@@ -578,6 +578,9 @@ pre code {
 
 .param-header {
   margin-bottom: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .param-label {
@@ -591,14 +594,35 @@ pre code {
   color: var(--color-text-muted);
   font-size: 13px;
   font-weight: 400;
-  margin-left: 6px;
 }
 
 .param-description {
   color: var(--color-text-muted);
   font-size: var(--font-size-small);
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 6px 0;
+}
+
+/* Dropdown/Menu parameter options */
+.param-options {
+  margin-top: 6px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.param-options li {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  padding: 3px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.param-options li:before {
+  content: '-';
+  position: absolute;
+  left: 8px;
+  color: var(--color-accent);
 }
 
 /* ===========================
