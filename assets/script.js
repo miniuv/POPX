@@ -145,10 +145,37 @@ function initSidebarState() {
     }
   });
 
-  // Open all accordion sections by default
+  // Restore accordion state from localStorage or open all by default
   const accordionSections = document.querySelectorAll('.sidebar-section');
-  accordionSections.forEach(section => {
-    section.setAttribute('open', '');
+  const savedState = localStorage.getItem('popx-accordion-state');
+
+  if (savedState) {
+    // Restore saved state
+    const state = JSON.parse(savedState);
+    accordionSections.forEach((section, index) => {
+      const sectionKey = `section-${index}`;
+      if (state[sectionKey] === true) {
+        section.setAttribute('open', '');
+      } else {
+        section.removeAttribute('open');
+      }
+    });
+  } else {
+    // Open all accordion sections by default on first visit
+    accordionSections.forEach(section => {
+      section.setAttribute('open', '');
+    });
+  }
+
+  // Save accordion state whenever it changes
+  accordionSections.forEach((section, index) => {
+    section.addEventListener('toggle', function() {
+      const state = {};
+      accordionSections.forEach((s, i) => {
+        state[`section-${i}`] = s.hasAttribute('open');
+      });
+      localStorage.setItem('popx-accordion-state', JSON.stringify(state));
+    });
   });
 }
 
