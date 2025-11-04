@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>POPX Docs — Home</title>
+  <title>Installation — POPX Docs</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -33,21 +33,36 @@
     </aside>
     <main class="content">
 
+<h1>Installation & Getting Started</h1>
 <div class="panel">
-  <h1>Welcome to POPX Docs</h1>
-  <p>This is the official documentation for the <strong>POPX</strong> suite of GPU-based particle and geometry operators for TouchDesigner.</p>
-  <p>Browse the operator types below to learn about generators, modifiers, simulations, and more.</p>
+  <p>The <strong>POPX</strong> toolkit is distributed as a collection of <code>.tox</code> components that can be imported into any TouchDesigner project.</p>
+  <h3>Steps:</h3>
+  <ol>
+    <li>Download or clone the <code>POPX</code> repository from GitHub.</li>
+    <li>Extract the folder and locate the <code>/popx</code> directory containing all operators.</li>
+    <li>In TouchDesigner, drag and drop the desired <code>.tox</code> file (e.g., <code>POPX_Transform_Modifier.tox</code>) into your network.</li>
+    <li>Each operator comes pre-wired with standard POPX attributes and can be chained with others.</li>
+    <li>For updates, simply replace the component in your project with the latest version.</li>
+  </ol>
 </div>
 
 <div class="panel">
-  <h2>POPX Operator Types</h2>
+  <h3>System Requirements</h3>
   <ul>
-    <li><a href="generators.html">Generators</a> — create particle or geometry data.</li>
-    <li><a href="modifiers.html">Modifiers</a> — transform and modify existing data.</li>
-    <li><a href="followoffs.html">Follow-offs</a> — chain or post-process data downstream.</li>
-    <li><a href="simulations.html">Simulations</a> — physics-based solvers.</li>
-    <li><a href="tools.html">Tools</a> — utility operators and I/O helpers.</li>
+    <li>TouchDesigner 2023.11+ (Experimental builds recommended)</li>
+    <li>GPU with OpenGL 4.6+ and compute shader support</li>
+    <li>Windows 10/11 or macOS 13+</li>
   </ul>
+</div>
+
+<div class="panel">
+  <h3>Recommended Structure</h3>
+  <pre>/popx
+├── generators/
+├── modifiers/
+├── simulations/
+├── tools/
+└── followoffs/</pre>
 </div>
 
     </main>

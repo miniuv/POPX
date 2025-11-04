@@ -4,34 +4,31 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>POPX Transform Modifier — POPX Docs</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
 <body>
 <div class="site">
   <div class="header">
-    <div class="brand"><div class="logo"></div> POPX Documentation</div>
+    <div class="brand"><div class="logo"></div> POPX Docs</div>
     <nav class="nav small">
-      <a href="index.html">Home</a>
-      <a href="generators.html">Generators</a>
-      <a href="modifiers.html">Modifiers</a>
-      <a href="followups.html">Follow-ups</a>
-      <a href="simulations.html">Simulations</a>
-      <a href="tools.html">Tools</a>
+      <a href="../index.html">Home</a>
+      <a href="../installation.html">Installation</a>
+      <a href="../generators.html">Generators</a>
+      <a href="../modifiers.html">Modifiers</a>
+      <a href="../followoffs.html">Follow-offs</a>
+      <a href="../simulations.html">Simulations</a>
+      <a href="../tools.html">Tools</a>
     </nav>
   </div>
   <div class="container">
     <aside class="sidebar">
-      <h3>Categories</h3>
+      <h3>POPX Operator Types</h3>
       <div class="menu">
-        <a href="generators.html">Generators</a>
-        <a href="modifiers.html">Modifiers</a>
-        <a href="followups.html">Follow-ups</a>
-        <a href="simulations.html">Simulations</a>
-        <a href="tools.html">Tools</a>
-      </div>
-      <h3>Quick Links</h3>
-      <div class="menu">
-        <a href="operators/popx-transform-modifier.html">POPX Transform Modifier</a>
+        <a href="../generators.html">Generators</a>
+        <a href="../modifiers.html">Modifiers</a>
+        <a href="../followoffs.html">Follow-offs</a>
+        <a href="../simulations.html">Simulations</a>
+        <a href="../tools.html">Tools</a>
       </div>
     </aside>
     <main class="content">
@@ -39,66 +36,62 @@
 <h1>POPX Transform Modifier</h1>
 
 <div class="panel">
-  <p>The <strong>POPX Transform Modifier</strong> applies procedural transformations — translation, rotation, and scaling — to incoming particles or instances.
-  It can operate in both <em>world space</em> and <em>local space</em>, and supports orientation-aware transforms via the <code>popxOrient</code> attribute, enabling MOPS-style workflows.</p>
+  <p>The <strong>POPX Transform Modifier</strong> applies translation, rotation, and scaling to incoming particles or instances.
+  It supports both <em>world space</em> and <em>local space</em> transformations and integrates with the <code>popxOrient</code> attribute for orientation-aware motion.</p>
 </div>
 
-<h2>Parameters</h2>
 <div class="panel">
+  <h2>Parameters</h2>
   <table class="table">
     <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
     <tbody>
-      <tr><td><strong>Translate X / Y / Z</strong></td><td>Float</td><td>Applies translation offsets along the corresponding axes.</td></tr>
-      <tr><td><strong>Rotate X / Y / Z</strong></td><td>Float (°)</td><td>Rotates particles or instances around the specified axes (degrees).</td></tr>
-      <tr><td><strong>Scale X / Y / Z</strong></td><td>Float</td><td>Scales particles along each axis independently.</td></tr>
-      <tr><td><strong>Uniform Scale</strong></td><td>Float</td><td>Applies a uniform scale multiplier to all axes.</td></tr>
-      <tr><td><strong>Pivot</strong></td><td>XYZ</td><td>Defines the pivot position for rotation and scaling operations.</td></tr>
-      <tr><td><strong>Space</strong></td><td>Menu</td><td>Local / World — where the transform is applied.</td></tr>
-      <tr><td><strong>Affect Orientation</strong></td><td>Toggle</td><td>If enabled, rotations modify the <code>popxOrient</code> quaternion attribute.</td></tr>
-      <tr><td><strong>Affect Velocity</strong></td><td>Toggle</td><td>If enabled, transformations apply to the <code>velocity</code> attribute for consistency.</td></tr>
-      <tr><td><strong>Use Delta Transform</strong></td><td>Toggle</td><td>Enables relative (delta) mode to accumulate changes over time (MOPS-style).</td></tr>
-      <tr><td><strong>Enable</strong></td><td>Toggle</td><td>Enables/disables the operator without removing it from the network.</td></tr>
+      <tr><td><strong>Translate X / Y / Z</strong></td><td>Float</td><td>Offset along corresponding axes.</td></tr>
+      <tr><td><strong>Rotate X / Y / Z</strong></td><td>Float (°)</td><td>Rotation around each axis in degrees.</td></tr>
+      <tr><td><strong>Scale X / Y / Z</strong></td><td>Float</td><td>Non-uniform scaling along axes.</td></tr>
+      <tr><td><strong>Uniform Scale</strong></td><td>Float</td><td>Uniform scaling multiplier.</td></tr>
+      <tr><td><strong>Pivot</strong></td><td>XYZ</td><td>Defines pivot point for transforms.</td></tr>
+      <tr><td><strong>Space</strong></td><td>Menu</td><td>Choose Local or World space.</td></tr>
+      <tr><td><strong>Affect Orientation</strong></td><td>Toggle</td><td>Updates <code>popxOrient</code> quaternion.</td></tr>
+      <tr><td><strong>Affect Velocity</strong></td><td>Toggle</td><td>Applies transformations to <code>velocity</code>.</td></tr>
+      <tr><td><strong>Use Delta Transform</strong></td><td>Toggle</td><td>Enables relative (delta) mode for accumulated transforms.</td></tr>
+      <tr><td><strong>Enable</strong></td><td>Toggle</td><td>Enables/disables the modifier.</td></tr>
     </tbody>
   </table>
 </div>
 
-<h2>Inputs</h2>
 <div class="panel">
-  <ul>
-    <li><strong>Input 0:</strong> Particle or instance stream.</li>
-  </ul>
+  <h2>Inputs</h2>
+  <ul><li><strong>Input 0:</strong> Particle or instance stream.</li></ul>
 </div>
 
-<h2>Outputs</h2>
 <div class="panel">
-  <ul>
-    <li><strong>Output 0:</strong> Transformed stream with updated position, orientation, and scale.</li>
-  </ul>
+  <h2>Outputs</h2>
+  <ul><li><strong>Output 0:</strong> Transformed stream with updated attributes.</li></ul>
 </div>
 
-<h2>Attributes Affected</h2>
 <div class="panel">
+  <h2>Attributes Affected</h2>
   <ul>
     <li><code>P</code> — Position</li>
-    <li><code>v</code> — Velocity (if <em>Affect Velocity</em> is enabled)</li>
-    <li><code>popxOrient</code> — Quaternion orientation (if <em>Affect Orientation</em> is enabled)</li>
-    <li><code>scale</code> — Non-uniform scale vector or uniform scale float</li>
+    <li><code>v</code> — Velocity</li>
+    <li><code>popxOrient</code> — Quaternion orientation</li>
+    <li><code>scale</code> — Scale vector or float</li>
   </ul>
 </div>
 
-<h2>Notes</h2>
 <div class="panel">
+  <h2>Notes</h2>
   <ul>
-    <li>Works well when chained with <em>POPX Noise</em>, <em>POPX Magnetize</em>, or <em>POPX Instancer</em>.</li>
-    <li>Delta transforms allow procedural rigging or progressive adjustments across frames.</li>
-    <li>All parameters can be driven by CHOP channels for interactive control.</li>
+    <li>Combine with <em>POPX Noise</em> or <em>POPX Magnetize</em> for dynamic effects.</li>
+    <li>Delta transforms allow time-accumulated procedural motion.</li>
+    <li>All parameters are animatable and CHOP-drivable.</li>
   </ul>
 </div>
 
     </main>
   </div>
-  <div class="footer small">
-    © 2025 POPX Docs — Generated static site. Host on GitHub Pages.
+  <div class="footer">
+    © 2025 POPX Docs — Built for TouchDesigner developers.
   </div>
 </div>
 </body>
