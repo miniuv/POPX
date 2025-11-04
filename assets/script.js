@@ -284,17 +284,10 @@ function initSmoothScroll() {
           e.preventDefault();
         }
 
-        // Get target position - use the section or h2 element
-        let targetElement = target;
-
-        // If target is h2, get its parent section for better positioning
-        if (target.tagName === 'H2' && target.parentElement.tagName === 'SECTION') {
-          targetElement = target.parentElement;
-        }
-
+        // Get target position - use the target element directly
         // Calculate scroll position with offset
         const offset = 80;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
 
         // Instant jump (no smooth animation) - using old syntax for guaranteed instant jump
         window.scrollTo(0, targetPosition);
