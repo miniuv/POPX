@@ -45,22 +45,33 @@ function initMobileMenu() {
   });
 
   // Prevent link clicks inside accordions from toggling the accordion
-  const accordionLinks = sidebar.querySelectorAll('.sidebar-section a');
-  accordionLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      // Stop propagation so clicking a link doesn't trigger accordion toggle
-      e.stopPropagation();
-      // Don't prevent default - let the link navigate normally
+  const accordionSections = document.querySelectorAll('.sidebar-section');
+  accordionSections.forEach(section => {
+    // Prevent clicks on any child elements except the summary from toggling
+    section.addEventListener('click', function(e) {
+      // Only allow toggle if clicking directly on the summary element
+      if (e.target.tagName !== 'SUMMARY') {
+        e.stopPropagation();
+        e.preventDefault();
+      }
     });
-  });
 
-  // Prevent clicks on accordion content (ul) from toggling the accordion
-  const accordionContent = sidebar.querySelectorAll('.sidebar-section ul');
-  accordionContent.forEach(ul => {
-    ul.addEventListener('click', function(e) {
-      // Stop propagation so clicking anywhere in the content doesn't toggle
-      e.stopPropagation();
+    // Stop propagation on all links to prevent accordion toggle
+    const links = section.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // Allow default link behavior
+      });
     });
+
+    // Stop propagation on the content list
+    const contentList = section.querySelector('ul');
+    if (contentList) {
+      contentList.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
   });
 
   // Close menu only when clicking actual navigation links (not summary/accordion toggles)
