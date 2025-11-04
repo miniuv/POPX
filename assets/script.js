@@ -90,9 +90,22 @@ function initMobileMenu() {
 // ===========================
 function initScrollSpy() {
   const tocLinks = document.querySelectorAll('.toc a');
-  const sections = document.querySelectorAll('h1[id], h2[id], h3[id]');
 
-  if (tocLinks.length === 0 || sections.length === 0) return;
+  if (tocLinks.length === 0) return;
+
+  // Build sections array from TOC links to ensure exact matching
+  const sections = [];
+  tocLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const section = document.querySelector(href);
+      if (section) {
+        sections.push(section);
+      }
+    }
+  });
+
+  if (sections.length === 0) return;
 
   // Use multiple thresholds to better detect sections
   const observerOptions = {
