@@ -644,7 +644,6 @@ pre code {
   gap: 8px;
   cursor: pointer;
   user-select: none;
-  padding: 4px 0;
   transition: background-color 0.2s ease;
 }
 
@@ -654,22 +653,30 @@ pre code {
 
 .param-toggle {
   display: inline-block;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-text-muted);
-  transition: transform 0.2s ease;
+  transition: transform 0.15s ease;
   width: 12px;
   flex-shrink: 0;
+  margin-left: 4px;
 }
 
 .param-group.expanded .param-toggle {
   transform: rotate(90deg);
 }
 
+.param-group-description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  margin: 0;
+}
+
 .param-subparams {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  padding-left: 20px;
+  padding-left: 24px;
   margin-top: 8px;
 }
 
@@ -678,21 +685,33 @@ pre code {
 }
 
 .param-subparam {
-  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 12px;
 }
 
-.param-subparam .param-header {
-  margin-bottom: 2px;
+.param-subparam:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
 }
 
 .param-subparam .param-label {
   font-weight: 500;
   font-size: 15px;
+  color: var(--color-text);
 }
 
-.param-subparam .param-description {
+.param-subparam .param-name {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
   font-size: 13px;
-  margin-bottom: 4px;
+  font-weight: 400;
 }
 
 /* ===========================
