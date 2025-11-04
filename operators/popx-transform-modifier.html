@@ -346,111 +346,6 @@
           </tr>
         </table>
       </section>
-
-      <section>
-        <h2 id="attributes">Attributes Affected</h2>
-        <table class="parameter-table">
-          <tr>
-            <th>Attribute</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td><code>P</code></td>
-            <td>Vector (3)</td>
-            <td>Point position. Modified by translation parameters.</td>
-          </tr>
-          <tr>
-            <td><code>popxOrient</code></td>
-            <td>Vector (4)</td>
-            <td>Orientation quaternion (x, y, z, w). Updated by rotation parameters when "Affect Orientation" is enabled.</td>
-          </tr>
-          <tr>
-            <td><code>scale</code></td>
-            <td>Vector (3)</td>
-            <td>Per-axis scale values. Modified by scale parameters. Created if it doesn't exist.</td>
-          </tr>
-          <tr>
-            <td><code>v</code></td>
-            <td>Vector (3)</td>
-            <td>Velocity. Optionally modified when using delta transforms with position changes.</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2 id="usage">Usage Examples</h2>
-
-        <h3>Example 1: Rotating Instances Over Time</h3>
-        <pre><code>POPX Scatter
-  ↓
-POPX Transform Modifier
-  - Use Delta Transform: On
-  - Rotate Y: absTime.seconds * 45
-  - Affect Orientation: On
-  ↓
-Geometry COMP (with instancing)</code></pre>
-        <p>
-          This creates particles that continuously rotate around the Y axis at 45 degrees per second.
-        </p>
-
-        <h3>Example 2: Scaling with Falloff</h3>
-        <pre><code>POPX Scatter → POPX Transform Modifier
-                          ↑
-                  POPX Radial Falloff</code></pre>
-        <p>
-          Connect a radial falloff to the second input. Set "Use Falloff" to On and adjust "Uniform Scale" to 2.0. Particles near the falloff center will scale larger while distant particles remain unchanged.
-        </p>
-
-        <h3>Example 3: Translate Along Custom Axis</h3>
-        <pre><code>POPX Transform Modifier
-  - Transform Space: Local
-  - Translate Z: 5.0
-  - Use Delta Transform: On</code></pre>
-        <p>
-          Moves particles forward along their local Z axis (useful for oriented instances like arrows or projectiles).
-        </p>
-      </section>
-
-      <section>
-        <h2 id="notes">Notes & Best Practices</h2>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>Delta vs Absolute:</strong> Use "Delta Transform" for animated motion. Use absolute values for one-time transforms or resetting positions.</li>
-          <li><strong>Quaternions:</strong> The <code>popxOrient</code> attribute uses quaternion representation (x, y, z, w) to avoid gimbal lock. Always enable "Affect Orientation" when rotating instances.</li>
-          <li><strong>Performance:</strong> Transform operations are extremely fast. You can chain dozens of transform modifiers without performance impact.</li>
-          <li><strong>Order Matters:</strong> Rotation order (XYZ, ZXY, etc.) affects final orientation. Match this to your DCC application's conventions.</li>
-          <li><strong>Pivot Point:</strong> Set the pivot for off-center rotation and scaling. Useful for asymmetric instances.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 id="related-operators">Related Operators</h2>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><a href="popx-noise-modifier.html">POPX Noise Modifier</a> – Add procedural deformation to transforms</li>
-          <li><a href="popx-force-modifier.html">POPX Force Modifier</a> – Physics-based motion instead of direct transforms</li>
-          <li><a href="popx-radial-falloff.html">POPX Radial Falloff</a> – Spatial falloff for localized transforms</li>
-          <li><a href="popx-constraint-modifier.html">POPX Constraint Modifier</a> – Limit transform results to specific regions</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 id="version-history">Version History</h2>
-        <table class="parameter-table">
-          <tr>
-            <th>Version</th>
-            <th>Date</th>
-            <th>Changes</th>
-          </tr>
-          <tr>
-            <td>1.0.0</td>
-            <td>Jan 2025</td>
-            <td>Initial release with full quaternion support and delta transforms</td>
-          </tr>
-        </table>
-        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted); font-size: 14px;">
-          <strong>Last Updated:</strong> January 15, 2025
-        </p>
-      </section>
     </main>
 
     <!-- Table of Contents -->
@@ -469,11 +364,6 @@ Geometry COMP (with instancing)</code></pre>
         </li>
         <li><a href="#inputs">Inputs</a></li>
         <li><a href="#outputs">Outputs</a></li>
-        <li><a href="#attributes">Attributes Affected</a></li>
-        <li><a href="#usage">Usage Examples</a></li>
-        <li><a href="#notes">Notes & Best Practices</a></li>
-        <li><a href="#related-operators">Related Operators</a></li>
-        <li><a href="#version-history">Version History</a></li>
       </ul>
     </aside>
   </div>
