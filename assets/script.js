@@ -209,10 +209,11 @@ function initSidebarState() {
 }
 
 // ===========================
-// Smooth Scroll for Anchor Links
+// Instant Jump for Anchor Links
 // ===========================
 function initSmoothScroll() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  const tocLinks = document.querySelectorAll('.toc a');
 
   anchorLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -225,9 +226,17 @@ function initSmoothScroll() {
       if (target) {
         e.preventDefault();
 
-        // Pause ScrollSpy during smooth scroll
-        if (window.pauseScrollSpy) {
-          window.pauseScrollSpy(1000);
+        const isTocLink = Array.from(tocLinks).includes(this);
+
+        if (isTocLink) {
+          // Immediately update highlight for TOC links
+          tocLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+
+          // Pause ScrollSpy briefly to prevent it from overriding our highlight
+          if (window.pauseScrollSpy) {
+            window.pauseScrollSpy(200);
+          }
         }
 
         // Get target position - use the section or h2 element
@@ -238,14 +247,14 @@ function initSmoothScroll() {
           targetElement = target.parentElement;
         }
 
-        // Calculate scroll position with minimal offset for precision
-        const offset = 80; // Account for any fixed headers or spacing
+        // Calculate scroll position with offset
+        const offset = 80;
         const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
-        // Scroll to target
+        // Instant jump (no smooth animation)
         window.scrollTo({
           top: targetPosition,
-          behavior: 'smooth'
+          behavior: 'auto'
         });
 
         // Update URL hash
