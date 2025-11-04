@@ -1,48 +1,27 @@
-## POPX Transform Modifier
+# POPX Docs — Static Site
 
-### Overview
-The **POPX Transform Modifier** applies procedural transformations — translation, rotation, and scaling — to incoming particles or instances.  
-It can operate in both **world space** and **local space**, and supports orientation-aware transforms through the `popxOrient` attribute.  
-This allows for MOPS-style transformations directly within the POPX ecosystem.
+A minimal static website to document your TouchDesigner POPX operators. Uses plain HTML/CSS and works perfectly on GitHub Pages.
 
----
+## Structure
+```
+/assets/style.css
+/index.html
+/generators.html
+/modifiers.html
+/followups.html
+/simulations.html
+/tools.html
+/operators/popx-transform-modifier.html
+```
 
-### Parameters
+## Add Operators
+- Duplicate a file in `/operators/`, rename it (e.g., `popx-scatter.html`), and edit the contents.
+- Link it from the appropriate category page (e.g., `generators.html`).
 
-| Name | Type | Description |
-|------|------|--------------|
-| **Translate X / Y / Z** | Float | Applies translation offsets along the corresponding axes. |
-| **Rotate X / Y / Z** | Float | Rotates particles or instances around the specified axes (in degrees). |
-| **Scale X / Y / Z** | Float | Scales particles along each axis independently. |
-| **Uniform Scale** | Float | Applies a uniform scale multiplier to all axes. |
-| **Pivot** | XYZ | Defines the pivot position for rotation and scaling operations. |
-| **Space** | Menu (Local / World) | Determines whether the transformation occurs in local or world coordinates. |
-| **Affect Orientation** | Toggle | When enabled, rotations also modify the `popxOrient` quaternion attribute. |
-| **Affect Velocity** | Toggle | When enabled, transformations apply to the `velocity` attribute, keeping it consistent with spatial changes. |
-| **Use Delta Transform** | Toggle | Enables relative delta transformation mode (like MOPS Apply Attributes), where changes accumulate over time. |
-| **Enable** | Toggle | Enables or disables the transform modifier without removing it from the network. |
+## Deploy to GitHub Pages
+1. Create a repo (e.g., `popx-docs`).
+2. Upload these files at the repo root.
+3. Go to **Settings → Pages** → “Build and deployment” → **Source: Deploy from a branch**; **Branch: main**; **Folder: /** (root).
+4. Wait ~1 minute; your site will be at `https://<username>.github.io/popx-docs/`.
 
----
-
-### Inputs
-- **Input 0:** Incoming particle or instance stream.
-
----
-
-### Outputs
-- **Output 0:** Transformed particles or instances with updated position, orientation, and scale attributes.
-
----
-
-### Attributes Affected
-- `P` – Position  
-- `v` – Velocity (if *Affect Velocity* is enabled)  
-- `popxOrient` – Quaternion orientation (if *Affect Orientation* is enabled)  
-- `scale` – Non-uniform scale vector or uniform scale float  
-
----
-
-### Notes
-- Works best when chained with other POPX modifiers like **POPX Noise**, **POPX Magnetize**, or **POPX Instancer**.  
-- The `Use Delta Transform` toggle makes it possible to accumulate transformations across frames for animation or procedural rigging effects.  
-- All parameters can be keyframed or driven by CHOP channels for interactive motion control.
+Tip: Keep URLs lowercase and hyphenated (e.g., `popx-transform-modifier.html`).
