@@ -571,84 +571,34 @@ pre code {
   background-color: var(--color-bg-elevated);
 }
 
-/* Parameter Item Styling (Modern Layout) */
+/* Parameter Item Styling (Simple Text Layout) */
 .parameter-item {
-  background-color: var(--color-bg-panel);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
   margin-bottom: var(--spacing-md);
 }
 
 .param-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 4px;
 }
 
 .param-label {
   font-weight: 600;
   color: var(--color-text);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-body);
 }
 
 .param-name {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   color: var(--color-text-muted);
-  font-size: var(--font-size-small);
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 6px;
 }
 
-.param-type {
-  background-color: var(--color-accent);
-  color: white;
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.param-details {
+.param-description {
   color: var(--color-text-muted);
   font-size: var(--font-size-small);
   line-height: 1.6;
-}
-
-.param-details dl {
-  margin: var(--spacing-sm) 0 0 0;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--spacing-xs) var(--spacing-sm);
-}
-
-.param-details dt {
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-.param-details dd {
   margin: 0;
-  color: var(--color-text-muted);
-}
-
-.param-details code {
-  background-color: var(--color-bg-elevated);
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  font-family: 'Courier New', monospace;
-  font-size: var(--font-size-small);
-}
-
-.param-details ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.param-details ul li {
-  padding: 2px 0;
 }
 
 /* ===========================
