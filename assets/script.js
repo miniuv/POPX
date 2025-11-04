@@ -227,12 +227,20 @@ function initSmoothScroll() {
 
         // Pause ScrollSpy during smooth scroll
         if (window.pauseScrollSpy) {
-          window.pauseScrollSpy(800);
+          window.pauseScrollSpy(1000);
         }
 
-        // Calculate scroll position with offset
-        const offset = 20;
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        // Get target position - use the section or h2 element
+        let targetElement = target;
+
+        // If target is h2, get its parent section for better positioning
+        if (target.tagName === 'H2' && target.parentElement.tagName === 'SECTION') {
+          targetElement = target.parentElement;
+        }
+
+        // Calculate scroll position with minimal offset for precision
+        const offset = 80; // Account for any fixed headers or spacing
+        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
         // Scroll to target
         window.scrollTo({
