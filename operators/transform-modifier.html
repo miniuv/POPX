@@ -194,8 +194,8 @@
           <div class="param-header">
             <span class="param-label">Uniform Scale</span>
             <span class="param-name">scale</span>
+            <span class="param-description">Uniform scaling factor applied after per-axis scaling.</span>
           </div>
-          <p class="param-description">Uniform scaling factor applied after per-axis scaling.</p>
         </div>
         </div>
 
@@ -206,24 +206,24 @@
           <div class="param-header">
             <span class="param-label">Affect Orientation</span>
             <span class="param-name">affectorient</span>
+            <span class="param-description">When enabled, updates the <code>popxOrient</code> quaternion attribute with rotation changes.</span>
           </div>
-          <p class="param-description">When enabled, updates the <code>popxOrient</code> quaternion attribute with rotation changes.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Use Delta Transform</span>
             <span class="param-name">usedelta</span>
+            <span class="param-description">When enabled, applies transforms incrementally per frame instead of absolute values. Essential for smooth animation.</span>
           </div>
-          <p class="param-description">When enabled, applies transforms incrementally per frame instead of absolute values. Essential for smooth animation.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Transform Space</span>
             <span class="param-name">space</span>
+            <span class="param-description">Coordinate space for transforms.</span>
           </div>
-          <p class="param-description">Coordinate space for transforms.</p>
           <ul class="param-options">
             <li>World</li>
             <li>Local</li>
@@ -235,8 +235,8 @@
           <div class="param-header">
             <span class="param-label">Rotation Order</span>
             <span class="param-name">order</span>
+            <span class="param-description">Order of rotation application.</span>
           </div>
-          <p class="param-description">Order of rotation application.</p>
           <ul class="param-options">
             <li>XYZ</li>
             <li>XZY</li>
@@ -251,8 +251,8 @@
           <div class="param-header">
             <span class="param-label">Pivot</span>
             <span class="param-name">pivot</span>
+            <span class="param-description">Pivot point for rotation and scale operations in local space (X, Y, Z).</span>
           </div>
-          <p class="param-description">Pivot point for rotation and scale operations in local space (X, Y, Z).</p>
         </div>
         </div>
 
@@ -263,40 +263,40 @@
           <div class="param-header">
             <span class="param-label">Use Falloff</span>
             <span class="param-name">usefalloff</span>
+            <span class="param-description">Enable spatial falloff to modulate transform strength.</span>
           </div>
-          <p class="param-description">Enable spatial falloff to modulate transform strength.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Falloff Input</span>
             <span class="param-name">fallofinput</span>
+            <span class="param-description">Connect a POPX Falloff operator to provide spatial influence values.</span>
           </div>
-          <p class="param-description">Connect a POPX Falloff operator to provide spatial influence values.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Falloff Attribute</span>
             <span class="param-name">falloffattr</span>
+            <span class="param-description">Name of the falloff attribute to read (typically "falloff" or "weight").</span>
           </div>
-          <p class="param-description">Name of the falloff attribute to read (typically "falloff" or "weight").</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Invert Falloff</span>
             <span class="param-name">invertfalloff</span>
+            <span class="param-description">Reverses falloff values (1-falloff).</span>
           </div>
-          <p class="param-description">Reverses falloff values (1-falloff).</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Falloff Remap</span>
             <span class="param-name">fallofremap</span>
+            <span class="param-description">Remaps falloff values through a lookup curve for fine-tuned control.</span>
           </div>
-          <p class="param-description">Remaps falloff values through a lookup curve for fine-tuned control.</p>
         </div>
         </div>
 
@@ -307,32 +307,32 @@
           <div class="param-header">
             <span class="param-label">Enable</span>
             <span class="param-name">enable</span>
+            <span class="param-description">Turns the modifier on/off. When disabled, input passes through unchanged.</span>
           </div>
-          <p class="param-description">Turns the modifier on/off. When disabled, input passes through unchanged.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Strength</span>
             <span class="param-name">strength</span>
+            <span class="param-description">Global multiplier for all transform values (0-1 range for blending).</span>
           </div>
-          <p class="param-description">Global multiplier for all transform values (0-1 range for blending).</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Group</span>
             <span class="param-name">group</span>
+            <span class="param-description">Apply transform only to particles in the specified group. Leave empty for all particles.</span>
           </div>
-          <p class="param-description">Apply transform only to particles in the specified group. Leave empty for all particles.</p>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Blend Mode</span>
             <span class="param-name">blendmode</span>
+            <span class="param-description">How transforms combine with existing values.</span>
           </div>
-          <p class="param-description">How transforms combine with existing values.</p>
           <ul class="param-options">
             <li>Add</li>
             <li>Multiply</li>
@@ -344,8 +344,8 @@
           <div class="param-header">
             <span class="param-label">Cook on Demand</span>
             <span class="param-name">cookondemand</span>
+            <span class="param-description">Only compute when downstream operators request data (performance optimization).</span>
           </div>
-          <p class="param-description">Only compute when downstream operators request data (performance optimization).</p>
         </div>
         </div>
       </section>
