@@ -94,16 +94,34 @@ function initScrollSpy() {
 
   if (tocLinks.length === 0 || sections.length === 0) return;
 
+  // Use multiple thresholds to better detect sections
   const observerOptions = {
     root: null,
-    rootMargin: '-100px 0px -66%',
-    threshold: 0
+    rootMargin: '-20% 0px -35% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
   };
 
+  let activeSection = null;
+
   const observerCallback = (entries) => {
+    // Find the section that's most visible
+    let mostVisible = null;
+    let maxRatio = 0;
+
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
+      if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+        maxRatio = entry.intersectionRatio;
+        mostVisible = entry.target;
+      }
+    });
+
+    // If we found a visible section, make it active
+    if (mostVisible) {
+      const id = mostVisible.getAttribute('id');
+
+      // Only update if it's a different section
+      if (activeSection !== id) {
+        activeSection = id;
 
         // Remove active class from all links
         tocLinks.forEach(link => link.classList.remove('active'));
@@ -114,7 +132,7 @@ function initScrollSpy() {
           activeLink.classList.add('active');
         }
       }
-    });
+    }
   };
 
   const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -122,6 +140,54 @@ function initScrollSpy() {
   sections.forEach(section => {
     observer.observe(section);
   });
+
+  // Handle scroll position to detect first/last sections
+  const handleScroll = () => {
+    // Check if we're at the top of the page
+    if (window.scrollY < 100) {
+      const firstSection = sections[0];
+      if (firstSection) {
+        const id = firstSection.getAttribute('id');
+        if (activeSection !== id) {
+          activeSection = id;
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      }
+    }
+
+    // Check if we're at the bottom of the page
+    const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+    if (scrolledToBottom) {
+      const lastSection = sections[sections.length - 1];
+      if (lastSection) {
+        const id = lastSection.getAttribute('id');
+        if (activeSection !== id) {
+          activeSection = id;
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      }
+    }
+  };
+
+  // Listen to scroll events with throttling
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = setTimeout(handleScroll, 50);
+  }, { passive: true });
+
+  // Initial call to set active section on page load
+  handleScroll();
 }
 
 // ===========================
