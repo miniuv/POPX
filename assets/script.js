@@ -245,6 +245,18 @@ function initSmoothScroll() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
   const tocLinks = document.querySelectorAll('.toc a');
 
+  // Build sections array for checking visibility
+  const sections = [];
+  tocLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const section = document.querySelector(href);
+      if (section) {
+        sections.push({ element: section, id: section.id, link: link });
+      }
+    }
+  });
+
   anchorLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -254,11 +266,35 @@ function initSmoothScroll() {
 
       const target = document.querySelector(href);
       if (target) {
-        e.preventDefault();
-
         const isTocLink = Array.from(tocLinks).includes(this);
 
         if (isTocLink) {
+          // Check if this section is below another visible section
+          const scrollPosition = window.scrollY + 100;
+          let topmostVisibleSection = null;
+
+          // Find the topmost visible section
+          for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const sectionTop = section.element.offsetTop;
+            const sectionBottom = sectionTop + section.element.offsetHeight;
+
+            if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom) {
+              topmostVisibleSection = section.element;
+              break;
+            }
+          }
+
+          // If this is not the topmost visible section, ignore the click
+          if (topmostVisibleSection && topmostVisibleSection !== target &&
+              topmostVisibleSection.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING) {
+            // The target is below the topmost visible section - do nothing
+            e.preventDefault();
+            return;
+          }
+
+          e.preventDefault();
+
           // Set this link as permanently active until another click or manual scroll
           if (window.setActiveLink) {
             window.setActiveLink(this);
@@ -268,6 +304,8 @@ function initSmoothScroll() {
           if (window.pauseScrollSpy) {
             window.pauseScrollSpy(200);
           }
+        } else {
+          e.preventDefault();
         }
 
         // Get target position - use the section or h2 element
