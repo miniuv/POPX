@@ -5,27 +5,49 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
   const sidebar = document.querySelector('.sidebar');
 
-  if (mobileToggle && sidebar) {
-    mobileToggle.addEventListener('click', function() {
-      sidebar.classList.toggle('active');
+  // Create overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
+  document.body.appendChild(overlay);
 
-      // Update button text
-      if (sidebar.classList.contains('active')) {
-        mobileToggle.innerHTML = '&times;';
-      } else {
-        mobileToggle.innerHTML = '&#9776;';
-      }
+  function toggleSidebar() {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+
+    // Update button text
+    if (sidebar.classList.contains('active')) {
+      mobileToggle.innerHTML = '&times;';
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileToggle.innerHTML = '&#9776;';
+      document.body.style.overflow = '';
+    }
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    mobileToggle.innerHTML = '&#9776;';
+    document.body.style.overflow = '';
+  }
+
+  if (mobileToggle && sidebar) {
+    // Toggle on button click
+    mobileToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleSidebar();
     });
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      const isClickInsideSidebar = sidebar.contains(event.target);
-      const isClickOnToggle = mobileToggle.contains(event.target);
+    // Close on overlay click
+    overlay.addEventListener('click', closeSidebar);
 
-      if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
-        mobileToggle.innerHTML = '&#9776;';
-      }
+    // Close on sidebar link click (mobile only)
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 900) {
+          closeSidebar();
+        }
+      });
     });
   }
 
