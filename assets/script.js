@@ -90,7 +90,6 @@ function initMobileMenu() {
 // ===========================
 function initScrollSpy() {
   const tocLinks = document.querySelectorAll('.toc a');
-
   if (tocLinks.length === 0) return;
 
   // Build sections array from TOC links to ensure exact matching
@@ -100,112 +99,55 @@ function initScrollSpy() {
     if (href && href.startsWith('#')) {
       const section = document.querySelector(href);
       if (section) {
-        sections.push(section);
+        sections.push({ element: section, id: section.id, link: link });
       }
     }
   });
 
   if (sections.length === 0) return;
 
-  // Flag to prevent ScrollSpy from interfering during smooth scroll
-  let isUserScrolling = false;
-  let scrollSpyEnabled = true;
+  let userScrolling = false;
 
-  // Use multiple thresholds to better detect sections
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -35% 0px',
-    threshold: [0, 0.25, 0.5, 0.75, 1]
-  };
+  // Simple function to find which section is currently in view
+  const updateActiveLink = () => {
+    if (userScrolling) return;
 
-  let activeSection = null;
+    const scrollPosition = window.scrollY + 150; // Offset for better detection
 
-  const updateActiveSection = (id) => {
-    if (!scrollSpyEnabled) return;
+    // Find the current section based on scroll position
+    let current = sections[0];
 
-    if (activeSection !== id) {
-      activeSection = id;
-
-      // Remove active class from all links
-      tocLinks.forEach(link => link.classList.remove('active'));
-
-      // Add active class to current link
-      const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
-      if (activeLink) {
-        activeLink.classList.add('active');
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (section.element.offsetTop <= scrollPosition) {
+        current = section;
+        break;
       }
+    }
+
+    // Update active states
+    tocLinks.forEach(link => link.classList.remove('active'));
+    if (current && current.link) {
+      current.link.classList.add('active');
     }
   };
 
-  const observerCallback = (entries) => {
-    if (!scrollSpyEnabled) return;
-
-    // Find the section that's most visible
-    let mostVisible = null;
-    let maxRatio = 0;
-
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-        maxRatio = entry.intersectionRatio;
-        mostVisible = entry.target;
-      }
-    });
-
-    // If we found a visible section, make it active
-    if (mostVisible) {
-      const id = mostVisible.getAttribute('id');
-      updateActiveSection(id);
-    }
-  };
-
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-
-  // Handle scroll position to detect first/last sections
-  const handleScroll = () => {
-    if (!scrollSpyEnabled) return;
-
-    // Check if we're at the top of the page
-    if (window.scrollY < 100) {
-      const firstSection = sections[0];
-      if (firstSection) {
-        const id = firstSection.getAttribute('id');
-        updateActiveSection(id);
-      }
-    } else {
-      // Check if we're at the bottom of the page
-      const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
-      if (scrolledToBottom) {
-        const lastSection = sections[sections.length - 1];
-        if (lastSection) {
-          const id = lastSection.getAttribute('id');
-          updateActiveSection(id);
-        }
-      }
-    }
-  };
-
-  // Listen to scroll events with throttling
+  // Listen to scroll with throttling
   let scrollTimeout;
   window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-      clearTimeout(scrollTimeout);
-    }
-    scrollTimeout = setTimeout(handleScroll, 50);
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateActiveLink, 100);
   }, { passive: true });
 
-  // Initial call to set active section on page load
-  handleScroll();
+  // Initial update
+  updateActiveLink();
 
-  // Expose function to disable/enable ScrollSpy (used by smooth scroll)
-  window.disableScrollSpy = (duration) => {
-    scrollSpyEnabled = false;
+  // Expose control function
+  window.pauseScrollSpy = (duration) => {
+    userScrolling = true;
     setTimeout(() => {
-      scrollSpyEnabled = true;
-      handleScroll(); // Re-check position after re-enabling
+      userScrolling = false;
+      updateActiveLink();
     }, duration);
   };
 }
@@ -271,7 +213,6 @@ function initSidebarState() {
 // ===========================
 function initSmoothScroll() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  const tocLinks = document.querySelectorAll('.toc a');
 
   anchorLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -284,18 +225,9 @@ function initSmoothScroll() {
       if (target) {
         e.preventDefault();
 
-        // Check if this is a TOC link
-        const isTocLink = Array.from(tocLinks).includes(this);
-
-        if (isTocLink) {
-          // Disable ScrollSpy during smooth scroll to prevent flickering
-          if (window.disableScrollSpy) {
-            window.disableScrollSpy(1000); // Disable for 1 second
-          }
-
-          // Immediately update active state
-          tocLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
+        // Pause ScrollSpy during smooth scroll
+        if (window.pauseScrollSpy) {
+          window.pauseScrollSpy(800);
         }
 
         // Calculate scroll position with offset
