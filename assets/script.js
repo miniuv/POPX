@@ -269,30 +269,6 @@ function initSmoothScroll() {
         const isTocLink = Array.from(tocLinks).includes(this);
 
         if (isTocLink) {
-          // Check if this section is below another visible section
-          const scrollPosition = window.scrollY + 100;
-          let topmostVisibleSection = null;
-
-          // Find the topmost visible section
-          for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-            const sectionTop = section.element.offsetTop;
-            const sectionBottom = sectionTop + section.element.offsetHeight;
-
-            if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom) {
-              topmostVisibleSection = section.element;
-              break;
-            }
-          }
-
-          // If this is not the topmost visible section, ignore the click
-          if (topmostVisibleSection && topmostVisibleSection !== target &&
-              topmostVisibleSection.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING) {
-            // The target is below the topmost visible section - do nothing
-            e.preventDefault();
-            return;
-          }
-
           e.preventDefault();
 
           // Set this link as permanently active until another click or manual scroll
