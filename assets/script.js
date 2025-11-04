@@ -109,24 +109,34 @@ function initScrollSpy() {
   let userScrolling = false;
   let clickedLink = null; // Track which link was clicked
 
-  // Simple function to find which section is currently in view
+  // Simple function to find which section is currently at the top of viewport
   const updateActiveLink = () => {
     if (userScrolling) return;
 
     // If a link was clicked, keep it highlighted until manual scroll
     if (clickedLink) return;
 
-    const scrollPosition = window.scrollY + 150; // Offset for better detection
+    const scrollPosition = window.scrollY + 100; // Small offset from top
 
-    // Find the current section based on scroll position
-    let current = sections[0];
+    // Find the first section that is at or near the top of the viewport
+    let current = null;
 
-    for (let i = sections.length - 1; i >= 0; i--) {
+    // Check each section to find which one is at the top
+    for (let i = 0; i < sections.length; i++) {
       const section = sections[i];
-      if (section.element.offsetTop <= scrollPosition) {
+      const sectionTop = section.element.offsetTop;
+      const sectionBottom = sectionTop + section.element.offsetHeight;
+
+      // If this section contains the scroll position, it's the topmost visible one
+      if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionBottom) {
         current = section;
         break;
       }
+    }
+
+    // If no section found, default to the first one if we're near the top
+    if (!current && scrollPosition < 200) {
+      current = sections[0];
     }
 
     // Update active states
