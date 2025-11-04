@@ -585,7 +585,7 @@ pre code {
 
 .param-label {
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-accent);
   font-size: var(--font-size-body);
 }
 
