@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Community - POPX Docs</title>
+  <meta name="description" content="Get support, report issues, and connect with the POPX community.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span>POPX</span> Docs
+        </div>
+        <div class="sidebar-tagline">TouchDesigner Particle Operators</div>
+      </div>
+
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="installation.html">Installation</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+
+      <h3>Operators</h3>
+
+      <details class="sidebar-section category-generators" open>
+        <summary>Generators</summary>
+        <ul>
+          <li><a href="operators/popx-scatter.html">POPX Scatter</a></li>
+          <li><a href="operators/popx-source.html">POPX Source</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-modifiers" open>
+        <summary>Modifiers</summary>
+        <ul>
+          <li><a href="operators/popx-transform-modifier.html">POPX Transform Modifier</a></li>
+          <li><a href="operators/popx-noise-modifier.html">POPX Noise Modifier</a></li>
+          <li><a href="operators/popx-force-modifier.html">POPX Force Modifier</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-falloffs" open>
+        <summary>Falloffs</summary>
+        <ul>
+          <li><a href="operators/popx-falloff-field.html">POPX Falloff Field</a></li>
+          <li><a href="operators/popx-radial-falloff.html">POPX Radial Falloff</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-tools" open>
+        <summary>Tools</summary>
+        <ul>
+          <li><a href="operators/popx-voxelize.html">POPX Voxelize</a></li>
+          <li><a href="operators/popx-attribute-manager.html">POPX Attribute Manager</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-simulations" open>
+        <summary>Simulations</summary>
+        <ul>
+          <li><a href="operators/popx-flip-solver.html">POPX FLIP Solver</a></li>
+          <li><a href="operators/popx-sph-solver.html">POPX SPH Solver</a></li>
+        </ul>
+      </details>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>→</span>
+        <span>Contact</span>
+      </div>
+
+      <h1>Contact & Community</h1>
+      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
+        Get help, report bugs, request features, and connect with the POPX community.
+      </p>
+
+      <section>
+        <h2 id="support">Getting Support</h2>
+        <p>
+          Need help with POPX? Choose the best channel for your question:
+        </p>
+
+        <div class="card">
+          <h3>Discord Community</h3>
+          <span class="badge badge-tool">Fastest Response</span>
+          <p>
+            Join our Discord server for real-time help from the community and POPX developers. Perfect for quick questions, troubleshooting, and sharing work.
+          </p>
+          <a href="#" class="btn btn-primary">Join Discord Server</a>
+          <p style="margin-top: var(--spacing-sm); color: var(--color-text-muted); font-size: 14px;">
+            <strong>Channels:</strong> #general, #help, #showcase, #feature-requests, #development
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>GitHub Issues</h3>
+          <span class="badge badge-simulation">Bug Reports</span>
+          <p>
+            Report bugs, request features, or track development progress on our GitHub repository. Please search existing issues before creating new ones.
+          </p>
+          <a href="#" class="btn btn-secondary">View Issues</a>
+          <a href="#" class="btn btn-secondary" style="margin-left: var(--spacing-xs);">Report Bug</a>
+        </div>
+
+        <div class="card">
+          <h3>Forum</h3>
+          <span class="badge badge-modifier">In-Depth Discussions</span>
+          <p>
+            For longer-form discussions, tutorials, and project showcases, visit the POPX community forum. Great for detailed troubleshooting and sharing knowledge.
+          </p>
+          <a href="#" class="btn btn-secondary">Visit Forum</a>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="bug-reports">Reporting Bugs</h2>
+        <p>
+          When reporting a bug, please include the following information:
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>POPX Version:</strong> Check the version number in the operator info panel</li>
+          <li><strong>TouchDesigner Version:</strong> Build number from Help → About TouchDesigner</li>
+          <li><strong>Operating System:</strong> Windows/macOS/Linux version</li>
+          <li><strong>GPU Model:</strong> Graphics card and driver version</li>
+          <li><strong>Steps to Reproduce:</strong> Detailed description of how to trigger the bug</li>
+          <li><strong>Expected Behavior:</strong> What should happen</li>
+          <li><strong>Actual Behavior:</strong> What actually happens</li>
+          <li><strong>Screenshots/Video:</strong> Visual evidence if applicable</li>
+          <li><strong>Error Messages:</strong> Copy from the TouchDesigner textport</li>
+        </ul>
+        <p style="margin-top: var(--spacing-md);">
+          <a href="#" class="btn btn-primary">Submit Bug Report</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 id="feature-requests">Feature Requests</h2>
+        <p>
+          Have an idea for a new operator or feature? We'd love to hear it! Feature requests are tracked on GitHub Discussions.
+        </p>
+        <h4>Popular Requested Features:</h4>
+        <table class="parameter-table">
+          <tr>
+            <th>Feature</th>
+            <th>Status</th>
+            <th>Votes</th>
+          </tr>
+          <tr>
+            <td>Cloth Simulation Solver</td>
+            <td><span class="badge badge-modifier">In Progress</span></td>
+            <td>142</td>
+          </tr>
+          <tr>
+            <td>Particle Caching to Disk</td>
+            <td><span class="badge badge-falloff">Planned</span></td>
+            <td>98</td>
+          </tr>
+          <tr>
+            <td>Python API for Custom Operators</td>
+            <td><span class="badge badge-tool">Under Review</span></td>
+            <td>87</td>
+          </tr>
+          <tr>
+            <td>Multi-GPU Support</td>
+            <td><span class="badge badge-generator">Research</span></td>
+            <td>76</td>
+          </tr>
+        </table>
+        <p style="margin-top: var(--spacing-md);">
+          <a href="#" class="btn btn-secondary">View All Requests</a>
+          <a href="#" class="btn btn-secondary" style="margin-left: var(--spacing-xs);">Submit Request</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 id="contributing">Contributing</h2>
+        <p>
+          POPX is open source and we welcome contributions! Here's how you can help:
+        </p>
+
+        <h3>Code Contributions</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Fork the repository and create a feature branch</li>
+          <li>Follow the coding standards outlined in CONTRIBUTING.md</li>
+          <li>Write tests for new features</li>
+          <li>Submit a pull request with a clear description</li>
+        </ul>
+
+        <h3>Documentation</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Improve existing documentation pages</li>
+          <li>Write tutorials or guides</li>
+          <li>Translate documentation to other languages</li>
+          <li>Fix typos and broken links</li>
+        </ul>
+
+        <h3>Community Support</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Answer questions on Discord and the forum</li>
+          <li>Share example projects and techniques</li>
+          <li>Create video tutorials</li>
+          <li>Write blog posts about POPX</li>
+        </ul>
+
+        <p style="margin-top: var(--spacing-md);">
+          <a href="#" class="btn btn-primary">Contributor Guide</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 id="social">Social Media & Links</h2>
+        <p>
+          Stay updated with the latest POPX news and releases:
+        </p>
+        <div class="operator-grid">
+          <a href="#" class="operator-card type-tool">
+            <h3>GitHub</h3>
+            <p>Source code, releases, and issue tracking</p>
+          </a>
+          <a href="#" class="operator-card type-generator">
+            <h3>Discord</h3>
+            <p>Real-time community chat and support</p>
+          </a>
+          <a href="#" class="operator-card type-modifier">
+            <h3>YouTube</h3>
+            <p>Video tutorials and feature demos</p>
+          </a>
+          <a href="#" class="operator-card type-falloff">
+            <h3>Instagram</h3>
+            <p>Project showcases and inspiration</p>
+          </a>
+          <a href="#" class="operator-card type-simulation">
+            <h3>Patreon</h3>
+            <p>Support development, get early access</p>
+          </a>
+          <a href="#" class="operator-card type-tool">
+            <h3>Newsletter</h3>
+            <p>Monthly updates and tips via email</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="team">POPX Team</h2>
+        <p>
+          POPX is developed and maintained by:
+        </p>
+        <table class="parameter-table">
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Contact</th>
+          </tr>
+          <tr>
+            <td>Lead Developer</td>
+            <td>Core Development & Architecture</td>
+            <td><a href="#">GitHub</a> · <a href="#">Discord</a></td>
+          </tr>
+          <tr>
+            <td>Documentation Lead</td>
+            <td>Docs, Tutorials, Community</td>
+            <td><a href="#">GitHub</a> · <a href="#">Discord</a></td>
+          </tr>
+          <tr>
+            <td>Community Manager</td>
+            <td>Support, Discord, Social Media</td>
+            <td><a href="#">Discord</a> · <a href="#">Email</a></td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="license">License & Legal</h2>
+        <p>
+          POPX is released under the <strong>MIT License</strong>, which means:
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Free for personal and commercial use</li>
+          <li>You can modify and redistribute the code</li>
+          <li>Attribution is appreciated but not required</li>
+          <li>No warranty or liability</li>
+        </ul>
+        <p style="margin-top: var(--spacing-md);">
+          <a href="#" class="btn btn-secondary">Read Full License</a>
+        </p>
+
+        <h3 style="margin-top: var(--spacing-lg);">Privacy Policy</h3>
+        <p>
+          POPX operators do not collect any user data or telemetry. This documentation site uses basic analytics to improve content. <a href="#">Learn more</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 id="acknowledgments">Acknowledgments</h2>
+        <p>
+          POPX wouldn't be possible without these amazing projects and communities:
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Derivative TouchDesigner</strong> – The incredible real-time visual development platform</li>
+          <li><strong>SideFX Houdini</strong> – Inspiration for the operator-based workflow</li>
+          <li><strong>TouchDesigner Community</strong> – Feedback, testing, and support</li>
+          <li><strong>Open Source Contributors</strong> – All the developers who've contributed code and documentation</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#support">Getting Support</a></li>
+        <li><a href="#bug-reports">Reporting Bugs</a></li>
+        <li><a href="#feature-requests">Feature Requests</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#social">Social Media</a></li>
+        <li><a href="#team">POPX Team</a></li>
+        <li><a href="#license">License & Legal</a></li>
+        <li><a href="#acknowledgments">Acknowledgments</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Transform Modifier - POPX Docs</title>
+  <meta name="description" content="Applies translation, rotation, and scaling transformations to POPX particles and instances.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span>POPX</span> Docs
+        </div>
+        <div class="sidebar-tagline">TouchDesigner Particle Operators</div>
+      </div>
+
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../installation.html">Installation</a></li>
+        <li><a href="../tutorials.html">Tutorials</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+
+      <h3>Operators</h3>
+
+      <details class="sidebar-section category-generators" open>
+        <summary>Generators</summary>
+        <ul>
+          <li><a href="popx-scatter.html">POPX Scatter</a></li>
+          <li><a href="popx-source.html">POPX Source</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-modifiers" open>
+        <summary>Modifiers</summary>
+        <ul>
+          <li><a href="popx-transform-modifier.html" class="active">POPX Transform Modifier</a></li>
+          <li><a href="popx-noise-modifier.html">POPX Noise Modifier</a></li>
+          <li><a href="popx-force-modifier.html">POPX Force Modifier</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-falloffs" open>
+        <summary>Falloffs</summary>
+        <ul>
+          <li><a href="popx-falloff-field.html">POPX Falloff Field</a></li>
+          <li><a href="popx-radial-falloff.html">POPX Radial Falloff</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-tools" open>
+        <summary>Tools</summary>
+        <ul>
+          <li><a href="popx-voxelize.html">POPX Voxelize</a></li>
+          <li><a href="popx-attribute-manager.html">POPX Attribute Manager</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-simulations" open>
+        <summary>Simulations</summary>
+        <ul>
+          <li><a href="popx-flip-solver.html">POPX FLIP Solver</a></li>
+          <li><a href="popx-sph-solver.html">POPX SPH Solver</a></li>
+        </ul>
+      </details>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>→</span>
+        <a href="../modifiers/index.html">Modifiers</a>
+        <span>→</span>
+        <span>POPX Transform Modifier</span>
+      </div>
+
+      <h1>POPX Transform Modifier <span class="badge badge-modifier">v1.0</span></h1>
+      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
+        Applies translation, rotation, and scaling transformations to particles and instances with support for orientation quaternions and delta transforms.
+      </p>
+
+      <section>
+        <h2 id="overview">Overview</h2>
+        <p>
+          The <strong>POPX Transform Modifier</strong> is a foundational operator for manipulating particle and instance transforms. It provides precise control over position, rotation, and scale while maintaining proper orientation through quaternion mathematics.
+        </p>
+        <p>
+          This modifier is essential for:
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Animating particle positions over time</li>
+          <li>Rotating instances to face specific directions</li>
+          <li>Scaling particles based on attributes or falloff fields</li>
+          <li>Building complex procedural motion systems</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="key-features">Key Features</h2>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Quaternion Orientation Support</strong> – Maintains proper rotation accumulation using <code>popxOrient</code> attribute</li>
+          <li><strong>Delta Transforms</strong> – Apply incremental changes per frame for smooth animations</li>
+          <li><strong>Per-Axis Control</strong> – Independent control over X, Y, Z translation, rotation, and scale</li>
+          <li><strong>Falloff Integration</strong> – Spatially modulate transform strength with falloff operators</li>
+          <li><strong>Transform Space</strong> – Apply transforms in local, world, or view space</li>
+          <li><strong>GPU Accelerated</strong> – All transforms computed on the GPU via compute shaders</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="parameters">Parameters</h2>
+
+        <h3 id="page-transform">Page: Transform</h3>
+        <table class="parameter-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Translate X</strong></td>
+            <td>Float</td>
+            <td>0.0</td>
+            <td>Translation offset along the X axis in world units.</td>
+          </tr>
+          <tr>
+            <td><strong>Translate Y</strong></td>
+            <td>Float</td>
+            <td>0.0</td>
+            <td>Translation offset along the Y axis in world units.</td>
+          </tr>
+          <tr>
+            <td><strong>Translate Z</strong></td>
+            <td>Float</td>
+            <td>0.0</td>
+            <td>Translation offset along the Z axis in world units.</td>
+          </tr>
+          <tr>
+            <td><strong>Rotate X</strong></td>
+            <td>Float (°)</td>
+            <td>0.0</td>
+            <td>Rotation around the X axis in degrees.</td>
+          </tr>
+          <tr>
+            <td><strong>Rotate Y</strong></td>
+            <td>Float (°)</td>
+            <td>0.0</td>
+            <td>Rotation around the Y axis in degrees.</td>
+          </tr>
+          <tr>
+            <td><strong>Rotate Z</strong></td>
+            <td>Float (°)</td>
+            <td>0.0</td>
+            <td>Rotation around the Z axis in degrees.</td>
+          </tr>
+          <tr>
+            <td><strong>Scale X</strong></td>
+            <td>Float</td>
+            <td>1.0</td>
+            <td>Scale multiplier along the X axis.</td>
+          </tr>
+          <tr>
+            <td><strong>Scale Y</strong></td>
+            <td>Float</td>
+            <td>1.0</td>
+            <td>Scale multiplier along the Y axis.</td>
+          </tr>
+          <tr>
+            <td><strong>Scale Z</strong></td>
+            <td>Float</td>
+            <td>1.0</td>
+            <td>Scale multiplier along the Z axis.</td>
+          </tr>
+          <tr>
+            <td><strong>Uniform Scale</strong></td>
+            <td>Float</td>
+            <td>1.0</td>
+            <td>Uniform scaling factor applied after per-axis scaling.</td>
+          </tr>
+        </table>
+
+        <h3 id="page-orientation">Page: Orientation</h3>
+        <table class="parameter-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Affect Orientation</strong></td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>When enabled, updates the <code>popxOrient</code> quaternion attribute with rotation changes.</td>
+          </tr>
+          <tr>
+            <td><strong>Use Delta Transform</strong></td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>When enabled, applies transforms incrementally per frame instead of absolute values. Essential for smooth animation.</td>
+          </tr>
+          <tr>
+            <td><strong>Transform Space</strong></td>
+            <td>Menu</td>
+            <td>World</td>
+            <td>Coordinate space for transforms. <em>Options: World, Local, View</em></td>
+          </tr>
+          <tr>
+            <td><strong>Rotation Order</strong></td>
+            <td>Menu</td>
+            <td>XYZ</td>
+            <td>Order of rotation application. <em>Options: XYZ, XZY, YXZ, YZX, ZXY, ZYX</em></td>
+          </tr>
+          <tr>
+            <td><strong>Pivot X / Y / Z</strong></td>
+            <td>Float</td>
+            <td>0.0</td>
+            <td>Pivot point for rotation and scale operations in local space.</td>
+          </tr>
+        </table>
+
+        <h3 id="page-falloff">Page: Falloff</h3>
+        <table class="parameter-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Use Falloff</strong></td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Enable spatial falloff to modulate transform strength.</td>
+          </tr>
+          <tr>
+            <td><strong>Falloff Input</strong></td>
+            <td>SOP</td>
+            <td>-</td>
+            <td>Connect a POPX Falloff operator to provide spatial influence values.</td>
+          </tr>
+          <tr>
+            <td><strong>Falloff Attribute</strong></td>
+            <td>String</td>
+            <td>falloff</td>
+            <td>Name of the falloff attribute to read (typically "falloff" or "weight").</td>
+          </tr>
+          <tr>
+            <td><strong>Invert Falloff</strong></td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Reverses falloff values (1-falloff).</td>
+          </tr>
+          <tr>
+            <td><strong>Falloff Remap</strong></td>
+            <td>Ramp</td>
+            <td>Linear</td>
+            <td>Remaps falloff values through a lookup curve for fine-tuned control.</td>
+          </tr>
+        </table>
+
+        <h3 id="page-common">Page: Common</h3>
+        <table class="parameter-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Enable</strong></td>
+            <td>Toggle</td>
+            <td>On</td>
+            <td>Turns the modifier on/off. When disabled, input passes through unchanged.</td>
+          </tr>
+          <tr>
+            <td><strong>Strength</strong></td>
+            <td>Float</td>
+            <td>1.0</td>
+            <td>Global multiplier for all transform values (0-1 range for blending).</td>
+          </tr>
+          <tr>
+            <td><strong>Group</strong></td>
+            <td>String</td>
+            <td>-</td>
+            <td>Apply transform only to particles in the specified group. Leave empty for all particles.</td>
+          </tr>
+          <tr>
+            <td><strong>Blend Mode</strong></td>
+            <td>Menu</td>
+            <td>Add</td>
+            <td>How transforms combine with existing values. <em>Options: Add, Multiply, Replace</em></td>
+          </tr>
+          <tr>
+            <td><strong>Cook on Demand</strong></td>
+            <td>Toggle</td>
+            <td>Off</td>
+            <td>Only compute when downstream operators request data (performance optimization).</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="inputs">Inputs</h2>
+        <table class="parameter-table">
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Input 0</strong></td>
+            <td>SOP</td>
+            <td>Particle or instance stream containing point geometry with standard POPX attributes.</td>
+          </tr>
+          <tr>
+            <td><strong>Input 1</strong> <em>(optional)</em></td>
+            <td>SOP</td>
+            <td>Falloff field geometry (alternative to the Falloff Input parameter).</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
+        <table class="parameter-table">
+          <tr>
+            <th>Output</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><strong>Output 0</strong></td>
+            <td>SOP</td>
+            <td>Transformed particle stream with updated <code>P</code>, <code>popxOrient</code>, and <code>scale</code> attributes.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="attributes">Attributes Affected</h2>
+        <table class="parameter-table">
+          <tr>
+            <th>Attribute</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><code>P</code></td>
+            <td>Vector (3)</td>
+            <td>Point position. Modified by translation parameters.</td>
+          </tr>
+          <tr>
+            <td><code>popxOrient</code></td>
+            <td>Vector (4)</td>
+            <td>Orientation quaternion (x, y, z, w). Updated by rotation parameters when "Affect Orientation" is enabled.</td>
+          </tr>
+          <tr>
+            <td><code>scale</code></td>
+            <td>Vector (3)</td>
+            <td>Per-axis scale values. Modified by scale parameters. Created if it doesn't exist.</td>
+          </tr>
+          <tr>
+            <td><code>v</code></td>
+            <td>Vector (3)</td>
+            <td>Velocity. Optionally modified when using delta transforms with position changes.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="usage">Usage Examples</h2>
+
+        <h3>Example 1: Rotating Instances Over Time</h3>
+        <pre><code>POPX Scatter
+  ↓
+POPX Transform Modifier
+  - Use Delta Transform: On
+  - Rotate Y: absTime.seconds * 45
+  - Affect Orientation: On
+  ↓
+Geometry COMP (with instancing)</code></pre>
+        <p>
+          This creates particles that continuously rotate around the Y axis at 45 degrees per second.
+        </p>
+
+        <h3>Example 2: Scaling with Falloff</h3>
+        <pre><code>POPX Scatter → POPX Transform Modifier
+                          ↑
+                  POPX Radial Falloff</code></pre>
+        <p>
+          Connect a radial falloff to the second input. Set "Use Falloff" to On and adjust "Uniform Scale" to 2.0. Particles near the falloff center will scale larger while distant particles remain unchanged.
+        </p>
+
+        <h3>Example 3: Translate Along Custom Axis</h3>
+        <pre><code>POPX Transform Modifier
+  - Transform Space: Local
+  - Translate Z: 5.0
+  - Use Delta Transform: On</code></pre>
+        <p>
+          Moves particles forward along their local Z axis (useful for oriented instances like arrows or projectiles).
+        </p>
+      </section>
+
+      <section>
+        <h2 id="notes">Notes & Best Practices</h2>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Delta vs Absolute:</strong> Use "Delta Transform" for animated motion. Use absolute values for one-time transforms or resetting positions.</li>
+          <li><strong>Quaternions:</strong> The <code>popxOrient</code> attribute uses quaternion representation (x, y, z, w) to avoid gimbal lock. Always enable "Affect Orientation" when rotating instances.</li>
+          <li><strong>Performance:</strong> Transform operations are extremely fast. You can chain dozens of transform modifiers without performance impact.</li>
+          <li><strong>Order Matters:</strong> Rotation order (XYZ, ZXY, etc.) affects final orientation. Match this to your DCC application's conventions.</li>
+          <li><strong>Pivot Point:</strong> Set the pivot for off-center rotation and scaling. Useful for asymmetric instances.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="related-operators">Related Operators</h2>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><a href="popx-noise-modifier.html">POPX Noise Modifier</a> – Add procedural deformation to transforms</li>
+          <li><a href="popx-force-modifier.html">POPX Force Modifier</a> – Physics-based motion instead of direct transforms</li>
+          <li><a href="popx-radial-falloff.html">POPX Radial Falloff</a> – Spatial falloff for localized transforms</li>
+          <li><a href="popx-constraint-modifier.html">POPX Constraint Modifier</a> – Limit transform results to specific regions</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="version-history">Version History</h2>
+        <table class="parameter-table">
+          <tr>
+            <th>Version</th>
+            <th>Date</th>
+            <th>Changes</th>
+          </tr>
+          <tr>
+            <td>1.0.0</td>
+            <td>Jan 2025</td>
+            <td>Initial release with full quaternion support and delta transforms</td>
+          </tr>
+        </table>
+        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted); font-size: 14px;">
+          <strong>Last Updated:</strong> January 15, 2025
+        </p>
+      </section>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-transform">Transform</a></li>
+            <li><a href="#page-orientation">Orientation</a></li>
+            <li><a href="#page-falloff">Falloff</a></li>
+            <li><a href="#page-common">Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+        <li><a href="#attributes">Attributes Affected</a></li>
+        <li><a href="#usage">Usage Examples</a></li>
+        <li><a href="#notes">Notes & Best Practices</a></li>
+        <li><a href="#related-operators">Related Operators</a></li>
+        <li><a href="#version-history">Version History</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../assets/script.js"></script>
+</body>
+</html>

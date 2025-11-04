@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifiers - POPX Docs</title>
+  <meta name="description" content="POPX Modifier operators for transforming and manipulating particle streams in TouchDesigner.">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span>POPX</span> Docs
+        </div>
+        <div class="sidebar-tagline">TouchDesigner Particle Operators</div>
+      </div>
+
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../installation.html">Installation</a></li>
+        <li><a href="../tutorials.html">Tutorials</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+
+      <h3>Operators</h3>
+
+      <details class="sidebar-section category-generators" open>
+        <summary>Generators</summary>
+        <ul>
+          <li><a href="../operators/popx-scatter.html">POPX Scatter</a></li>
+          <li><a href="../operators/popx-source.html">POPX Source</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-modifiers" open>
+        <summary>Modifiers</summary>
+        <ul>
+          <li><a href="../operators/popx-transform-modifier.html">POPX Transform Modifier</a></li>
+          <li><a href="../operators/popx-noise-modifier.html">POPX Noise Modifier</a></li>
+          <li><a href="../operators/popx-force-modifier.html">POPX Force Modifier</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-falloffs" open>
+        <summary>Falloffs</summary>
+        <ul>
+          <li><a href="../operators/popx-falloff-field.html">POPX Falloff Field</a></li>
+          <li><a href="../operators/popx-radial-falloff.html">POPX Radial Falloff</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-tools" open>
+        <summary>Tools</summary>
+        <ul>
+          <li><a href="../operators/popx-voxelize.html">POPX Voxelize</a></li>
+          <li><a href="../operators/popx-attribute-manager.html">POPX Attribute Manager</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-simulations" open>
+        <summary>Simulations</summary>
+        <ul>
+          <li><a href="../operators/popx-flip-solver.html">POPX FLIP Solver</a></li>
+          <li><a href="../operators/popx-sph-solver.html">POPX SPH Solver</a></li>
+        </ul>
+      </details>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>→</span>
+        <span>Modifiers</span>
+      </div>
+
+      <h1>POPX Modifiers</h1>
+      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
+        Transform, deform, and manipulate particle streams with forces, noise, constraints, and custom expressions.
+      </p>
+
+      <section>
+        <h2 id="overview">Overview</h2>
+        <p>
+          Modifiers are the core manipulation tools in the POPX ecosystem. They read particle data streams, modify attributes (position, velocity, orientation, scale, color, etc.), and output the transformed stream for downstream processing or rendering.
+        </p>
+        <p>
+          All modifiers support:
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Falloff Integration</strong> – Connect falloff operators to spatially limit modifier influence</li>
+          <li><strong>Custom Attributes</strong> – Modify any particle attribute, including user-defined attributes</li>
+          <li><strong>GPU Acceleration</strong> – All operations run on compute shaders for real-time performance</li>
+          <li><strong>Chainable Operations</strong> – Combine multiple modifiers to create complex procedural systems</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="modifiers">Available Modifiers</h2>
+
+        <div class="operator-grid">
+          <a href="../operators/popx-transform-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Transform Modifier</h3>
+            <span class="badge badge-modifier">Core</span>
+            <p>Applies translation, rotation, and scaling transformations to particles and instances with support for delta transforms and orientation accumulation.</p>
+          </a>
+
+          <a href="../operators/popx-noise-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Noise Modifier</h3>
+            <span class="badge badge-modifier">Core</span>
+            <p>Deforms particle positions and attributes using Perlin, Simplex, Curl, and Voronoi noise patterns with customizable frequency and amplitude.</p>
+          </a>
+
+          <a href="../operators/popx-force-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Force Modifier</h3>
+            <span class="badge badge-modifier">Physics</span>
+            <p>Applies directional forces, gravity, turbulence, drag, and vortex forces to particle velocities with real-time physics integration.</p>
+          </a>
+
+          <a href="../operators/popx-color-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Color Modifier</h3>
+            <span class="badge badge-modifier">Visual</span>
+            <p>Modifies particle color attributes using ramps, gradients, noise, and attribute-driven coloring with HDR support.</p>
+          </a>
+
+          <a href="../operators/popx-velocity-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Velocity Modifier</h3>
+            <span class="badge badge-modifier">Physics</span>
+            <p>Controls particle velocity through direct manipulation, speed limits, alignment forces, and velocity inheritance from geometry.</p>
+          </a>
+
+          <a href="../operators/popx-attribute-transfer.html" class="operator-card type-modifier">
+            <h3>POPX Attribute Transfer</h3>
+            <span class="badge badge-modifier">Data</span>
+            <p>Transfers attributes from source geometry to particles using nearest point, proximity averaging, or texture sampling methods.</p>
+          </a>
+
+          <a href="../operators/popx-constraint-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Constraint Modifier</h3>
+            <span class="badge badge-modifier">Physics</span>
+            <p>Constrains particles to surfaces, volumes, curves, and bounding regions with collision response and sliding behavior.</p>
+          </a>
+
+          <a href="../operators/popx-expression-modifier.html" class="operator-card type-modifier">
+            <h3>POPX Expression Modifier</h3>
+            <span class="badge badge-modifier">Advanced</span>
+            <p>Create custom particle behaviors using GLSL expressions with access to all attributes, neighbors, and global parameters.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="workflow">Modifier Workflow</h2>
+        <p>
+          A typical modifier workflow involves chaining operators to build complex behaviors:
+        </p>
+        <pre><code>POPX Scatter (create particles)
+  ↓
+POPX Force Modifier (apply gravity + turbulence)
+  ↓
+POPX Noise Modifier (add position displacement)
+  ↓
+POPX Transform Modifier (add rotation)
+  ↓
+POPX Color Modifier (color by velocity)
+  ↓
+Geometry COMP (render)</code></pre>
+
+        <h3>Best Practices</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Order Matters</strong> – Physics modifiers (Force, Velocity) should generally come before visual modifiers (Color, Transform)</li>
+          <li><strong>Use Falloffs</strong> – Connect falloff operators to limit modifier influence to specific regions</li>
+          <li><strong>Enable/Disable</strong> – Use the "Enable" parameter to toggle modifiers without breaking the chain</li>
+          <li><strong>Attribute Names</strong> – Stick to standard attribute names (P, v, Cd, N, orient) for compatibility with other operators</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="common-parameters">Common Parameters</h2>
+        <p>
+          Most modifiers share these common parameters:
+        </p>
+        <table class="parameter-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>Enable</td>
+            <td>Toggle</td>
+            <td>Turns the modifier on/off (passthrough when disabled)</td>
+          </tr>
+          <tr>
+            <td>Strength</td>
+            <td>Float</td>
+            <td>Global multiplier for modifier effect (0-1 range typically)</td>
+          </tr>
+          <tr>
+            <td>Falloff Input</td>
+            <td>SOP</td>
+            <td>Optional falloff field to spatially modulate strength</td>
+          </tr>
+          <tr>
+            <td>Group</td>
+            <td>String</td>
+            <td>Limit modifier to particles in specified group</td>
+          </tr>
+          <tr>
+            <td>Blend Mode</td>
+            <td>Menu</td>
+            <td>How modifier combines with existing attributes (Add, Multiply, Replace)</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="related">Related Operators</h2>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><a href="../generators/index.html">Generators</a> – Create particle streams to feed into modifiers</li>
+          <li><a href="../falloffs/index.html">Falloffs</a> – Spatial influence fields for modifiers</li>
+          <li><a href="../tools/index.html">Tools</a> – Attribute managers and analyzers for advanced workflows</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#modifiers">Available Modifiers</a></li>
+        <li><a href="#workflow">Modifier Workflow</a></li>
+        <li><a href="#common-parameters">Common Parameters</a></li>
+        <li><a href="#related">Related Operators</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../assets/script.js"></script>
+</body>
+</html>

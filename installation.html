@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started - POPX Docs</title>
+  <meta name="description" content="Installation and setup guide for POPX TouchDesigner operators.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span>POPX</span> Docs
+        </div>
+        <div class="sidebar-tagline">TouchDesigner Particle Operators</div>
+      </div>
+
+      <h3>Getting Started</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="installation.html" class="active">Installation</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <h3>Operators</h3>
+
+      <details class="sidebar-section category-generators" open>
+        <summary>Generators</summary>
+        <ul>
+          <li><a href="operators/popx-scatter.html">POPX Scatter</a></li>
+          <li><a href="operators/popx-source.html">POPX Source</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-modifiers" open>
+        <summary>Modifiers</summary>
+        <ul>
+          <li><a href="operators/popx-transform-modifier.html">POPX Transform Modifier</a></li>
+          <li><a href="operators/popx-noise-modifier.html">POPX Noise Modifier</a></li>
+          <li><a href="operators/popx-force-modifier.html">POPX Force Modifier</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-falloffs" open>
+        <summary>Falloffs</summary>
+        <ul>
+          <li><a href="operators/popx-falloff-field.html">POPX Falloff Field</a></li>
+          <li><a href="operators/popx-radial-falloff.html">POPX Radial Falloff</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-tools" open>
+        <summary>Tools</summary>
+        <ul>
+          <li><a href="operators/popx-voxelize.html">POPX Voxelize</a></li>
+          <li><a href="operators/popx-attribute-manager.html">POPX Attribute Manager</a></li>
+        </ul>
+      </details>
+
+      <details class="sidebar-section category-simulations" open>
+        <summary>Simulations</summary>
+        <ul>
+          <li><a href="operators/popx-flip-solver.html">POPX FLIP Solver</a></li>
+          <li><a href="operators/popx-sph-solver.html">POPX SPH Solver</a></li>
+        </ul>
+      </details>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>→</span>
+        <span>Getting Started</span>
+      </div>
+
+      <h1>Getting Started with POPX</h1>
+      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
+        Follow this guide to install and configure POPX operators in your TouchDesigner environment.
+      </p>
+
+      <section>
+        <h2 id="download">Download POPX</h2>
+        <p>
+          POPX is distributed as a collection of <code>.tox</code> component files organized by operator type. Download the latest release from one of the following sources:
+        </p>
+        <div style="margin: var(--spacing-md) 0;">
+          <a href="#" class="btn btn-primary">Download Latest Release</a>
+          <a href="#" class="btn btn-secondary" style="margin-left: var(--spacing-sm);">View on GitHub</a>
+        </div>
+        <p>
+          <strong>Latest Version:</strong> <code>v1.0.0</code> (Released: January 2025)<br>
+          <strong>File Size:</strong> ~45 MB<br>
+          <strong>License:</strong> MIT License
+        </p>
+      </section>
+
+      <section>
+        <h2 id="installation">Installation</h2>
+
+        <h3 id="step-1">Step 1: Extract the Archive</h3>
+        <p>
+          After downloading, extract the <code>POPX.zip</code> archive to a location of your choice. The recommended location is:
+        </p>
+        <pre><code>C:\Users\[YourName]\Documents\TouchDesigner\POPX\</code></pre>
+        <p>Or on macOS/Linux:</p>
+        <pre><code>/Users/[YourName]/Documents/TouchDesigner/POPX/</code></pre>
+
+        <h3 id="step-2">Step 2: Folder Structure</h3>
+        <p>
+          After extraction, your POPX folder should contain the following structure:
+        </p>
+        <pre><code>/POPX
+  ├── generators/
+  │   ├── popx_scatter.tox
+  │   ├── popx_source.tox
+  │   └── ...
+  ├── modifiers/
+  │   ├── popx_transform_modifier.tox
+  │   ├── popx_noise_modifier.tox
+  │   └── ...
+  ├── falloffs/
+  │   ├── popx_falloff_field.tox
+  │   └── ...
+  ├── tools/
+  │   ├── popx_voxelize.tox
+  │   └── ...
+  ├── simulations/
+  │   ├── popx_flip_solver.tox
+  │   └── ...
+  └── README.txt</code></pre>
+
+        <h3 id="step-3">Step 3: Add to TouchDesigner Palette (Optional)</h3>
+        <p>
+          To add POPX operators to your TouchDesigner component palette for easy access:
+        </p>
+        <ol style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Open TouchDesigner</li>
+          <li>Navigate to <strong>Edit → Preferences</strong></li>
+          <li>Select the <strong>Palette</strong> tab</li>
+          <li>Click <strong>Add Folder</strong></li>
+          <li>Browse to your POPX installation directory</li>
+          <li>Click <strong>OK</strong> to save</li>
+        </ol>
+        <p>
+          POPX operators will now appear in your component palette, organized by type.
+        </p>
+
+        <h3 id="step-4">Step 4: Using POPX Operators</h3>
+        <p>
+          To use a POPX operator in your network:
+        </p>
+        <ol style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>In the TouchDesigner network editor, press <strong>Tab</strong> to open the operator menu</li>
+          <li>Type the operator name (e.g., "popx scatter")</li>
+          <li>Select the operator from the list</li>
+          <li>Alternatively, drag and drop <code>.tox</code> files directly from your file browser into the network</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 id="requirements">System Requirements</h2>
+        <p>
+          Ensure your system meets the following requirements for optimal POPX performance:
+        </p>
+        <table class="parameter-table">
+          <tr>
+            <th>Component</th>
+            <th>Minimum</th>
+            <th>Recommended</th>
+          </tr>
+          <tr>
+            <td>TouchDesigner Version</td>
+            <td>2023.11760</td>
+            <td>2024.10000+</td>
+          </tr>
+          <tr>
+            <td>GPU</td>
+            <td>OpenGL 4.6 compatible</td>
+            <td>NVIDIA RTX series / AMD RX 6000+</td>
+          </tr>
+          <tr>
+            <td>VRAM</td>
+            <td>4 GB</td>
+            <td>8 GB+</td>
+          </tr>
+          <tr>
+            <td>RAM</td>
+            <td>16 GB</td>
+            <td>32 GB+</td>
+          </tr>
+          <tr>
+            <td>CPU</td>
+            <td>Quad-core Intel/AMD</td>
+            <td>8+ cores, 3.0+ GHz</td>
+          </tr>
+          <tr>
+            <td>Operating System</td>
+            <td>Windows 10, macOS 12, Ubuntu 20.04</td>
+            <td>Windows 11, macOS 13+, Ubuntu 22.04+</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="verification">Verify Installation</h2>
+        <p>
+          To verify that POPX is installed correctly:
+        </p>
+        <ol style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Create a new TouchDesigner project</li>
+          <li>Add a <strong>POPX Scatter</strong> operator to your network</li>
+          <li>Connect a <strong>Box SOP</strong> to the first input of POPX Scatter</li>
+          <li>Create a <strong>Geometry COMP</strong> and connect POPX Scatter to it</li>
+          <li>You should see particles scattered on the box surface</li>
+        </ol>
+        <p>
+          If particles appear, your installation is successful!
+        </p>
+      </section>
+
+      <section>
+        <h2 id="first-network">Your First POPX Network</h2>
+        <p>
+          Let's create a simple particle system to get familiar with POPX:
+        </p>
+
+        <h3>Basic Particle Scatter with Transform</h3>
+        <pre><code>Box SOP
+  ↓
+POPX Scatter (emit 1000 particles)
+  ↓
+POPX Transform Modifier (add rotation)
+  ↓
+Geometry COMP (render as instances)</code></pre>
+
+        <h4>Detailed Steps:</h4>
+        <ol style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Create source geometry:</strong> Add a <code>Box SOP</code></li>
+          <li><strong>Scatter particles:</strong> Add <code>POPX Scatter</code>, set "Total Count" to 1000</li>
+          <li><strong>Add motion:</strong> Add <code>POPX Transform Modifier</code>, set "Rotate Y" to 45</li>
+          <li><strong>Render:</strong> Create <code>Geometry COMP</code>, enable "Instancing"</li>
+        </ol>
+
+        <p style="margin-top: var(--spacing-md);">
+          For more detailed tutorials, visit the <a href="tutorials.html">Tutorials</a> page.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="troubleshooting">Troubleshooting</h2>
+
+        <h3>Operators Not Appearing in Palette</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Verify the palette path in <strong>Edit → Preferences → Palette</strong></li>
+          <li>Restart TouchDesigner after adding the palette folder</li>
+          <li>Check that .tox files are not corrupted (re-download if necessary)</li>
+        </ul>
+
+        <h3>GPU Compute Errors</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Update your graphics drivers to the latest version</li>
+          <li>Verify OpenGL 4.6 support with <code>glxinfo</code> (Linux) or GPU-Z (Windows)</li>
+          <li>Reduce particle count if experiencing out-of-memory errors</li>
+        </ul>
+
+        <h3>Performance Issues</h3>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Enable "Cook on Demand" for operators not actively being used</li>
+          <li>Reduce particle counts during initial setup, scale up for final renders</li>
+          <li>Use falloff operators to limit modifier influence regions</li>
+          <li>Monitor VRAM usage in TouchDesigner's performance monitor</li>
+        </ul>
+
+        <p style="margin-top: var(--spacing-md);">
+          For additional support, visit the <a href="contact.html">Contact</a> page.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="next-steps">Next Steps</h2>
+        <p>Now that POPX is installed, explore the documentation:</p>
+        <div class="operator-grid">
+          <a href="generators/index.html" class="operator-card type-generator">
+            <h3>Generators</h3>
+            <p>Learn how to emit and create particles</p>
+          </a>
+          <a href="modifiers/index.html" class="operator-card type-modifier">
+            <h3>Modifiers</h3>
+            <p>Transform and manipulate particle streams</p>
+          </a>
+          <a href="tutorials.html" class="operator-card type-tool">
+            <h3>Tutorials</h3>
+            <p>Follow step-by-step project guides</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#download">Download POPX</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#requirements">System Requirements</a></li>
+        <li><a href="#verification">Verify Installation</a></li>
+        <li><a href="#first-network">Your First Network</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#next-steps">Next Steps</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
