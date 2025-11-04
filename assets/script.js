@@ -45,34 +45,28 @@ function initMobileMenu() {
   });
 
   // Prevent link clicks inside accordions from toggling the accordion
-  const accordionSections = document.querySelectorAll('.sidebar-section');
-  accordionSections.forEach(section => {
-    // Prevent clicks on any child elements except the summary from toggling
-    section.addEventListener('click', function(e) {
-      // Only allow toggle if clicking directly on the summary element
-      if (e.target.tagName !== 'SUMMARY') {
-        e.stopPropagation();
-        e.preventDefault();
+  if (sidebar) {
+    const accordionSections = sidebar.querySelectorAll('.sidebar-section');
+
+    accordionSections.forEach(section => {
+      // Stop propagation on all links to prevent accordion toggle
+      const links = section.querySelectorAll('a');
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Allow default link behavior
+        });
+      });
+
+      // Stop propagation on the content list
+      const contentList = section.querySelector('ul');
+      if (contentList) {
+        contentList.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
       }
     });
-
-    // Stop propagation on all links to prevent accordion toggle
-    const links = section.querySelectorAll('a');
-    links.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.stopPropagation();
-        // Allow default link behavior
-      });
-    });
-
-    // Stop propagation on the content list
-    const contentList = section.querySelector('ul');
-    if (contentList) {
-      contentList.addEventListener('click', function(e) {
-        e.stopPropagation();
-      });
-    }
-  });
+  }
 
   // Close menu only when clicking actual navigation links (not summary/accordion toggles)
   const sidebarLinks = sidebar.querySelectorAll('a');
@@ -165,6 +159,13 @@ function initSidebarState() {
     accordionSections.forEach(section => {
       section.setAttribute('open', '');
     });
+
+    // Save initial state
+    const initialState = {};
+    accordionSections.forEach((section, index) => {
+      initialState[`section-${index}`] = true;
+    });
+    localStorage.setItem('popx-accordion-state', JSON.stringify(initialState));
   }
 
   // Save accordion state whenever it changes
