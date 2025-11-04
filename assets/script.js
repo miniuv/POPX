@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollSpy();
   initSidebarState();
   initSmoothScroll();
+  initParameterGroups();
 });
 
 // ===========================
@@ -373,3 +374,20 @@ function initCodeCopy() {
 
 // Optional: Initialize code copy if needed
 // initCodeCopy();
+
+// ===========================
+// Parameter Group Toggle
+// ===========================
+function initParameterGroups() {
+  const paramGroups = document.querySelectorAll('.param-group');
+
+  paramGroups.forEach(group => {
+    const header = group.querySelector('.param-group-header');
+
+    if (header) {
+      header.addEventListener('click', function() {
+        group.classList.toggle('expanded');
+      });
+    }
+  });
+}

@@ -596,6 +596,14 @@ pre code {
   font-weight: 400;
 }
 
+.param-type {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
 .param-description {
   color: var(--color-text-muted);
   font-size: var(--font-size-small);
@@ -623,6 +631,68 @@ pre code {
   position: absolute;
   left: 8px;
   color: var(--color-accent);
+}
+
+/* Expandable Parameter Groups (Vector/Color types) */
+.param-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.param-group-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  transition: background-color 0.2s ease;
+}
+
+.param-group-header:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.param-toggle {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  transition: transform 0.2s ease;
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.param-group.expanded .param-toggle {
+  transform: rotate(90deg);
+}
+
+.param-subparams {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.param-group.expanded .param-subparams {
+  max-height: 500px;
+}
+
+.param-subparam {
+  margin-bottom: var(--spacing-sm);
+}
+
+.param-subparam .param-header {
+  margin-bottom: 2px;
+}
+
+.param-subparam .param-label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.param-subparam .param-description {
+  font-size: 13px;
+  margin-bottom: 4px;
 }
 
 /* ===========================
