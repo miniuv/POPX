@@ -134,8 +134,11 @@ function initSidebarState() {
     }
   });
 
-  // Accordions work natively with <details> element
-  // No need to save/restore state - they stay closed by default in HTML
+  // Open all accordion sections by default
+  const accordionSections = document.querySelectorAll('.sidebar-section');
+  accordionSections.forEach(section => {
+    section.setAttribute('open', '');
+  });
 }
 
 // ===========================
