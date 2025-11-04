@@ -1,11 +1,14 @@
 :root {
-  --bg: #1a1a1a;
-  --panel: #252525;
-  --muted: #b3b3b3;
-  --text: #ffffff;
-  --brand: #ff3333;
-  --border: #333333;
-  --brand-hover: #ff6666;
+  --bg: #000000;
+  --panel: #101010;
+  --muted: #bbbbbb;
+  --text: #eeeeee;
+  --text-secondary: #bbbbbb;
+  --brand: #e53935;
+  --border: #222222;
+  --brand-hover: #ff5252;
+  --sidebar-bg: #0a0a0a;
+  --header-bg: #080808;
 }
 
 * { box-sizing: border-box; }
@@ -15,8 +18,9 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", system-ui, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
   line-height: 1.6;
+  font-size: 15px;
 }
 
 .site {
@@ -31,10 +35,22 @@ html, body {
   justify-content: space-between;
   padding: 0 24px;
   border-bottom: 1px solid var(--border);
-  background: #121212;
+  background: var(--header-bg);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 12px;
 }
 
 .brand {
@@ -82,8 +98,9 @@ html, body {
 
 .sidebar {
   border-right: 1px solid var(--border);
-  padding: 18px;
-  background: #1f1f1f;
+  padding: 24px 18px;
+  background: var(--sidebar-bg);
+  transition: transform 0.3s ease;
 }
 
 .sidebar h3 {
@@ -165,6 +182,19 @@ h1, h2, h3 {
 h1 {
   color: var(--brand);
   margin-top: 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .badge {
@@ -252,4 +282,170 @@ pre {
   justify-content: center;
   font-size: 0.875rem;
   font-weight: bold;
+}
+
+/* Breadcrumb navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--brand);
+}
+
+.breadcrumb-separator {
+  color: var(--border);
+}
+
+/* Operator cards grid */
+.operator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.operator-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.operator-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15);
+}
+
+.operator-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--brand);
+  font-size: 18px;
+}
+
+.operator-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Link styles */
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--brand-hover);
+}
+
+.content a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.3s ease;
+}
+
+.content a:hover {
+  text-decoration-color: var(--brand);
+}
+
+/* Table overflow on mobile */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 60px;
+    bottom: 0;
+    width: 260px;
+    z-index: 90;
+    overflow-y: auto;
+  }
+
+  .sidebar.active {
+    transform: translateX(280px);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .content {
+    padding: 24px 20px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .content {
+    padding: 20px 16px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .operator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .getting-started-grid {
+    grid-template-columns: 1fr;
+  }
 }

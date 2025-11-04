@@ -4,37 +4,52 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Modifiers — POPX Docs</title>
-  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 <div class="site">
   <div class="header">
     <div class="brand"><div class="logo"></div> POPX Docs</div>
-    <nav class="nav small">
-      <a href="../index.html">Home</a>
-      <a href="../installation.html">Installation</a>
-      <a href="../generators.html">Generators</a>
-      <a href="../modifiers.html">Modifiers</a>
-      <a href="../followoffs.html">Follow-offs</a>
-      <a href="../simulations.html">Simulations</a>
-      <a href="../tools.html">Tools</a>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="installation.html">Getting Started</a>
+      <a href="generators.html">Generators</a>
+      <a href="modifiers.html">Modifiers</a>
+      <a href="falloffs.html">Falloffs</a>
+      <a href="tools.html">Tools</a>
+      <a href="simulations.html">Simulations</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
   <div class="container">
     <aside class="sidebar">
       <h3>POPX Operator Types</h3>
       <div class="menu">
-        <a href="../generators.html">Generators</a>
-        <a href="../modifiers.html">Modifiers</a>
-        <a href="../followoffs.html">Follow-offs</a>
-        <a href="../simulations.html">Simulations</a>
-        <a href="../tools.html">Tools</a>
+        <a href="generators.html">Generators</a>
+        <a href="modifiers.html">Modifiers</a>
+        <a href="falloffs.html">Falloffs</a>
+        <a href="tools.html">Tools</a>
+        <a href="simulations.html">Simulations</a>
       </div>
     </aside>
     <main class="content">
 
 <h1>Modifiers</h1>
-<div class="panel"><p>Operators belonging to the <strong>Modifiers</strong> type will appear here.</p></div>
+
+<div class="panel">
+  <p><strong>Modifiers</strong> transform, move, or modify existing particle and geometry data. They operate on incoming streams to adjust positions, velocities, orientations, colors, and other attributes in procedural and dynamic ways.</p>
+</div>
+
+<h2>Available Operators</h2>
+<div class="operator-grid">
+  <a href="operators/popx-transform-modifier.html" class="operator-card">
+    <h3>POPX Transform Modifier</h3>
+    <p>Apply translation, rotation, and scaling transformations to particles and instances.</p>
+  </a>
+  <!-- Additional modifier operators will be added here -->
+</div>
 
     </main>
   </div>
@@ -42,5 +57,6 @@
     © 2025 POPX Docs — Built for TouchDesigner developers.
   </div>
 </div>
+<script src="assets/script.js"></script>
 </body>
 </html>
