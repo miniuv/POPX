@@ -54,6 +54,15 @@ function initMobileMenu() {
     });
   });
 
+  // Prevent clicks on accordion content (ul) from toggling the accordion
+  const accordionContent = sidebar.querySelectorAll('.sidebar-section ul');
+  accordionContent.forEach(ul => {
+    ul.addEventListener('click', function(e) {
+      // Stop propagation so clicking anywhere in the content doesn't toggle
+      e.stopPropagation();
+    });
+  });
+
   // Close menu only when clicking actual navigation links (not summary/accordion toggles)
   const sidebarLinks = sidebar.querySelectorAll('a');
   sidebarLinks.forEach(link => {
