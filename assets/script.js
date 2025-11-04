@@ -251,6 +251,7 @@ function initSidebarState() {
 // ===========================
 function initSmoothScroll() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  const tocLinks = document.querySelectorAll('.toc a');
 
   anchorLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -263,10 +264,18 @@ function initSmoothScroll() {
       if (target) {
         e.preventDefault();
 
-        // No top nav anymore, just add a small offset for breathing room
+        // Immediately update active state for TOC links
+        const isTocLink = Array.from(tocLinks).includes(this);
+        if (isTocLink) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        }
+
+        // Calculate scroll position with offset
         const offset = 20;
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
+        // Scroll to target
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
