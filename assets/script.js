@@ -107,10 +107,14 @@ function initScrollSpy() {
   if (sections.length === 0) return;
 
   let userScrolling = false;
+  let clickedLink = null; // Track which link was clicked
 
   // Simple function to find which section is currently in view
   const updateActiveLink = () => {
     if (userScrolling) return;
+
+    // If a link was clicked, keep it highlighted until manual scroll
+    if (clickedLink) return;
 
     const scrollPosition = window.scrollY + 150; // Offset for better detection
 
@@ -132,22 +136,38 @@ function initScrollSpy() {
     }
   };
 
-  // Listen to scroll with throttling
-  let scrollTimeout;
+  // Detect manual scrolling to clear clicked link state
+  let scrollTimer;
+  let lastScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(updateActiveLink, 100);
+    // If scroll position changed and it wasn't a programmatic scroll, clear clicked link
+    if (Math.abs(window.scrollY - lastScrollY) > 5) {
+      if (scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        if (!userScrolling) {
+          clickedLink = null;
+          updateActiveLink();
+        }
+      }, 150);
+    }
+    lastScrollY = window.scrollY;
   }, { passive: true });
 
   // Initial update
   updateActiveLink();
 
-  // Expose control function
+  // Expose control function for click handling
+  window.setActiveLink = (link) => {
+    clickedLink = link;
+    tocLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  };
+
+  // Expose control function for pausing
   window.pauseScrollSpy = (duration) => {
     userScrolling = true;
     setTimeout(() => {
       userScrolling = false;
-      updateActiveLink();
     }, duration);
   };
 }
@@ -229,13 +249,14 @@ function initSmoothScroll() {
         const isTocLink = Array.from(tocLinks).includes(this);
 
         if (isTocLink) {
-          // Immediately update highlight for TOC links
-          tocLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
+          // Set this link as permanently active until another click or manual scroll
+          if (window.setActiveLink) {
+            window.setActiveLink(this);
+          }
 
-          // Pause ScrollSpy for longer to keep the clicked highlight
+          // Pause ScrollSpy briefly during the jump
           if (window.pauseScrollSpy) {
-            window.pauseScrollSpy(500);
+            window.pauseScrollSpy(200);
           }
         }
 
