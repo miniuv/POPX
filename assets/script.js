@@ -107,6 +107,10 @@ function initScrollSpy() {
 
   if (sections.length === 0) return;
 
+  // Flag to prevent ScrollSpy from interfering during smooth scroll
+  let isUserScrolling = false;
+  let scrollSpyEnabled = true;
+
   // Use multiple thresholds to better detect sections
   const observerOptions = {
     root: null,
@@ -116,7 +120,26 @@ function initScrollSpy() {
 
   let activeSection = null;
 
+  const updateActiveSection = (id) => {
+    if (!scrollSpyEnabled) return;
+
+    if (activeSection !== id) {
+      activeSection = id;
+
+      // Remove active class from all links
+      tocLinks.forEach(link => link.classList.remove('active'));
+
+      // Add active class to current link
+      const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+  };
+
   const observerCallback = (entries) => {
+    if (!scrollSpyEnabled) return;
+
     // Find the section that's most visible
     let mostVisible = null;
     let maxRatio = 0;
@@ -131,20 +154,7 @@ function initScrollSpy() {
     // If we found a visible section, make it active
     if (mostVisible) {
       const id = mostVisible.getAttribute('id');
-
-      // Only update if it's a different section
-      if (activeSection !== id) {
-        activeSection = id;
-
-        // Remove active class from all links
-        tocLinks.forEach(link => link.classList.remove('active'));
-
-        // Add active class to current link
-        const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
-      }
+      updateActiveSection(id);
     }
   };
 
@@ -156,35 +166,23 @@ function initScrollSpy() {
 
   // Handle scroll position to detect first/last sections
   const handleScroll = () => {
+    if (!scrollSpyEnabled) return;
+
     // Check if we're at the top of the page
     if (window.scrollY < 100) {
       const firstSection = sections[0];
       if (firstSection) {
         const id = firstSection.getAttribute('id');
-        if (activeSection !== id) {
-          activeSection = id;
-          tocLinks.forEach(link => link.classList.remove('active'));
-          const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
-          if (activeLink) {
-            activeLink.classList.add('active');
-          }
-        }
+        updateActiveSection(id);
       }
-    }
-
-    // Check if we're at the bottom of the page
-    const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
-    if (scrolledToBottom) {
-      const lastSection = sections[sections.length - 1];
-      if (lastSection) {
-        const id = lastSection.getAttribute('id');
-        if (activeSection !== id) {
-          activeSection = id;
-          tocLinks.forEach(link => link.classList.remove('active'));
-          const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
-          if (activeLink) {
-            activeLink.classList.add('active');
-          }
+    } else {
+      // Check if we're at the bottom of the page
+      const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      if (scrolledToBottom) {
+        const lastSection = sections[sections.length - 1];
+        if (lastSection) {
+          const id = lastSection.getAttribute('id');
+          updateActiveSection(id);
         }
       }
     }
@@ -201,6 +199,15 @@ function initScrollSpy() {
 
   // Initial call to set active section on page load
   handleScroll();
+
+  // Expose function to disable/enable ScrollSpy (used by smooth scroll)
+  window.disableScrollSpy = (duration) => {
+    scrollSpyEnabled = false;
+    setTimeout(() => {
+      scrollSpyEnabled = true;
+      handleScroll(); // Re-check position after re-enabling
+    }, duration);
+  };
 }
 
 // ===========================
@@ -277,9 +284,16 @@ function initSmoothScroll() {
       if (target) {
         e.preventDefault();
 
-        // Immediately update active state for TOC links
+        // Check if this is a TOC link
         const isTocLink = Array.from(tocLinks).includes(this);
+
         if (isTocLink) {
+          // Disable ScrollSpy during smooth scroll to prevent flickering
+          if (window.disableScrollSpy) {
+            window.disableScrollSpy(1000); // Disable for 1 second
+          }
+
+          // Immediately update active state
           tocLinks.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
         }
