@@ -65,7 +65,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Removed scroll-behavior: smooth to allow instant jump navigation */
 }
 
 body {
