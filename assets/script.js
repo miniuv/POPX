@@ -233,9 +233,9 @@ function initSmoothScroll() {
           tocLinks.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
 
-          // Pause ScrollSpy briefly to prevent it from overriding our highlight
+          // Pause ScrollSpy for longer to keep the clicked highlight
           if (window.pauseScrollSpy) {
-            window.pauseScrollSpy(200);
+            window.pauseScrollSpy(500);
           }
         }
 
@@ -251,11 +251,8 @@ function initSmoothScroll() {
         const offset = 80;
         const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
 
-        // Instant jump (no smooth animation)
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'auto'
-        });
+        // Instant jump (no smooth animation) - using old syntax for guaranteed instant jump
+        window.scrollTo(0, targetPosition);
 
         // Update URL hash
         history.pushState(null, null, href);
