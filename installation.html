@@ -85,14 +85,20 @@
       <section>
         <h2 id="download">Download POPX</h2>
         <p>
-          POPX is available exclusively through Patreon. To access it, subscribe to the <strong>POPX Tier</strong> on my <a href="#">Patreon page</a> and download the latest release.
+          POPX is available exclusively through Patreon. To access it, subscribe to the POPX Tier and download the latest release.
         </p>
+
+        <div style="margin: var(--spacing-lg) 0; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+          <a href="#" class="btn btn-primary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Subscribe on Patreon</a>
+          <a href="#" class="btn btn-secondary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Watch Installation Guide</a>
+        </div>
+
         <p>
           <strong>Latest Version:</strong> <code>v1.0.0</code><br>
           <strong>Release Date:</strong> November 2025
         </p>
         <p>
-          Each release includes the POPX operators package and an example project file to help you get started quickly. A full installation walkthrough is also available in the <a href="#">video tutorial</a>.
+          Each release includes the POPX operators package and an example project file to help you get started quickly.
         </p>
       </section>
 
@@ -104,125 +110,47 @@
         <p>
           <strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1 / OpenGL 4.5.
         </p>
-        <p>
+        <p style="margin-bottom: 8px;">
           <strong>Operating System:</strong>
         </p>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>Windows 10/11</strong> — full support for all GPU features.</li>
-          <li><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
+        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 48px; padding-left: 0; list-style-type: disc; margin-top: 0; margin-bottom: 20px;">
+          <li style="margin-bottom: 6px;"><strong>Windows 10/11</strong> — full support for all GPU features.</li>
+          <li style="margin-bottom: 6px;"><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
         </ul>
-        <p>
+        <p style="margin-left: 0;">
           <strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.
         </p>
-        <p style="margin-top: var(--spacing-md); font-style: italic;">
-          <strong>Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
-        </p>
+        <div style="margin-top: var(--spacing-md); padding: 16px 20px; background: rgba(200, 60, 60, 0.08); border-left: 3px solid rgba(200, 60, 60, 0.5); border-radius: 4px;">
+          <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-style: italic;">
+            <strong>⚠️ Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
+          </p>
+        </div>
       </section>
 
       <section>
         <h2 id="installation">Installation Steps</h2>
-        <ol style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
-          <li>Open your TouchDesigner project.</li>
-          <li>Drag the <code>POPX.tox</code> file directly into your network.</li>
-          <li>Your project may freeze momentarily while the system initializes — this is normal.</li>
-          <li>Once loaded, the POPX container will appear at the root level of your project.</li>
-          <li>Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX operator family available for use.</li>
-        </ol>
+        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc;">
+          <li style="margin-bottom: 10px;">Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
+          <li style="margin-bottom: 10px;">Open your TouchDesigner project.</li>
+          <li style="margin-bottom: 10px;">Drag the <code>POPX.tox</code> file directly into your network.</li>
+          <li style="margin-bottom: 10px;">Your project may freeze momentarily while the system initializes — this is normal.</li>
+          <li style="margin-bottom: 10px;">Once loaded, the POPX container will appear at the root level of your project.</li>
+          <li style="margin-bottom: 10px;">Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX operator family available for use.</li>
+        </ul>
       </section>
 
       <section>
         <h2 id="verification">Verify Installation</h2>
-        <p>
+        <p style="margin-bottom: 8px;">
           To verify that POPX is installed correctly:
         </p>
-        <ol style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Create a new TouchDesigner project</li>
-          <li>Add a <strong>POPX Scatter</strong> operator to your network</li>
-          <li>Connect a <strong>Box SOP</strong> to the first input of POPX Scatter</li>
-          <li>Create a <strong>Geometry COMP</strong> and connect POPX Scatter to it</li>
-          <li>You should see particles scattered on the box surface</li>
-        </ol>
-        <p>
-          If particles appear, your installation is successful!
-        </p>
-      </section>
-
-      <section>
-        <h2 id="first-network">Your First POPX Network</h2>
-        <p>
-          Let's create a simple particle system to get familiar with POPX:
-        </p>
-
-        <h3>Basic Particle Scatter with Transform</h3>
-        <pre><code>Box SOP
-  ↓
-POPX Scatter (emit 1000 particles)
-  ↓
-POPX Transform Modifier (add rotation)
-  ↓
-Geometry COMP (render as instances)</code></pre>
-
-        <h4>Detailed Steps:</h4>
-        <ol style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>Create source geometry:</strong> Add a <code>Box SOP</code></li>
-          <li><strong>Scatter particles:</strong> Add <code>POPX Scatter</code>, set "Total Count" to 1000</li>
-          <li><strong>Add motion:</strong> Add <code>POPX Transform Modifier</code>, set "Rotate Y" to 45</li>
-          <li><strong>Render:</strong> Create <code>Geometry COMP</code>, enable "Instancing"</li>
-        </ol>
-
-        <p style="margin-top: var(--spacing-md);">
-          For more detailed tutorials, visit the <a href="tutorials.html">Tutorials</a> page.
-        </p>
-      </section>
-
-      <section>
-        <h2 id="troubleshooting">Troubleshooting</h2>
-
-        <h3>Operators Not Appearing in Palette</h3>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Verify the palette path in <strong>Edit → Preferences → Palette</strong></li>
-          <li>Restart TouchDesigner after adding the palette folder</li>
-          <li>Check that .tox files are not corrupted (re-download if necessary)</li>
+        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 48px; padding-left: 0; list-style-type: disc; margin-top: 0; margin-bottom: 20px;">
+          <li style="margin-bottom: 6px;">Create a new TouchDesigner project.</li>
+          <li style="margin-bottom: 6px;">Add a <strong>POPX Scatter</strong> operator to your network.</li>
+          <li style="margin-bottom: 6px;">Connect a <strong>Box SOP</strong> to the first input of POPX Scatter.</li>
+          <li style="margin-bottom: 6px;">Create a <strong>Geometry COMP</strong> and connect POPX Scatter to it.</li>
+          <li style="margin-bottom: 6px;">You should see particles scattered on the box surface.</li>
         </ul>
-
-        <h3>GPU Compute Errors</h3>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Update your graphics drivers to the latest version</li>
-          <li>Verify OpenGL 4.6 support with <code>glxinfo</code> (Linux) or GPU-Z (Windows)</li>
-          <li>Reduce particle count if experiencing out-of-memory errors</li>
-        </ul>
-
-        <h3>Performance Issues</h3>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Enable "Cook on Demand" for operators not actively being used</li>
-          <li>Reduce particle counts during initial setup, scale up for final renders</li>
-          <li>Use falloff operators to limit modifier influence regions</li>
-          <li>Monitor VRAM usage in TouchDesigner's performance monitor</li>
-        </ul>
-
-        <p style="margin-top: var(--spacing-md);">
-          For additional support, visit the <a href="contact.html">Contact</a> page.
-        </p>
-      </section>
-
-      <section>
-        <h2 id="next-steps">Next Steps</h2>
-        <p>Now that POPX is installed, explore the documentation:</p>
-        <div class="operator-grid">
-          <a href="generators/index.html" class="operator-card type-generator">
-            <h3>Generators</h3>
-            <p>Learn how to emit and create particles</p>
-          </a>
-          <a href="modifiers/index.html" class="operator-card type-modifier">
-            <h3>Modifiers</h3>
-            <p>Transform and manipulate particle streams</p>
-          </a>
-          <a href="tutorials.html" class="operator-card type-tool">
-            <h3>Tutorials</h3>
-            <p>Follow step-by-step project guides</p>
-          </a>
-        </div>
       </section>
 
       <!-- Page Navigation -->
@@ -239,6 +167,7 @@ Geometry COMP (render as instances)</code></pre>
         <li><a href="#download">Download POPX</a></li>
         <li><a href="#requirements">System Requirements</a></li>
         <li><a href="#installation">Installation Steps</a></li>
+        <li><a href="#verification">Verify Installation</a></li>
       </ul>
     </aside>
   </div>

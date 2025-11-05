@@ -8,19 +8,19 @@
   --color-bg: #000000;
   --color-bg-panel: #0a0a0a;
   --color-bg-elevated: #141414;
-  --color-accent: #D90040;
-  --color-accent-hover: #FF0055;
+  --color-accent: #B8003A;
+  --color-accent-hover: #D90040;
   --color-text: #e5e5e5;
   --color-text-muted: #999999;
   --color-border: #1a1a1a;
   --color-border-light: #222222;
 
   /* All categories use red accent */
-  --color-generator: #D90040;
-  --color-modifier: #D90040;
-  --color-falloff: #D90040;
-  --color-tool: #D90040;
-  --color-simulation: #D90040;
+  --color-generator: #B8003A;
+  --color-modifier: #B8003A;
+  --color-falloff: #B8003A;
+  --color-tool: #B8003A;
+  --color-simulation: #B8003A;
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
