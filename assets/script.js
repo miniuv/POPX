@@ -2,6 +2,16 @@
 // POPX Docs - Interactive Scripts
 // ===========================
 
+// Apply theme immediately (before DOMContentLoaded) to prevent flash
+(function() {
+  const savedTheme = localStorage.getItem('popx-theme') || 'dark';
+  if (savedTheme === 'auto') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
   initMobileMenu();
   initScrollSpy();
@@ -506,9 +516,8 @@ function initThemeSelector() {
 
 function applyTheme(theme) {
   if (theme === 'auto') {
-    // Auto theme based on system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    // Auto theme defaults to dark mode
+    document.documentElement.setAttribute('data-theme', 'dark');
   } else {
     document.documentElement.setAttribute('data-theme', theme);
   }
@@ -519,42 +528,193 @@ function updateThemeButton(theme) {
   if (!themeButton) return;
 
   const themeConfig = {
-    'light': { name: 'Light', icon: '☀️' },
-    'dark': { name: 'Dark', icon: '🌙' },
-    'auto': { name: 'Auto', icon: '⚙️' }
+    'light': { name: 'Light', icon: '☼' },
+    'dark': { name: 'Dark', icon: '☽' },
+    'auto': { name: 'Auto', icon: '◐' }
   };
 
   const config = themeConfig[theme] || themeConfig['dark'];
 
-  // Update button HTML with icon, name, and arrow
+  // Update button HTML with icon, name, and dropdown arrow
   themeButton.innerHTML = `
     <span class="theme-icon">${config.icon}</span>
     <span>${config.name}</span>
-    <span class="theme-arrow">▾</span>
+    <span class="theme-dropdown-arrow">▾</span>
   `;
 }
 
 // ===========================
 // Search Functionality
 // ===========================
+// Helper function to get correct path based on current location
+function getSearchPath(path) {
+  const currentPath = window.location.pathname;
+  const isInSubfolder = currentPath.includes('/operators/');
+
+  // If we're in a subfolder and the path doesn't start with 'operators/', add '../'
+  if (isInSubfolder && !path.startsWith('operators/')) {
+    return '../' + path;
+  }
+  // If we're in root and path starts with 'operators/', keep as is
+  // If we're in operators/ subfolder and path starts with 'operators/', remove it and use just filename
+  if (isInSubfolder && path.startsWith('operators/')) {
+    return path.replace('operators/', '');
+  }
+
+  return path;
+}
+
 const searchIndex = [
-  // Operators
-  { title: 'Scatter', path: 'operators/scatter.html', type: 'Operator', category: 'Generators' },
-  { title: 'Source', path: 'operators/source.html', type: 'Operator', category: 'Generators' },
-  { title: 'Falloff Field', path: 'operators/falloff-field.html', type: 'Operator', category: 'Falloffs' },
-  { title: 'Radial Falloff', path: 'operators/radial-falloff.html', type: 'Operator', category: 'Falloffs' },
-  { title: 'Transform Modifier', path: 'operators/transform-modifier.html', type: 'Operator', category: 'Modifiers' },
-  { title: 'Noise Modifier', path: 'operators/noise-modifier.html', type: 'Operator', category: 'Modifiers' },
-  { title: 'Force Modifier', path: 'operators/force-modifier.html', type: 'Operator', category: 'Modifiers' },
-  { title: 'Voxelize', path: 'operators/voxelize.html', type: 'Operator', category: 'Tools' },
-  { title: 'Attribute Manager', path: 'operators/attribute-manager.html', type: 'Operator', category: 'Tools' },
-  { title: 'FLIP Solver', path: 'operators/flip-solver.html', type: 'Operator', category: 'Simulations' },
-  { title: 'SPH Solver', path: 'operators/sph-solver.html', type: 'Operator', category: 'Simulations' },
+  // Operators with sections
+  {
+    title: 'Scatter',
+    path: 'operators/scatter.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Source',
+    path: 'operators/source.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Falloff Field',
+    path: 'operators/falloff-field.html',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Radial Falloff',
+    path: 'operators/radial-falloff.html',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Transform Modifier',
+    path: 'operators/transform-modifier.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Transform', anchor: '#page-transform', keywords: ['translate', 'rotate', 'scale', 'pivot'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Noise Modifier',
+    path: 'operators/noise-modifier.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Force Modifier',
+    path: 'operators/force-modifier.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Voxelize',
+    path: 'operators/voxelize.html',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Attribute Manager',
+    path: 'operators/attribute-manager.html',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'FLIP Solver',
+    path: 'operators/flip-solver.html',
+    type: 'Operator',
+    category: 'Simulations',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'SPH Solver',
+    path: 'operators/sph-solver.html',
+    type: 'Operator',
+    category: 'Simulations',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
 
   // Pages
-  { title: 'Getting Started with POPX', path: 'getting-started.html', type: 'Guide' },
-  { title: 'Installation', path: 'installation.html', type: 'Guide' },
-  { title: 'Tutorials', path: 'tutorials.html', type: 'Guide' },
+  {
+    title: 'Getting Started with POPX',
+    path: 'getting-started.html',
+    type: 'Guide',
+    sections: [
+      { title: 'POPX Overview', anchor: '#popx-overview' },
+      { title: 'Getting Started', anchor: '#getting-started' }
+    ]
+  },
+  {
+    title: 'Installation',
+    path: 'installation.html',
+    type: 'Guide'
+  },
+  {
+    title: 'Tutorials',
+    path: 'tutorials.html',
+    type: 'Guide'
+  },
+  {
+    title: 'Contact & Community',
+    path: 'contact.html',
+    type: 'Guide'
+  },
 ];
 
 function initSearch() {
@@ -568,36 +728,66 @@ function initSearch() {
   resultsDiv.className = 'search-results';
   searchContainer.appendChild(resultsDiv);
 
+  // Create clear button (X icon)
+  const clearButton = document.createElement('span');
+  clearButton.className = 'search-clear';
+  clearButton.innerHTML = '✕';
+  clearButton.title = 'Clear search';
+  document.querySelector('.search-input-wrapper').insertBefore(
+    clearButton,
+    searchInput
+  );
+
+  const searchIcon = document.querySelector('.search-icon');
+
   let searchTimeout;
 
-  searchInput.addEventListener('input', function(e) {
-    const query = e.target.value.toLowerCase().trim();
-
+  // Function to handle search input
+  function handleSearchInput() {
+    const query = searchInput.value.toLowerCase().trim();
     clearTimeout(searchTimeout);
 
-    if (query.length < 2) {
+    // Toggle clear button visibility
+    if (searchInput.value.length > 0) {
+      clearButton.classList.add('active');
+    } else {
+      clearButton.classList.remove('active');
+    }
+
+    if (query.length < 1) {
       resultsDiv.classList.remove('active');
       return;
     }
 
-    // Debounce search
     searchTimeout = setTimeout(() => {
       performSearch(query, resultsDiv);
     }, 200);
+  }
+
+  // Search input
+  searchInput.addEventListener('input', handleSearchInput);
+
+  // Clear button click handler
+  clearButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    searchInput.value = '';
+    resultsDiv.classList.remove('active');
+    clearButton.classList.remove('active');
+    searchInput.focus();
   });
 
   // Handle Enter key - navigate to first result
   searchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
-      const query = e.target.value.toLowerCase().trim();
-      if (query.length >= 2) {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query.length >= 1) {
         const results = searchIndex.filter(item =>
-          item.title.toLowerCase().includes(query) ||
-          (item.category && item.category.toLowerCase().includes(query))
+          item.title.toLowerCase().includes(query)
         );
 
         if (results.length > 0) {
-          window.location.href = results[0].path;
+          const correctPath = getSearchPath(results[0].path);
+          window.location.href = correctPath;
         }
       }
     } else if (e.key === 'Escape') {
@@ -613,36 +803,87 @@ function initSearch() {
     }
   });
 
-  // Ctrl+K keyboard shortcut to focus search
-  document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      searchInput.focus();
+  // Close results when clicking on any search result link
+  document.addEventListener('click', function(e) {
+    const resultLink = e.target.closest('.search-result-item, .search-result-section, .search-result-subsection');
+    if (resultLink && searchContainer.contains(resultLink)) {
+      // Only close if it's not the toggle button
+      if (!e.target.classList.contains('search-toggle')) {
+        resultsDiv.classList.remove('active');
+        searchInput.value = '';
+        clearButton.classList.remove('active');
+      }
     }
   });
 }
 
 function performSearch(query, resultsDiv) {
-  const results = searchIndex.filter(item =>
-    item.title.toLowerCase().includes(query) ||
-    (item.category && item.category.toLowerCase().includes(query))
-  ).slice(0, 8); // Limit to 8 results
+  // Search through pages - only match page titles
+  const searchResults = [];
 
-  if (results.length === 0) {
+  searchIndex.forEach(item => {
+    const titleMatch = item.title.toLowerCase().includes(query);
+
+    // Only add result if page title matches
+    if (titleMatch) {
+      searchResults.push({
+        item: item,
+        matchingSections: [],
+        pageMatch: true,
+        hasSectionMatch: false
+      });
+    }
+  });
+
+  // Limit results
+  const limitedResults = searchResults.slice(0, 8);
+
+  if (limitedResults.length === 0) {
     resultsDiv.innerHTML = '<div class="search-no-results">No results found</div>';
     resultsDiv.classList.add('active');
     return;
   }
 
-  resultsDiv.innerHTML = results.map(result => {
-    const titleWithHighlight = highlightText(result.title, query);
-    const pathDisplay = result.category ? `${result.category} / ${result.type}` : result.type;
+  resultsDiv.innerHTML = limitedResults.map(result => {
+    const item = result.item;
+    const titleWithHighlight = highlightText(item.title, query);
+    const pathDisplay = item.category ? `${item.category} / ${item.type}` : item.type;
+    const correctPath = getSearchPath(item.path);
+
+    // Build sections HTML
+    let sectionsHTML = '';
+
+    // If page matches, show ALL sections of that page
+    // If only sections match, show only matching sections
+    const sectionsToShow = result.pageMatch && item.sections ? item.sections : result.matchingSections;
+
+    if (sectionsToShow.length > 0) {
+      sectionsHTML = sectionsToShow.map((section, index) => {
+        const sectionTitle = highlightText(section.title, query);
+        const sectionPath = correctPath + section.anchor;
+
+        return `
+          <a href="${sectionPath}" class="search-result-section">
+            <span class="section-title">${sectionTitle}</span>
+          </a>
+        `;
+      }).join('');
+    }
+
+    const hasToggle = sectionsToShow.length > 0;
+    const toggleButton = hasToggle ? '<span class="search-toggle collapsed" onclick="toggleSearchSections(event)">▼</span>' : '';
 
     return `
-      <a href="${result.path}" class="search-result-item">
-        <div class="search-result-title">${titleWithHighlight}</div>
-        <div class="search-result-path">${pathDisplay}</div>
-      </a>
+      <div class="search-result-group">
+        <a href="${correctPath}" class="search-result-item search-result-page">
+          <div class="search-result-page-content">
+            <div class="search-result-title">${titleWithHighlight}</div>
+            <div class="search-result-path">${pathDisplay}</div>
+          </div>
+          ${toggleButton}
+        </a>
+        ${hasToggle ? `<div class="search-sections collapsed">${sectionsHTML}</div>` : ''}
+      </div>
     `;
   }).join('');
 
@@ -650,6 +891,21 @@ function performSearch(query, resultsDiv) {
 }
 
 function highlightText(text, query) {
-  const regex = new RegExp(`(${query})`, 'gi');
-  return text.replace(regex, '<span class="search-highlight">$1</span>');
+  // Return plain text without highlighting
+  return text;
+}
+
+function toggleSearchSections(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const toggle = event.target;
+  const searchResultPage = toggle.closest('.search-result-page');
+  const searchGroup = toggle.closest('.search-result-group');
+  const sections = searchGroup.querySelector('.search-sections');
+
+  if (sections) {
+    sections.classList.toggle('collapsed');
+    toggle.classList.toggle('collapsed');
+  }
 }

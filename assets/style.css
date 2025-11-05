@@ -74,6 +74,11 @@
   color: #555555;
 }
 
+/* Light Theme - Search Overlay Background */
+[data-theme="light"] .search-overlay {
+  background: rgba(255, 255, 255, 0.75);
+}
+
 /* ===========================
    Reset & Base Styles
    =========================== */
@@ -247,7 +252,7 @@ pre code {
   justify-content: space-between;
   padding: 0 var(--spacing-lg);
   z-index: 98;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
 }
 
 .top-bar-logo {
@@ -276,23 +281,92 @@ pre code {
 
 /* Search Bar (Desktop Only) */
 .top-bar-search {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper {
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.search-input-wrapper:hover {
+  border-color: var(--color-border-light);
+}
+
+.search-input-wrapper:focus-within {
+  background: var(--color-bg-panel);
+  border-color: var(--color-border-light);
+}
+
+.search-input-wrapper:focus-within .search-icon {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 45%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  font-size: 18px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+}
+
+.search-clear.active {
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.search-clear:hover {
+  opacity: 1;
+  color: var(--color-accent);
 }
 
 .top-bar-search input {
   width: 100%;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  padding: 10px 16px 10px 44px;
   color: var(--color-text);
   font-size: 14px;
   font-family: var(--font-family);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
 }
 
@@ -301,12 +375,6 @@ pre code {
   opacity: 0.6;
 }
 
-.top-bar-search input:focus {
-  border-color: var(--color-accent);
-  background: var(--color-bg-panel);
-  transform: scale(1.02);
-  box-shadow: 0 2px 8px rgba(184, 0, 58, 0.2);
-}
 
 /* Search Results Dropdown */
 .search-results {
@@ -330,30 +398,34 @@ pre code {
 
 .search-result-item {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--color-border);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.15s ease;
+  text-decoration: none;
+  display: block;
+  border-left: 3px solid transparent;
 }
 
 .search-result-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .search-result-item:hover {
   background: var(--color-bg-panel);
+  border-left-color: var(--color-accent);
 }
 
 .search-result-title {
   color: var(--color-text);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 4px;
 }
 
 .search-result-path {
   color: var(--color-text-muted);
   font-size: 12px;
-  opacity: 0.8;
+  opacity: 0.7;
+  font-family: var(--font-mono);
 }
 
 .search-result-excerpt {
@@ -373,14 +445,157 @@ pre code {
   text-align: center;
   color: var(--color-text-muted);
   font-size: 14px;
+  margin: 0 12px;
+}
+
+/* Search Result Groups (page + sections) */
+.search-result-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  padding-left: 4px;
+  border-left: 2px solid transparent;
+}
+
+.search-result-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Add left accent when group has sections */
+.search-result-group:has(.search-result-section) {
+  border-left-color: var(--color-border);
+}
+
+/* Page title styling */
+.search-result-page {
+  border-left: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-result-page-content {
+  flex: 1;
+}
+
+.search-result-page .search-result-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Expand/collapse toggle button */
+.search-toggle {
+  padding: 4px 8px;
+  margin-left: 8px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.search-toggle:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.search-toggle.collapsed {
+  transform: rotate(-90deg);
+}
+
+/* Sections container */
+.search-sections {
+  display: block;
+}
+
+.search-sections.collapsed {
+  display: none;
+}
+
+/* Section results (nested under page) */
+.search-result-section {
+  padding: 6px 16px 6px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  display: block;
+  background: var(--color-bg-elevated);
+  position: relative;
+}
+
+.search-result-section:hover {
+  background: var(--color-bg-panel);
+}
+
+.section-title {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.search-result-section:hover .section-title {
+  color: var(--color-text);
+}
+
+/* Subsection results (nested under sections) */
+.search-result-subsection {
+  padding: 6px 16px 6px 48px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--color-bg-elevated);
+  position: relative;
+}
+
+.search-result-subsection:hover {
+  background: var(--color-bg-panel);
+}
+
+/* Tree connector for subsections */
+.subsection-connector {
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  pointer-events: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+/* Light theme: gray connectors */
+[data-theme="light"] .subsection-connector {
+  color: #999999;
+}
+
+/* Dark theme: dim red connectors */
+[data-theme="dark"] .subsection-connector {
+  color: #B8003A;
+  opacity: 0.3;
+}
+
+.search-result-subsection:hover .subsection-connector {
+  opacity: 0.6;
 }
 
 /* Theme Selector (Desktop Only) */
 .theme-selector {
   position: relative;
   flex-shrink: 0;
-  padding-left: var(--spacing-lg);
-  border-left: 1px solid var(--color-border);
+  margin-left: var(--spacing-xl);
 }
 
 .theme-selector-button {
@@ -388,39 +603,48 @@ pre code {
   border: 1px solid var(--color-border);
   border-radius: 6px;
   padding: 8px 12px;
-  color: var(--color-text);
+  color: var(--color-text-muted);
   font-size: 14px;
   font-family: var(--font-family);
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 110px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  justify-content: space-between;
 }
 
 .theme-selector-button:hover {
-  border-color: var(--color-accent);
-  background: var(--color-bg-panel);
+  border-color: var(--color-border-light);
+  color: var(--color-accent);
+}
+
+.theme-selector-button:active,
+.theme-selector-button:focus {
+  outline: none;
+}
+
+.theme-dropdown-arrow {
+  font-size: 14px;
+  color: var(--color-text);
+  opacity: 1;
+  margin-left: 2px;
+  font-weight: 700;
 }
 
 .theme-icon {
   font-size: 16px;
-  display: inline-block;
-}
-
-.theme-arrow {
-  font-size: 10px;
-  color: var(--color-text-muted);
-  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .theme-selector-dropdown {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-elevated) !important;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   min-width: 100px;
@@ -436,20 +660,53 @@ pre code {
 
 .theme-option {
   padding: 10px 16px;
-  color: var(--color-text);
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.15s ease, color 0.15s ease;
+  border: none;
 }
 
+/* Dark mode - all dropdown items dark */
+[data-theme="dark"] .theme-option {
+  background: #141414 !important;
+  color: #999999 !important;
+}
+
+/* Light mode - all dropdown items light */
+[data-theme="light"] .theme-option {
+  background: #f0f0f0 !important;
+  color: #666666 !important;
+}
+
+/* Hover effect works for ALL items including selected */
 .theme-option:hover {
-  background: var(--color-bg-panel);
-  color: var(--color-accent);
+  color: #B8003A !important;
 }
 
-.theme-option.selected {
-  background: rgba(184, 0, 58, 0.1);
-  color: var(--color-accent);
+/* Dark mode: brighten background on hover */
+[data-theme="dark"] .theme-option:hover {
+  background: #1a1a1a !important;
+}
+
+/* Light mode: darken background on hover */
+[data-theme="light"] .theme-option:hover {
+  background: #e8e8e8 !important;
+}
+
+/* Selected state */
+[data-theme="dark"] .theme-option.selected {
+  background: #141414 !important;
+  color: #999999 !important;
+}
+
+[data-theme="light"] .theme-option.selected {
+  background: #f0f0f0 !important;
+  color: #666666 !important;
+}
+
+/* Ensure selected items can still be hovered */
+.theme-option.selected:hover {
+  color: #B8003A !important;
 }
 
 /* ===========================
