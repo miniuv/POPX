@@ -1192,33 +1192,41 @@ pre code {
     white-space: nowrap;
   }
 
-  /* Keep parameter layout on single line - mobile optimized */
+  /* Mobile parameter layout - inline with smart wrapping */
   .param-header {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: baseline;
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .param-label,
+  .param-name,
+  .param-separator,
+  .param-description {
+    display: inline;
   }
 
   .param-label {
     font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
   }
 
   .param-name {
     font-size: 10px;
     padding: 2px 6px;
+    margin: 0 4px;
   }
 
   .param-separator {
     font-size: 9px;
+    margin: 0 4px;
   }
 
   .param-description {
-    flex-basis: 100%;
-    margin-top: 2px;
-    padding-left: 0;
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.6;
+    color: var(--color-text-muted);
   }
 
   /* Keep param-header-inline truly inline on mobile */
@@ -1234,14 +1242,23 @@ pre code {
   }
 
   .param-group-header {
-    flex-wrap: wrap;
-    gap: 6px;
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .param-group-header .param-label,
+  .param-group-header .param-name,
+  .param-group-header .param-separator,
+  .param-group-header .param-toggle {
+    display: inline;
   }
 
   .param-group-description {
-    flex-basis: 100%;
-    margin-top: 2px;
+    display: inline;
     font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
   }
 
   /* Section content indentation */

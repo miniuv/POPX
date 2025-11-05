@@ -81,131 +81,54 @@
     <!-- Main Content -->
     <main class="main-content">
       <h1>Installation</h1>
-      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
-        Follow this guide to install and configure POPX operators in your TouchDesigner environment.
-      </p>
 
       <section>
         <h2 id="download">Download POPX</h2>
         <p>
-          POPX is distributed as a collection of <code>.tox</code> component files organized by operator type. Download the latest release from one of the following sources:
+          POPX is available exclusively through Patreon. To access it, subscribe to the <strong>POPX Tier</strong> on my <a href="#">Patreon page</a> and download the latest release.
         </p>
-        <div style="margin: var(--spacing-md) 0;">
-          <a href="#" class="btn btn-primary">Download Latest Release</a>
-          <a href="#" class="btn btn-secondary" style="margin-left: var(--spacing-sm);">View on GitHub</a>
-        </div>
         <p>
-          <strong>Latest Version:</strong> <code>v1.0.0</code> (Released: January 2025)<br>
-          <strong>File Size:</strong> ~45 MB<br>
-          <strong>License:</strong> MIT License
+          <strong>Latest Version:</strong> <code>v1.0.0</code><br>
+          <strong>Release Date:</strong> November 2025
         </p>
-      </section>
-
-      <section>
-        <h2 id="installation">Installation</h2>
-
-        <h3 id="step-1">Step 1: Extract the Archive</h3>
         <p>
-          After downloading, extract the <code>POPX.zip</code> archive to a location of your choice. The recommended location is:
+          Each release includes the POPX operators package and an example project file to help you get started quickly. A full installation walkthrough is also available in the <a href="#">video tutorial</a>.
         </p>
-        <pre><code>C:\Users\[YourName]\Documents\TouchDesigner\POPX\</code></pre>
-        <p>Or on macOS/Linux:</p>
-        <pre><code>/Users/[YourName]/Documents/TouchDesigner/POPX/</code></pre>
-
-        <h3 id="step-2">Step 2: Folder Structure</h3>
-        <p>
-          After extraction, your POPX folder should contain the following structure:
-        </p>
-        <pre><code>/POPX
-  ├── generators/
-  │   ├── popx_scatter.tox
-  │   ├── popx_source.tox
-  │   └── ...
-  ├── modifiers/
-  │   ├── popx_transform_modifier.tox
-  │   ├── popx_noise_modifier.tox
-  │   └── ...
-  ├── falloffs/
-  │   ├── popx_falloff_field.tox
-  │   └── ...
-  ├── tools/
-  │   ├── popx_voxelize.tox
-  │   └── ...
-  ├── simulations/
-  │   ├── popx_flip_solver.tox
-  │   └── ...
-  └── README.txt</code></pre>
-
-        <h3 id="step-3">Step 3: Add to TouchDesigner Palette (Optional)</h3>
-        <p>
-          To add POPX operators to your TouchDesigner component palette for easy access:
-        </p>
-        <ol style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Open TouchDesigner</li>
-          <li>Navigate to <strong>Edit → Preferences</strong></li>
-          <li>Select the <strong>Palette</strong> tab</li>
-          <li>Click <strong>Add Folder</strong></li>
-          <li>Browse to your POPX installation directory</li>
-          <li>Click <strong>OK</strong> to save</li>
-        </ol>
-        <p>
-          POPX operators will now appear in your component palette, organized by type.
-        </p>
-
-        <h3 id="step-4">Step 4: Using POPX Operators</h3>
-        <p>
-          To use a POPX operator in your network:
-        </p>
-        <ol style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>In the TouchDesigner network editor, press <strong>Tab</strong> to open the operator menu</li>
-          <li>Type the operator name (e.g., "popx scatter")</li>
-          <li>Select the operator from the list</li>
-          <li>Alternatively, drag and drop <code>.tox</code> files directly from your file browser into the network</li>
-        </ol>
       </section>
 
       <section>
         <h2 id="requirements">System Requirements</h2>
         <p>
-          Ensure your system meets the following requirements for optimal POPX performance:
+          <strong>TouchDesigner:</strong> 2025 Experimental (2025.xxx) or newer — required to access the new POPs (Point Operators) family.
         </p>
-        <table class="parameter-table">
-          <tr>
-            <th>Component</th>
-            <th>Minimum</th>
-            <th>Recommended</th>
-          </tr>
-          <tr>
-            <td>TouchDesigner Version</td>
-            <td>2023.11760</td>
-            <td>2024.10000+</td>
-          </tr>
-          <tr>
-            <td>GPU</td>
-            <td>OpenGL 4.6 compatible</td>
-            <td>NVIDIA RTX series / AMD RX 6000+</td>
-          </tr>
-          <tr>
-            <td>VRAM</td>
-            <td>4 GB</td>
-            <td>8 GB+</td>
-          </tr>
-          <tr>
-            <td>RAM</td>
-            <td>16 GB</td>
-            <td>32 GB+</td>
-          </tr>
-          <tr>
-            <td>CPU</td>
-            <td>Quad-core Intel/AMD</td>
-            <td>8+ cores, 3.0+ GHz</td>
-          </tr>
-          <tr>
-            <td>Operating System</td>
-            <td>Windows 10, macOS 12, Ubuntu 20.04</td>
-            <td>Windows 11, macOS 13+, Ubuntu 22.04+</td>
-          </tr>
-        </table>
+        <p>
+          <strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1 / OpenGL 4.5.
+        </p>
+        <p>
+          <strong>Operating System:</strong>
+        </p>
+        <ul style="color: var(--color-text-muted); line-height: 1.8;">
+          <li><strong>Windows 10/11</strong> — full support for all GPU features.</li>
+          <li><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
+        </ul>
+        <p>
+          <strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.
+        </p>
+        <p style="margin-top: var(--spacing-md); font-style: italic;">
+          <strong>Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="installation">Installation Steps</h2>
+        <ol style="color: var(--color-text-muted); line-height: 1.8;">
+          <li>Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
+          <li>Open your TouchDesigner project.</li>
+          <li>Drag the <code>POPX.tox</code> file directly into your network.</li>
+          <li>Your project may freeze momentarily while the system initializes — this is normal.</li>
+          <li>Once loaded, the POPX container will appear at the root level of your project.</li>
+          <li>Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX operator family available for use.</li>
+        </ol>
       </section>
 
       <section>
@@ -314,12 +237,8 @@ Geometry COMP (render as instances)</code></pre>
       <h4>Contents</h4>
       <ul>
         <li><a href="#download">Download POPX</a></li>
-        <li><a href="#installation">Installation</a></li>
         <li><a href="#requirements">System Requirements</a></li>
-        <li><a href="#verification">Verify Installation</a></li>
-        <li><a href="#first-network">Your First Network</a></li>
-        <li><a href="#troubleshooting">Troubleshooting</a></li>
-        <li><a href="#next-steps">Next Steps</a></li>
+        <li><a href="#installation">Installation Steps</a></li>
       </ul>
     </aside>
   </div>
