@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transform Modifier - POPX Docs</title>
   <meta name="description" content="Applies translation, rotation, and scaling transformations to POPX particles and instances.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -15,131 +18,142 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="sidebar-logo">
+        <a href="../index.html" class="sidebar-logo">
           <span>POPX</span> Docs
-        </div>
+        </a>
       </div>
 
-      <h3>Getting Started</h3>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../installation.html">Installation</a></li>
-        <li><a href="../tutorials.html">Tutorials</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
-
-      <h3>Operators</h3>
-
-      <details class="sidebar-section category-generators">
-        <summary>Generators</summary>
+      <details class="sidebar-section sidebar-main-section" data-section="guides">
+        <summary>Guides</summary>
         <ul>
-          <li><a href="scatter.html">Scatter</a></li>
-          <li><a href="source.html">Source</a></li>
+          <li><a href="../getting-started.html">Getting Started with POPX</a></li>
+          <li><a href="../installation.html">Installation</a></li>
+          <li><a href="../tutorials.html">Tutorials</a></li>
         </ul>
       </details>
 
-      <details class="sidebar-section category-modifiers">
-        <summary>Modifiers</summary>
-        <ul>
-          <li><a href="transform-modifier.html" class="active">Transform Modifier</a></li>
-          <li><a href="noise-modifier.html">Noise Modifier</a></li>
-          <li><a href="force-modifier.html">Force Modifier</a></li>
-        </ul>
-      </details>
+      <details class="sidebar-section sidebar-main-section" data-section="operators">
+        <summary>Operators</summary>
 
-      <details class="sidebar-section category-falloffs">
-        <summary>Falloffs</summary>
-        <ul>
-          <li><a href="falloff-field.html">Falloff Field</a></li>
-          <li><a href="radial-falloff.html">Radial Falloff</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-generators">
+          <summary>Generators</summary>
+          <ul>
+            <li><a href="scatter.html">Scatter</a></li>
+            <li><a href="source.html">Source</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-tools">
-        <summary>Tools</summary>
-        <ul>
-          <li><a href="voxelize.html">Voxelize</a></li>
-          <li><a href="attribute-manager.html">Attribute Manager</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-falloffs">
+          <summary>Falloffs</summary>
+          <ul>
+            <li><a href="falloff-field.html">Falloff Field</a></li>
+            <li><a href="radial-falloff.html">Radial Falloff</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-simulations">
-        <summary>Simulations</summary>
-        <ul>
-          <li><a href="flip-solver.html">FLIP Solver</a></li>
-          <li><a href="sph-solver.html">SPH Solver</a></li>
-        </ul>
+        <details class="sidebar-section category-modifiers">
+          <summary>Modifiers</summary>
+          <ul>
+            <li><a href="transform-modifier.html" class="active">Transform Modifier</a></li>
+            <li><a href="noise-modifier.html">Noise Modifier</a></li>
+            <li><a href="force-modifier.html">Force Modifier</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-tools">
+          <summary>Tools</summary>
+          <ul>
+            <li><a href="voxelize.html">Voxelize</a></li>
+            <li><a href="attribute-manager.html">Attribute Manager</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-simulations">
+          <summary>Simulations</summary>
+          <ul>
+            <li><a href="flip-solver.html">FLIP Solver</a></li>
+            <li><a href="sph-solver.html">SPH Solver</a></li>
+          </ul>
+        </details>
       </details>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="breadcrumb">
-        <a href="../index.html">Home</a>
-        <span>→</span>
-        <a href="../modifiers/index.html">Modifiers</a>
-        <span>→</span>
-        <span>Transform Modifier</span>
-      </div>
-
-      <h1>Transform Modifier <span class="badge badge-modifier">v1.0</span></h1>
-      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
-        Applies translation, rotation, and scaling transformations to particles and instances with support for orientation quaternions and delta transforms.
-      </p>
+      <h1 class="operator-title">Transform Modifier</h1>
 
       <section>
-        <h2 id="overview">Overview</h2>
+        <h2 id="summary">Summary</h2>
         <p>
-          The <strong>POPX Transform Modifier</strong> is a foundational operator for manipulating particle and instance transforms. It provides precise control over position, rotation, and scale while maintaining proper orientation through quaternion mathematics.
+          The Transform Modifier is one of the most common operators you'll use with POPX. It works similarly to the Transform POP, but instead of transforming an entire geometry, it applies transformations directly to each instance.
         </p>
         <p>
-          This modifier is essential for:
+          You can choose to apply transformations in either world or local space, depending on how you want your instances to behave. If the local axes of your instances aren't aligned as expected, use the Reorient operator to generate new local axes for each instance before applying transformations.
         </p>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li>Animating particle positions over time</li>
-          <li>Rotating instances to face specific directions</li>
-          <li>Scaling particles based on attributes or falloff fields</li>
-          <li>Building complex procedural motion systems</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 id="key-features">Key Features</h2>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>Quaternion Orientation Support</strong> – Maintains proper rotation accumulation using <code>popxOrient</code> attribute</li>
-          <li><strong>Delta Transforms</strong> – Apply incremental changes per frame for smooth animations</li>
-          <li><strong>Per-Axis Control</strong> – Independent control over X, Y, Z translation, rotation, and scale</li>
-          <li><strong>Falloff Integration</strong> – Spatially modulate transform strength with falloff operators</li>
-          <li><strong>Transform Space</strong> – Apply transforms in local, world, or view space</li>
-          <li><strong>GPU Accelerated</strong> – All transforms computed on the GPU via compute shaders</li>
-        </ul>
       </section>
 
       <section>
         <h2 id="parameters">Parameters</h2>
 
-        <div class="parameter-page-section">
-          <h3 id="page-transform">Page: Transform</h3>
+        <h3 id="page-transform">Page: Transform</h3>
 
-          <div class="param-group">
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which group of instances to affect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Local Space</span>
+            <span class="param-name">Localspace</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply the transform in local or world space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff influence for the transform.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Selects the attribute that controls falloff strength.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Translate</span>
-            <span class="param-name">t</span>
-            <span class="param-toggle">▸</span>
-            <span class="param-group-description">Translate the points in the three axes.</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Moves instances along the X, Y, and Z axes.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Translate X</span>
-              <span class="param-name">tx</span>
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Translate Y</span>
-              <span class="param-name">ty</span>
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Translate Z</span>
-              <span class="param-name">tz</span>
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
             </div>
           </div>
         </div>
@@ -147,22 +161,24 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Rotate</span>
-            <span class="param-name">r</span>
-            <span class="param-toggle">▸</span>
-            <span class="param-group-description">Rotate the points in the three axes.</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotates instances around the X, Y, and Z axes.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Rotate X</span>
-              <span class="param-name">rx</span>
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Rotate Y</span>
-              <span class="param-name">ry</span>
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Rotate Z</span>
-              <span class="param-name">rz</span>
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
             </div>
           </div>
         </div>
@@ -170,22 +186,24 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Scale</span>
-            <span class="param-name">s</span>
-            <span class="param-toggle">▸</span>
-            <span class="param-group-description">Scale the points in the three axes.</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scales instances on X, Y, and Z axes independently.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Scale X</span>
-              <span class="param-name">sx</span>
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale Y</span>
-              <span class="param-name">sy</span>
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale Z</span>
-              <span class="param-name">sz</span>
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
             </div>
           </div>
         </div>
@@ -193,212 +211,209 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Uniform Scale</span>
-            <span class="param-name">scale</span>
-            <span class="param-description">Uniform scaling factor applied after per-axis scaling.</span>
-          </div>
-        </div>
-        </div>
-
-        <div class="parameter-page-section">
-          <h3 id="page-orientation">Page: Orientation</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Affect Orientation</span>
-            <span class="param-name">affectorient</span>
-            <span class="param-description">When enabled, updates the <code>popxOrient</code> quaternion attribute with rotation changes.</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scales instances equally on all axes.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Use Delta Transform</span>
-            <span class="param-name">usedelta</span>
-            <span class="param-description">When enabled, applies transforms incrementally per frame instead of absolute values. Essential for smooth animation.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Transform Space</span>
-            <span class="param-name">space</span>
-            <span class="param-description">Coordinate space for transforms.</span>
-          </div>
-          <ul class="param-options">
-            <li>World</li>
-            <li>Local</li>
-            <li>View</li>
-          </ul>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Rotation Order</span>
-            <span class="param-name">order</span>
-            <span class="param-description">Order of rotation application.</span>
-          </div>
-          <ul class="param-options">
-            <li>XYZ</li>
-            <li>XZY</li>
-            <li>YXZ</li>
-            <li>YZX</li>
-            <li>ZXY</li>
-            <li>ZYX</li>
-          </ul>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Pivot</span>
-            <span class="param-name">pivot</span>
-            <span class="param-description">Pivot point for rotation and scale operations in local space (X, Y, Z).</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the pivot point for transforms.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
           </div>
         </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the rotation axis evaluation order.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zyx</span>
+            </div>
+          </div>
         </div>
 
-        <div class="parameter-page-section">
-          <h3 id="page-falloff">Page: Falloff</h3>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Mode</span>
+            <span class="param-name">Rmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Chooses between adding or setting rotation.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale Mode</span>
+            <span class="param-name">Smode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Defines whether scale multiplies or replaces.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">mult</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">replace</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot Mode</span>
+            <span class="param-name">Pmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Adds or sets pivot adjustments directly.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">set</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h3 id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Use Falloff</span>
-            <span class="param-name">usefalloff</span>
-            <span class="param-description">Enable spatial falloff to modulate transform strength.</span>
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Falloff Input</span>
-            <span class="param-name">fallofinput</span>
-            <span class="param-description">Connect a POPX Falloff operator to provide spatial influence values.</span>
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Falloff Attribute</span>
-            <span class="param-name">falloffattr</span>
-            <span class="param-description">Name of the falloff attribute to read (typically "falloff" or "weight").</span>
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX geometry or shows it as point instances only.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Invert Falloff</span>
-            <span class="param-name">invertfalloff</span>
-            <span class="param-description">Reverses falloff values (1-falloff).</span>
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
           </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Falloff Remap</span>
-            <span class="param-name">fallofremap</span>
-            <span class="param-description">Remaps falloff values through a lookup curve for fine-tuned control.</span>
-          </div>
-        </div>
-        </div>
-
-        <div class="parameter-page-section">
-          <h3 id="page-common">Page: Common</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable</span>
-            <span class="param-name">enable</span>
-            <span class="param-description">Turns the modifier on/off. When disabled, input passes through unchanged.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Strength</span>
-            <span class="param-name">strength</span>
-            <span class="param-description">Global multiplier for all transform values (0-1 range for blending).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Group</span>
-            <span class="param-name">group</span>
-            <span class="param-description">Apply transform only to particles in the specified group. Leave empty for all particles.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Blend Mode</span>
-            <span class="param-name">blendmode</span>
-            <span class="param-description">How transforms combine with existing values.</span>
-          </div>
-          <ul class="param-options">
-            <li>Add</li>
-            <li>Multiply</li>
-            <li>Replace</li>
-          </ul>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Cook on Demand</span>
-            <span class="param-name">cookondemand</span>
-            <span class="param-description">Only compute when downstream operators request data (performance optimization).</span>
-          </div>
-        </div>
         </div>
       </section>
 
       <section>
         <h2 id="inputs">Inputs</h2>
-        <table class="parameter-table">
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td><strong>Input 0</strong></td>
-            <td>SOP</td>
-            <td>Particle or instance stream containing point geometry with standard POPX attributes.</td>
-          </tr>
-          <tr>
-            <td><strong>Input 1</strong> <em>(optional)</em></td>
-            <td>SOP</td>
-            <td>Falloff field geometry (alternative to the Falloff Input parameter).</td>
-          </tr>
-        </table>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-label">POPX Geometry</span>
+          </div>
+        </div>
       </section>
 
       <section>
         <h2 id="outputs">Outputs</h2>
-        <table class="parameter-table">
-          <tr>
-            <th>Output</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td><strong>Output 0</strong></td>
-            <td>SOP</td>
-            <td>Transformed particle stream with updated <code>P</code>, <code>popxOrient</code>, and <code>scale</code> attributes.</td>
-          </tr>
-        </table>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-label">POPX_out1</span>
+          </div>
+        </div>
       </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="radial-falloff.html" class="nav-button prev">Radial Falloff</a>
+        <a href="noise-modifier.html" class="nav-button next">Noise Modifier</a>
+      </nav>
     </main>
 
     <!-- Table of Contents -->
     <aside class="toc">
       <h4>Contents</h4>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#summary">Summary</a></li>
         <li><a href="#parameters">Parameters</a>
           <ul>
             <li><a href="#page-transform">Page: Transform</a></li>
-            <li><a href="#page-orientation">Page: Orientation</a></li>
-            <li><a href="#page-falloff">Page: Falloff</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

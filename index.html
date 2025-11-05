@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POPX Docs - TouchDesigner Particle & Instance Operators</title>
-  <meta name="description" content="Official documentation for the POPX family of TouchDesigner operators - powerful particle and instance manipulation tools.">
+  <title>POPX Docs - Home</title>
+  <meta name="description" content="Welcome to POPX Docs - explore, learn, and build your simulation tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -15,192 +18,94 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="sidebar-logo">
+        <a href="index.html" class="sidebar-logo">
           <span>POPX</span> Docs
-        </div>
+        </a>
       </div>
 
-      <h3>Getting Started</h3>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="installation.html">Installation</a></li>
-        <li><a href="tutorials.html">Tutorials</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <h3>Operators</h3>
-
-      <details class="sidebar-section category-generators">
-        <summary>Generators</summary>
+      <details class="sidebar-section sidebar-main-section" data-section="guides">
+        <summary>Guides</summary>
         <ul>
-          <li><a href="operators/scatter.html">Scatter</a></li>
-          <li><a href="operators/source.html">Source</a></li>
+          <li><a href="getting-started.html">Getting Started with POPX</a></li>
+          <li><a href="installation.html">Installation</a></li>
+          <li><a href="tutorials.html">Tutorials</a></li>
         </ul>
       </details>
 
-      <details class="sidebar-section category-modifiers">
-        <summary>Modifiers</summary>
-        <ul>
-          <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
-          <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
-          <li><a href="operators/force-modifier.html">Force Modifier</a></li>
-        </ul>
-      </details>
+      <details class="sidebar-section sidebar-main-section" data-section="operators">
+        <summary>Operators</summary>
 
-      <details class="sidebar-section category-falloffs">
-        <summary>Falloffs</summary>
-        <ul>
-          <li><a href="operators/falloff-field.html">Falloff Field</a></li>
-          <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-generators">
+          <summary>Generators</summary>
+          <ul>
+            <li><a href="operators/scatter.html">Scatter</a></li>
+            <li><a href="operators/source.html">Source</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-tools">
-        <summary>Tools</summary>
-        <ul>
-          <li><a href="operators/voxelize.html">Voxelize</a></li>
-          <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-falloffs">
+          <summary>Falloffs</summary>
+          <ul>
+            <li><a href="operators/falloff-field.html">Falloff Field</a></li>
+            <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-simulations">
-        <summary>Simulations</summary>
-        <ul>
-          <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
-          <li><a href="operators/sph-solver.html">SPH Solver</a></li>
-        </ul>
+        <details class="sidebar-section category-modifiers">
+          <summary>Modifiers</summary>
+          <ul>
+            <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
+            <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
+            <li><a href="operators/force-modifier.html">Force Modifier</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-tools">
+          <summary>Tools</summary>
+          <ul>
+            <li><a href="operators/voxelize.html">Voxelize</a></li>
+            <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-simulations">
+          <summary>Simulations</summary>
+          <ul>
+            <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
+            <li><a href="operators/sph-solver.html">SPH Solver</a></li>
+          </ul>
+        </details>
       </details>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>POPX Documentation</h1>
-      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
-        A comprehensive family of TouchDesigner operators for advanced particle and instance manipulation.
-      </p>
+      <div class="home-container">
+        <div class="home-tagline">
+          Welcome to POPX Docs — explore, learn, and build your simulation tools.
+        </div>
 
-      <section style="margin-bottom: var(--spacing-xl);">
-        <h2 id="overview">Overview</h2>
-        <p>
-          <strong>POPX</strong> is a powerful ecosystem of TouchDesigner components designed to bring industry-standard particle and instance workflows to real-time GPU-accelerated environments. Built for artists, technical directors, and creative coders, POPX combines the flexibility of Houdini-style operators with TouchDesigner's performance-oriented architecture.
-        </p>
-        <p>
-          Whether you're creating procedural animations, real-time simulations, or data-driven installations, POPX provides the tools to manipulate thousands of particles and instances with precision and control.
-        </p>
-      </section>
-
-      <section style="margin-bottom: var(--spacing-xl);">
-        <h2 id="operator-families">Operator Families</h2>
-        <div class="operator-grid">
-          <a href="generators/index.html" class="operator-card type-generator">
-            <h3>Generators</h3>
-            <span class="badge badge-generator">5 Operators</span>
-            <p>Create and emit particles from various sources including geometry, surfaces, volumes, and procedural patterns.</p>
+        <div class="home-links">
+          <a href="getting-started.html" class="home-link-button">
+            <span class="home-link-title">Getting Started with POPX</span>
+            <span class="home-link-description">Learn the fundamentals and workflows</span>
           </a>
 
-          <a href="modifiers/index.html" class="operator-card type-modifier">
-            <h3>Modifiers</h3>
-            <span class="badge badge-modifier">8 Operators</span>
-            <p>Transform, deform, and manipulate particle streams with forces, noise, constraints, and custom expressions.</p>
+          <a href="installation.html" class="home-link-button">
+            <span class="home-link-title">Installation Guide</span>
+            <span class="home-link-description">Set up POPX operators in TouchDesigner</span>
           </a>
 
-          <a href="falloffs/index.html" class="operator-card type-falloff">
-            <h3>Falloffs</h3>
-            <span class="badge badge-falloff">4 Operators</span>
-            <p>Create spatial influence fields that drive modifier strength based on distance, geometry, and custom curves.</p>
-          </a>
-
-          <a href="tools/index.html" class="operator-card type-tool">
-            <h3>Tools</h3>
-            <span class="badge badge-tool">6 Operators</span>
-            <p>Utilities for particle analysis, attribute management, instancing, and data conversion between formats.</p>
-          </a>
-
-          <a href="simulations/index.html" class="operator-card type-simulation">
-            <h3>Simulations</h3>
-            <span class="badge badge-simulation">3 Operators</span>
-            <p>Physics-based solvers including FLIP fluids, SPH particles, and constraint-based dynamics systems.</p>
+          <a href="operators/scatter.html" class="home-link-button">
+            <span class="home-link-title">Browse Operators</span>
+            <span class="home-link-description">Explore the complete operator reference</span>
           </a>
         </div>
-      </section>
-
-      <section style="margin-bottom: var(--spacing-xl);">
-        <h2 id="key-features">Key Features</h2>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>GPU-Accelerated Performance</strong> – All operators leverage TouchDesigner's compute shaders for real-time performance with thousands of particles.</li>
-          <li><strong>Modular Architecture</strong> – Chain operators together to create complex procedural systems with full control over each stage.</li>
-          <li><strong>Houdini-Style Workflow</strong> – Familiar parameter organization and attribute-based manipulation for VFX artists.</li>
-          <li><strong>Custom Attributes</strong> – Create, modify, and delete custom particle attributes including vectors, quaternions, and matrices.</li>
-          <li><strong>Instancing Support</strong> – Full support for instanced rendering with orientation, scale, and custom material attributes.</li>
-          <li><strong>Simulation Systems</strong> – Industry-standard FLIP and SPH solvers with collision detection and constraints.</li>
-        </ul>
-      </section>
-
-      <section style="margin-bottom: var(--spacing-xl);">
-        <h2 id="getting-started">Getting Started</h2>
-        <p>
-          New to POPX? Start with our comprehensive installation and setup guide:
-        </p>
-        <div style="margin-top: var(--spacing-md);">
-          <a href="installation.html" class="btn btn-primary">Installation Guide</a>
-          <a href="tutorials.html" class="btn btn-secondary" style="margin-left: var(--spacing-sm);">View Tutorials</a>
-        </div>
-      </section>
-
-      <section style="margin-bottom: var(--spacing-xl);">
-        <h2 id="system-requirements">System Requirements</h2>
-        <table class="parameter-table">
-          <tr>
-            <th>Requirement</th>
-            <th>Specification</th>
-          </tr>
-          <tr>
-            <td>TouchDesigner Version</td>
-            <td>2023.11760 or later</td>
-          </tr>
-          <tr>
-            <td>GPU</td>
-            <td>NVIDIA/AMD with OpenGL 4.6+ support</td>
-          </tr>
-          <tr>
-            <td>RAM</td>
-            <td>16GB minimum, 32GB recommended</td>
-          </tr>
-          <tr>
-            <td>Operating System</td>
-            <td>Windows 10/11, macOS 12+, Linux (Ubuntu 20.04+)</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2 id="support">Community & Support</h2>
-        <p>
-          Join the POPX community to get help, share projects, and stay updated with the latest releases:
-        </p>
-        <ul style="color: var(--color-text-muted); line-height: 1.8;">
-          <li><strong>Discord Server</strong> – Real-time help and community discussions</li>
-          <li><strong>GitHub Repository</strong> – Report issues, request features, and contribute</li>
-          <li><strong>Forum</strong> – In-depth tutorials and project showcases</li>
-          <li><strong>Patreon</strong> – Support development and get early access to new features</li>
-        </ul>
-        <div style="margin-top: var(--spacing-md);">
-          <a href="contact.html" class="btn btn-secondary">Contact & Links</a>
-        </div>
-      </section>
+      </div>
     </main>
 
-    <!-- Table of Contents -->
+    <!-- Table of Contents (Empty for home page) -->
     <aside class="toc">
-      <h4>Contents</h4>
-      <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#operator-families">Operator Families</a></li>
-        <li><a href="#key-features">Key Features</a></li>
-        <li><a href="#getting-started">Getting Started</a></li>
-        <li><a href="#system-requirements">System Requirements</a></li>
-        <li><a href="#support">Community & Support</a></li>
-      </ul>
     </aside>
   </div>
 

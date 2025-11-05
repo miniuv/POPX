@@ -198,44 +198,17 @@ function initSidebarState() {
     }
   });
 
-  // Restore accordion state from localStorage or open all by default
-  const accordionSections = document.querySelectorAll('.sidebar-section');
-  const savedState = localStorage.getItem('popx-accordion-state');
+  // Handle main sections (Guides and Operators)
+  const mainSections = document.querySelectorAll('.sidebar-main-section');
+  const operatorSubsections = document.querySelectorAll('.sidebar-main-section[data-section="operators"] .sidebar-section');
 
-  if (savedState) {
-    // Restore saved state
-    const state = JSON.parse(savedState);
-    accordionSections.forEach((section, index) => {
-      const sectionKey = `section-${index}`;
-      if (state[sectionKey] === true) {
-        section.setAttribute('open', '');
-      } else {
-        section.removeAttribute('open');
-      }
-    });
-  } else {
-    // Open all accordion sections by default on first visit
-    accordionSections.forEach(section => {
-      section.setAttribute('open', '');
-    });
+  // Open all sections by default
+  mainSections.forEach(section => {
+    section.setAttribute('open', '');
+  });
 
-    // Save initial state
-    const initialState = {};
-    accordionSections.forEach((section, index) => {
-      initialState[`section-${index}`] = true;
-    });
-    localStorage.setItem('popx-accordion-state', JSON.stringify(initialState));
-  }
-
-  // Save accordion state whenever it changes
-  accordionSections.forEach((section, index) => {
-    section.addEventListener('toggle', function() {
-      const state = {};
-      accordionSections.forEach((s, i) => {
-        state[`section-${i}`] = s.hasAttribute('open');
-      });
-      localStorage.setItem('popx-accordion-state', JSON.stringify(state));
-    });
+  operatorSubsections.forEach(section => {
+    section.setAttribute('open', '');
   });
 }
 
@@ -382,10 +355,11 @@ function initParameterGroups() {
   const paramGroups = document.querySelectorAll('.param-group');
 
   paramGroups.forEach(group => {
-    const header = group.querySelector('.param-group-header');
+    const toggle = group.querySelector('.param-toggle');
 
-    if (header) {
-      header.addEventListener('click', function() {
+    if (toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         group.classList.toggle('expanded');
       });
     }

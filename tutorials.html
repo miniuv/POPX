@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tutorials - POPX Docs</title>
   <meta name="description" content="Step-by-step tutorials for learning POPX operators in TouchDesigner.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -15,71 +18,68 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="sidebar-logo">
+        <a href="index.html" class="sidebar-logo">
           <span>POPX</span> Docs
-        </div>
+        </a>
       </div>
 
-      <h3>Getting Started</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="installation.html">Installation</a></li>
-        <li><a href="tutorials.html" class="active">Tutorials</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <h3>Operators</h3>
-
-      <details class="sidebar-section category-generators">
-        <summary>Generators</summary>
+      <details class="sidebar-section sidebar-main-section" data-section="guides">
+        <summary>Guides</summary>
         <ul>
-          <li><a href="operators/scatter.html">Scatter</a></li>
-          <li><a href="operators/source.html">Source</a></li>
+          <li><a href="getting-started.html">Getting Started with POPX</a></li>
+          <li><a href="installation.html">Installation</a></li>
+          <li><a href="tutorials.html" class="active">Tutorials</a></li>
         </ul>
       </details>
 
-      <details class="sidebar-section category-modifiers">
-        <summary>Modifiers</summary>
-        <ul>
-          <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
-          <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
-          <li><a href="operators/force-modifier.html">Force Modifier</a></li>
-        </ul>
-      </details>
+      <details class="sidebar-section sidebar-main-section" data-section="operators">
+        <summary>Operators</summary>
 
-      <details class="sidebar-section category-falloffs">
-        <summary>Falloffs</summary>
-        <ul>
-          <li><a href="operators/falloff-field.html">Falloff Field</a></li>
-          <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-generators">
+          <summary>Generators</summary>
+          <ul>
+            <li><a href="operators/scatter.html">Scatter</a></li>
+            <li><a href="operators/source.html">Source</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-tools">
-        <summary>Tools</summary>
-        <ul>
-          <li><a href="operators/voxelize.html">Voxelize</a></li>
-          <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
-        </ul>
-      </details>
+        <details class="sidebar-section category-falloffs">
+          <summary>Falloffs</summary>
+          <ul>
+            <li><a href="operators/falloff-field.html">Falloff Field</a></li>
+            <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
+          </ul>
+        </details>
 
-      <details class="sidebar-section category-simulations">
-        <summary>Simulations</summary>
-        <ul>
-          <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
-          <li><a href="operators/sph-solver.html">SPH Solver</a></li>
-        </ul>
+        <details class="sidebar-section category-modifiers">
+          <summary>Modifiers</summary>
+          <ul>
+            <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
+            <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
+            <li><a href="operators/force-modifier.html">Force Modifier</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-tools">
+          <summary>Tools</summary>
+          <ul>
+            <li><a href="operators/voxelize.html">Voxelize</a></li>
+            <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
+          </ul>
+        </details>
+
+        <details class="sidebar-section category-simulations">
+          <summary>Simulations</summary>
+          <ul>
+            <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
+            <li><a href="operators/sph-solver.html">SPH Solver</a></li>
+          </ul>
+        </details>
       </details>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="breadcrumb">
-        <a href="index.html">Home</a>
-        <span>→</span>
-        <span>Tutorials</span>
-      </div>
-
       <h1>POPX Tutorials</h1>
       <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
         Step-by-step guides to master POPX workflows, from beginner basics to advanced techniques.
@@ -327,6 +327,12 @@ Geometry COMP</code></pre>
           <li><a href="#">Submit Your Tutorial</a> – Share your POPX knowledge!</li>
         </ul>
       </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="installation.html" class="nav-button prev">Installation</a>
+        <a href="operators/scatter.html" class="nav-button next">Scatter</a>
+      </nav>
     </main>
 
     <!-- Table of Contents -->
