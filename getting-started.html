@@ -90,56 +90,56 @@
         </p>
       </section>
 
-      <!-- SECTION B: POPX Geometry -->
+      <!-- SECTION B: Operator Types Overview -->
       <section>
-        <h2 id="popx-geometry">POPX Geometry</h2>
-        <p>
-          <strong>POPX Geometry</strong> is a packed structure where each piece of geometry is represented by a single point containing all transform attributes — position, rotation, scale, and pivot. This compact format allows transformations to operate directly on the GPU without manually constructing attributes or computing transformation matrices — it handles everything for you.
-        </p>
-      </section>
+        <div class="operator-grid">
+          <!-- POPX Geometry -->
+          <div class="operator-card" id="popx-geometry-card">
+            <h3>POPX Geometry</h3>
+            <p>
+              A packed structure where each piece of geometry is represented by a single point containing all transform attributes — position, rotation, scale, and pivot. This compact format allows transformations to operate directly on the GPU without manually constructing attributes or computing transformation matrices — it handles everything for you.
+            </p>
+          </div>
 
-      <!-- SECTION C: Operator Types Overview -->
-      <section>
-        <h2 id="operator-types">Operator Types Overview</h2>
+          <!-- Generators -->
+          <div class="operator-card" id="generators">
+            <h3>Generators</h3>
+            <p>
+              Generate instances for the POPX system, either by creating new geometry, converting existing geometry to POPX instances, or producing general geometry structures.
+            </p>
+          </div>
 
-        <!-- Generators -->
-        <div style="margin-bottom: var(--spacing-lg); margin-top: var(--spacing-lg);">
-          <h3 id="generators" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Generators</h3>
-          <p>
-            Generate instances for the POPX system, either by creating new geometry, converting existing geometry to POPX instances, or producing general geometry structures.
-          </p>
-        </div>
+          <!-- Falloffs -->
+          <div class="operator-card" id="falloffs">
+            <h3>Falloffs</h3>
+            <p>
+              Define spatial regions of influence, using the <strong>popxFalloff</strong> attribute to control how strongly other operators affect instances.
+            </p>
+          </div>
 
-        <!-- Falloffs -->
-        <div style="margin-bottom: var(--spacing-lg);">
-          <h3 id="falloffs" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Falloffs</h3>
-          <p>
-            Define spatial regions of influence, using the <strong>popxFalloff</strong> attribute to control how strongly other operators affect instances.
-          </p>
-        </div>
+          <!-- Modifiers -->
+          <div class="operator-card" id="modifiers">
+            <h3>Modifiers</h3>
+            <p>
+              Adjust and transform geometry by modifying position, rotation, scale, pivot, and other custom attributes such as color.
+            </p>
+          </div>
 
-        <!-- Modifiers -->
-        <div style="margin-bottom: var(--spacing-lg);">
-          <h3 id="modifiers" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Modifiers</h3>
-          <p>
-            Adjust and transform geometry by modifying position, rotation, scale, pivot, and other custom attributes such as color.
-          </p>
-        </div>
+          <!-- Tools -->
+          <div class="operator-card" id="tools">
+            <h3>Tools</h3>
+            <p>
+              Provide additional utilities for visualization, orientation, geometry management, and general workflow assistance.
+            </p>
+          </div>
 
-        <!-- Tools -->
-        <div style="margin-bottom: var(--spacing-lg);">
-          <h3 id="tools" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Tools</h3>
-          <p>
-            Provide additional utilities for visualization, orientation, geometry management, and general workflow assistance.
-          </p>
-        </div>
-
-        <!-- Simulations -->
-        <div style="margin-bottom: var(--spacing-lg);">
-          <h3 id="simulations" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Simulations</h3>
-          <p>
-            A stand-alone part of the POPX ecosystem focused on time-based physical simulations such as fluid, particle, and growth systems.
-          </p>
+          <!-- Simulations -->
+          <div class="operator-card" id="simulations">
+            <h3>Simulations</h3>
+            <p>
+              A stand-alone part of the POPX ecosystem focused on time-based physical simulations such as fluid, particle, and growth systems.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -184,15 +184,7 @@
       <ul>
         <li><a href="#popx-overview">POPX Overview</a></li>
         <li><a href="#popx-geometry">POPX Geometry</a></li>
-        <li><a href="#operator-types">Operator Types Overview</a>
-          <ul>
-            <li><a href="#generators">Generators</a></li>
-            <li><a href="#falloffs">Falloffs</a></li>
-            <li><a href="#modifiers">Modifiers</a></li>
-            <li><a href="#tools">Tools</a></li>
-            <li><a href="#simulations">Simulations</a></li>
-          </ul>
-        </li>
+        <li><a href="#operator-types">Operator Types Overview</a></li>
         <li><a href="#getting-started">Getting Started</a></li>
       </ul>
     </aside>
