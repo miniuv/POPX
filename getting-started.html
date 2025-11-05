@@ -86,31 +86,27 @@
       <section>
         <h2 id="popx-overview">POPX Overview</h2>
         <p>
-          <strong>POPX</strong> is a new family of operators that extends TouchDesigner's POPs (Point Operators). Designed to fully leverage GPU acceleration, POPX introduces a modular framework for generating, transforming, and simulating geometry in real time.
-        </p>
-        <p>
-          At its core, POPX focuses on <strong>instance transformation</strong> — enabling artists and developers to create, manipulate, and animate large-scale instanced geometry efficiently. The system revolves around <strong>POPX Geometry</strong>, a packed data structure where each piece of geometry is stored in a single point containing all necessary attributes for transformation, including position, rotation, scale, and pivot. This packed approach allows POPX to manage transformations directly on the GPU without requiring users to manually construct transform matrices or compute attribute operations.
-        </p>
-        <p>
-          Although POPX operators can generate and operate on POPX Geometry, they are also fully compatible with any standard POP geometry. This flexibility allows the POPX system to integrate smoothly into existing workflows while maintaining GPU efficiency and procedural control.
-        </p>
-        <p>
-          Built for artists, technical directors, and creative coders, POPX provides a unified environment for creating procedural animations, real-time simulations, generative visuals, and large-scale geometry transformations — all with precision, performance, and creative flexibility inside TouchDesigner.
+          <strong>POPX</strong> is a new family of operators that extends TouchDesigner's POPs (Point Operators). It introduces a GPU-accelerated framework for generating, transforming, and simulating geometry in real time. While optimized for its packed POPX Geometry system, all operators work seamlessly with any standard POP geometry.
         </p>
       </section>
 
-      <!-- SECTION B: Operator Types Overview -->
+      <!-- SECTION B: POPX Geometry -->
+      <section>
+        <h2 id="popx-geometry">POPX Geometry</h2>
+        <p>
+          <strong>POPX Geometry</strong> is a packed structure where each piece of geometry is represented by a single point containing all transform attributes — position, rotation, scale, and pivot. This compact format allows transformations to operate directly on the GPU without manually constructing attributes or computing transformation matrices — it handles everything for you.
+        </p>
+      </section>
+
+      <!-- SECTION C: Operator Types Overview -->
       <section>
         <h2 id="operator-types">Operator Types Overview</h2>
-        <p>
-          POPX operators are organized into five categories, each serving a specific role in the instance manipulation workflow:
-        </p>
 
         <!-- Generators -->
         <div style="margin-bottom: var(--spacing-lg); margin-top: var(--spacing-lg);">
           <h3 id="generators" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Generators</h3>
           <p>
-            Generators create and initialize new instances or geometry from various sources. They are the starting point of any POPX workflow, defining initial positions, attributes, and distribution patterns. Generators can emit from surfaces, volumes, curves, vertices, or procedural patterns, with full control over particle density, initial velocity, orientation, color, and custom attributes. They support both continuous emission over time and single-burst generation modes.
+            Generate instances for the POPX system, either by creating new geometry, converting existing geometry to POPX instances, or producing general geometry structures.
           </p>
         </div>
 
@@ -118,7 +114,7 @@
         <div style="margin-bottom: var(--spacing-lg);">
           <h3 id="falloffs" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Falloffs</h3>
           <p>
-            Falloffs define areas of influence or weighting for other operators. They generate spatial weight values (typically 0-1) based on distance from points, curves, surfaces, or volumes. These weight values can then modulate the strength of any modifier, allowing you to create localized transformations, forces, and deformations. Falloffs support custom remap curves, inversion, clamping, and can write their values to custom particle attributes for advanced control.
+            Define spatial regions of influence, using the <strong>popxFalloff</strong> attribute to control how strongly other operators affect instances.
           </p>
         </div>
 
@@ -126,7 +122,7 @@
         <div style="margin-bottom: var(--spacing-lg);">
           <h3 id="modifiers" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Modifiers</h3>
           <p>
-            Modifiers transform or adjust existing instance attributes like position, rotation, scale, velocity, color, and more. They read particle data streams, apply transformations or effects, and output the modified stream for downstream processing. All modifiers support falloff integration for spatial control, can target specific particle groups, and offer blend modes for combining effects. Modifiers are fully GPU-accelerated and can be chained together to create complex procedural behaviors.
+            Adjust and transform geometry by modifying position, rotation, scale, pivot, and other custom attributes such as color.
           </p>
         </div>
 
@@ -134,7 +130,7 @@
         <div style="margin-bottom: var(--spacing-lg);">
           <h3 id="tools" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Tools</h3>
           <p>
-            Tools perform utility functions, conversions, and data operations within the POPX workflow. Unlike modifiers, they don't directly transform particle motion but instead manage attributes, analyze data, prepare instances for rendering, and convert between formats. Tools include attribute managers for creating and renaming attributes, voxelizers for converting particles to volumes, instance setup operators for GPU rendering preparation, and analysis tools for debugging and performance optimization.
+            Provide additional utilities for visualization, orientation, geometry management, and general workflow assistance.
           </p>
         </div>
 
@@ -142,7 +138,7 @@
         <div style="margin-bottom: var(--spacing-lg);">
           <h3 id="simulations" style="color: var(--color-accent); margin-bottom: var(--spacing-sm);">Simulations</h3>
           <p>
-            Simulations handle time-based dynamics, interactions, and physics-like behaviors. They use industry-standard algorithms like FLIP (Fluid Implicit Particle) and SPH (Smoothed Particle Hydrodynamics) to calculate realistic particle motion based on forces, collisions, constraints, and fluid dynamics. Simulations support accurate time-stepping with sub-frame iterations, fast spatial hashing for collision detection, constraint solving with position-based dynamics, and are fully GPU-accelerated for real-time performance.
+            A stand-alone part of the POPX ecosystem focused on time-based physical simulations such as fluid, particle, and growth systems.
           </p>
         </div>
       </section>
@@ -187,6 +183,7 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#popx-overview">POPX Overview</a></li>
+        <li><a href="#popx-geometry">POPX Geometry</a></li>
         <li><a href="#operator-types">Operator Types Overview</a>
           <ul>
             <li><a href="#generators">Generators</a></li>
