@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initSmoothScroll();
   initParameterGroups();
   initSidebarSwipe();
+  initThemeSelector();
+  initSearch();
 });
 
 // ===========================
@@ -409,8 +411,8 @@ function initSidebarSwipe() {
 
     // Only trigger if horizontal swipe is dominant and exceeds threshold
     if (absDeltaX > absDeltaY && absDeltaX > 50) {
-      // Swipe left to close
-      if (deltaX < 0 && sidebar.classList.contains('open')) {
+      // Swipe right to close (for right-side sidebar)
+      if (deltaX > 0 && sidebar.classList.contains('open')) {
         sidebar.classList.remove('open');
         if (overlay) {
           overlay.classList.remove('active');
@@ -419,13 +421,14 @@ function initSidebarSwipe() {
     }
   }, { passive: true });
 
-  // Swipe from left edge to open
+  // Swipe from right edge to open
   let edgeSwipeStartX = 0;
   let isEdgeSwiping = false;
 
   document.addEventListener('touchstart', function(e) {
-    // Only detect swipe from left edge (first 20px)
-    if (e.touches[0].clientX < 20 && !sidebar.classList.contains('open')) {
+    // Only detect swipe from right edge (last 20px)
+    const screenWidth = window.innerWidth;
+    if (e.touches[0].clientX > screenWidth - 20 && !sidebar.classList.contains('open')) {
       edgeSwipeStartX = e.touches[0].screenX;
       isEdgeSwiping = true;
     }
@@ -436,9 +439,9 @@ function initSidebarSwipe() {
     isEdgeSwiping = false;
 
     const edgeSwipeEndX = e.changedTouches[0].screenX;
-    const edgeDelta = edgeSwipeEndX - edgeSwipeStartX;
+    const edgeDelta = edgeSwipeStartX - edgeSwipeEndX;
 
-    // Swipe right from edge to open (threshold 80px)
+    // Swipe left from right edge to open (threshold 80px)
     if (edgeDelta > 80) {
       sidebar.classList.add('open');
       if (overlay) {
@@ -455,4 +458,198 @@ function initSidebarSwipe() {
       isEdgeSwiping = false;
     }
   });
+}
+
+// ===========================
+// Theme Selector
+// ===========================
+function initThemeSelector() {
+  const themeButton = document.querySelector('.theme-selector-button');
+  const themeDropdown = document.querySelector('.theme-selector-dropdown');
+  const themeOptions = document.querySelectorAll('.theme-option');
+
+  if (!themeButton || !themeDropdown) return;
+
+  // Load saved theme or default to dark
+  const savedTheme = localStorage.getItem('popx-theme') || 'dark';
+  applyTheme(savedTheme);
+  updateThemeButton(savedTheme);
+
+  // Toggle dropdown
+  themeButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    themeDropdown.classList.toggle('active');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!themeButton.contains(e.target) && !themeDropdown.contains(e.target)) {
+      themeDropdown.classList.remove('active');
+    }
+  });
+
+  // Handle theme selection
+  themeOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const theme = this.dataset.theme;
+      applyTheme(theme);
+      updateThemeButton(theme);
+      localStorage.setItem('popx-theme', theme);
+      themeDropdown.classList.remove('active');
+
+      // Update selected state
+      themeOptions.forEach(opt => opt.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+}
+
+function applyTheme(theme) {
+  if (theme === 'auto') {
+    // Auto theme based on system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+}
+
+function updateThemeButton(theme) {
+  const themeButton = document.querySelector('.theme-selector-button');
+  if (!themeButton) return;
+
+  const themeConfig = {
+    'light': { name: 'Light', icon: '☀️' },
+    'dark': { name: 'Dark', icon: '🌙' },
+    'auto': { name: 'Auto', icon: '⚙️' }
+  };
+
+  const config = themeConfig[theme] || themeConfig['dark'];
+
+  // Update button HTML with icon, name, and arrow
+  themeButton.innerHTML = `
+    <span class="theme-icon">${config.icon}</span>
+    <span>${config.name}</span>
+    <span class="theme-arrow">▾</span>
+  `;
+}
+
+// ===========================
+// Search Functionality
+// ===========================
+const searchIndex = [
+  // Operators
+  { title: 'Scatter', path: 'operators/scatter.html', type: 'Operator', category: 'Generators' },
+  { title: 'Source', path: 'operators/source.html', type: 'Operator', category: 'Generators' },
+  { title: 'Falloff Field', path: 'operators/falloff-field.html', type: 'Operator', category: 'Falloffs' },
+  { title: 'Radial Falloff', path: 'operators/radial-falloff.html', type: 'Operator', category: 'Falloffs' },
+  { title: 'Transform Modifier', path: 'operators/transform-modifier.html', type: 'Operator', category: 'Modifiers' },
+  { title: 'Noise Modifier', path: 'operators/noise-modifier.html', type: 'Operator', category: 'Modifiers' },
+  { title: 'Force Modifier', path: 'operators/force-modifier.html', type: 'Operator', category: 'Modifiers' },
+  { title: 'Voxelize', path: 'operators/voxelize.html', type: 'Operator', category: 'Tools' },
+  { title: 'Attribute Manager', path: 'operators/attribute-manager.html', type: 'Operator', category: 'Tools' },
+  { title: 'FLIP Solver', path: 'operators/flip-solver.html', type: 'Operator', category: 'Simulations' },
+  { title: 'SPH Solver', path: 'operators/sph-solver.html', type: 'Operator', category: 'Simulations' },
+
+  // Pages
+  { title: 'Getting Started with POPX', path: 'getting-started.html', type: 'Guide' },
+  { title: 'Installation', path: 'installation.html', type: 'Guide' },
+  { title: 'Tutorials', path: 'tutorials.html', type: 'Guide' },
+];
+
+function initSearch() {
+  const searchInput = document.querySelector('.top-bar-search input');
+  const searchContainer = document.querySelector('.top-bar-search');
+
+  if (!searchInput || !searchContainer) return;
+
+  // Create results container
+  const resultsDiv = document.createElement('div');
+  resultsDiv.className = 'search-results';
+  searchContainer.appendChild(resultsDiv);
+
+  let searchTimeout;
+
+  searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase().trim();
+
+    clearTimeout(searchTimeout);
+
+    if (query.length < 2) {
+      resultsDiv.classList.remove('active');
+      return;
+    }
+
+    // Debounce search
+    searchTimeout = setTimeout(() => {
+      performSearch(query, resultsDiv);
+    }, 200);
+  });
+
+  // Handle Enter key - navigate to first result
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const query = e.target.value.toLowerCase().trim();
+      if (query.length >= 2) {
+        const results = searchIndex.filter(item =>
+          item.title.toLowerCase().includes(query) ||
+          (item.category && item.category.toLowerCase().includes(query))
+        );
+
+        if (results.length > 0) {
+          window.location.href = results[0].path;
+        }
+      }
+    } else if (e.key === 'Escape') {
+      resultsDiv.classList.remove('active');
+      searchInput.blur();
+    }
+  });
+
+  // Close results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchContainer.contains(e.target)) {
+      resultsDiv.classList.remove('active');
+    }
+  });
+
+  // Ctrl+K keyboard shortcut to focus search
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+}
+
+function performSearch(query, resultsDiv) {
+  const results = searchIndex.filter(item =>
+    item.title.toLowerCase().includes(query) ||
+    (item.category && item.category.toLowerCase().includes(query))
+  ).slice(0, 8); // Limit to 8 results
+
+  if (results.length === 0) {
+    resultsDiv.innerHTML = '<div class="search-no-results">No results found</div>';
+    resultsDiv.classList.add('active');
+    return;
+  }
+
+  resultsDiv.innerHTML = results.map(result => {
+    const titleWithHighlight = highlightText(result.title, query);
+    const pathDisplay = result.category ? `${result.category} / ${result.type}` : result.type;
+
+    return `
+      <a href="${result.path}" class="search-result-item">
+        <div class="search-result-title">${titleWithHighlight}</div>
+        <div class="search-result-path">${pathDisplay}</div>
+      </a>
+    `;
+  }).join('');
+
+  resultsDiv.classList.add('active');
+}
+
+function highlightText(text, query) {
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.replace(regex, '<span class="search-highlight">$1</span>');
 }
