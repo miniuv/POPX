@@ -104,22 +104,18 @@
 
       <section>
         <h2 id="requirements">System Requirements</h2>
-        <p>
-          <strong>TouchDesigner:</strong> 2025 Experimental (2025.xxx) or newer — required to access the new POPs (Point Operators) family.
-        </p>
-        <p>
-          <strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1 / OpenGL 4.5.
-        </p>
-        <p style="margin-bottom: 8px;">
-          <strong>Operating System:</strong>
-        </p>
-        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 48px; padding-left: 0; list-style-type: disc; margin-top: 0; margin-bottom: 20px;">
-          <li style="margin-bottom: 6px;"><strong>Windows 10/11</strong> — full support for all GPU features.</li>
-          <li style="margin-bottom: 6px;"><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>TouchDesigner:</strong> 2025 Experimental (2025.xxx) or newer — required to access the new POPs (Point Operators) family.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">
+            <strong>Operating System:</strong>
+            <ul style="line-height: 1.8; margin-left: 20px; margin-top: 6px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>Windows 10/11</strong> — full support for all GPU features.</li>
+              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
+            </ul>
+          </li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.</li>
         </ul>
-        <p style="margin-left: 0;">
-          <strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.
-        </p>
         <div style="margin-top: var(--spacing-md); padding: 16px 20px; background: rgba(200, 60, 60, 0.08); border-left: 3px solid rgba(200, 60, 60, 0.5); border-radius: 4px;">
           <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-style: italic;">
             <strong>⚠️ Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
@@ -129,27 +125,13 @@
 
       <section>
         <h2 id="installation">Installation Steps</h2>
-        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc;">
-          <li style="margin-bottom: 10px;">Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
-          <li style="margin-bottom: 10px;">Open your TouchDesigner project.</li>
-          <li style="margin-bottom: 10px;">Drag the <code>POPX.tox</code> file directly into your network.</li>
-          <li style="margin-bottom: 10px;">Your project may freeze momentarily while the system initializes — this is normal.</li>
-          <li style="margin-bottom: 10px;">Once loaded, the POPX container will appear at the root level of your project.</li>
-          <li style="margin-bottom: 10px;">Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX operator family available for use.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 id="verification">Verify Installation</h2>
-        <p style="margin-bottom: 8px;">
-          To verify that POPX is installed correctly:
-        </p>
-        <ul style="color: var(--color-text-muted); line-height: 1.8; margin-left: 48px; padding-left: 0; list-style-type: disc; margin-top: 0; margin-bottom: 20px;">
-          <li style="margin-bottom: 6px;">Create a new TouchDesigner project.</li>
-          <li style="margin-bottom: 6px;">Add a <strong>POPX Scatter</strong> operator to your network.</li>
-          <li style="margin-bottom: 6px;">Connect a <strong>Box SOP</strong> to the first input of POPX Scatter.</li>
-          <li style="margin-bottom: 6px;">Create a <strong>Geometry COMP</strong> and connect POPX Scatter to it.</li>
-          <li style="margin-bottom: 6px;">You should see particles scattered on the box surface.</li>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Open your TouchDesigner project.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Drag the <code>POPX.tox</code> file directly into your network.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Your project may freeze momentarily while the system initializes — this is normal.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Once loaded, the POPX container will appear at the root level of your project.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX Operators Family available for use.</li>
         </ul>
       </section>
 
@@ -167,7 +149,6 @@
         <li><a href="#download">Download POPX</a></li>
         <li><a href="#requirements">System Requirements</a></li>
         <li><a href="#installation">Installation Steps</a></li>
-        <li><a href="#verification">Verify Installation</a></li>
       </ul>
     </aside>
   </div>

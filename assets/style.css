@@ -1389,3 +1389,8 @@ pre code {
 .menu-overlay.active {
   display: block;
 }
+
+/* Red bullet markers for content lists */
+.main-content ul[style*="list-style-type: disc"] li::marker {
+  color: var(--color-accent);
+}
