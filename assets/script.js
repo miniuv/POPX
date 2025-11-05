@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initSidebarState();
   initSmoothScroll();
   initParameterGroups();
+  initSidebarSwipe();
 });
 
 // ===========================
@@ -362,6 +363,96 @@ function initParameterGroups() {
         e.stopPropagation();
         group.classList.toggle('expanded');
       });
+    }
+  });
+}
+
+// ===========================
+// Sidebar Swipe Gestures (Mobile)
+// ===========================
+function initSidebarSwipe() {
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.menu-overlay');
+
+  if (!sidebar) return;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let isSwiping = false;
+
+  // Only enable swipe on mobile/tablet
+  if (window.innerWidth > 768) return;
+
+  // Swipe to close when sidebar is open
+  sidebar.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    isSwiping = true;
+  }, { passive: true });
+
+  sidebar.addEventListener('touchmove', function(e) {
+    if (!isSwiping) return;
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  sidebar.addEventListener('touchend', function(e) {
+    if (!isSwiping) return;
+    isSwiping = false;
+
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+
+    // Only trigger if horizontal swipe is dominant and exceeds threshold
+    if (absDeltaX > absDeltaY && absDeltaX > 50) {
+      // Swipe left to close
+      if (deltaX < 0 && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        if (overlay) {
+          overlay.classList.remove('active');
+        }
+      }
+    }
+  }, { passive: true });
+
+  // Swipe from left edge to open
+  let edgeSwipeStartX = 0;
+  let isEdgeSwiping = false;
+
+  document.addEventListener('touchstart', function(e) {
+    // Only detect swipe from left edge (first 20px)
+    if (e.touches[0].clientX < 20 && !sidebar.classList.contains('open')) {
+      edgeSwipeStartX = e.touches[0].screenX;
+      isEdgeSwiping = true;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (!isEdgeSwiping) return;
+    isEdgeSwiping = false;
+
+    const edgeSwipeEndX = e.changedTouches[0].screenX;
+    const edgeDelta = edgeSwipeEndX - edgeSwipeStartX;
+
+    // Swipe right from edge to open (threshold 80px)
+    if (edgeDelta > 80) {
+      sidebar.classList.add('open');
+      if (overlay) {
+        overlay.classList.add('active');
+      }
+    }
+  }, { passive: true });
+
+  // Re-initialize on window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      // Desktop mode - remove mobile interactions
+      isSwiping = false;
+      isEdgeSwiping = false;
     }
   });
 }
