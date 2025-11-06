@@ -714,6 +714,76 @@ function getSearchPath(path) {
 const searchIndex = [
   // Operators with sections
   {
+    title: 'Convert',
+    path: 'operators/convert.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Convert', anchor: '#page-convert' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Explode',
+    path: 'operators/explode.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Define Pieces', anchor: '#page-define-pieces' },
+      { title: 'Page: Orient', anchor: '#page-orient' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Instancer',
+    path: 'operators/instancer.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Instancing', anchor: '#page-instancing' },
+      { title: 'Page: Distribution', anchor: '#page-distribution' },
+      { title: 'Page: Sorting', anchor: '#page-sorting' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Subdivider',
+    path: 'operators/subdivider.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Subdivider', anchor: '#page-subdivider' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Sweep',
+    path: 'operators/sweep.html',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Orient Curve', anchor: '#page-orient-curve' },
+      { title: 'Page: Surface', anchor: '#page-surface' },
+      { title: 'Page: Attributes', anchor: '#page-attributes' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Scatter',
     path: 'operators/scatter.html',
     type: 'Operator',
@@ -822,6 +892,49 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Magnetize', anchor: '#page-magnetize' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Move Along Curve',
+    path: 'operators/move-along-curve.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Move Along Curve', anchor: '#page-move-along-curve' },
+      { title: 'Page: Attach', anchor: '#page-attach' },
+      { title: 'Page: Animate', anchor: '#page-animate' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Move Along Mesh',
+    path: 'operators/move-along-mesh.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Move Along Mesh', anchor: '#page-move-along-mesh' },
+      { title: 'Page: Attach', anchor: '#page-attach' },
+      { title: 'Page: Animate', anchor: '#page-animate' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Pivot',
+    path: 'operators/pivot.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Pivot', anchor: '#page-pivot' },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1100,7 +1213,7 @@ function performSearch(query, resultsDiv) {
     }
 
     const hasToggle = sectionsToShow.length > 0;
-    const toggleButton = hasToggle ? '<span class="search-toggle collapsed" onclick="toggleSearchSections(event)">▼</span>' : '';
+    const toggleButton = hasToggle ? '<span class="search-toggle collapsed" onclick="toggleSearchSections(event)"></span>' : '';
 
     return `
       <div class="search-result-group">

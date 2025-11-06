@@ -461,29 +461,28 @@ pre code {
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 4px;
-  padding-bottom: 12px;
+  margin-bottom: 0;
   border-bottom: 1px solid var(--color-border);
-  padding-left: 4px;
-  border-left: 2px solid transparent;
 }
 
 .search-result-group:last-child {
   border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* Add left accent when group has sections */
-.search-result-group:has(.search-result-section) {
-  border-left-color: var(--color-border);
 }
 
 /* Page title styling */
 .search-result-page {
-  border-left: 3px solid transparent;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+  border-left: 3px solid transparent;
+}
+
+.search-result-page:hover {
+  background: var(--color-bg-panel);
+  border-left-color: var(--color-accent);
 }
 
 .search-result-page-content {
@@ -492,59 +491,92 @@ pre code {
 
 .search-result-page .search-result-title {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
+  color: var(--color-text);
 }
 
-/* Expand/collapse toggle button */
+/* Expand/collapse toggle indicator - matches sidebar style */
 .search-toggle {
-  padding: 4px 8px;
-  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+  margin-left: 12px;
   color: var(--color-text-muted);
-  font-size: 12px;
   cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  user-select: none;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease;
 }
 
-.search-toggle:hover {
-  opacity: 1;
-  color: var(--color-accent);
+.search-toggle::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  transform: translateY(-1px) rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.search-toggle.collapsed {
-  transform: rotate(-90deg);
+.search-result-page:hover .search-toggle::after {
+  border-color: var(--color-accent);
 }
 
-/* Sections container */
+.search-toggle.collapsed::after {
+  transform: translateY(0.5px) rotate(-45deg);
+}
+
+/* Sections container - smooth accordion animation */
 .search-sections {
-  display: block;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.25s ease;
+  opacity: 1;
 }
 
 .search-sections.collapsed {
-  display: none;
+  max-height: 0;
+  opacity: 0;
 }
 
 /* Section results (nested under page) */
 .search-result-section {
-  padding: 6px 16px 6px 20px;
+  padding: 7px 16px 7px 32px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
   text-decoration: none;
   display: block;
-  background: var(--color-bg-elevated);
   position: relative;
+  border-left: 2px solid var(--color-border);
+  margin-left: 16px;
+}
+
+.search-result-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--color-border);
 }
 
 .search-result-section:hover {
   background: var(--color-bg-panel);
 }
 
+.search-result-section:hover::before {
+  background: var(--color-accent);
+  opacity: 0.5;
+}
+
 .section-title {
   color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.4;
+  transition: color 0.15s ease;
 }
 
 .search-result-section:hover .section-title {
