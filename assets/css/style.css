@@ -1746,8 +1746,12 @@ section > p {
   font-size: 16px;
 }
 
-.nav-button:only-child {
+.nav-button.next:only-child {
   margin-left: auto;
+}
+
+.nav-button.prev:only-child {
+  margin-right: auto;
 }
 
 /* ===========================
