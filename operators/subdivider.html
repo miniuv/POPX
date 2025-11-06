@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POPX Docs | Magnetize</title>
-  <meta name="description" content="Magnetize operator for applying magnetic forces (repulse, attract, spin) to instances based on magnet positions.">
+  <title>POPX Docs | Subdivider</title>
+  <meta name="description" content="Subdivider generator for subdividing, extruding and rotating polygon faces based on falloff attributes.">
   <link rel="icon" type="image/png" href="../assets/images/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,25 +145,13 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Magnetize</h1>
+      <h1>Subdivider</h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Magnetize</strong> operator applies magnetic forces to each instance based on magnet positions.
-          Each magnet can repulse, attract, or spin instances around them within a specified search radius, creating dynamic force-based effects.
-        </p>
-
-        <p>
-          Magnet positions can be specified either through a second input connection or via the <strong>Magnets</strong> parameter.
-          The operator supports three force modes: <strong>Repulse</strong> (push away), <strong>Attract</strong> (pull toward), and <strong>Spin</strong> (rotate around magnets).
-        </p>
-
-        <p>
-          Effect intensity is controlled by the <strong>Search Radius</strong>, <strong>Effect Radius</strong>, and <strong>Force Strength</strong> parameters.
-          Additionally, individual magnet behavior can be customized using point attributes on the magnet input: <strong>ForceMode</strong>, <strong>ForceStrength</strong>, <strong>SpinDir</strong> (for spin direction), and <strong>PointScale</strong> (for effect radius).
-          Optional falloff-based modulation enables spatially varying magnetic effects.
+          The <strong>Subdivider</strong> divides, extrudes, and rotates polygon faces based on a <strong>Falloff Attribute</strong>, if enabled. A falloff value of <strong>1.0</strong> means that the corresponding primitive will subdivide and extrude exactly the number of times specified by the <strong>Max Subdivisions</strong> parameter. The <strong>Extrude Strength</strong> defines the peak extrusion distance, while the <strong>Falloff Exponent</strong> controls the gradual falloff of extrusion between iterations. The <strong>Inset</strong> parameter further affects the shape of each subdivided region, allowing additional control over the local geometry structure and depth.
         </p>
       </section>
 
@@ -171,33 +159,60 @@
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Magnetize Parameters -->
-        <h3 id="page-magnetize">Page: Magnetize</h3>
+        <!-- Subdivider Page -->
+        <h3 id="page-subdivider">Page: Subdivider</h3>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Group</span>
-            <span class="param-name">Group</span>
+            <span class="param-label">Max Triangles</span>
+            <span class="param-name">Maxtriangles</span>
             <span class="param-separator">–</span>
-            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+            <span class="param-description">Maximum number of triangles allowed in the output geometry.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Magnets</span>
-            <span class="param-name">Magnets</span>
+            <span class="param-label">Subdivisions</span>
+            <span class="param-name">Subdivisions</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies magnet positions when no second input is connected. Accepts POP geometry.</span>
+            <span class="param-description">Number of subdivision iterations to perform.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Display Magents</span>
-            <span class="param-name">Displaymagents</span>
+            <span class="param-label">Extrude Strength</span>
+            <span class="param-name">Extrudestrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables visual display of magnet positions in the viewport.</span>
+            <span class="param-description">Controls the peak distance of each extrusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extrusion Falloff Exponent</span>
+            <span class="param-name">Extrusionfalloffexponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls how far each extrusion goes compared to the last.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inset</span>
+            <span class="param-name">Inset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount to inset subdivided faces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Area</span>
+            <span class="param-name">Minimumarea</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum face area threshold for extrusion.</span>
           </div>
         </div>
 
@@ -206,7 +221,7 @@
             <span class="param-label">Do Falloff</span>
             <span class="param-name">Dofalloff</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables falloff-based magnetic force intensity control.</span>
+            <span class="param-description">Enables falloff-based subdivision control.</span>
           </div>
         </div>
 
@@ -215,125 +230,143 @@
             <span class="param-label">Falloff Attribute</span>
             <span class="param-name">Falloffattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies which attribute to use for falloff values that modulate magnetic force strength.</span>
+            <span class="param-description">Name of the falloff attribute to use for extrusion control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Post Subdivide</span>
+            <span class="param-name">Postsubdivide</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables additional subdivision pass after extrusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Depth</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of post-subdivision iterations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Crease Weight</span>
+            <span class="param-name">Creaseweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Determines how much sharp edges in the geometry should be preserved.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Simple Coefficients</span>
+            <span class="param-name">Simplecoeffs</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables simple coefficient computation when smoothing the interpolated points.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Force Mode</span>
-            <span class="param-name">Forcemode</span>
+            <span class="param-label">Normals Action</span>
+            <span class="param-name">Nml</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Determines the type of magnetic force: Repulse, Attract, or Spin. Can be overridden per-magnet using a ForceMode point attribute.</span>
+            <span class="param-group-description">Choose what to do regarding normals.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">repulse</span>
+              <span class="param-label">Always Compute</span>
+              <span class="param-name">alwayscompute</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attribute Class</span>
+            <span class="param-name">Attrclass</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Makes the POP operate on point attributes, vertex attributes or primitive attributes where applicable.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">attract</span>
+              <span class="param-label">Vertex</span>
+              <span class="param-name">vertex</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">spin</span>
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Normals Weighting</span>
+            <span class="param-name">Nmlweighting</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">For point normals, choose how to weight the normals of the primitives the point is a part of.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Average</span>
+              <span class="param-name">average</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Compute Normals Technique</span>
+            <span class="param-name">Compnmltech</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specify which technique to use to calculate point normals.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Loop Primitives</span>
+              <span class="param-name">loopprims</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Search Radius</span>
-            <span class="param-name">Searchradius</span>
+            <span class="param-label">Max Number of Primitives per Point</span>
+            <span class="param-name">Maxprimsperpoint</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum distance from magnets within which instances are affected by magnetic forces.</span>
+            <span class="param-description">Maximum number of primitives a point can be part of in the input geometry.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Relaxation Factor</span>
-            <span class="param-name">Relaxationfactor</span>
+            <span class="param-label">Angle</span>
+            <span class="param-name">Angle</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Controls the smoothness and damping of magnetic force application over time.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Effect Radius</span>
-            <span class="param-name">Effectradius</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Radius of influence for each magnet. Can be overridden per-magnet using a PointScale point attribute.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Force Strength</span>
-            <span class="param-name">Forcestrength</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Intensity of magnetic forces applied to instances. Can be overridden per-magnet using a ForceStrength point attribute.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Invert Spin Direction</span>
-            <span class="param-name">Invertspindirection</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reverses the spin rotation direction. Can be controlled per-magnet using a SpinDir point attribute.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Affect Rotation</span>
-            <span class="param-name">Affectrotation</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables rotation changes based on magnetic force direction.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Aim Weight</span>
-            <span class="param-name">Aimweight</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls how quickly instances rotate toward their direction of motion when Affect Rotation is enabled.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Initialize</span>
-            <span class="param-name">Initializepulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Resets the simulation state to initial conditions.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Start</span>
-            <span class="param-name">Startpulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Begins the simulation from the current state.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Play</span>
-            <span class="param-name">Play</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Toggles simulation playback on or off.</span>
+            <span class="param-description">For vertex normals, the threshold angle between faces above which the shared edge vertices don't share normals.</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Common Parameters -->
+        <!-- Common Page -->
         <h3 id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
@@ -353,29 +386,10 @@
             <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
           </div>
         </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Render Primitives</span>
-            <span class="param-name">Renderprimitives</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">SRT / RST</span>
-            <span class="param-name">Srtrst</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
-          </div>
-        </div>
       </section>
 
-      <!-- Inputs Section -->
-      <section id="inputs">
-        <h2>Inputs</h2>
+      <section>
+        <h2 id="inputs">Inputs</h2>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
@@ -383,24 +397,13 @@
             <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Input 1</span>
-            <span class="param-separator">–</span>
-            <span class="param-name">POP</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Magnets</span>
+            <span class="param-text">Geometry</span>
           </div>
         </div>
       </section>
 
-      <!-- Outputs Section -->
-      <section id="outputs">
-        <h2>Outputs</h2>
+      <section>
+        <h2 id="outputs">Outputs</h2>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
@@ -415,8 +418,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="color-modifier.html" class="nav-button prev">Color Modifier</a>
-        <a href="move-along-curve.html" class="nav-button next">Move Along Curve</a>
+        <a href="explode.html" class="nav-button prev">Explode</a>
+        <a href="aim.html" class="nav-button next">Aim</a>
       </nav>
     </main>
 
@@ -427,7 +430,7 @@
         <li><a href="#summary">Summary</a></li>
         <li><a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-magnetize">Page: Magnetize</a></li>
+            <li><a href="#page-subdivider">Page: Subdivider</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

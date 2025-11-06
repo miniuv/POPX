@@ -9,7 +9,10 @@
       "Bash(do sed -i 's/<h3>Contact & Community<\\/h3>/<h3>Content<\\/h3>/g' \"$file\")",
       "Bash(do sed -i 's/<h3>Content<\\/h3>/<h3>Contact \\& Community<\\/h3>/g' \"$file\")",
       "Bash(test:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(for file in operators/*.html)",
+      "Bash(do sed -i '/<li><a href=\"\"\\.\\.\\/operators\\/explode\\.html\"\">Explode<\\/a><\\/li>/d' \"$file\")",
+      "Bash(do sed -i '/<li><a href=\"\"\\.\\.\\/operators\\/source\\.html\"\">Source<\\/a><\\/li>/d' \"$file\")"
     ],
     "deny": [],
     "ask": []
