@@ -12,7 +12,82 @@
   }
 })();
 
+// Apply accordion states immediately (before DOMContentLoaded) to prevent flicker
+(function() {
+  const STORAGE_KEY = 'popx-accordion-state';
+
+  // Function to apply states as soon as DOM is ready
+  function applyAccordionStates() {
+    let accordionState = {};
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        accordionState = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Failed to load accordion state:', e);
+    }
+
+    // Apply to sections
+    const sections = document.querySelectorAll('.sidebar-section');
+    sections.forEach((section, index) => {
+      const sectionId = `section-${index}`;
+      if (accordionState[sectionId] === false) {
+        section.classList.add('collapsed');
+      }
+    });
+
+    // Apply to subsections
+    const subsections = document.querySelectorAll('.sidebar-subsection');
+    subsections.forEach((subsection, index) => {
+      const subsectionId = `subsection-${index}`;
+      if (accordionState[subsectionId] === false) {
+        subsection.classList.add('collapsed');
+      }
+    });
+  }
+
+  // Apply states immediately if DOM is already loaded, otherwise wait
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyAccordionStates);
+  } else {
+    applyAccordionStates();
+  }
+})();
+
+// ===========================
+// Page Transitions
+// ===========================
+function initPageTransitions() {
+  // Intercept sidebar link clicks for smooth transitions
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+  sidebarLinks.forEach(link => {
+    // Only handle same-origin links
+    if (link.hostname === window.location.hostname) {
+      link.addEventListener('click', function(e) {
+        // Don't intercept if it's a hash link (anchor)
+        if (link.hash && link.pathname === window.location.pathname) {
+          return;
+        }
+
+        e.preventDefault();
+        const targetUrl = link.href;
+
+        // Add transitioning class for fade out
+        document.body.classList.add('page-transitioning');
+
+        // Navigate after fade completes
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 60);
+      });
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  initPageTransitions();
   initMobileMenu();
   initScrollSpy();
   initSidebarState();
@@ -21,6 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
   initSidebarSwipe();
   initThemeSelector();
   initSearch();
+
+  // Fade in body after content is ready
+  document.body.classList.remove('page-transitioning');
 });
 
 // ===========================
@@ -197,13 +275,89 @@ function initScrollSpy() {
 }
 
 // ===========================
-// Sidebar State Persistence
+// Sidebar - Accordion State Management
+// ===========================
+function initSidebarAccordions() {
+  const STORAGE_KEY = 'popx-accordion-state';
+
+  // Get stored state or initialize with all sections open
+  let accordionState = {};
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      accordionState = JSON.parse(stored);
+    }
+  } catch (e) {
+    console.warn('Failed to load accordion state:', e);
+  }
+
+  // Apply stored state or default to open
+  const sections = document.querySelectorAll('.sidebar-section');
+  sections.forEach((section, index) => {
+    const sectionId = `section-${index}`;
+    const h3 = section.querySelector('h3');
+
+    if (!h3) return;
+
+    // If no stored state exists, keep all sections open (default)
+    // Otherwise, apply stored state
+    if (accordionState[sectionId] === false) {
+      section.classList.add('collapsed');
+    }
+
+    // Add click handler
+    h3.addEventListener('click', (e) => {
+      e.preventDefault();
+      section.classList.toggle('collapsed');
+
+      // Save state
+      accordionState[sectionId] = !section.classList.contains('collapsed');
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(accordionState));
+      } catch (e) {
+        console.warn('Failed to save accordion state:', e);
+      }
+    });
+  });
+
+  // Handle subsections (Generators, Modifiers, etc.)
+  const subsections = document.querySelectorAll('.sidebar-subsection');
+  subsections.forEach((subsection, index) => {
+    const subsectionId = `subsection-${index}`;
+    const h4 = subsection.querySelector('h4');
+
+    if (!h4) return;
+
+    // If no stored state exists, keep all subsections open (default)
+    // Otherwise, apply stored state
+    if (accordionState[subsectionId] === false) {
+      subsection.classList.add('collapsed');
+    }
+
+    // Add click handler
+    h4.addEventListener('click', (e) => {
+      e.preventDefault();
+      subsection.classList.toggle('collapsed');
+
+      // Save state
+      accordionState[subsectionId] = !subsection.classList.contains('collapsed');
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(accordionState));
+      } catch (e) {
+        console.warn('Failed to save accordion state:', e);
+      }
+    });
+  });
+}
+
+// ===========================
+// Sidebar - Highlight Active Link
 // ===========================
 function initSidebarState() {
-  // Highlight active page in sidebar
   const currentPath = window.location.pathname;
   const sidebarLinks = document.querySelectorAll('.sidebar a');
 
+  // Highlight active page
   sidebarLinks.forEach(link => {
     const linkPath = new URL(link.href).pathname;
     if (linkPath === currentPath) {
@@ -211,18 +365,8 @@ function initSidebarState() {
     }
   });
 
-  // Handle main sections (Guides and Operators)
-  const mainSections = document.querySelectorAll('.sidebar-main-section');
-  const operatorSubsections = document.querySelectorAll('.sidebar-main-section[data-section="operators"] .sidebar-section');
-
-  // Open all sections by default
-  mainSections.forEach(section => {
-    section.setAttribute('open', '');
-  });
-
-  operatorSubsections.forEach(section => {
-    section.setAttribute('open', '');
-  });
+  // Initialize accordions
+  initSidebarAccordions();
 }
 
 // ===========================
@@ -474,11 +618,12 @@ function initSidebarSwipe() {
 // Theme Selector
 // ===========================
 function initThemeSelector() {
+  const themeSelector = document.querySelector('.theme-selector');
   const themeButton = document.querySelector('.theme-selector-button');
   const themeDropdown = document.querySelector('.theme-selector-dropdown');
   const themeOptions = document.querySelectorAll('.theme-option');
 
-  if (!themeButton || !themeDropdown) return;
+  if (!themeButton || !themeDropdown || !themeSelector) return;
 
   // Load saved theme or default to dark
   const savedTheme = localStorage.getItem('popx-theme') || 'dark';
@@ -489,12 +634,14 @@ function initThemeSelector() {
   themeButton.addEventListener('click', function(e) {
     e.stopPropagation();
     themeDropdown.classList.toggle('active');
+    themeSelector.classList.toggle('active');
   });
 
   // Close dropdown when clicking outside
   document.addEventListener('click', function(e) {
     if (!themeButton.contains(e.target) && !themeDropdown.contains(e.target)) {
       themeDropdown.classList.remove('active');
+      themeSelector.classList.remove('active');
     }
   });
 
@@ -506,6 +653,7 @@ function initThemeSelector() {
       updateThemeButton(theme);
       localStorage.setItem('popx-theme', theme);
       themeDropdown.classList.remove('active');
+      themeSelector.classList.remove('active');
 
       // Update selected state
       themeOptions.forEach(opt => opt.classList.remove('selected'));
@@ -535,11 +683,10 @@ function updateThemeButton(theme) {
 
   const config = themeConfig[theme] || themeConfig['dark'];
 
-  // Update button HTML with icon, name, and dropdown arrow
+  // Update button HTML with icon and name
   themeButton.innerHTML = `
     <span class="theme-icon">${config.icon}</span>
     <span>${config.name}</span>
-    <span class="theme-dropdown-arrow">▾</span>
   `;
 }
 
@@ -630,17 +777,99 @@ const searchIndex = [
     category: 'Modifiers',
     sections: [
       { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Noise', anchor: '#page-noise' },
+      { title: 'Page: Transform', anchor: '#page-transform' },
+      { title: 'Page: Affect', anchor: '#page-affect' },
+      { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
   },
   {
-    title: 'Force Modifier',
-    path: 'operators/force-modifier.html',
+    title: 'Aim',
+    path: 'operators/aim.html',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
       { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: General', anchor: '#page-general' },
+      { title: 'Page: Aim', anchor: '#page-aim' },
+      { title: 'Page: Up', anchor: '#page-up' },
+      { title: 'Page: Orientation', anchor: '#page-orientation' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Color Modifier',
+    path: 'operators/color-modifier.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Color', anchor: '#page-color' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Magnetize',
+    path: 'operators/magnetize.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Magnetize', anchor: '#page-magnetize' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Randomize',
+    path: 'operators/randomize.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: General', anchor: '#page-general' },
+      { title: 'Page: Position', anchor: '#page-position' },
+      { title: 'Page: Rotation', anchor: '#page-rotation' },
+      { title: 'Page: Scale', anchor: '#page-scale' },
+      { title: 'Page: Color', anchor: '#page-color' },
+      { title: 'Page: Other', anchor: '#page-other' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Relax',
+    path: 'operators/relax.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Relax', anchor: '#page-relax' },
+      { title: 'Page: Constraint Geometry', anchor: '#page-constraint-geometry' },
+      { title: 'Page: Constraint Volume', anchor: '#page-constraint-volume' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Spring Modifier',
+    path: 'operators/spring-modifier.html',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Spring', anchor: '#page-spring' },
+      { title: 'Page: Falloff', anchor: '#page-falloff' },
+      { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]

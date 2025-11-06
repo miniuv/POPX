@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in pivot.html randomize.html relax.html spring-modifier.html move-along-mesh.html move-along-curve.html)",
+      "Bash(do sed -i '/<details class=\"\"sidebar-section sidebar-main-section\"\" data-section=\"\"contact\"\">/,/<\\/details>/{s|<li><a href=\"\"mailto:your-email@example.com\"\">Email</a></li>|<li><a href=\"\"../contact.html\"\">Contact Us</a></li>|; s|<li><a href=\"\"https://patreon.com/yourpage\"\" target=\"\"_blank\"\" rel=\"\"noopener\"\">Patreon</a></li>|<li><a href=\"\"../community.html\"\">Community</a></li>|; s|<li><a href=\"\"https://discord.gg/yourinvite\"\" target=\"\"_blank\"\" rel=\"\"noopener\"\">Discord</a></li>||;}' \"$file\")",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(for file in pivot.html randomize.html relax.html spring-modifier.html move-along-mesh.html move-along-curve.html aim.html color-modifier.html magnetize.html noise-modifier.html transform-modifier.html)",
+      "Bash(do sed -i 's/<h3>Contact & Community<\\/h3>/<h3>Content<\\/h3>/g' \"$file\")",
+      "Bash(do sed -i 's/<h3>Content<\\/h3>/<h3>Contact \\& Community<\\/h3>/g' \"$file\")",
+      "Bash(test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POPX Docs – Getting Started</title>
+  <title>POPX Docs | Getting Started</title>
   <meta name="description" content="Learn about POPX - a comprehensive family of TouchDesigner operators for advanced particle and instance manipulation.">
   <link rel="icon" type="image/png" href="popx_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,16 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
   <!-- Top Navigation Bar -->
   <header class="top-bar">
     <a href="index.html" class="top-bar-logo">
@@ -43,59 +53,92 @@
 
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
-      <details class="sidebar-section sidebar-main-section" data-section="guides">
-        <summary>Guides</summary>
-        <ul>
-          <li><a href="getting-started.html" class="active">Getting Started with POPX</a></li>
-          <li><a href="installation.html">Installation</a></li>
-          <li><a href="tutorials.html">Tutorials</a></li>
-        </ul>
-      </details>
-
-      <details class="sidebar-section sidebar-main-section" data-section="operators">
-        <summary>Operators</summary>
-
-        <details class="sidebar-section category-generators">
-          <summary>Generators</summary>
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
           <ul>
-            <li><a href="operators/scatter.html">Scatter</a></li>
-            <li><a href="operators/source.html">Source</a></li>
+            <li><a href="getting-started.html">Getting Started</a></li>
+            <li><a href="installation.html">Installation</a></li>
+            <li><a href="tutorials.html">Tutorials</a></li>
           </ul>
-        </details>
+        </div>
+      </div>
 
-        <details class="sidebar-section category-falloffs">
-          <summary>Falloffs</summary>
-          <ul>
-            <li><a href="operators/falloff-field.html">Falloff Field</a></li>
-            <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
-          </ul>
-        </details>
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
 
-        <details class="sidebar-section category-modifiers">
-          <summary>Modifiers</summary>
-          <ul>
-            <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
-            <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
-            <li><a href="operators/force-modifier.html">Force Modifier</a></li>
-          </ul>
-        </details>
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="operators/scatter.html">Scatter</a></li>
+                <li><a href="operators/source.html">Source</a></li>
+              </ul>
+            </div>
+          </div>
 
-        <details class="sidebar-section category-tools">
-          <summary>Tools</summary>
-          <ul>
-            <li><a href="operators/voxelize.html">Voxelize</a></li>
-            <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
-          </ul>
-        </details>
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="operators/falloff-field.html">Falloff Field</a></li>
+                <li><a href="operators/radial-falloff.html">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
 
-        <details class="sidebar-section category-simulations">
-          <summary>Simulations</summary>
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="operators/aim.html">Aim</a></li>
+                <li><a href="operators/color-modifier.html">Color Modifier</a></li>
+                <li><a href="operators/magnetize.html">Magnetize</a></li>
+                <li><a href="operators/move-along-curve.html">Move Along Curve</a></li>
+                <li><a href="operators/move-along-mesh.html">Move Along Mesh</a></li>
+                <li><a href="operators/noise-modifier.html">Noise Modifier</a></li>
+                <li><a href="operators/pivot.html">Pivot</a></li>
+                <li><a href="operators/randomize.html">Randomize</a></li>
+                <li><a href="operators/relax.html">Relax</a></li>
+                <li><a href="operators/spring-modifier.html">Spring Modifier</a></li>
+                <li><a href="operators/transform-modifier.html">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="operators/attribute-manager.html">Attribute Manager</a></li>
+                <li><a href="operators/voxelize.html">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
+                <li><a href="operators/sph-solver.html">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
           <ul>
-            <li><a href="operators/flip-solver.html">FLIP Solver</a></li>
-            <li><a href="operators/sph-solver.html">SPH Solver</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="community.html">Community</a></li>
           </ul>
-        </details>
-      </details>
+        </div>
+      </div>
     </aside>
 
     <!-- Main Content -->
@@ -117,7 +160,10 @@
           <div class="operator-card" id="popx-geometry-card">
             <h3>POPX Geometry</h3>
             <p>
-              A packed structure where each piece of geometry is represented by a single point containing all transform attributes — position, rotation, scale, and pivot. This compact format allows transformations to operate directly on the GPU without manually constructing attributes or computing transformation matrices — it handles everything for you.
+              A packed data structure where each piece of geometry is represented by a single point containing all its transform attributes — position, rotation, scale, and pivot. This compact format enables efficient GPU-based transformations, allowing modifiers to operate directly on the POPX Geometry without manually building attributes or computing transformation matrices.
+            </p>
+            <p style="margin-top: 12px;">
+              In essence, it's a unified representation that handles transformation logic automatically, keeping everything lightweight, procedural, and GPU-optimized.
             </p>
           </div>
 
@@ -125,7 +171,10 @@
           <div class="operator-card" id="generators">
             <h3>Generators</h3>
             <p>
-              Generate instances for the POPX system, either by creating new geometry, converting existing geometry to POPX instances, or producing general geometry structures.
+              Generate POPX Geometry or procedural new geometries. Generators can also convert existing geometry into POPX Geometry, like the Convert Generator. For example, the Explode Generator creates POPX Geometry, while the Subdivider Generator builds procedural geometry structures.
+            </p>
+            <p style="margin-top: 12px;">
+              There are two modes for generating POPX Geometry: using TouchDesigner's built-in instancing, or generating actual geometry represented by the POPX Geometry points and their instance attributes.
             </p>
           </div>
 
@@ -175,7 +224,7 @@
             <a href="installation.html" style="color: var(--color-accent); text-decoration: none;">Installation</a>
           </h3>
           <p style="color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">
-            Learn how to install POPX operators into your TouchDesigner environment and verify that everything is working correctly.
+            Learn how to install POPX into your TouchDesigner environment and verify that everything is working correctly.
           </p>
 
           <h3 style="color: var(--color-text); font-size: 18px; margin-bottom: var(--spacing-sm);">

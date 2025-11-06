@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POPX Docs | Transform Modifier</title>
-  <meta name="description" content="Applies translation, rotation, and scaling transformations to POPX particles and instances.">
+  <title>POPX Docs | Aim</title>
+  <meta name="description" content="Aim operator for orienting instances towards specific targets using aim and up vectors.">
   <link rel="icon" type="image/png" href="../popx_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,22 +143,29 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1 class="operator-title">Transform Modifier</h1>
+      <h1>Aim</h1>
 
-      <section>
-        <h2 id="summary">Summary</h2>
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
         <p>
-          The Transform Modifier is one of the most common operators you'll use with POPX. It works similarly to the Transform POP, but instead of transforming an entire geometry, it applies transformations directly to each instance.
+          The <strong>Aim</strong> operator orients instances towards a particular position in space, towards an object's position, or towards individual positions per-instance.
+          Instances will have their aim axis aligned to point directly at the target position, with rotation controlled by a specified up vector or up position.
         </p>
+
         <p>
-          You can choose to apply transformations in either world or local space, depending on how you want your instances to behave. If the local axes of your instances aren't aligned as expected, use the Reorient operator to generate new local axes for each instance before applying transformations.
+          You can define aim targets using three methods: <strong>Aim Vector</strong>, <strong>Aim at Object</strong>, or <strong>Aim at Positions</strong>.
+          Similarly, the up direction can be defined using <strong>Up Vector</strong>, <strong>Up at Object</strong>, or <strong>Up at Positions</strong>.
+          Optional falloff-based attenuation enables spatially varying aim effects.
         </p>
       </section>
 
-      <section>
-        <h2 id="parameters">Parameters</h2>
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
 
-        <h3 id="page-transform">Page: Transform</h3>
+        <!-- General Parameters -->
+        <h3 id="page-general">Page: General</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -171,19 +178,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Local Space</span>
-            <span class="param-name">Localspace</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Apply the transform in local or world space.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Do Falloff</span>
             <span class="param-name">Dofalloff</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables falloff influence for the transform.</span>
+            <span class="param-description">Enables falloff-based aim intensity control.</span>
           </div>
         </div>
 
@@ -192,209 +190,329 @@
             <span class="param-label">Falloff Attribute</span>
             <span class="param-name">Falloffattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Selects the attribute that controls falloff strength.</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that attenuate aim rotation strength.</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Translate</span>
-            <span class="param-name">T</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Translate the instances along the X, Y, and Z axes.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Tx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Ty</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Tz</span>
-            </div>
-          </div>
-        </div>
+        <hr class="section-divider">
+
+        <!-- Aim Parameters -->
+        <h3 id="page-aim">Page: Aim</h3>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Rotate</span>
-            <span class="param-name">R</span>
+            <span class="param-label">Aim Method</span>
+            <span class="param-name">Aimmethod</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Rotate the instances around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+            <span class="param-group-description">Determines how aim targets are specified: Aim Vector, Aim at Object, or Aim at Positions.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Rx</span>
+              <span class="param-label">vector</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Ry</span>
+              <span class="param-label">object</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Rz</span>
+              <span class="param-label">points</span>
             </div>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Scale</span>
-            <span class="param-name">S</span>
+            <span class="param-label">Aim Vector</span>
+            <span class="param-name">Aimvector</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
+            <span class="param-group-description">Direction vector for aim orientation when Aim Method is set to Aim Vector.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sx</span>
+              <span class="param-label">Aim Vector</span>
+              <span class="param-name">Aimvectorx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sy</span>
+              <span class="param-label">Aim Vector</span>
+              <span class="param-name">Aimvectory</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sz</span>
+              <span class="param-label">Aim Vector</span>
+              <span class="param-name">Aimvectorz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Aim Position</span>
+            <span class="param-name">Aimposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Target position for aim orientation when Aim Method is set to Aim at Object.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Aim Position</span>
+              <span class="param-name">Aimpositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Aim Position</span>
+              <span class="param-name">Aimpositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Aim Position</span>
+              <span class="param-name">Aimpositionz</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Uniform Scale</span>
-            <span class="param-name">Scale</span>
+            <span class="param-label">Display Aim Guide</span>
+            <span class="param-name">Displayguideaim</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies a uniform scale factor in all axes.</span>
+            <span class="param-description">Visualizes aim target positions in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Guide Scale</span>
+            <span class="param-name">Guidescaleaim</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the display size of aim guide visualization.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Pivot</span>
-            <span class="param-name">P</span>
+            <span class="param-label">Color</span>
+            <span class="param-name">Coloraim</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">The pivot position for the transform rotates and scales.</span>
+            <span class="param-group-description">Color of the aim guide visualization.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Px</span>
+              <span class="param-label">Color</span>
+              <span class="param-name">Coloraimx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Py</span>
+              <span class="param-label">Color</span>
+              <span class="param-name">Coloraimy</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Pz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Rotate Order</span>
-            <span class="param-name">Rord</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">xyz</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">xzy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">yxz</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">yzx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">zxy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">zyx</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Rotate Mode</span>
-            <span class="param-name">Rmode</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Chooses between adding or setting rotation.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">add</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">set</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Scale Mode</span>
-            <span class="param-name">Smode</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Defines whether scale multiplies or replaces.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">mult</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">replace</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Pivot Mode</span>
-            <span class="param-name">Pmode</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Adds or sets pivot adjustments directly.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">add</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">set</span>
+              <span class="param-label">Color</span>
+              <span class="param-name">Coloraimz</span>
             </div>
           </div>
         </div>
 
         <hr class="section-divider">
 
+        <!-- Up Parameters -->
+        <h3 id="page-up">Page: Up</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Up Method</span>
+            <span class="param-name">Upmethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how up direction is specified: Up Vector, Up at Object, or Up at Positions.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">vector</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">object</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">points</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Up Vector</span>
+            <span class="param-name">Upvector</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Direction vector for up orientation when Up Method is set to Up Vector.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Up Vector</span>
+              <span class="param-name">Upvectorx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Vector</span>
+              <span class="param-name">Upvectory</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Vector</span>
+              <span class="param-name">Upvectorz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Up Position</span>
+            <span class="param-name">Upposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Target position for up orientation when Up Method is set to Up at Object.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Up Position</span>
+              <span class="param-name">Uppositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Position</span>
+              <span class="param-name">Uppositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Position</span>
+              <span class="param-name">Uppositionz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Aim Guide</span>
+            <span class="param-name">Displayguideup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes up target positions in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Guide Scale</span>
+            <span class="param-name">Guidescaleup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the display size of up guide visualization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Colorup</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color of the up guide visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorupx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorupy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorupz</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Orientation Parameters -->
+        <h3 id="page-orientation">Page: Orientation</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Aim Axis</span>
+            <span class="param-name">Aimaxis</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specifies which local axis should be used as the aim direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">x</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">y</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">z</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Up Axis</span>
+            <span class="param-name">Upaxis</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specifies which local axis should be used as the up direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">x</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">y</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">z</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert Aim</span>
+            <span class="param-name">Invertaim</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the aim direction by 180 degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert Up</span>
+            <span class="param-name">Invertup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the up direction by 180 degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constrain Around Up</span>
+            <span class="param-name">Constrainaroundup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Limits rotation to occur only around the up axis, preventing roll.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
         <h3 id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
@@ -434,8 +552,9 @@
         </div>
       </section>
 
-      <section>
-        <h2 id="inputs">Inputs</h2>
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
@@ -446,10 +565,31 @@
             <span class="param-text">POPX Geometry</span>
           </div>
         </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Aim Target</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Up Target</span>
+          </div>
+        </div>
       </section>
 
-      <section>
-        <h2 id="outputs">Outputs</h2>
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
@@ -464,8 +604,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="spring-modifier.html" class="nav-button prev">Spring Modifier</a>
-        <a href="../contact.html" class="nav-button next">Contact</a>
+        <a href="../tutorials.html" class="nav-button prev">Tutorials</a>
+        <a href="color-modifier.html" class="nav-button next">Color Modifier</a>
       </nav>
     </main>
 
@@ -476,7 +616,10 @@
         <li><a href="#summary">Summary</a></li>
         <li><a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-transform">Page: Transform</a></li>
+            <li><a href="#page-general">Page: General</a></li>
+            <li><a href="#page-aim">Page: Aim</a></li>
+            <li><a href="#page-up">Page: Up</a></li>
+            <li><a href="#page-orientation">Page: Orientation</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>
