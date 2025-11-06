@@ -1924,9 +1924,15 @@ pre code {
 
   .param-group-header .param-label,
   .param-group-header .param-name,
-  .param-group-header .param-separator,
-  .param-group-header .param-toggle {
+  .param-group-header .param-separator {
     display: inline;
+  }
+
+  .param-group-header .param-toggle {
+    display: inline-flex;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
   }
 
   .param-group-description {
