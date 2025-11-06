@@ -1350,6 +1350,16 @@ pre code {
   margin-bottom: 12px;
 }
 
+.parameter-item-indented {
+  margin-left: 24px;
+  padding-left: 12px;
+  border-left: 4px solid var(--color-accent);
+}
+
+section > p {
+  font-size: 0.85em;
+}
+
 .param-header {
   margin-bottom: 0;
   display: grid;
