@@ -1571,15 +1571,15 @@ pre code {
   transition: all 0.2s ease;
 }
 
-/* .operator-card:hover {
+.operator-card:hover {
   background-color: #0d0d0d;
-  border-color: var(--color-accent);
+  border-color: #2a2a2a;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
-} */
+}
 
 .operator-card h3 {
-  color: var(--color-text);
+  color: var(--color-accent);
   font-size: 18px;
   font-weight: 600;
   margin-top: 0;

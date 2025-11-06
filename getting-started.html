@@ -239,7 +239,7 @@
         </div>
 
         <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
-          In this example, two falloffs are multiplied together: a spherical falloff and a linear falloff. The color gradient on each instance visualizes the combined falloff amount. The linear falloff itself animates by translating along the x-axis, creating a sweeping effect as it moves through the spherical region. The transform modifier then uses this combined falloff to drive the scaling of instances. This demonstrates how falloffs can be layered and combined to control modifiers.
+          In this workflow example, the Instancer Generator creates a uniform grid of box instances. Two distinct Falloff Operators—a spherical falloff and a linear falloff—are multiplied together to produce a combined falloff value. The color gradient applied to each instance provides visual feedback of the resulting falloff intensity. The linear falloff animates by translating along the X-axis, creating a dynamic sweeping effect as it passes through the spherical falloff region. A Transform Modifier uses this combined falloff to procedurally drive the scale of each instance, demonstrating how multiple falloffs can be layered and composed for precise modifier control.
         </p>
 
         <div style="margin: var(--spacing-lg) 0;">
@@ -257,7 +257,7 @@
         </div>
 
         <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
-          The Explode generator converts standard geometry into POPX Geometry by separating it into individual primitives (each sphere primitive becomes an instance) with their own transform attributes. A Transform Modifier then translates each instance along their local Z axis while rotating them around the Z axis, creating an exploding outward motion. The Visualize Frame tool places an axis at the pivot position of each instance to visualize its local orientation frame, making the transformation behavior clear.
+          In this workflow example, the Explode Generator converts standard TouchDesigner geometry into POPX Geometry by decomposing it into individual primitives. Each primitive (in this case, sphere primitives) becomes an independent instance with its own transform attributes—position, rotation, and scale. A Transform Modifier then applies transformations in local space: translating each instance along its local Z-axis while simultaneously rotating it around the Z-axis, creating an outward motion. The Visualize Frame Tool displays coordinate axes at each instance's pivot point, providing clear visual feedback of the local orientation frame.
         </p>
 
         <div style="margin: var(--spacing-lg) 0;">
@@ -274,7 +274,7 @@
         </div>
 
         <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
-          POPX operators work seamlessly with standard POP geometry, not just POPX Geometry. In this example, the Spring Modifier is applied directly to a Grid POP, creating dynamic spring-based motion. This demonstrates the flexibility of POPX operators to enhance any POP workflow without requiring conversion to POPX Geometry format.
+          In this workflow example, POPX Operators demonstrate full compatibility with standard TouchDesigner POP geometry, not exclusively with POPX Geometry. The Spring Modifier is applied directly to a Grid POP operator, generating spring-based motion and physically influenced transformations without requiring any format conversion. This illustrates the architectural flexibility of POPX Operators—they seamlessly integrate into existing POP or geometry-based workflows and can enhance procedural transformations, animation, and motion systems without needing conversion into the POPX Geometry format.
         </p>
 
         <div style="margin: var(--spacing-lg) 0;">
