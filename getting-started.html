@@ -151,6 +151,9 @@
         <p>
           <strong>POPX</strong> is a custom family of operators that extends TouchDesigner's POPs (Point Operators). It introduces a GPU-accelerated framework for generating, transforming, and simulating geometry in real time. While optimized for its packed POPX Geometry system, all operators work seamlessly with any standard POP geometry.
         </p>
+        <p style="margin-top: var(--spacing-md);">
+          POPX operators are divided into 5 main types: <strong>Generators</strong> for creating geometry, <strong>Falloffs</strong> for defining influence regions, <strong>Modifiers</strong> for transforming instances, <strong>Tools</strong> for utility operations, and <strong>Simulations</strong> for physics-based dynamics.
+        </p>
       </section>
 
       <!-- SECTION B: Operator Types Overview -->
@@ -224,7 +227,65 @@
         </div>
       </section>
 
-      <!-- SECTION C: Getting Started -->
+      <!-- SECTION C: Basic Workflows -->
+      <section>
+        <h2 id="workflows">Basic Workflows</h2>
+        <p>
+          POPX operators are designed to work together in a modular chain. A typical workflow starts with a Generator, applies Falloffs for influence control, and uses Modifiers to transform the geometry.
+        </p>
+
+        <div style="margin-top: var(--spacing-xl);">
+          <span style="display: inline-block; padding: 4px 12px; background: var(--color-border); color: var(--color-text-muted); font-size: 12px; font-weight: 500; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Workflow 1: Combining Falloffs</span>
+        </div>
+
+        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
+          In this example, two falloffs are multiplied together: a spherical falloff and a linear falloff. The color gradient on each instance visualizes the combined falloff amount. The linear falloff itself animates by translating along the x-axis, creating a sweeping effect as it moves through the spherical region. The transform modifier then uses this combined falloff to drive the scaling of instances. This demonstrates how falloffs can be layered and combined to control modifiers.
+        </p>
+
+        <div style="margin: var(--spacing-lg) 0;">
+          <video autoplay loop muted playsinline style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--color-border);">
+            <source src="workflow1.mp4" type="video/mp4">
+            <source src="workflow1.mov" type="video/quicktime">
+            <img src="workflow1.gif" alt="Basic POPX workflow showing box1, instancer, shape_falloff, and transform_modifier" style="max-width: 100%; height: auto;">
+          </video>
+        </div>
+
+        <hr style="margin: var(--spacing-xl) 0; border: none; border-top: 1px solid var(--color-border);">
+
+        <div style="margin-top: var(--spacing-xl);">
+          <span style="display: inline-block; padding: 4px 12px; background: var(--color-border); color: var(--color-text-muted); font-size: 12px; font-weight: 500; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Workflow 2: Exploding Geometry</span>
+        </div>
+
+        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
+          The Explode generator converts standard geometry into POPX Geometry by separating it into individual primitives (each sphere primitive becomes an instance) with their own transform attributes. A Transform Modifier then translates each instance along their local Z axis while rotating them around the Z axis, creating an exploding outward motion. The Visualize Frame tool places an axis at the pivot position of each instance to visualize its local orientation frame, making the transformation behavior clear.
+        </p>
+
+        <div style="margin: var(--spacing-lg) 0;">
+          <video autoplay loop muted playsinline style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--color-border);">
+            <source src="workflow2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <hr style="margin: var(--spacing-xl) 0; border: none; border-top: 1px solid var(--color-border);">
+
+        <div style="margin-top: var(--spacing-xl);">
+          <span style="display: inline-block; padding: 4px 12px; background: var(--color-border); color: var(--color-text-muted); font-size: 12px; font-weight: 500; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Workflow 3: Spring Modifier on Standard POP Geometry</span>
+        </div>
+
+        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
+          POPX operators work seamlessly with standard POP geometry, not just POPX Geometry. In this example, the Spring Modifier is applied directly to a Grid POP, creating dynamic spring-based motion. This demonstrates the flexibility of POPX operators to enhance any POP workflow without requiring conversion to POPX Geometry format.
+        </p>
+
+        <div style="margin: var(--spacing-lg) 0;">
+          <video autoplay loop muted playsinline style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--color-border);">
+            <source src="workflow3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <!-- SECTION D: Getting Started -->
       <section>
         <h2 id="getting-started">Getting Started</h2>
         <p>
@@ -264,6 +325,7 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#popx-overview">POPX Overview</a></li>
+        <li><a href="#workflows">Basic Workflows</a></li>
         <li><a href="#getting-started">Getting Started</a></li>
       </ul>
     </aside>
