@@ -182,7 +182,10 @@
           <div class="operator-card" id="falloffs">
             <h3>Falloffs</h3>
             <p>
-              Define spatial regions of influence, using the <strong>popxFalloff</strong> attribute to control how strongly other operators affect instances.
+              Define spatial regions of influence and use the Falloff Attribute to control how strongly other operators affect instances. This attribute provides localized weighting across the POPX Geometry, allowing smooth transitions, blending, and gradient-based control over modifiers and effects.
+            </p>
+            <p style="margin-top: 12px;">
+              Falloffs can be combined, layered, or inverted to create complex influence patterns that drive the behavior of other POPX Operators.
             </p>
           </div>
 
@@ -190,7 +193,10 @@
           <div class="operator-card" id="modifiers">
             <h3>Modifiers</h3>
             <p>
-              Adjust and transform geometry by modifying position, rotation, scale, pivot, and other custom attributes such as color.
+              Modifiers adjust and transform POPX Geometry by modifying attributes such as position, rotation, scale, pivot, and other custom parameters like color or user-defined data. They act as transformation layers that can be stacked, combined, or driven by Falloff Attributes to create dynamic, procedural motion and deformation effects across instances.
+            </p>
+            <p style="margin-top: 12px;">
+              Each Modifier operates directly on the GPU, ensuring real-time responsiveness and seamless integration within the POPX workflow.
             </p>
           </div>
 
@@ -198,7 +204,10 @@
           <div class="operator-card" id="tools">
             <h3>Tools</h3>
             <p>
-              Provide additional utilities for visualization, orientation, geometry management, and general workflow assistance.
+              Tools are utility Operators that provide general-purpose functionality for geometry management, visualization, and workflow assistance — such as deleting, merging, rendering, or applying transformations. Common examples include Apply Attributes (similar to Copy to Points), visualization tools for previewing local frames or falloffs, and Unpack for converting POPX Geometry into actual geometry.
+            </p>
+            <p style="margin-top: 12px;">
+              Orientation and alignment utilities like Reorient also fall under this category, providing flexible control over geometry presentation and management.
             </p>
           </div>
 
@@ -206,7 +215,10 @@
           <div class="operator-card" id="simulations">
             <h3>Simulations</h3>
             <p>
-              A stand-alone part of the POPX ecosystem focused on time-based physical simulations such as fluid, particle, and growth systems.
+              A stand-alone part of the POPX ecosystem focused on time-based physical simulations such as fluid, particle, and growth systems. Simulations operate independently from other POPX Operators, providing specialized solvers for dynamic, physics-based motion and behavior.
+            </p>
+            <p style="margin-top: 12px;">
+              These tools enable complex real-time effects like fluid dynamics, particle interactions, and organic growth patterns within the POPX framework.
             </p>
           </div>
         </div>
