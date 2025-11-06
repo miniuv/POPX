@@ -80,7 +80,7 @@ function initPageTransitions() {
         // Navigate after fade completes
         setTimeout(() => {
           window.location.href = targetUrl;
-        }, 60);
+        }, 80);
       });
     }
   });

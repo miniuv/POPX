@@ -103,7 +103,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   opacity: 1;
-  transition: opacity 0.06s ease-in-out;
+  transition: opacity 0.08s ease-in-out;
 }
 
 body.page-transitioning {
