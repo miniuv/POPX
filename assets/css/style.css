@@ -322,6 +322,13 @@ pre code {
   display: block;
 }
 
+/* Ensure logo images never appear without size constraints */
+.logo-light,
+.logo-dark {
+  max-width: 100%;
+  height: auto;
+}
+
 .top-bar-logo span {
   color: var(--color-accent);
   transition: opacity 0.2s ease;
