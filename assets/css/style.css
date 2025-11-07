@@ -258,9 +258,16 @@ pre code {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-md);
   z-index: 98;
   gap: var(--spacing-sm);
+}
+
+.top-bar-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .top-bar-logo {
@@ -275,8 +282,17 @@ pre code {
   position: relative;
 }
 
+.logo-tagline {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 .top-bar-logo img {
-  height: 50px;
+  height: 60px;
   width: auto;
   display: block;
   transition: opacity 0.2s ease;
