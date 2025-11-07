@@ -1648,19 +1648,19 @@ section > p {
 }
 
 .operator-card {
-  background-color: #0a0a0a;
-  border: 1px solid #1a1a1a;
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 28px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: all 0.2s ease;
 }
 
 .operator-card:hover {
-  background-color: #0d0d0d;
-  border-color: #2a2a2a;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
 
