@@ -12,48 +12,40 @@
   }
 })();
 
-// Apply accordion states immediately (before DOMContentLoaded) to prevent flicker
-(function() {
-  const STORAGE_KEY = 'popx-accordion-state';
-
-  // Function to apply states as soon as DOM is ready
-  function applyAccordionStates() {
-    let accordionState = {};
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        accordionState = JSON.parse(stored);
-      }
-    } catch (e) {
-      console.warn('Failed to load accordion state:', e);
-    }
-
-    // Apply to sections
-    const sections = document.querySelectorAll('.sidebar-section');
-    sections.forEach((section, index) => {
-      const sectionId = `section-${index}`;
-      if (accordionState[sectionId] === false) {
-        section.classList.add('collapsed');
-      }
-    });
-
-    // Apply to subsections
-    const subsections = document.querySelectorAll('.sidebar-subsection');
-    subsections.forEach((subsection, index) => {
-      const subsectionId = `subsection-${index}`;
-      if (accordionState[subsectionId] === false) {
-        subsection.classList.add('collapsed');
-      }
-    });
-  }
-
-  // Apply states immediately if DOM is already loaded, otherwise wait
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyAccordionStates);
-  } else {
-    applyAccordionStates();
-  }
-})();
+// Accordion states disabled - sidebar is now static (always open)
+// (function() {
+//   const STORAGE_KEY = 'popx-accordion-state';
+//   function applyAccordionStates() {
+//     let accordionState = {};
+//     try {
+//       const stored = localStorage.getItem(STORAGE_KEY);
+//       if (stored) {
+//         accordionState = JSON.parse(stored);
+//       }
+//     } catch (e) {
+//       console.warn('Failed to load accordion state:', e);
+//     }
+//     const sections = document.querySelectorAll('.sidebar-section');
+//     sections.forEach((section, index) => {
+//       const sectionId = `section-${index}`;
+//       if (accordionState[sectionId] === false) {
+//         section.classList.add('collapsed');
+//       }
+//     });
+//     const subsections = document.querySelectorAll('.sidebar-subsection');
+//     subsections.forEach((subsection, index) => {
+//       const subsectionId = `subsection-${index}`;
+//       if (accordionState[subsectionId] === false) {
+//         subsection.classList.add('collapsed');
+//       }
+//     });
+//   }
+//   if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', applyAccordionStates);
+//   } else {
+//     applyAccordionStates();
+//   }
+// })();
 
 // ===========================
 // Page Transitions
@@ -365,8 +357,8 @@ function initSidebarState() {
     }
   });
 
-  // Initialize accordions
-  initSidebarAccordions();
+  // Accordion behavior removed - sidebar is now static (always open)
+  // initSidebarAccordions();
 }
 
 // ===========================
@@ -696,26 +688,68 @@ function updateThemeButton(theme) {
 // Helper function to get correct path based on current location
 function getSearchPath(path) {
   const currentPath = window.location.pathname;
-  const isInSubfolder = currentPath.includes('/operators/');
 
-  // If we're in a subfolder and the path doesn't start with 'operators/', add '../'
-  if (isInSubfolder && !path.startsWith('operators/')) {
-    return '../' + path;
+  // If we're at root (index.html or just /), paths are relative to root
+  if (currentPath === '/' || currentPath.endsWith('index.html') && !currentPath.includes('/docs/')) {
+    return path;
   }
-  // If we're in root and path starts with 'operators/', keep as is
-  // If we're in operators/ subfolder and path starts with 'operators/', remove it and use just filename
-  if (isInSubfolder && path.startsWith('operators/')) {
-    return path.replace('operators/', '');
+
+  // Count how many levels deep we are in docs/
+  const pathParts = currentPath.split('/').filter(p => p && p !== 'index.html');
+  const docsIndex = pathParts.indexOf('docs');
+
+  if (docsIndex >= 0) {
+    // We're inside docs/ - count levels after docs/
+    const levelsDeep = pathParts.length - docsIndex - 1;
+    const backPath = '../'.repeat(levelsDeep);
+    return backPath + path;
   }
 
   return path;
 }
 
 const searchIndex = [
-  // Operators with sections
+  // Guides
+  {
+    title: 'Getting Started',
+    path: 'docs/guides/getting-started/',
+    type: 'Guide',
+    category: 'Guides',
+    sections: []
+  },
+  {
+    title: 'Installation',
+    path: 'docs/guides/installation/',
+    type: 'Guide',
+    category: 'Guides',
+    sections: []
+  },
+  {
+    title: 'Tutorials',
+    path: 'docs/guides/tutorials/',
+    type: 'Guide',
+    category: 'Guides',
+    sections: []
+  },
+  // Contact
+  {
+    title: 'Contact Us',
+    path: 'docs/contact/contact-us/',
+    type: 'Contact',
+    category: 'Contact',
+    sections: []
+  },
+  {
+    title: 'Community',
+    path: 'docs/contact/community/',
+    type: 'Contact',
+    category: 'Contact',
+    sections: []
+  },
+  // Operators - Generators
   {
     title: 'Convert',
-    path: 'operators/convert.html',
+    path: 'docs/operators/generators/convert/',
     type: 'Operator',
     category: 'Generators',
     sections: [
@@ -728,7 +762,7 @@ const searchIndex = [
   },
   {
     title: 'Explode',
-    path: 'operators/explode.html',
+    path: 'docs/operators/generators/explode/',
     type: 'Operator',
     category: 'Generators',
     sections: [
@@ -742,7 +776,7 @@ const searchIndex = [
   },
   {
     title: 'Instancer',
-    path: 'operators/instancer.html',
+    path: 'docs/operators/generators/instancer/',
     type: 'Operator',
     category: 'Generators',
     sections: [
@@ -757,7 +791,7 @@ const searchIndex = [
   },
   {
     title: 'Subdivider',
-    path: 'operators/subdivider.html',
+    path: 'docs/operators/generators/subdivider/',
     type: 'Operator',
     category: 'Generators',
     sections: [
@@ -770,7 +804,7 @@ const searchIndex = [
   },
   {
     title: 'Sweep',
-    path: 'operators/sweep.html',
+    path: 'docs/operators/generators/sweep/',
     type: 'Operator',
     category: 'Generators',
     sections: [
@@ -807,7 +841,7 @@ const searchIndex = [
   },
   {
     title: 'Falloff Field',
-    path: 'operators/falloff-field.html',
+    path: 'docs/operators/falloffs/falloff-field/',
     type: 'Operator',
     category: 'Falloffs',
     sections: [
@@ -818,7 +852,7 @@ const searchIndex = [
   },
   {
     title: 'Radial Falloff',
-    path: 'operators/radial-falloff.html',
+    path: 'docs/operators/falloffs/radial-falloff/',
     type: 'Operator',
     category: 'Falloffs',
     sections: [
@@ -829,7 +863,7 @@ const searchIndex = [
   },
   {
     title: 'Transform Modifier',
-    path: 'operators/transform-modifier.html',
+    path: 'docs/operators/modifiers/transform-modifier/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -842,7 +876,7 @@ const searchIndex = [
   },
   {
     title: 'Noise Modifier',
-    path: 'operators/noise-modifier.html',
+    path: 'docs/operators/modifiers/noise-modifier/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -857,7 +891,7 @@ const searchIndex = [
   },
   {
     title: 'Aim',
-    path: 'operators/aim.html',
+    path: 'docs/operators/modifiers/aim/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -873,7 +907,7 @@ const searchIndex = [
   },
   {
     title: 'Color Modifier',
-    path: 'operators/color-modifier.html',
+    path: 'docs/operators/modifiers/color-modifier/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -886,7 +920,7 @@ const searchIndex = [
   },
   {
     title: 'Magnetize',
-    path: 'operators/magnetize.html',
+    path: 'docs/operators/modifiers/magnetize/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -899,7 +933,7 @@ const searchIndex = [
   },
   {
     title: 'Move Along Curve',
-    path: 'operators/move-along-curve.html',
+    path: 'docs/operators/modifiers/move-along-curve/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -914,7 +948,7 @@ const searchIndex = [
   },
   {
     title: 'Move Along Mesh',
-    path: 'operators/move-along-mesh.html',
+    path: 'docs/operators/modifiers/move-along-mesh/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -929,7 +963,7 @@ const searchIndex = [
   },
   {
     title: 'Pivot',
-    path: 'operators/pivot.html',
+    path: 'docs/operators/modifiers/pivot/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -942,7 +976,7 @@ const searchIndex = [
   },
   {
     title: 'Randomize',
-    path: 'operators/randomize.html',
+    path: 'docs/operators/modifiers/randomize/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -960,7 +994,7 @@ const searchIndex = [
   },
   {
     title: 'Relax',
-    path: 'operators/relax.html',
+    path: 'docs/operators/modifiers/relax/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -975,7 +1009,7 @@ const searchIndex = [
   },
   {
     title: 'Spring Modifier',
-    path: 'operators/spring-modifier.html',
+    path: 'docs/operators/modifiers/spring-modifier/',
     type: 'Operator',
     category: 'Modifiers',
     sections: [
@@ -989,7 +1023,7 @@ const searchIndex = [
   },
   {
     title: 'Voxelize',
-    path: 'operators/voxelize.html',
+    path: 'docs/operators/tools/voxelize/',
     type: 'Operator',
     category: 'Tools',
     sections: [
