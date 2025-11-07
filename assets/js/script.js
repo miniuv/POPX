@@ -826,50 +826,6 @@ const searchIndex = [
     ]
   },
   {
-    title: 'Scatter',
-    path: 'operators/scatter.html',
-    type: 'Operator',
-    category: 'Generators',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Source',
-    path: 'operators/source.html',
-    type: 'Operator',
-    category: 'Generators',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Falloff Field',
-    path: 'docs/operators/falloffs/falloff-field/',
-    type: 'Operator',
-    category: 'Falloffs',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Radial Falloff',
-    path: 'docs/operators/falloffs/radial-falloff/',
-    type: 'Operator',
-    category: 'Falloffs',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
     title: 'Transform Modifier',
     path: 'docs/operators/modifiers/transform-modifier/',
     type: 'Operator',
@@ -1028,77 +984,7 @@ const searchIndex = [
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
-  },
-  {
-    title: 'Voxelize',
-    path: 'docs/operators/tools/voxelize/',
-    type: 'Operator',
-    category: 'Tools',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Attribute Manager',
-    path: 'operators/attribute-manager.html',
-    type: 'Operator',
-    category: 'Tools',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'FLIP Solver',
-    path: 'operators/flip-solver.html',
-    type: 'Operator',
-    category: 'Simulations',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'SPH Solver',
-    path: 'operators/sph-solver.html',
-    type: 'Operator',
-    category: 'Simulations',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-
-  // Pages
-  {
-    title: 'Getting Started with POPX',
-    path: 'getting-started.html',
-    type: 'Guide',
-    sections: [
-      { title: 'POPX Overview', anchor: '#popx-overview' },
-      { title: 'Getting Started', anchor: '#getting-started' }
-    ]
-  },
-  {
-    title: 'Installation',
-    path: 'installation.html',
-    type: 'Guide'
-  },
-  {
-    title: 'Tutorials',
-    path: 'tutorials.html',
-    type: 'Guide'
-  },
-  {
-    title: 'Contact & Community',
-    path: 'contact.html',
-    type: 'Guide'
-  },
+  }
 ];
 
 function initSearch() {
