@@ -730,7 +730,11 @@ const searchIndex = [
     path: 'docs/guides/getting-started/',
     type: 'Guide',
     category: 'Guides',
-    sections: []
+    sections: [
+      { title: 'What is POPX?', anchor: '#popx-overview' },
+      { title: 'Basic Workflows', anchor: '#workflows' },
+      { title: 'Getting Started', anchor: '#getting-started' }
+    ]
   },
   {
     title: 'Installation',
@@ -1121,7 +1125,6 @@ function performSearch(query, resultsDiv) {
   resultsDiv.innerHTML = limitedResults.map(result => {
     const item = result.item;
     const titleWithHighlight = highlightText(item.title, query);
-    const pathDisplay = item.category ? `${item.category} / ${item.type}` : item.type;
     const correctPath = getSearchPath(item.path);
 
     // Build sections HTML - always show sections (no accordion)
@@ -1151,7 +1154,6 @@ function performSearch(query, resultsDiv) {
         <a href="${correctPath}" class="search-result-item search-result-page">
           <div class="search-result-page-content">
             <div class="search-result-title">${titleWithHighlight}</div>
-            <div class="search-result-path">${pathDisplay}</div>
           </div>
         </a>
         ${hasSections ? `<div class="search-sections">${sectionsHTML}</div>` : ''}
