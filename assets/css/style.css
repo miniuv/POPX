@@ -289,8 +289,6 @@ pre code {
   opacity: 0.6;
   font-weight: 400;
   white-space: nowrap;
-  align-self: flex-end;
-  margin-bottom: 4px;
 }
 
 .top-bar-logo img {
