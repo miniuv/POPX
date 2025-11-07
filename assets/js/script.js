@@ -710,6 +710,13 @@ function getSearchPath(path) {
     // We're inside docs/ - count levels after docs/
     const levelsDeep = pathParts.length - docsIndex - 1;
     const backPath = '../'.repeat(levelsDeep);
+
+    // If path starts with 'docs/', remove it and just use the relative path
+    if (path.startsWith('docs/')) {
+      const pathWithoutDocs = path.substring(5); // Remove 'docs/'
+      return backPath + pathWithoutDocs;
+    }
+
     return backPath + path;
   }
 
