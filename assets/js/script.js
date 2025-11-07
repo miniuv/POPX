@@ -12,40 +12,48 @@
   }
 })();
 
-// Accordion states disabled - sidebar is now static (always open)
-// (function() {
-//   const STORAGE_KEY = 'popx-accordion-state';
-//   function applyAccordionStates() {
-//     let accordionState = {};
-//     try {
-//       const stored = localStorage.getItem(STORAGE_KEY);
-//       if (stored) {
-//         accordionState = JSON.parse(stored);
-//       }
-//     } catch (e) {
-//       console.warn('Failed to load accordion state:', e);
-//     }
-//     const sections = document.querySelectorAll('.sidebar-section');
-//     sections.forEach((section, index) => {
-//       const sectionId = `section-${index}`;
-//       if (accordionState[sectionId] === false) {
-//         section.classList.add('collapsed');
-//       }
-//     });
-//     const subsections = document.querySelectorAll('.sidebar-subsection');
-//     subsections.forEach((subsection, index) => {
-//       const subsectionId = `subsection-${index}`;
-//       if (accordionState[subsectionId] === false) {
-//         subsection.classList.add('collapsed');
-//       }
-//     });
-//   }
-//   if (document.readyState === 'loading') {
-//     document.addEventListener('DOMContentLoaded', applyAccordionStates);
-//   } else {
-//     applyAccordionStates();
-//   }
-// })();
+// Apply accordion states immediately (before DOMContentLoaded) to prevent flicker
+(function() {
+  const STORAGE_KEY = 'popx-accordion-state';
+
+  // Function to apply states as soon as DOM is ready
+  function applyAccordionStates() {
+    let accordionState = {};
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        accordionState = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Failed to load accordion state:', e);
+    }
+
+    // Apply to sections
+    const sections = document.querySelectorAll('.sidebar-section');
+    sections.forEach((section, index) => {
+      const sectionId = `section-${index}`;
+      if (accordionState[sectionId] === false) {
+        section.classList.add('collapsed');
+      }
+    });
+
+    // Apply to subsections
+    const subsections = document.querySelectorAll('.sidebar-subsection');
+    subsections.forEach((subsection, index) => {
+      const subsectionId = `subsection-${index}`;
+      if (accordionState[subsectionId] === false) {
+        subsection.classList.add('collapsed');
+      }
+    });
+  }
+
+  // Apply states immediately if DOM is already loaded, otherwise wait
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyAccordionStates);
+  } else {
+    applyAccordionStates();
+  }
+})();
 
 // ===========================
 // Page Transitions
@@ -357,8 +365,8 @@ function initSidebarState() {
     }
   });
 
-  // Accordion behavior removed - sidebar is now static (always open)
-  // initSidebarAccordions();
+  // Initialize accordions for sidebar
+  initSidebarAccordions();
 }
 
 // ===========================
@@ -1181,14 +1189,11 @@ function initSearch() {
 
   // Close results when clicking on any search result link
   document.addEventListener('click', function(e) {
-    const resultLink = e.target.closest('.search-result-item, .search-result-section, .search-result-subsection');
+    const resultLink = e.target.closest('.search-result-item, .search-result-section');
     if (resultLink && searchContainer.contains(resultLink)) {
-      // Only close if it's not the toggle button
-      if (!e.target.classList.contains('search-toggle')) {
-        resultsDiv.classList.remove('active');
-        searchInput.value = '';
-        clearButton.classList.remove('active');
-      }
+      resultsDiv.classList.remove('active');
+      searchInput.value = '';
+      clearButton.classList.remove('active');
     }
   });
 }
@@ -1226,7 +1231,7 @@ function performSearch(query, resultsDiv) {
     const pathDisplay = item.category ? `${item.category} / ${item.type}` : item.type;
     const correctPath = getSearchPath(item.path);
 
-    // Build sections HTML
+    // Build sections HTML - always show sections (no accordion)
     let sectionsHTML = '';
 
     // If page matches, show ALL sections of that page
@@ -1234,7 +1239,7 @@ function performSearch(query, resultsDiv) {
     const sectionsToShow = result.pageMatch && item.sections ? item.sections : result.matchingSections;
 
     if (sectionsToShow.length > 0) {
-      sectionsHTML = sectionsToShow.map((section, index) => {
+      sectionsHTML = sectionsToShow.map((section) => {
         const sectionTitle = highlightText(section.title, query);
         const sectionPath = correctPath + section.anchor;
 
@@ -1246,8 +1251,7 @@ function performSearch(query, resultsDiv) {
       }).join('');
     }
 
-    const hasToggle = sectionsToShow.length > 0;
-    const toggleButton = hasToggle ? '<span class="search-toggle collapsed" onclick="toggleSearchSections(event)"></span>' : '';
+    const hasSections = sectionsToShow.length > 0;
 
     return `
       <div class="search-result-group">
@@ -1256,9 +1260,8 @@ function performSearch(query, resultsDiv) {
             <div class="search-result-title">${titleWithHighlight}</div>
             <div class="search-result-path">${pathDisplay}</div>
           </div>
-          ${toggleButton}
         </a>
-        ${hasToggle ? `<div class="search-sections collapsed">${sectionsHTML}</div>` : ''}
+        ${hasSections ? `<div class="search-sections">${sectionsHTML}</div>` : ''}
       </div>
     `;
   }).join('');
