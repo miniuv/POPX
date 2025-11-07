@@ -272,10 +272,37 @@ pre code {
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  position: relative;
 }
 
-.top-bar-logo:hover {
-  color: var(--color-text);
+.top-bar-logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.top-bar-logo:hover img {
+  opacity: 0.85;
+}
+
+/* Theme-specific logo visibility */
+[data-theme="dark"] .top-bar-logo .logo-dark,
+[data-theme="auto"] .top-bar-logo .logo-dark {
+  display: none;
+}
+
+[data-theme="dark"] .top-bar-logo .logo-light,
+[data-theme="auto"] .top-bar-logo .logo-light {
+  display: block;
+}
+
+[data-theme="light"] .top-bar-logo .logo-light {
+  display: none;
+}
+
+[data-theme="light"] .top-bar-logo .logo-dark {
+  display: block;
 }
 
 .top-bar-logo span {
