@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Move Along Curve</title>
+  <meta name="description" content="Move Along Curve operator for attaching instances to curves and animating them along curve paths using Line Strip POP.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Move Along Curve</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Move Along Curve</strong> operator attaches instances to a curve and animates them along the path using Line Strip POP.
+          This operator works in two phases similar to Move Along Mesh: first, it attaches instances to the curve based on proximity, distribution, or attributes; second, it moves instances along the path either procedurally or through a solver.
+        </p>
+
+        <p>
+          There are several presets available to set up your instances to move as a group or to distribute themselves evenly along the path.
+          The operator includes options for wrapping from the end of the path to the start, enabling easy looping motion.
+        </p>
+
+        <p>
+          The Attach step allows you to attach instances based on their proximity to the curve or based on an even distribution. You can even attach to multiple curves per-instance via a point attribute.
+          The Offset controls determine how much of the original distance between each instance's starting position and the attachment position is maintained.
+        </p>
+
+        <p>
+          The Animation step allows you to either procedurally move instances along the curve based on the <strong>Goal</strong> parameter, or push the instances per timestep in a solver.
+          Solver mode additionally allows you to create trails that emit from each instance.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Move Along Curve Parameters -->
+        <h3 id="page-move-along-curve">Page: Move Along Curve</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Curve to Attach To</span>
+            <span class="param-name">Curve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP for the curve to attach instances to when no second input is connected.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Curve</span>
+            <span class="param-name">Displaycurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes the curve in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for curve visualization when Display Curve is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Mode</span>
+            <span class="param-name">Mode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Simple mode (procedural animation) and Solver mode (per-timestep solver with trail support).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">solver</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the simulation state to initial conditions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Begins the simulation from the current state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles simulation playback on or off when in Solver mode.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Advances the simulation by one frame when in Solver mode.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Attach Parameters -->
+        <h3 id="page-attach">Page: Attach</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lock to Curve</span>
+            <span class="param-name">Locktocurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Locks the initial attachment positions so they don't need to be recalculated every frame, improving performance. Instances still move along the curve based on their locked attachment points.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reattach to Curve</span>
+            <span class="param-name">Reattachtocurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Recomputes attachment points for all instances.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Curve Select Mode</span>
+            <span class="param-name">Curveselectmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how to select which curve primitive to attach to: by Primitive Index, Use Nearest curve, or Distribute across curves.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">primi</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">nearest</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">dist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Primitive Index</span>
+            <span class="param-name">Primitiveindex</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which primitive index to attach to when Curve Select Mode is set to Primitive Index.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attach Method</span>
+            <span class="param-name">Attachmethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how instances are attached to the selected curve: Nearest Point, Distribute evenly, or use an Attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">nearest</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">dist</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">attr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Search Distance</span>
+            <span class="param-name">Searchdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance for finding nearest attachment points when using Nearest Point attach method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attach Attribute</span>
+            <span class="param-name">Attachattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for determining attachment positions when Attach Method is set to Attribute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Snap Centroid to Curve Start</span>
+            <span class="param-name">Snaptocentroid</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Moves the centroid of all instances to the start of the curve before attaching.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Orient Snap</span>
+            <span class="param-name">Doorientsnap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies orientation alignment when snapping centroid to curve start.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Normal Axis</span>
+            <span class="param-name">Normalaxis</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Defines the normal axis for orientation snapping.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Normal Axis</span>
+              <span class="param-name">Normalaxisx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Normal Axis</span>
+              <span class="param-name">Normalaxisy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Normal Axis</span>
+              <span class="param-name">Normalaxisz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Up Axis</span>
+            <span class="param-name">Upaxis</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Defines the up axis for orientation snapping.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Up Axis</span>
+              <span class="param-name">Upaxisx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Axis</span>
+              <span class="param-name">Upaxisy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Up Axis</span>
+              <span class="param-name">Upaxisz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Offset</span>
+            <span class="param-name">Visualizeoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Displays lines showing the offset between instances and their attachment points.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fetch Offsets Lines</span>
+            <span class="param-name">Fetchoffsetslines</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Creates a select POP with the selected offsets lines of the instances for visualization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maintain Offset</span>
+            <span class="param-name">Maintainoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount for maintaining the original offset distance from the curve. 0 means instances stick to the curve, 1 means they maintain their original distance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Offset Ramp</span>
+            <span class="param-name">Offsetramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal offset ramp editor for customizing offset behavior along the curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Offset Ramp</span>
+            <span class="param-name">Resetoffsetramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the offset ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Offset</span>
+            <span class="param-name">Ramptopoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for offset control. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maintain Orient Offset</span>
+            <span class="param-name">Maintainorientoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount for maintaining the original orientation offset from the curve orientation. 0 means instances adopt the curve orientation, 1 means they maintain their original rotation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Orient Offset Ramp</span>
+            <span class="param-name">Orientoffsetramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal orientation offset ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Orient Offset Ramp</span>
+            <span class="param-name">Resetorientoffsetramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the orientation offset ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Orient</span>
+            <span class="param-name">Ramptoporient</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for orientation offset. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reorient Input Curve</span>
+            <span class="param-name">Reorientinputcurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables reorientation of the input curve for better tangent and normal calculation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert Tangent</span>
+            <span class="param-name">Inverttangent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the tangent direction of the curve by 180 degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Custom First Tangent</span>
+            <span class="param-name">Customfirsttangent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables specification of a custom tangent vector at the start of the curve.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">First Tangent</span>
+            <span class="param-name">Firsttangent</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Custom tangent vector for the first point of the curve.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangentx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangenty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangentz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Twist Amount</span>
+            <span class="param-name">Twistamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of twist to apply to the curve orientation in degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Twist Ramp</span>
+            <span class="param-name">Twistramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal twist ramp editor for modulating twist along the curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Twist Ramp</span>
+            <span class="param-name">Resettwistramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the twist ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Twist Curve</span>
+            <span class="param-name">Ramptoptwistcurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for twist control. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Twist Per Curve</span>
+            <span class="param-name">Twistpercurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies twist ramp per individual curve primitive when using multiple curves.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Resample Method</span>
+            <span class="param-name">Resamplemethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for resampling the curve: None, Divisions per Line Strip, or Distance between Points.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">linestrip</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">dist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Divisions</span>
+            <span class="param-name">Resampledivs</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of divisions per line strip when using Divisions per Line Strip resample method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Distance</span>
+            <span class="param-name">Resamplemaxdist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance between resampled points when using Distance between Points method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Number of Vertices</span>
+            <span class="param-name">Maxverts</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of vertices allowed when resampling by distance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Tries for Binary Search</span>
+            <span class="param-name">Maxtries</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum iterations for binary search algorithm during resampling.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Animate Parameters -->
+        <h3 id="page-animate">Page: Animate</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based modulation of animation effects.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Affects Speed</span>
+            <span class="param-name">Falloffaffectsspeed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allows falloff values to modulate instance movement speed.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Affects Rotation</span>
+            <span class="param-name">Falloffaffectsrotation</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allows falloff values to modulate instance rotation alignment.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that modulate animation intensity.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Goal Type</span>
+            <span class="param-name">Goaltype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how goal position is calculated: Goal U (parametric) or Arc Length (distance-based).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">goalu</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">arclen</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Goal</span>
+            <span class="param-name">Goal</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Target position along the curve for procedural animation in Simple mode. 0 is the start, 1 is the end of the curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Speed</span>
+            <span class="param-name">Speed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global speed multiplier for instance movement along the curve in Solver mode.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Random Speed</span>
+            <span class="param-name">Randomspeed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of random variation applied to each instance's speed.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seedspeed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for speed randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reverse</span>
+            <span class="param-name">Reverse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the direction of movement along the curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Align to Curve</span>
+            <span class="param-name">Aligntocurve</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Aligns instance orientation to follow the curve tangent direction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Wrap</span>
+            <span class="param-name">Wrap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables wrapping from the end of the curve back to the start for continuous looping motion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Goal Attributes</span>
+            <span class="param-name">Outputgoalattributes</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs goal position attributes for each instance when enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Twist Amount</span>
+            <span class="param-name">Twistamountanimae</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Additional twist rotation applied during animation in degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Twist Ramp</span>
+            <span class="param-name">Twistrampanimate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal twist ramp editor for animation twist modulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Twist Ramp</span>
+            <span class="param-name">Resettwistrampanimate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the animation twist ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Twist</span>
+            <span class="param-name">Ramptoptwist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for animation twist control. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale by Goal</span>
+            <span class="param-name">Scalebygoal</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables scale modulation based on goal position along the curve.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Remap Scale</span>
+            <span class="param-name">Remapscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Remaps the output scale values from the ramp to this range.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Remap Scale</span>
+              <span class="param-name">Remapscalex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Remap Scale</span>
+              <span class="param-name">Remapscaley</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Scale Ramp</span>
+            <span class="param-name">Scaleramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal scale ramp editor for creating custom scale curves based on goal position.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Scale Ramp</span>
+            <span class="param-name">Resetscaleramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the scale ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Scale</span>
+            <span class="param-name">Ramptopscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for scale control. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Acceleration Ramp</span>
+            <span class="param-name">Accramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal acceleration ramp editor for modulating speed along the curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Acceleration Ramp</span>
+            <span class="param-name">Resetaccramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the acceleration ramp to default values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP Acceleration</span>
+            <span class="param-name">Ramptopacc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for acceleration control. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Curve to Attach To</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../magnetize/" class="nav-button prev">Magnetize</a>
+        <a href="../move-along-mesh/" class="nav-button next">Move Along Mesh</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-move-along-curve">Page: Move Along Curve</a></li>
+            <li><a href="#page-attach">Page: Attach</a></li>
+            <li><a href="#page-animate">Page: Animate</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

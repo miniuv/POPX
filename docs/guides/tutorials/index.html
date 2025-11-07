@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Tutorials</title>
+  <meta name="description" content="Step-by-step tutorials for learning POPX operators in TouchDesigner.">
+  <link rel="icon" type="image/png" href="../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../getting-started/">Getting Started</a></li>
+            <li><a href="../installation/">Installation</a></li>
+            <li><a href="../tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/generators/convert/">Convert</a></li>
+                <li><a href="../../operators/generators/explode/">Explode</a></li>
+                <li><a href="../../operators/generators/instancer/">Instancer</a></li>
+                <li><a href="../../operators/generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../operators/generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../operators/falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/modifiers/aim/">Aim</a></li>
+                <li><a href="../../operators/modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../operators/modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../operators/modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../operators/modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../operators/modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../operators/modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../operators/modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../operators/modifiers/relax/">Relax</a></li>
+                <li><a href="../../operators/modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../operators/modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../operators/tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../operators/simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Tutorials</h1>
+      <p style="font-size: 18px; color: var(--color-text-muted); margin-top: var(--spacing-lg);">
+        Coming soon.
+      </p>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../installation/" class="nav-button prev">Installation</a>
+        <a href="../../operators/generators/convert/" class="nav-button next">Convert</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../assets/js/script.js"></script>
+</body>
+</html>

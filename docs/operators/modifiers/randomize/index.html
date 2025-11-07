@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Randomize</title>
+  <meta name="description" content="Randomize operator for adding randomness to instance transforms and attributes.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Randomize</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Randomize</strong> operator adds randomness to instance transforms including position, rotation, and scale.
+          Each randomization parameter can be controlled independently with custom seed values, min/max ranges, and step increments.
+        </p>
+
+        <p>
+          You can also randomize the color attribute and custom float attributes.
+          The existing falloff attribute, if enabled, will affect the amount of randomness applied, enabling spatially varying random effects.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- General Parameters -->
+        <h3 id="page-general">Page: General</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Local Space</span>
+            <span class="param-name">Localspace</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies randomization in local space when enabled, or world space when disabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based modulation of the randomization effect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that modulate the randomization strength.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Position Parameters -->
+        <h3 id="page-position">Page: Position</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Position</span>
+            <span class="param-name">Posrand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables position randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Posseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for position randomization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Min Value</span>
+            <span class="param-name">Posminval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum random offset per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Posminvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Posminvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Posminvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Posmaxval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum random offset per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Posmaxvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Posmaxvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Posmaxvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Posstep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Quantizes random values to multiples of this step size.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Rotation Parameters -->
+        <h3 id="page-rotation">Page: Rotation</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Orientation</span>
+            <span class="param-name">Rotrand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables rotation randomization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Mode</span>
+            <span class="param-name">Rmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Add and Set modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Rotseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for rotation randomization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Min Value</span>
+            <span class="param-name">Rotminval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum random rotation per axis in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Rotminvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Rotminvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Rotminvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Rotmaxval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum random rotation per axis in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Rotmaxvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Rotmaxvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Rotmaxvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotation Multiplier</span>
+            <span class="param-name">Rotmult</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplies the final random rotation values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Rotstep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Quantizes random rotation values to multiples of this step size in degrees.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the rotation order for applying random rotations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zyx</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Scale Parameters -->
+        <h3 id="page-scale">Page: Scale</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Scale</span>
+            <span class="param-name">Scalerand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables per-axis scale randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Scaleseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for scale randomization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Min Value</span>
+            <span class="param-name">Scaleminval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum random scale per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Scaleminvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Scaleminvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Min Value</span>
+              <span class="param-name">Scaleminvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Scalemaxval</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum random scale per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Scalemaxvalx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Scalemaxvaly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Max Value</span>
+              <span class="param-name">Scalemaxvalz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Scalestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Quantizes random scale values to multiples of this step size.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Uniform Scale</span>
+            <span class="param-name">Uscalerand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables uniform scale randomization across all axes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Uscaleseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for uniform scale randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Min Value</span>
+            <span class="param-name">Uscaleminval</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum random uniform scale value.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Uscalemaxval</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum random uniform scale value.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Uscalestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Quantizes random uniform scale values to multiples of this step size.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale Mode</span>
+            <span class="param-name">Usmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Multiply and Replace modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">mult</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">replace</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Color Parameters -->
+        <h3 id="page-color">Page: Color</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Color</span>
+            <span class="param-name">Colorrand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables color randomization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color Mode</span>
+            <span class="param-name">Colormode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Set, Add, and Multiply modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">mult</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Colorseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for color randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Map from Low</span>
+            <span class="param-name">Fromlow</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Lower bound of the input random range for color mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Map from High</span>
+            <span class="param-name">Fromhigh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Upper bound of the input random range for color mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Map to Low</span>
+            <span class="param-name">Tolow</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Lower bound of the output color range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Map to High</span>
+            <span class="param-name">Tohigh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Upper bound of the output color range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color Ramp</span>
+            <span class="param-name">Colorramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables color ramp for randomization instead of direct random values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Ramp</span>
+            <span class="param-name">Openramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the internal ramp editor for customizing the color gradient.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Ramp</span>
+            <span class="param-name">Resetramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the internal ramp to default gradient values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to an external Ramp TOP for color palette. When specified, overrides the internal ramp editor.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Other Parameters -->
+        <h3 id="page-other">Page: Other</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Randomize Other</span>
+            <span class="param-name">Otherrand</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables randomization of a custom float attribute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute (Float)</span>
+            <span class="param-name">Attribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which float attribute to randomize.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Otherseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for attribute randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Min Value</span>
+            <span class="param-name">Otherminval</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum random attribute value.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Othermaxval</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum random attribute value.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how random values are combined with existing attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">sub</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">mult</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">div</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">screen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">overlay</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">max</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">min</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Swap Operation Order</span>
+            <span class="param-name">Swaporder</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the order of operands in the combine operation.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../pivot/" class="nav-button prev">Pivot</a>
+        <a href="../relax/" class="nav-button next">Relax</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-general">Page: General</a></li>
+            <li><a href="#page-position">Page: Position</a></li>
+            <li><a href="#page-rotation">Page: Rotation</a></li>
+            <li><a href="#page-scale">Page: Scale</a></li>
+            <li><a href="#page-color">Page: Color</a></li>
+            <li><a href="#page-other">Page: Other</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

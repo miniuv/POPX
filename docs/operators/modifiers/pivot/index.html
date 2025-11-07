@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Pivot</title>
+  <meta name="description" content="Pivot operator for adjusting instance pivot points relative to bounding boxes or custom positions.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Pivot</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Pivot</strong> operator adjusts the pivot points of instances relative to their individual bounding boxes.
+          This operator allows you to move pivots either as a transformation of the instance itself, or as an invisible pivot-only adjustment.
+        </p>
+
+        <p>
+          You can use this operator to ensure that the pivots of objects of different sizes and shapes are all scaling or rotating from the same relative positions.
+          This is particularly useful when you need consistent transformation behavior across heterogeneous instance collections.
+        </p>
+
+        <p>
+          The operator supports multiple modes: <strong>Center Pivot</strong> (centers the pivot), <strong>Align to BBox</strong> (aligns to bounding box sides), <strong>Shift Pivot</strong> (offsets by a specific amount), <strong>Set Pivot (Local)</strong> (sets an explicit local-space position), and <strong>Set Pivot (World)</strong> (sets an explicit world-space position).
+          Optional falloff-based modulation enables spatially varying pivot adjustments.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Pivot Parameters -->
+        <h3 id="page-pivot">Page: Pivot</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based modulation of pivot adjustments.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that modulate pivot adjustment intensity.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Mode</span>
+            <span class="param-name">Mode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how the pivot is adjusted: Center Pivot, Align to BBox, Shift Pivot, Set Pivot (Local), or Set Pivot (World).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">center</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">bbox</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">shift</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">setlocal</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">setworld</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pivot Only</span>
+            <span class="param-name">Pivotonly</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, adjusts only the pivot point without transforming the instance geometry itself.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Alignment Side</span>
+            <span class="param-name">Alignmentside</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specifies which side of the bounding box to align the pivot to when Mode is set to Align to BBox.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">xm</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">xp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">ym</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zm</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Local Space</span>
+            <span class="param-name">Localspace</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, pivot adjustments are calculated in local space relative to each instance's orientation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Shift Amount</span>
+            <span class="param-name">Shiftamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Offset amount for pivot position when Mode is set to Shift Pivot.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Shift Amount</span>
+              <span class="param-name">Shiftamountx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Shift Amount</span>
+              <span class="param-name">Shiftamounty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Shift Amount</span>
+              <span class="param-name">Shiftamountz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">Pivot</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Explicit pivot position when Mode is set to Set Pivot (Local) or Set Pivot (World).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pivotx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pivoty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pivotz</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../noise-modifier/" class="nav-button prev">Noise Modifier</a>
+        <a href="../randomize/" class="nav-button next">Randomize</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-pivot">Page: Pivot</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

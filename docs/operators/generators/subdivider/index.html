@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Subdivider</title>
+  <meta name="description" content="Subdivider generator for subdividing, extruding and rotating polygon faces based on falloff attributes.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../convert/">Convert</a></li>
+                <li><a href="../explode/">Explode</a></li>
+                <li><a href="../instancer/">Instancer</a></li>
+                <li><a href="../subdivider/">Subdivider</a></li>
+                <li><a href="../sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../modifiers/aim/">Aim</a></li>
+                <li><a href="../../modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../modifiers/relax/">Relax</a></li>
+                <li><a href="../../modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Subdivider</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Subdivider</strong> divides, extrudes, and rotates polygon faces based on a <strong>Falloff Attribute</strong>, if enabled. A falloff value of <strong>1.0</strong> means that the corresponding primitive will subdivide and extrude exactly the number of times specified by the <strong>Max Subdivisions</strong> parameter. The <strong>Extrude Strength</strong> defines the peak extrusion distance, while the <strong>Falloff Exponent</strong> controls the gradual falloff of extrusion between iterations. The <strong>Inset</strong> parameter further affects the shape of each subdivided region, allowing additional control over the local geometry structure and depth.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Subdivider Page -->
+        <h3 id="page-subdivider">Page: Subdivider</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Triangles</span>
+            <span class="param-name">Maxtriangles</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of triangles allowed in the output geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Subdivisions</span>
+            <span class="param-name">Subdivisions</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of subdivision iterations to perform.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extrude Strength</span>
+            <span class="param-name">Extrudestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the peak distance of each extrusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extrusion Falloff Exponent</span>
+            <span class="param-name">Extrusionfalloffexponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls how far each extrusion goes compared to the last.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inset</span>
+            <span class="param-name">Inset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount to inset subdivided faces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Area</span>
+            <span class="param-name">Minimumarea</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum face area threshold for extrusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based subdivision control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the falloff attribute to use for extrusion control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Post Subdivide</span>
+            <span class="param-name">Postsubdivide</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables additional subdivision pass after extrusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Depth</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of post-subdivision iterations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Crease Weight</span>
+            <span class="param-name">Creaseweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Determines how much sharp edges in the geometry should be preserved.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Simple Coefficients</span>
+            <span class="param-name">Simplecoeffs</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables simple coefficient computation when smoothing the interpolated points.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Normals Action</span>
+            <span class="param-name">Nml</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Choose what to do regarding normals.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Always Compute</span>
+              <span class="param-name">alwayscompute</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attribute Class</span>
+            <span class="param-name">Attrclass</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Makes the POP operate on point attributes, vertex attributes or primitive attributes where applicable.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Vertex</span>
+              <span class="param-name">vertex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Normals Weighting</span>
+            <span class="param-name">Nmlweighting</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">For point normals, choose how to weight the normals of the primitives the point is a part of.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Average</span>
+              <span class="param-name">average</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Compute Normals Technique</span>
+            <span class="param-name">Compnmltech</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specify which technique to use to calculate point normals.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Loop Primitives</span>
+              <span class="param-name">loopprims</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Number of Primitives per Point</span>
+            <span class="param-name">Maxprimsperpoint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of primitives a point can be part of in the input geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Angle</span>
+            <span class="param-name">Angle</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">For vertex normals, the threshold angle between faces above which the shared edge vertices don't share normals.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="inputs">Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../instancer/" class="nav-button prev">Instancer</a>
+        <a href="../sweep/" class="nav-button next">Sweep</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-subdivider">Page: Subdivider</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

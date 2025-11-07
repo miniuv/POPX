@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Spring Modifier</title>
+  <meta name="description" content="Spring Modifier operator for applying spring physics to position, rotation, scale, and custom float attributes.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Spring Modifier</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Spring Modifier</strong> applies spring physics to each instance, creating bouncy, elastic motion effects.
+          It can affect position, rotation, scale, or custom float attributes, simulating realistic spring behavior with configurable mass, spring constant, and damping.
+        </p>
+
+        <p>
+          You can enable spring physics independently for <strong>Position</strong>, <strong>Rotation</strong>, and <strong>Scale</strong>, or apply it to a custom float attribute by enabling <strong>Other</strong>.
+          The spring behavior is controlled by the <strong>Mass</strong>, <strong>Spring Constant</strong>, and <strong>Damping Coefficient</strong> parameters.
+        </p>
+
+        <p>
+          The effect can be attenuated using a <strong>Falloff Attribute</strong>, and you can override the global mass parameter with a per-instance <strong>Mass Attribute</strong> for more granular control.
+          This enables spatially varying spring effects where different instances respond differently to the same spring forces.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Spring Parameters -->
+        <h3 id="page-spring">Page: Spring</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based attenuation of spring effects.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that attenuate spring intensity.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Position</span>
+            <span class="param-name">Position</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies spring physics to instance position.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotation</span>
+            <span class="param-name">Rotation</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies spring physics to instance rotation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies spring physics to instance scale.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Other</span>
+            <span class="param-name">Other</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables spring physics for a custom float attribute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute (Float)</span>
+            <span class="param-name">Attribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which float attribute to apply spring physics to when Other is enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Mass Attribute</span>
+            <span class="param-name">Usemassattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uses a per-instance mass attribute instead of the global Mass parameter.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Mass Attribute</span>
+            <span class="param-name">Massattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for per-instance mass values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Mass</span>
+            <span class="param-name">Mass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Mass value used in spring physics calculations. Higher mass results in slower response to spring forces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Spring Constant</span>
+            <span class="param-name">Springconst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Stiffness of the spring. Higher values create tighter, faster-responding springs.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Damping Coefficient</span>
+            <span class="param-name">Dampingcoef</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls how quickly spring motion decays. Values closer to 1 result in less oscillation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the spring simulation state to initial conditions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Begins the spring simulation from the current state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles spring simulation playback on or off.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Falloff Parameters -->
+        <h3 id="page-falloff">Page: Falloff</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes falloff values as colors for debugging and setup purposes.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the color ramp used for falloff visualization when Preview Falloff is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the custom ramp editor for creating custom falloff visualization gradients.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the custom ramp to default gradient values.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../relax/" class="nav-button prev">Relax</a>
+        <a href="../transform-modifier/" class="nav-button next">Transform Modifier</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-spring">Page: Spring</a></li>
+            <li><a href="#page-falloff">Page: Falloff</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

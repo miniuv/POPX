@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Relax</title>
+  <meta name="description" content="Relax operator for spreading instances apart and preventing overlaps with optional surface or volume constraints.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Relax</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Relax</strong> operator applies a relaxation algorithm to spread instances apart and prevent overlaps.
+          It uses iterative solving to push overlapping instances away from each other, creating more evenly distributed spacing.
+        </p>
+
+        <p>
+          You can optionally provide constraint geometry (surface) or a constraint volume (3D texture) to keep instances from flying off into space.
+          The operator supports two solver modes: <strong>Simple</strong> for immediate single-frame relaxation, and <strong>Advect</strong> for progressive time-dependent solving.
+        </p>
+
+        <p>
+          Relax supports two methods: <strong>Neighbor</strong> (searches for nearby instances within a radius) and <strong>Field</strong> (uses a voxel-based field approach).
+          The operator considers the <strong>PointScale</strong> attribute of each instance as its radius for overlap detection. If there is no PointScale attribute, the radius defaults to half of the search radius.
+          Optional falloff-based modulation enables spatially varying relaxation effects.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Relax Parameters -->
+        <h3 id="page-relax">Page: Relax</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Solver Mode</span>
+            <span class="param-name">Solvermode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Simple and Advect modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">advect</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Relax Method</span>
+            <span class="param-name">Relaxmethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines the relaxation algorithm: Neighbor (proximity-based search) or Field (voxel-based volume approach).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">nebr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">field</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Points Update POP</span>
+            <span class="param-name">Pointsupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP for updating target positions when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based modulation of the relaxation effect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that modulate the relaxation strength.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Relax Iterations</span>
+            <span class="param-name">Relaxiterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of relaxation passes to perform per frame. Higher values produce more thorough relaxation but increase computation time.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Relax Radius</span>
+            <span class="param-name">Maxrelaxradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum search distance for finding neighboring instances. Instances beyond this radius will not affect each other.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of neighboring instances to consider when using Neighbor method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Axis Resolution</span>
+            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum voxel resolution along the longest axis when using Field method.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerboundsfield</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Lower bounds of the field volume when using Field method.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsfieldx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsfieldy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsfieldz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperboundsfield</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Upper bounds of the field volume when using Field method.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsfieldx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsfieldy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsfieldz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Kernel Size</span>
+            <span class="param-name">Kernelsize</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the convolution kernel used for field-based relaxation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Relax Strength</span>
+            <span class="param-name">Relaxstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Overall intensity of the relaxation effect. Higher values push instances apart more aggressively.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the Advect solver to initial state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Begins Advect solver simulation from the current state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles playback of the Advect solver simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Advances the Advect solver by one frame.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraint Geometry Parameters -->
+        <h3 id="page-constraint-geometry">Page: Constraint Geometry</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint to Geometry</span>
+            <span class="param-name">Constrainttogeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables constraint to a surface geometry, keeping instances from flying off into space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Geometry</span>
+            <span class="param-name">Constraintgeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP geometry to use as constraint surface when no second input is connected.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Opaque Geometry</span>
+            <span class="param-name">Opaque</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Treats the constraint geometry as a solid opaque surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Geometry</span>
+            <span class="param-name">Displaygeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shows the constraint geometry in the viewport for visualization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Display color for the constraint geometry visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorb</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraint Volume Parameters -->
+        <h3 id="page-constraint-volume">Page: Constraint Volume</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint to Volume</span>
+            <span class="param-name">Constrainttovolume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables constraint to a 3D texture volume, keeping instances confined within the volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Volume</span>
+            <span class="param-name">Constraintvolume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a 3D texture TOP to use as constraint volume when no third input is connected.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Lower bounds of the constraint volume in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Upper bounds of the constraint volume in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Force Strength</span>
+            <span class="param-name">Forcestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Intensity of the constraining force applied to keep instances within the volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of pre-shrink iterations applied to the volume before constraint calculation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the filter kernel applied to the constraint volume.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraint Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraint Volume</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../randomize/" class="nav-button prev">Randomize</a>
+        <a href="../spring-modifier/" class="nav-button next">Spring Modifier</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-relax">Page: Relax</a></li>
+            <li><a href="#page-constraint-geometry">Page: Constraint Geometry</a></li>
+            <li><a href="#page-constraint-volume">Page: Constraint Volume</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

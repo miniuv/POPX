@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Noise Modifier</title>
+  <meta name="description" content="Displaces particles or instances using procedural noise fields for turbulence and natural motion.">
+  <link rel="icon" type="image/png" href="../../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../aim/">Aim</a></li>
+                <li><a href="../color-modifier/">Color Modifier</a></li>
+                <li><a href="../magnetize/">Magnetize</a></li>
+                <li><a href="../move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../pivot/">Pivot</a></li>
+                <li><a href="../randomize/">Randomize</a></li>
+                <li><a href="../relax/">Relax</a></li>
+                <li><a href="../spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Noise Modifier</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Noise Modifier</strong> displaces each instance using the internal <strong>Noise POP</strong>.
+          It generates procedural motion and directional flow fields that can be used for turbulence, jitter, and natural-looking movement.
+        </p>
+
+        <p>
+          The <strong>Noise Modifier</strong> supports two modes:
+          <strong>Simple Mode</strong> samples the noise field once to directly displace each instance in space. The effect is immediate and not accumulative over time.
+          <strong>Advect Mode</strong> moves each instance through the noise field progressively, producing smooth, time-dependent motion.
+        </p>
+
+        <p>
+          The <strong>Aim Weight</strong> parameter controls how quickly each instance rotates toward its direction of motion.
+          Lower values result in gradual orientation changes, while higher values make alignment more immediate.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Noise Parameters -->
+        <h3 id="page-noise">Page: Noise</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based noise intensity control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Noise Signature</span>
+            <span class="param-name">Noisesignature</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Number of noise components to compute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">scalar</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">vector</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Rest Attribute</span>
+            <span class="param-name">Userestattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uses the rest attribute to stabilize the noise reference space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Direction from Attribute</span>
+            <span class="param-name">Enabledirattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reads direction values from a point attribute for scalar noise.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Default Direction</span>
+            <span class="param-name">Defaultdir</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Default direction vector when using scalar noise without direction attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default Direction</span>
+              <span class="param-name">Defaultdir1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Direction</span>
+              <span class="param-name">Defaultdir2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Direction</span>
+              <span class="param-name">Defaultdir3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Direction Attribute</span>
+            <span class="param-name">Directionattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to use for direction vectors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Curl Noise</span>
+            <span class="param-name">Curlnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Generates divergence-free curl noise for fluid-like motion.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines the noise type.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">perlin</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">simplex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">cell</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Numerical value that initializes the randomization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Period</span>
+            <span class="param-name">Period</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Period (scale) of the noise field.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonics</span>
+            <span class="param-name">Harmon</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Spread</span>
+            <span class="param-name">Spread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Gain</span>
+            <span class="param-name">Gain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Amplitude</span>
+            <span class="param-name">Amp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">The noise values amplitude (a scale on the values output).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Amplitude</span>
+              <span class="param-name">Amp1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Amplitude</span>
+              <span class="param-name">Amp2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Amplitude</span>
+              <span class="param-name">Amp3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Exponent</span>
+              <span class="param-name">Exp1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Exponent</span>
+              <span class="param-name">Exp2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Exponent</span>
+              <span class="param-name">Exp3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Offset</span>
+            <span class="param-name">Offset</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Adds an offset to the resulting value.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Offset</span>
+              <span class="param-name">Offset1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Offset</span>
+              <span class="param-name">Offset2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Offset</span>
+              <span class="param-name">Offset3</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Transform Parameters -->
+        <h3 id="page-transform">Page: Transform</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">srt</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">str</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">rst</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">rts</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">tsr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">trs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">zyx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translate the instances through the noise space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotate the instances around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">The pivot position for the transform rotates and scales.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate 4D</span>
+            <span class="param-name">T4d</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translates the instances through the 4th noise dimension.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Affect Parameters -->
+        <h3 id="page-affect">Page: Affect</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Mode</span>
+            <span class="param-name">Mode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Simple Mode and Advect Mode.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">advect</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Affect Position</span>
+            <span class="param-name">Affectposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables noise-based position displacement.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Position Amount</span>
+            <span class="param-name">Positionamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the intensity of position displacement.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Affect Rotation</span>
+            <span class="param-name">Affectrotation</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables noise-based rotation changes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotation Amount</span>
+            <span class="param-name">Rotationamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the intensity of rotation changes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Aim Weight</span>
+            <span class="param-name">Aimweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Defines how fast instances rotate toward their direction of motion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Affect Scale</span>
+            <span class="param-name">Affectscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables noise-based scale changes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale Amount</span>
+            <span class="param-name">Scaleamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the intensity of scale changes.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale In Range</span>
+            <span class="param-name">Scaleinrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Input range for noise values that affect scale.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale In Range</span>
+              <span class="param-name">Scaleinrange1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale In Range</span>
+              <span class="param-name">Scaleinrange2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale Out Range</span>
+            <span class="param-name">Scaleoutrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Output range for scale values applied to particles.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale Out Range</span>
+              <span class="param-name">Scaleoutrange1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale Out Range</span>
+              <span class="param-name">Scaleoutrange2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets advection simulation state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Begins advection simulation from the current state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles advection simulation playback.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Advances advection simulation by one frame.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="inputs">Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../move-along-mesh/" class="nav-button prev">Move Along Mesh</a>
+        <a href="../pivot/" class="nav-button next">Pivot</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-noise">Page: Noise</a></li>
+            <li><a href="#page-transform">Page: Transform</a></li>
+            <li><a href="#page-affect">Page: Affect</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

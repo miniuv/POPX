@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Installation</title>
+  <meta name="description" content="Installation and setup guide for POPX TouchDesigner operators.">
+  <link rel="icon" type="image/png" href="../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../getting-started/">Getting Started</a></li>
+            <li><a href="../installation/">Installation</a></li>
+            <li><a href="../tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/generators/convert/">Convert</a></li>
+                <li><a href="../../operators/generators/explode/">Explode</a></li>
+                <li><a href="../../operators/generators/instancer/">Instancer</a></li>
+                <li><a href="../../operators/generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../operators/generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../operators/falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/modifiers/aim/">Aim</a></li>
+                <li><a href="../../operators/modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../operators/modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../operators/modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../operators/modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../operators/modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../operators/modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../operators/modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../operators/modifiers/relax/">Relax</a></li>
+                <li><a href="../../operators/modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../operators/modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../operators/tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../operators/simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Installation</h1>
+
+      <section>
+        <h2 id="download">Download POPX</h2>
+        <p>
+          POPX is available exclusively through Patreon. To access it, subscribe to the POPX Tier and download the latest release.
+        </p>
+
+        <div style="margin: var(--spacing-lg) 0; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+          <a href="#" class="btn btn-primary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Subscribe on Patreon</a>
+          <a href="#" class="btn btn-secondary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Watch Installation Guide</a>
+        </div>
+
+        <p>
+          <strong>Latest Version:</strong> <code style="background: rgba(255, 59, 48, 0.15); padding: 3px 8px; border-radius: 4px;">v1.0.0</code><br>
+          <strong>Release Date:</strong> November 2025
+        </p>
+        <p>
+          Each release includes the POPX operators package and an example project file to help you get started quickly.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="requirements">System Requirements</h2>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>TouchDesigner:</strong> 2025 Experimental (2025.xxx) or newer — required to access the new POPs (Point Operators) family.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">
+            <strong>Operating System:</strong>
+            <ul style="line-height: 1.8; margin-left: 20px; margin-top: 6px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>Windows 10/11</strong> — full support for all GPU features.</li>
+              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
+            </ul>
+          </li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.</li>
+        </ul>
+        <div style="margin-top: var(--spacing-md); padding: 16px 20px; background: rgba(200, 60, 60, 0.08); border-left: 3px solid rgba(200, 60, 60, 0.5); border-radius: 4px;">
+          <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-style: italic;">
+            <strong>⚠️ Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="installation">Installation Steps</h2>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Open your TouchDesigner project.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Drag the <code>POPX.tox</code> file directly into your network.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Your project may freeze momentarily while the system initializes — this is normal.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Once loaded, the POPX container will appear at the root level of your project.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX Operators Family available for use.</li>
+        </ul>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../getting-started/" class="nav-button prev">Getting Started</a>
+        <a href="../tutorials/" class="nav-button next">Tutorials</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#download">Download POPX</a></li>
+        <li><a href="#requirements">System Requirements</a></li>
+        <li><a href="#installation">Installation Steps</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../assets/js/script.js"></script>
+</body>
+</html>

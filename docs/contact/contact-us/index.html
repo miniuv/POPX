@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Contact</title>
+  <meta name="description" content="Get support and report issues for POPX operators.">
+  <link rel="icon" type="image/png" href="../../../assets/images/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <a href="../../../index.html" class="top-bar-logo">
+      <span>POPX</span> Docs
+    </a>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../guides/installation/">Installation</a></li>
+            <li><a href="../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/generators/convert/">Convert</a></li>
+                <li><a href="../../operators/generators/explode/">Explode</a></li>
+                <li><a href="../../operators/generators/instancer/">Instancer</a></li>
+                <li><a href="../../operators/generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../operators/generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/falloffs/falloff-field/">Falloff Field</a></li>
+                <li><a href="../../operators/falloffs/radial-falloff/">Radial Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/modifiers/aim/">Aim</a></li>
+                <li><a href="../../operators/modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../operators/modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../operators/modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../operators/modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../operators/modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../operators/modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../operators/modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../operators/modifiers/relax/">Relax</a></li>
+                <li><a href="../../operators/modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../operators/modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../operators/tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../operators/simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../operators/simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../contact-us/">Contact Us</a></li>
+            <li><a href="../community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Contact Us</h1>
+      <p style="font-size: 18px; color: var(--color-text); margin-bottom: var(--spacing-lg);">
+        Need help with POPX? Have questions or found a bug? We're here to help.
+      </p>
+
+      <section>
+        <h2 id="support-email">Support Email</h2>
+        <p>
+          For bug reports, technical issues, or general support inquiries, please contact us at:
+        </p>
+        <div class="card">
+          <p style="font-size: 20px; font-weight: 600; margin: 0;">
+            <a href="mailto:support@popx.example.com" style="color: var(--color-accent);">support@popx.example.com</a>
+          </p>
+        </div>
+        <p style="margin-top: var(--spacing-md); color: var(--color-text-muted);">
+          We aim to respond to all support emails within 48 hours. For faster responses, consider joining our Discord community.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="reporting-bugs">Reporting Bugs</h2>
+        <p>
+          If you encounter a bug or unexpected behavior in any POPX operator, please send a detailed report including:
+        </p>
+
+        <div class="card">
+          <h3>Required Information</h3>
+          <ul style="color: var(--color-text-muted); line-height: 1.8; margin: 0;">
+            <li><strong>Operator name and version</strong> — Check the operator info panel in TouchDesigner</li>
+            <li><strong>TouchDesigner build number</strong> — Found in Help → About TouchDesigner</li>
+            <li><strong>Steps to reproduce the issue</strong> — Detailed description of how to trigger the bug</li>
+            <li><strong>Screenshots or error logs if possible</strong> — Visual evidence or textport output</li>
+          </ul>
+        </div>
+
+        <h3>Example Bug Report</h3>
+        <div class="code-block">
+          <pre style="margin: 0; color: var(--color-text-muted); line-height: 1.6;">Subject: [Bug] Noise Modifier crashes with high iteration count
+
+Operator: Noise Modifier v1.2.3
+TouchDesigner Build: 2023.11760
+
+Steps to reproduce:
+1. Create a Scatter operator with 10000 points
+2. Connect to Noise Modifier
+3. Set Octaves parameter to 10
+4. Set Frequency to 5.0
+5. TouchDesigner freezes/crashes
+
+Expected: Operator should process without crashing
+Actual: Application becomes unresponsive
+
+Screenshots attached showing parameter settings.</pre>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="response-time">Response Time</h2>
+        <p>
+          We prioritize bug reports based on severity:
+        </p>
+        <table class="parameter-table">
+          <tr>
+            <th>Priority</th>
+            <th>Description</th>
+            <th>Response Time</th>
+          </tr>
+          <tr>
+            <td><span class="badge badge-simulation">Critical</span></td>
+            <td>Crashes, data loss, or complete operator failure</td>
+            <td>24 hours</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-modifier">High</span></td>
+            <td>Major functionality broken, no workaround available</td>
+            <td>48 hours</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-falloff">Medium</span></td>
+            <td>Feature not working as expected, workaround exists</td>
+            <td>3-5 days</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-tool">Low</span></td>
+            <td>Minor issues, cosmetic problems, feature requests</td>
+            <td>1-2 weeks</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../../operators/modifiers/transform-modifier/" class="nav-button prev">Transform Modifier</a>
+        <a href="../community/" class="nav-button next">Community</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#support-email">Support Email</a></li>
+        <li><a href="#reporting-bugs">Reporting Bugs</a></li>
+        <li><a href="#response-time">Response Time</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../assets/js/script.js"></script>
+</body>
+</html>
