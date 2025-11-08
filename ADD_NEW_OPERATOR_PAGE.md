@@ -798,7 +798,20 @@ grep -r "My New Operator" docs/
 
 ## Navigation and Search Integration
 
-When adding a new operator, you must update **three separate navigation systems**:
+When adding a new operator, you must update **four separate systems**:
+
+### Summary: What to Update
+
+| System | Files to Update | What to Update |
+|--------|----------------|----------------|
+| **1. Sidebar Navigation** | All ~30+ HTML files | Add operator link in alphabetical order |
+| **2. Prev/Next Buttons** | 2 operator HTML files | Update surrounding operators' navigation |
+| **3. Search Index** | `assets/js/script.js` | Add operator entry to searchIndex array |
+| **4. Parameters** | Operator's index.html | Document all parameters from JSON export |
+
+### Detailed Instructions
+
+When adding a new operator, you must update **three separate navigation systems** plus the search index:
 
 ### 1. Sidebar Navigation (All Pages)
 
@@ -945,21 +958,86 @@ find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/magnetize\/">Ma
 
 ### 3. Search Functionality
 
-**Good News:** Search is automatically handled by `assets/js/script.js` - no manual updates needed!
+**IMPORTANT:** Search is NOT automatic - you MUST manually add new operators to the search index!
 
-**What Gets Indexed:**
-The search system automatically crawls and indexes:
-- Page titles (h1 tags)
-- Section headings (h2 tags)
-- Parameter page headings (h3 with class="page-heading")
-- Parameter labels and names
-- Parameter descriptions
-- Summary text
+The search functionality uses a hardcoded index in `assets/js/script.js`. Every time you add a new operator, you MUST add it to the `searchIndex` array.
 
-**Requirements for Search to Work:**
-1. **Page must be in sidebar navigation** - Search only indexes pages linked in the navigation
-2. **Proper heading hierarchy** - Use h1 for title, h2 for major sections, h3 for parameter pages
-3. **Semantic HTML structure** - Follow the established parameter documentation patterns
+**Where to Add:**
+File: `assets/js/script.js`
+Location: Around line 726 (search for `const searchIndex = [`)
+
+**How to Add:**
+
+1. **Find the correct category section** in searchIndex:
+   - Guides (Getting Started, Installation, Tutorials)
+   - Contact (Contact Us, Community)
+   - Generators (Convert, Explode, Instancer, Subdivider, Sweep)
+   - Falloffs (Noise Falloff, Shape Falloff)
+   - Modifiers (Aim through Transform Modifier)
+   - Tools (Attribute Manager, Voxelize - NOT YET CREATED)
+   - Simulations (FLIP Solver, SPH Solver - NOT YET CREATED)
+
+2. **Add your operator in alphabetical order** within its category
+
+3. **Use this template:**
+
+```javascript
+{
+  title: 'Your Operator Name',
+  path: 'docs/operators/category/your-operator/',
+  type: 'Operator',
+  category: 'Category Name',  // Generators, Falloffs, Modifiers, Tools, Simulations
+  sections: [
+    { title: 'Summary', anchor: '#summary' },
+    { title: 'Page: Page Name', anchor: '#page-pagename', keywords: ['keyword1', 'keyword2'] },
+    { title: 'Page: Common', anchor: '#page-common' },
+    { title: 'Inputs', anchor: '#inputs' },
+    { title: 'Outputs', anchor: '#outputs' }
+  ]
+},
+```
+
+**Complete Example - Adding Noise Falloff:**
+
+```javascript
+// Falloffs section
+{
+  title: 'Noise Falloff',
+  path: 'docs/operators/falloffs/noise-falloff/',
+  type: 'Operator',
+  category: 'Falloffs',
+  sections: [
+    { title: 'Summary', anchor: '#summary' },
+    { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics', 'amplitude', 'frequency'] },
+    { title: 'Page: Transform', anchor: '#page-transform', keywords: ['translate', 'rotate', 'scale', 'pivot'] },
+    { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'blend', 'attribute'] },
+    { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+    { title: 'Page: Common', anchor: '#page-common' },
+    { title: 'Inputs', anchor: '#inputs' },
+    { title: 'Outputs', anchor: '#outputs' }
+  ]
+},
+```
+
+**Important Notes:**
+
+- **Path**: Must match your operator's directory path exactly (no leading slash)
+- **Category**: Must match one of the sidebar categories
+- **Sections**: List ALL major sections and parameter pages from your operator
+- **Anchors**: Must match the `id` attributes in your HTML (e.g., `id="page-noise"`)
+- **Keywords** (optional): Add relevant search terms for each section to improve discoverability
+- **Alphabetical Order**: Within each category, operators should be in alphabetical order
+- **Comma**: Don't forget the trailing comma after the closing brace
+
+**Verification:**
+
+After adding to searchIndex:
+1. Open the site in a browser
+2. Type your operator name in the search bar
+3. Verify it appears in results
+4. Click the result and verify navigation works
+5. Try searching for parameter page names (e.g., "noise", "transform")
+6. Verify section links work correctly
 
 **Example heading structure for good search results:**
 ```html
@@ -1034,7 +1112,11 @@ When adding a new operator, verify:
 - [ ] Navigation chain tested - clicking through works correctly
 
 #### ✓ Search Integration
-- [ ] Page linked in sidebar (requirement for search indexing)
+- [ ] **Operator added to searchIndex array** in `assets/js/script.js` (REQUIRED!)
+- [ ] Entry added in correct category and alphabetical order
+- [ ] All parameter pages listed in sections array
+- [ ] Anchors match HTML id attributes
+- [ ] Keywords added for important sections (optional but recommended)
 - [ ] Proper heading hierarchy (h1, h2, h3 with page-heading class)
 - [ ] Parameter labels and descriptions are complete
 - [ ] Search bar finds the new operator by name
@@ -1043,7 +1125,12 @@ When adding a new operator, verify:
 
 ### Quick Update Workflow
 
-**Step 1: Update Sidebar (All Files)**
+**Step 1: Create Operator Page**
+- Create directory: `docs/operators/category/operator-name/`
+- Create `index.html` with complete structure
+- Create `parameters.json` with complete TouchDesigner export
+
+**Step 2: Update Sidebar Navigation (All ~30+ Files)**
 ```bash
 # Use sed to add link to all files (adjust pattern and paths)
 find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/existing-operator\/">Existing Operator<\/a><\/li>/a\    <li><a href="RELATIVE_PATH\/new-operator\/">New Operator<\/a><\/li>' {} \;
@@ -1052,23 +1139,22 @@ find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/existing-operat
 # Edit: index.html
 ```
 
-**Step 2: Update Prev/Next (2 Files Only)**
+**Step 3: Update Prev/Next Navigation (2 Files Only)**
 ```bash
 # Manually edit the 2 surrounding operator files
 # Edit: docs/operators/category/previous-operator/index.html (next button)
 # Edit: docs/operators/category/next-operator/index.html (prev button)
 ```
 
-**Step 3: Verify Search (Automatic)**
+**Step 4: Update Search Index (CRITICAL - DO NOT SKIP!)**
 ```bash
-# No code changes needed - just test in browser:
-# 1. Open site
-# 2. Type operator name in search bar
-# 3. Verify results appear
-# 4. Click result and verify navigation works
+# Edit: assets/js/script.js
+# Find: const searchIndex = [
+# Add your operator entry in the correct category, in alphabetical order
+# Use the template provided in Section 3 above
 ```
 
-**Step 4: Verification**
+**Step 5: Verification**
 ```bash
 # Check sidebar was updated everywhere
 grep -r "New Operator" docs/ | wc -l
@@ -1077,6 +1163,16 @@ grep -r "New Operator" docs/ | wc -l
 # Check prev/next navigation updated
 grep -A5 -B5 "page-nav" docs/operators/category/previous-operator/index.html
 grep -A5 -B5 "page-nav" docs/operators/category/next-operator/index.html
+
+# Check search index was updated
+grep "New Operator" assets/js/script.js
+# Should show your operator in searchIndex
+
+# Test in browser:
+# 1. Open site
+# 2. Type operator name in search bar
+# 3. Verify it appears in results
+# 4. Click result and verify navigation works
 ```
 
 ---
