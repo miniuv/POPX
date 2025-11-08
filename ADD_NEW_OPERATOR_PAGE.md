@@ -815,47 +815,180 @@ When adding a new operator, you must update **three separate navigation systems*
 
 ### 1. Sidebar Navigation (All Pages)
 
-**Files to Update:** ALL ~30+ HTML files across the entire site
-- `index.html` (homepage)
-- All files in `docs/guides/`
-- All files in `docs/operators/generators/`
-- All files in `docs/operators/falloffs/`
-- All files in `docs/operators/modifiers/`
-- All files in `docs/operators/tools/`
-- All files in `docs/operators/simulations/`
-- All files in `docs/contact/`
+**CRITICAL:** Every HTML file must have ALL operators listed in its sidebar, with correct relative paths based on the file's location.
 
-**What to Update:**
-Add your new operator link to the appropriate sidebar section in alphabetical order.
+**Files to Update:** ALL 25 HTML files across the entire site:
+- 1 file: `index.html` (root)
+- 3 files: `docs/guides/*/index.html`
+- 3 files: `docs/operators/falloffs/*/index.html`
+- 5 files: `docs/operators/generators/*/index.html`
+- 11 files: `docs/operators/modifiers/*/index.html`
+- 2 files: `docs/contact/*/index.html`
 
-**Example - Adding "Noise Modifier" to Modifiers section:**
+---
+
+#### Path Pattern Reference Table
+
+**For each file location, here are the EXACT paths to use for operators:**
+
+| File Location | Generators | Falloffs | Modifiers | Contact |
+|--------------|------------|----------|-----------|---------|
+| **Root:** `index.html` | `docs/operators/generators/OPERATOR/` | `docs/operators/falloffs/OPERATOR/` | `docs/operators/modifiers/OPERATOR/` | `docs/contact/PAGE/` |
+| **Guides:** `docs/guides/*/` | `../../operators/generators/OPERATOR/` | `../../operators/falloffs/OPERATOR/` | `../../operators/modifiers/OPERATOR/` | `../../contact/PAGE/` |
+| **Generators:** `docs/operators/generators/*/` | `../OPERATOR/` | `../../falloffs/OPERATOR/` | `../../modifiers/OPERATOR/` | `../../../contact/PAGE/` |
+| **Falloffs:** `docs/operators/falloffs/*/` | `../../generators/OPERATOR/` | `../OPERATOR/` | `../../modifiers/OPERATOR/` | `../../../contact/PAGE/` |
+| **Modifiers:** `docs/operators/modifiers/*/` | `../../generators/OPERATOR/` | `../../falloffs/OPERATOR/` | `../OPERATOR/` | `../../../contact/PAGE/` |
+| **Contact:** `docs/contact/*/` | `../../operators/generators/OPERATOR/` | `../../operators/falloffs/OPERATOR/` | `../../operators/modifiers/OPERATOR/` | `../PAGE/` |
+
+---
+
+#### Step-by-Step Process for Adding a New Operator
+
+**Example:** Adding "Combine Falloff" to the Falloffs category
+
+**Step 1: Add to operator's own sidebar**
+
+Edit `docs/operators/falloffs/combine-falloff/index.html`:
 ```html
 <div class="sidebar-subsection">
-  <h4>Modifiers</h4>
+  <h4>Falloffs</h4>
   <div class="sidebar-subsection-content">
     <ul>
-      <li><a href="../../../operators/modifiers/aim/">Aim</a></li>
-      <li><a href="../../../operators/modifiers/color-modifier/">Color Modifier</a></li>
-      <li><a href="../../../operators/modifiers/magnetize/">Magnetize</a></li>
-      <!-- Add new operator here -->
-      <li><a href="../../../operators/modifiers/noise-modifier/">Noise Modifier</a></li>
-      <li><a href="../../../operators/modifiers/move-along-curve/">Move Along Curve</a></li>
+      <li><a href="../combine-falloff/">Combine Falloff</a></li>
+      <li><a href="../noise-falloff/">Noise Falloff</a></li>
+      <li><a href="../shape-falloff/">Shape Falloff</a></li>
     </ul>
   </div>
 </div>
 ```
 
-**Path Adjustments:**
-Paths are relative to each file's location. You MUST adjust the path depth:
-- From `index.html` (root): `docs/operators/modifiers/noise-modifier/`
-- From `docs/guides/getting-started/index.html`: `../../operators/modifiers/noise-modifier/`
-- From `docs/operators/modifiers/aim/index.html`: `../noise-modifier/`
-- From `docs/operators/generators/convert/index.html`: `../../modifiers/noise-modifier/`
+**Step 2: Add to all OTHER falloff operators**
 
-**Bulk Update with sed:**
+For `docs/operators/falloffs/noise-falloff/index.html` and `shape-falloff/index.html`:
+```html
+<li><a href="../combine-falloff/">Combine Falloff</a></li>
+```
+
+**Step 3: Add to all generator operators**
+
+For ALL files in `docs/operators/generators/*/index.html`:
+```html
+<li><a href="../../falloffs/combine-falloff/">Combine Falloff</a></li>
+```
+
+**Step 4: Add to all modifier operators**
+
+For ALL files in `docs/operators/modifiers/*/index.html`:
+```html
+<li><a href="../../falloffs/combine-falloff/">Combine Falloff</a></li>
+```
+
+**Step 5: Add to all guide pages**
+
+For ALL files in `docs/guides/*/index.html`:
+```html
+<li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff</a></li>
+```
+
+**Step 6: Add to all contact pages**
+
+For ALL files in `docs/contact/*/index.html`:
+```html
+<li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff</a></li>
+```
+
+**Step 7: Add to root index.html**
+
+For `index.html`:
+```html
+<li><a href="docs/operators/falloffs/combine-falloff/">Combine Falloff</a></li>
+```
+
+---
+
+#### Using sed Commands (Advanced)
+
+**IMPORTANT:** sed cannot handle varying relative paths automatically. You MUST run separate commands for each file group.
+
+**For Falloff operators:**
 ```bash
-# Add link to all pages (example - adjust paths as needed)
-find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/magnetize\/">Magnetize<\/a><\/li>/a\    <li><a href="ADJUST_PATH\/noise-modifier\/">Noise Modifier<\/a><\/li>' {} \;
+for file in docs/operators/falloffs/*/index.html; do
+  sed -i '/<li><a href="\.\.\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+```
+
+**For Generator operators:**
+```bash
+for file in docs/operators/generators/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+```
+
+**For Modifier operators:**
+```bash
+for file in docs/operators/modifiers/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+```
+
+**For Guide pages:**
+```bash
+for file in docs/guides/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+```
+
+**For Contact pages:**
+```bash
+for file in docs/contact/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+```
+
+**For Root index.html:**
+```bash
+sed -i '/<li><a href="docs\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="docs/operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' index.html
+```
+
+---
+
+#### Verification Checklist
+
+After adding the operator, verify EVERY file:
+
+```bash
+# Check that all 25 files have the new operator
+grep -r "Combine Falloff<" --include="*.html" . | wc -l
+# Should return 25 (one per file)
+
+# Check each file group has correct path
+echo "=== Falloff operators ==="
+grep "Combine Falloff" docs/operators/falloffs/*/index.html
+
+echo "=== Generator operators ==="
+grep "Combine Falloff" docs/operators/generators/*/index.html
+
+echo "=== Modifier operators ==="
+grep "Combine Falloff" docs/operators/modifiers/*/index.html
+
+echo "=== Guide pages ==="
+grep "Combine Falloff" docs/guides/*/index.html
+
+echo "=== Contact pages ==="
+grep "Combine Falloff" docs/contact/*/index.html
+
+echo "=== Root ==="
+grep "Combine Falloff" index.html
+```
+
+**CRITICAL:** Check for duplicates in any file:
+```bash
+for file in $(find . -name "*.html" -type f); do
+  count=$(grep -c "Combine Falloff<" "$file" 2>/dev/null || echo "0")
+  if [ "$count" -gt 2 ]; then
+    echo "DUPLICATE in $file: $count occurrences"
+  fi
+done
 ```
 
 ### 2. Prev/Next Navigation Buttons
@@ -1125,55 +1258,200 @@ When adding a new operator, verify:
 
 ### Quick Update Workflow
 
-**Step 1: Create Operator Page**
-- Create directory: `docs/operators/category/operator-name/`
-- Create `index.html` with complete structure
-- Create `parameters.json` with complete TouchDesigner export
+This is a complete, step-by-step workflow using the example of adding "Combine Falloff" operator.
 
-**Step 2: Update Sidebar Navigation (All ~30+ Files)**
+---
+
+**Step 1: Create Operator Directory and Files**
 ```bash
-# Use sed to add link to all files (adjust pattern and paths)
-find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/existing-operator\/">Existing Operator<\/a><\/li>/a\    <li><a href="RELATIVE_PATH\/new-operator\/">New Operator<\/a><\/li>' {} \;
+# Create directory
+mkdir -p docs/operators/falloffs/combine-falloff
 
-# Manually update main index.html (different path structure)
-# Edit: index.html
+# Create index.html (copy from template or existing operator)
+# Create parameters.json (export from TouchDesigner)
 ```
+
+---
+
+**Step 2: Update Sidebar Navigation (ALL 25 HTML Files)**
+
+**CRITICAL:** Use the exact commands below for each file group. DO NOT try to use a single sed command for all files.
+
+```bash
+# 1. Falloff operators (3 files)
+for file in docs/operators/falloffs/*/index.html; do
+  sed -i '/<li><a href="\.\.\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+
+# 2. Generator operators (5 files)
+for file in docs/operators/generators/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+
+# 3. Modifier operators (11 files)
+for file in docs/operators/modifiers/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+
+# 4. Guide pages (3 files)
+for file in docs/guides/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+
+# 5. Contact pages (2 files)
+for file in docs/contact/*/index.html; do
+  sed -i '/<li><a href="\.\.\/\.\.\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="../../operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' "$file"
+done
+
+# 6. Root index.html (1 file)
+sed -i '/<li><a href="docs\/operators\/falloffs\/noise-falloff\/">Noise Falloff<\/a><\/li>/i\                <li><a href="docs/operators/falloffs/combine-falloff/">Combine Falloff<\/a><\/li>' index.html
+```
+
+**Verify sidebar updates:**
+```bash
+# Should show exactly 25 matches (one per HTML file)
+grep -r "Combine Falloff<" --include="*.html" . | wc -l
+
+# Check for duplicates (should show nothing)
+for file in $(find . -name "*.html" -type f); do
+  count=$(grep -c "href=.*combine-falloff" "$file" 2>/dev/null || echo "0")
+  if [ "$count" -gt 1 ]; then
+    echo "DUPLICATE in $file: $count links"
+  fi
+done
+```
+
+---
 
 **Step 3: Update Prev/Next Navigation (2 Files Only)**
-```bash
-# Manually edit the 2 surrounding operator files
-# Edit: docs/operators/category/previous-operator/index.html (next button)
-# Edit: docs/operators/category/next-operator/index.html (prev button)
+
+**Manually edit the 2 surrounding operators:**
+
+1. **Previous operator** (`sweep/index.html`) - Update NEXT button:
+```html
+<nav class="page-navigation">
+  <a href="../subdivider/" class="nav-button prev">Subdivider</a>
+  <a href="../../falloffs/combine-falloff/" class="nav-button next">Combine Falloff</a>
+</nav>
 ```
+
+2. **Next operator** (`noise-falloff/index.html`) - Update PREV button:
+```html
+<nav class="page-navigation">
+  <a href="../combine-falloff/" class="nav-button prev">Combine Falloff</a>
+  <a href="../shape-falloff/" class="nav-button next">Shape Falloff</a>
+</nav>
+```
+
+3. **New operator** (`combine-falloff/index.html`) - Add navigation:
+```html
+<nav class="page-navigation">
+  <a href="../../generators/sweep/" class="nav-button prev">Sweep</a>
+  <a href="../noise-falloff/" class="nav-button next">Noise Falloff</a>
+</nav>
+```
+
+---
 
 **Step 4: Update Search Index (CRITICAL - DO NOT SKIP!)**
-```bash
-# Edit: assets/js/script.js
-# Find: const searchIndex = [
-# Add your operator entry in the correct category, in alphabetical order
-# Use the template provided in Section 3 above
+
+Edit `assets/js/script.js` and add to searchIndex array in alphabetical order:
+
+```javascript
+// In the Falloffs section, between other entries
+{
+  title: 'Combine Falloff',
+  path: 'docs/operators/falloffs/combine-falloff/',
+  type: 'Operator',
+  category: 'Falloffs',
+  sections: [
+    { title: 'Summary', anchor: '#summary' },
+    { title: 'Page: Combine', anchor: '#page-combine', keywords: ['add', 'subtract', 'multiply', 'divide', 'screen', 'overlay', 'maximum', 'minimum', 'operation'] },
+    { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['preview', 'ramp', 'heatmap', 'blackbody', 'infrared'] },
+    { title: 'Page: Common', anchor: '#page-common' },
+    { title: 'Inputs', anchor: '#inputs' },
+    { title: 'Outputs', anchor: '#outputs' }
+  ]
+},
 ```
 
-**Step 5: Verification**
+---
+
+**Step 5: Comprehensive Verification**
+
 ```bash
-# Check sidebar was updated everywhere
-grep -r "New Operator" docs/ | wc -l
-# Should show ~30+ matches (one per file)
+# 1. Check sidebar navigation count
+echo "=== Checking sidebar navigation ==="
+count=$(grep -r "Combine Falloff<" --include="*.html" . | wc -l)
+echo "Found $count occurrences (should be 25)"
 
-# Check prev/next navigation updated
-grep -A5 -B5 "page-nav" docs/operators/category/previous-operator/index.html
-grep -A5 -B5 "page-nav" docs/operators/category/next-operator/index.html
+# 2. Check each file group
+echo -e "\n=== Checking path patterns ==="
+echo "Falloff operators:"
+grep "combine-falloff" docs/operators/falloffs/*/index.html | head -3
 
-# Check search index was updated
-grep "New Operator" assets/js/script.js
-# Should show your operator in searchIndex
+echo -e "\nGenerator operators:"
+grep "combine-falloff" docs/operators/generators/*/index.html | head -3
 
-# Test in browser:
-# 1. Open site
-# 2. Type operator name in search bar
-# 3. Verify it appears in results
-# 4. Click result and verify navigation works
+echo -e "\nModifier operators:"
+grep "combine-falloff" docs/operators/modifiers/*/index.html | head -3
+
+echo -e "\nGuide pages:"
+grep "combine-falloff" docs/guides/*/index.html
+
+echo -e "\nContact pages:"
+grep "combine-falloff" docs/contact/*/index.html
+
+echo -e "\nRoot index:"
+grep "combine-falloff" index.html
+
+# 3. Check for duplicates
+echo -e "\n=== Checking for duplicates ==="
+for file in $(find . -name "*.html" -type f); do
+  count=$(grep -c "Combine Falloff<" "$file" 2>/dev/null || echo "0")
+  if [ "$count" -gt 2 ]; then
+    echo "DUPLICATE FOUND: $file has $count occurrences"
+  fi
+done
+
+# 4. Check prev/next navigation
+echo -e "\n=== Checking prev/next navigation ==="
+echo "Sweep (should link to Combine Falloff):"
+grep -A2 "nav-button next" docs/operators/generators/sweep/index.html
+
+echo -e "\nNoise Falloff (should link to Combine Falloff):"
+grep -A2 "nav-button prev" docs/operators/falloffs/noise-falloff/index.html
+
+echo -e "\nCombine Falloff navigation:"
+grep "page-navigation" -A10 docs/operators/falloffs/combine-falloff/index.html
+
+# 5. Check search index
+echo -e "\n=== Checking search index ==="
+grep "Combine Falloff" assets/js/script.js
 ```
+
+---
+
+**Step 6: Browser Testing**
+
+1. Open the site in a browser
+2. Navigate to different pages and verify Combine Falloff appears in sidebar
+3. Click Combine Falloff link from different pages - all should work
+4. Test prev/next buttons work correctly
+5. Search for "Combine Falloff" - should appear in results
+6. Search for parameter names (e.g., "add", "multiply") - should find the operator
+
+---
+
+**Common Issues and Fixes:**
+
+| Issue | Fix |
+|-------|-----|
+| Duplicate links in sidebar | Run duplicate check command and remove duplicates manually |
+| Link doesn't work from some pages | Check path pattern table and fix relative path |
+| Operator missing from some pages | Re-run the appropriate sed command for that file group |
+| Search doesn't find operator | Verify entry in `assets/js/script.js` searchIndex array |
+| Prev/next navigation broken | Check all 3 files (prev operator, new operator, next operator) |
 
 ---
 
