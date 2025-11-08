@@ -173,10 +173,13 @@
           <div class="operator-card" id="popx-geometry-card">
             <h3>POPX Geometry</h3>
             <p>
-              A packed data structure where each piece of geometry is represented by a single point containing all its transform attributes — position, rotation, scale, and pivot. This compact format enables efficient GPU-based transformations, allowing modifiers to operate directly on the POPX Geometry without manually building attributes or computing transformation matrices.
+              A packed data structure where each piece of geometry is represented by a single point containing all its transform attributes — position, rotation, scale, and pivot.
             </p>
             <p style="margin-top: 12px;">
-              In essence, it's a unified representation that handles transformation logic automatically, keeping everything lightweight, procedural, and GPU-optimized.
+              This compact format enables transformations to be computed directly on the GPU, eliminating the need for manual attribute construction or matrix calculations.
+            </p>
+            <p style="margin-top: 12px;">
+              In essence, it provides a unified, lightweight, and fully procedural representation optimized for real-time performance inside TouchDesigner.
             </p>
           </div>
 
@@ -184,10 +187,10 @@
           <div class="operator-card" id="generators">
             <h3>Generators</h3>
             <p>
-              Generate POPX Geometry or procedural new geometries. Generators can also convert existing geometry into POPX Geometry, like the Convert Generator. For example, the Explode Generator creates POPX Geometry, while the Subdivider Generator builds procedural geometry structures.
+              Generators create <strong>POPX Geometry</strong> as well as <strong>regular procedural geometry</strong>. They can also convert existing geometry into the POPX format, producing packed representations where each point contains all necessary transform attributes.
             </p>
             <p style="margin-top: 12px;">
-              There are two modes for generating POPX Geometry: using TouchDesigner's built-in instancing, or generating actual geometry represented by the POPX Geometry points and their instance attributes.
+              There are two generation modes: using <strong>TouchDesigner's built-in instancing</strong> for lightweight point-based rendering, or creating <strong>actual geometry</strong> represented through POPX points and their instance data.
             </p>
           </div>
 
@@ -195,7 +198,7 @@
           <div class="operator-card" id="falloffs">
             <h3>Falloffs</h3>
             <p>
-              Define spatial regions of influence and use the Falloff Attribute to control how strongly other operators affect instances. This attribute provides localized weighting across the POPX Geometry, allowing smooth transitions, blending, and gradient-based control over modifiers and effects.
+              Falloffs define spatial regions of influence across POPX Geometry or any regular geometry. They create or modify a Falloff Attribute that controls how strongly other operators affect instances or geometry, providing localized weighting for smooth transitions, blending, and gradient-based control over transformations and effects.
             </p>
             <p style="margin-top: 12px;">
               Falloffs can be combined, layered, or inverted to create complex influence patterns that drive the behavior of other POPX Operators.
@@ -217,10 +220,10 @@
           <div class="operator-card" id="tools">
             <h3>Tools</h3>
             <p>
-              Tools are utility Operators that provide general-purpose functionality for geometry management, visualization, and workflow assistance — such as deleting, merging, rendering, or applying transformations. Common examples include Apply Attributes (similar to Copy to Points), visualization tools for previewing local frames or falloffs, and Unpack for converting POPX Geometry into actual geometry.
+              Tools are utility operators that provide general-purpose functionality for geometry management, visualization, and workflow assistance — such as deleting, merging, rendering, or applying transformations.
             </p>
             <p style="margin-top: 12px;">
-              Orientation and alignment utilities like Reorient also fall under this category, providing flexible control over geometry presentation and management.
+              They include utilities for orientation, alignment, and conversion, offering flexible control over how geometry is organized, displayed, and managed within the POPX system.
             </p>
           </div>
 
@@ -295,11 +298,11 @@
         </div>
       </section>
 
-      <!-- SECTION D: Getting Started -->
+      <!-- SECTION D: Ready to Start? -->
       <section>
-        <h2 id="getting-started">Getting Started</h2>
+        <h2 id="getting-started">Ready to Start?</h2>
         <p>
-          Ready to start creating with POPX? Follow these guides to install the operators and learn the core concepts behind the system:
+          Follow these guides to install the operators and learn the core concepts behind the system:
         </p>
 
         <div style="margin-top: var(--spacing-lg);">
@@ -336,7 +339,7 @@
       <ul>
         <li><a href="#popx-overview">What is POPX?</a></li>
         <li><a href="#workflows">Basic Workflows</a></li>
-        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#getting-started">Ready to Start?</a></li>
       </ul>
     </aside>
   </div>

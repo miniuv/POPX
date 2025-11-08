@@ -733,7 +733,7 @@ const searchIndex = [
     sections: [
       { title: 'What is POPX?', anchor: '#popx-overview' },
       { title: 'Basic Workflows', anchor: '#workflows' },
-      { title: 'Getting Started', anchor: '#getting-started' }
+      { title: 'Ready to Start?', anchor: '#getting-started' }
     ]
   },
   {
