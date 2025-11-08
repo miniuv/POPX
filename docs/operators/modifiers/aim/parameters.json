@@ -1,174 +1,552 @@
 {
-  "parameterPages": {
-    "General": {
-      "Group": {
-        "name": "Group",
-        "label": "Group",
-        "page": "General",
-        "style": "StrMenu",
-        "menuSource": "op('./applyatt/applyatt/igroup').par.group"
-      },
-      "Dofalloff": {
-        "name": "Dofalloff",
-        "label": "Do Falloff",
-        "page": "General",
-        "style": "Toggle"
-      },
-      "Falloffattr": {
-        "name": "Falloffattr",
-        "label": "Falloff Attribute",
-        "page": "General",
-        "style": "StrMenu",
-        "menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
-      }
-    },
-    "Aim": {
-      "Aimmethod": {
-        "name": "Aimmethod",
-        "label": "Aim Method",
-        "page": "Aim",
-        "style": "Menu",
-        "menuNames": ["vector", "object", "points"],
-        "menuLabels": ["Aim Vector", "Aim at Object", "Aim at Points"]
-      },
-      "Aimvector": {
-        "name": "Aimvector",
-        "label": "Aim Vector",
-        "page": "Aim",
-        "style": "Float",
-        "size": 3
-      },
-      "Aimposition": {
-        "name": "Aimposition",
-        "label": "Aim Position",
-        "page": "Aim",
-        "style": "Float",
-        "size": 3
-      },
-      "Displayguideaim": {
-        "name": "Displayguideaim",
-        "label": "Display Aim Guide",
-        "page": "Aim",
-        "style": "Toggle"
-      },
-      "Guidescaleaim": {
-        "name": "Guidescaleaim",
-        "label": "Guide Scale",
-        "page": "Aim",
-        "style": "Float"
-      },
-      "Coloraim": {
-        "name": "Coloraim",
-        "label": "Color",
-        "page": "Aim",
-        "style": "RGBA",
-        "size": 3
-      }
-    },
-    "Up": {
-      "Upmethod": {
-        "name": "Upmethod",
-        "label": "Up Method",
-        "page": "Up",
-        "style": "Menu",
-        "menuNames": ["vector", "object", "points"],
-        "menuLabels": ["Up Vector", "Up at Object", "Up at Points"]
-      },
-      "Upvector": {
-        "name": "Upvector",
-        "label": "Up Vector",
-        "page": "Up",
-        "style": "Float",
-        "size": 3
-      },
-      "Upposition": {
-        "name": "Upposition",
-        "label": "Up Position",
-        "page": "Up",
-        "style": "Float",
-        "size": 3
-      },
-      "Displayguideup": {
-        "name": "Displayguideup",
-        "label": "Display Aim Guide",
-        "page": "Up",
-        "style": "Toggle"
-      },
-      "Guidescaleup": {
-        "name": "Guidescaleup",
-        "label": "Guide Scale",
-        "page": "Up",
-        "style": "Float"
-      },
-      "Colorup": {
-        "name": "Colorup",
-        "label": "Color",
-        "page": "Up",
-        "style": "RGBA",
-        "size": 3
-      }
-    },
-    "Orientation": {
-      "Aimaxis": {
-        "name": "Aimaxis",
-        "label": "Aim Axis",
-        "page": "Orientation",
-        "style": "Menu",
-        "menuNames": ["x", "y", "z"],
-        "menuLabels": ["X", "Y", "Z"]
-      },
-      "Upaxis": {
-        "name": "Upaxis",
-        "label": "Up Axis",
-        "page": "Orientation",
-        "style": "Menu",
-        "menuNames": ["x", "y", "z"],
-        "menuLabels": ["X", "Y", "Z"]
-      },
-      "Invertaim": {
-        "name": "Invertaim",
-        "label": "Invert Aim",
-        "page": "Orientation",
-        "style": "Toggle"
-      },
-      "Invertup": {
-        "name": "Invertup",
-        "label": "Invert Up",
-        "page": "Orientation",
-        "style": "Toggle"
-      },
-      "Constrainaroundup": {
-        "name": "Constrainaroundup",
-        "label": "Constrain Around Up",
-        "page": "Orientation",
-        "style": "Toggle"
-      }
-    },
-    "Common": {
-      "Bypass": {
-        "name": "Bypass",
-        "label": "Bypass",
-        "page": "Common",
-        "style": "Toggle"
-      },
-      "Freeextragpumem": {
-        "name": "Freeextragpumem",
-        "label": "Free Extra GPU Memory",
-        "page": "Common",
-        "style": "Pulse"
-      },
-      "Renderprimitives": {
-        "name": "Renderprimitives",
-        "label": "Render Primitives",
-        "page": "Common",
-        "style": "Toggle"
-      },
-      "Srtrst": {
-        "name": "Srtrst",
-        "label": "SRT / RST",
-        "page": "Common",
-        "style": "Toggle"
-      }
-    }
-  }
+	"parameterPages": {
+		"General": {
+			"Group": {
+				"name": "Group",
+				"tupletName": "Group",
+				"label": "Group",
+				"page": "General",
+				"sequence": null,
+				"style": "StrMenu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": "",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"tupletName": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "General",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": true,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"tupletName": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "General",
+				"sequence": null,
+				"style": "StrMenu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "popxFalloff",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Dofalloff",
+				"help": "",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			}
+		},
+		"Aim": {
+			"Aimmethod": {
+				"name": "Aimmethod",
+				"tupletName": "Aimmethod",
+				"label": "Aim Method",
+				"page": "Aim",
+				"sequence": null,
+				"style": "Menu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "object",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": "",
+				"menuNames": [
+					"vector",
+					"object",
+					"points"
+				],
+				"menuLabels": [
+					"Aim Vector",
+					"Aim at Object",
+					"Aim at Points"
+				]
+			},
+			"Aimvector": {
+				"name": "Aimvector",
+				"tupletName": "Aimvector",
+				"label": "Aim Vector",
+				"page": "Aim",
+				"sequence": null,
+				"style": "Float",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": [
+					0.0,
+					0.0,
+					1.0
+				],
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": "me.par.Aimmethod=='vector'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Aimposition": {
+				"name": "Aimposition",
+				"tupletName": "Aimposition",
+				"label": "Aim Position",
+				"page": "Aim",
+				"sequence": null,
+				"style": "Float",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": 0.0,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Aimmethod=='object'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Displayguideaim": {
+				"name": "Displayguideaim",
+				"tupletName": "Displayguideaim",
+				"label": "Display Aim Guide",
+				"page": "Aim",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": true,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": "me.par.Aimmethod=='object' or me.par.Aimmethod=='points'",
+				"help": ""
+			},
+			"Guidescaleaim": {
+				"name": "Guidescaleaim",
+				"tupletName": "Guidescaleaim",
+				"label": "Guide Scale",
+				"page": "Aim",
+				"sequence": null,
+				"style": "Float",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": 1.0,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Aimmethod=='object' or me.par.Aimmethod=='points'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 10.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Coloraim": {
+				"name": "Coloraim",
+				"tupletName": "Coloraim",
+				"label": "Color",
+				"page": "Aim",
+				"sequence": null,
+				"style": "RGBA",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": [
+					0.0,
+					0.5,
+					1.0
+				],
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Aimmethod=='object' or me.par.Aimmethod=='points'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			}
+		},
+		"Up": {
+			"Upmethod": {
+				"name": "Upmethod",
+				"tupletName": "Upmethod",
+				"label": "Up Method",
+				"page": "Up",
+				"sequence": null,
+				"style": "Menu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "vector",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": "",
+				"menuNames": [
+					"vector",
+					"object",
+					"points"
+				],
+				"menuLabels": [
+					"Up Vector",
+					"Up at Object",
+					"Up at Points"
+				]
+			},
+			"Upvector": {
+				"name": "Upvector",
+				"tupletName": "Upvector",
+				"label": "Up Vector",
+				"page": "Up",
+				"sequence": null,
+				"style": "Float",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": "me.par.Upmethod=='vector'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Upposition": {
+				"name": "Upposition",
+				"tupletName": "Upposition",
+				"label": "Up Position",
+				"page": "Up",
+				"sequence": null,
+				"style": "Float",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": 0.0,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Upmethod=='object' ",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Displayguideup": {
+				"name": "Displayguideup",
+				"tupletName": "Displayguideup",
+				"label": "Display Aim Guide",
+				"page": "Up",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": true,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": "me.par.Upmethod=='object' or me.par.Upmethod=='points'",
+				"help": ""
+			},
+			"Guidescaleup": {
+				"name": "Guidescaleup",
+				"tupletName": "Guidescaleup",
+				"label": "Guide Scale",
+				"page": "Up",
+				"sequence": null,
+				"style": "Float",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": 1.0,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Upmethod=='object' or me.par.Upmethod=='points'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 10.0,
+				"clampMin": false,
+				"clampMax": false
+			},
+			"Colorup": {
+				"name": "Colorup",
+				"tupletName": "Colorup",
+				"label": "Color",
+				"page": "Up",
+				"sequence": null,
+				"style": "RGBA",
+				"size": 3,
+				"defaultMode": "CONSTANT",
+				"default": [
+					0.95,
+					1.0,
+					0.5
+				],
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.par.Upmethod=='object' or me.par.Upmethod=='points'",
+				"help": "",
+				"min": 0.0,
+				"max": 1.0,
+				"normMin": 0.0,
+				"normMax": 1.0,
+				"clampMin": false,
+				"clampMax": false
+			}
+		},
+		"Orientation": {
+			"Aimaxis": {
+				"name": "Aimaxis",
+				"tupletName": "Aimaxis",
+				"label": "Aim Axis",
+				"page": "Orientation",
+				"sequence": null,
+				"style": "Menu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "z",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": "",
+				"menuNames": [
+					"x",
+					"y",
+					"z"
+				],
+				"menuLabels": [
+					"X",
+					"Y",
+					"Z"
+				]
+			},
+			"Upaxis": {
+				"name": "Upaxis",
+				"tupletName": "Upaxis",
+				"label": "Up Axis",
+				"page": "Orientation",
+				"sequence": null,
+				"style": "Menu",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": "y",
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": "",
+				"menuNames": [
+					"x",
+					"y",
+					"z"
+				],
+				"menuLabels": [
+					"X",
+					"Y",
+					"Z"
+				]
+			},
+			"Invertaim": {
+				"name": "Invertaim",
+				"tupletName": "Invertaim",
+				"label": "Invert Aim",
+				"page": "Orientation",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": false,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			},
+			"Invertup": {
+				"name": "Invertup",
+				"tupletName": "Invertup",
+				"label": "Invert Up",
+				"page": "Orientation",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": false,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			},
+			"Constrainaroundup": {
+				"name": "Constrainaroundup",
+				"tupletName": "Constrainaroundup",
+				"label": "Constrain Around Up",
+				"page": "Orientation",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": false,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"tupletName": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": false,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"tupletName": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"sequence": null,
+				"style": "Pulse",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": false,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": true,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": null,
+				"help": ""
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"tupletName": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": true,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": true,
+				"readOnly": false,
+				"enableExpr": "not me.op('./POPXExt').par.Generatortype=='None'",
+				"help": ""
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"tupletName": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"sequence": null,
+				"style": "Toggle",
+				"size": 1,
+				"defaultMode": "CONSTANT",
+				"default": true,
+				"defaultExpr": "",
+				"defaultBindExpr": "",
+				"enable": false,
+				"startSection": false,
+				"readOnly": false,
+				"enableExpr": "me.op('POPXExt').par.Method and not me.op('./POPXExt').par.Generatortype=='None'",
+				"help": ""
+			}
+		}
+	}
 }
