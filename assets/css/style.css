@@ -687,11 +687,13 @@ pre code {
   position: relative;
   flex-shrink: 0;
   margin-left: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  border-left: 1px solid var(--color-border);
 }
 
 .theme-selector-button {
   background: var(--color-bg-panel);
-  border: none;
+  border: none !important;
   border-radius: 0;
   padding: 10px 16px 10px 16px;
   color: var(--color-text-muted);
@@ -705,6 +707,15 @@ pre code {
   gap: 10px;
   position: relative;
   min-width: 110px;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.theme-selector-button * {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .theme-selector-button::after {
@@ -728,15 +739,39 @@ pre code {
 }
 
 .theme-selector-button:active,
-.theme-selector-button:focus {
-  outline: none;
-  box-shadow: none;
-  border: none;
+.theme-selector-button:focus,
+.theme-selector-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .theme-selector.active .theme-selector-button {
-  border: 1px solid var(--color-border);
-  border-bottom: none;
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  border: 1px solid var(--color-border) !important;
+  border-bottom: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-selector.active .theme-selector-button:focus,
+.theme-selector.active .theme-selector-button:active,
+.theme-selector.active .theme-selector-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid var(--color-border) !important;
+  border-bottom: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.theme-selector.active .theme-selector-button::after {
+  border-color: var(--color-text);
+}
+
+.theme-selector-button:active:not(.theme-selector.active .theme-selector-button) {
+  border: none !important;
 }
 
 .theme-icon {
@@ -751,7 +786,7 @@ pre code {
 .theme-selector-dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: var(--spacing-md);
   right: 0;
   background: var(--color-bg-elevated) !important;
   border: 1px solid var(--color-border);
@@ -777,6 +812,19 @@ pre code {
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
   border: none;
+  text-align: center;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.theme-option:focus,
+.theme-option:active,
+.theme-option:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 /* Dark mode - all dropdown items dark */
