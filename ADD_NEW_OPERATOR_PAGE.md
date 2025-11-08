@@ -580,6 +580,507 @@ POPX operator parameters are exported from TouchDesigner as JSON data. This data
 
 ---
 
+## Obtaining Complete Parameter Exports from TouchDesigner
+
+This section explains how to get **complete parameter exports** from TouchDesigner operators, which include all metadata needed for accurate documentation.
+
+### Why Complete Exports Matter
+
+Complete parameter exports include critical metadata that simplified exports lack:
+- `tupletName`: Groups related parameters
+- `sequence`: Parameter ordering within pages
+- `defaultMode`: How default values are set
+- `enableExpr`: Conditional parameter availability
+- `min`, `max`, `clampMin`, `clampMax`: Value constraints
+- `menuSource`: Dynamic menu population
+- All custom parameter properties
+
+### How to Export Complete Parameter Data
+
+1. **Open TouchDesigner** and load the POPX operator you want to document
+2. **Run the parameter introspection script** (contact POPX developers for the export script)
+3. **Copy the complete JSON output** - this will include all parameters across all pages
+4. **Save to `parameters.json`** in the operator's documentation directory
+
+**Example directory structure:**
+```
+docs/operators/modifiers/my-operator/
+├── index.html
+└── parameters.json  (complete export goes here)
+```
+
+### Complete vs Simplified Exports
+
+**Simplified Export (AVOID):**
+```json
+{
+  "Combineop": {
+    "name": "Combineop",
+    "label": "Combine Op",
+    "style": "Menu"
+  }
+}
+```
+
+**Complete Export (USE THIS):**
+```json
+{
+  "Combineop": {
+    "name": "Combineop",
+    "tupletName": "Combineop",
+    "label": "Combine Op",
+    "page": "Falloff",
+    "style": "Menu",
+    "order": 0,
+    "sequence": 0,
+    "size": 1,
+    "startSection": false,
+    "readOnly": false,
+    "default": 0,
+    "defaultMode": true,
+    "clampMin": false,
+    "clampMax": false,
+    "normMin": 0.0,
+    "normMax": 1.0,
+    "enable": true,
+    "enableExpr": null,
+    "menuNames": ["add", "sub", "mult", "div", "screen", "overlay", "max", "min", "set"],
+    "menuLabels": ["Add", "Substract", "Multiply", "Divide", "Screen", "Overlay", "Maximum", "Minimum", "Set"],
+    "menuIndex": 0,
+    "help": "Mathematical operation for combining attributes."
+  }
+}
+```
+
+### Critical Pattern: Menu vs StrMenu Parameters
+
+**This is extremely important** - there are two types of menu-style parameters, and they are handled **completely differently** in the HTML:
+
+#### Menu Parameters (style: "Menu")
+
+Fixed dropdown menus with predefined options. **MUST have sub-parameters in HTML.**
+
+**JSON Characteristics:**
+```json
+{
+  "style": "Menu",
+  "menuNames": ["add", "sub", "mult"],
+  "menuLabels": ["Add", "Subtract", "Multiply"]
+}
+```
+
+**HTML Structure (param-group with sub-parameters):**
+```html
+<div class="param-group">
+  <div class="param-group-header">
+    <span class="param-label">Combine Op</span>
+    <span class="param-name">Combineop</span>
+    <span class="param-separator">–</span>
+    <span class="param-toggle"></span>
+    <span class="param-separator">–</span>
+    <span class="param-group-description">Mathematical operation.</span>
+  </div>
+  <div class="param-subparams">
+    <div class="param-subparam">
+      <span class="param-label">Add</span>
+      <span class="param-name">add</span>
+    </div>
+    <div class="param-subparam">
+      <span class="param-label">Subtract</span>
+      <span class="param-name">sub</span>
+    </div>
+    <div class="param-subparam">
+      <span class="param-label">Multiply</span>
+      <span class="param-name">mult</span>
+    </div>
+  </div>
+</div>
+```
+
+#### StrMenu Parameters (style: "StrMenu")
+
+Dynamic attribute menus populated at runtime. **NO sub-parameters - treat as simple parameter.**
+
+**JSON Characteristics:**
+```json
+{
+  "style": "StrMenu",
+  "menuSource": "op('./somenode').par.someparam",
+  "menuNames": [],
+  "menuLabels": []
+}
+```
+
+**HTML Structure (parameter-item WITHOUT sub-parameters):**
+```html
+<div class="parameter-item">
+  <div class="param-header">
+    <span class="param-label">Falloff Attribute</span>
+    <span class="param-name">Falloffattr</span>
+    <span class="param-separator">–</span>
+    <span class="param-description">Name of the falloff attribute to use.</span>
+  </div>
+</div>
+```
+
+**Key Rule:**
+- `style: "Menu"` → Use `<div class="param-group">` with `<div class="param-subparams">`
+- `style: "StrMenu"` → Use `<div class="parameter-item">` (like Float, Int, Toggle)
+
+### Menu Parameter Naming Conventions
+
+For Menu parameters, there are two parallel arrays:
+
+**menuLabels**: User-friendly display text (capitalized, readable)
+- Examples: "Add", "Substract", "Multiply", "Scale Rotate Translate"
+
+**menuNames**: Internal identifiers (lowercase, abbreviated)
+- Examples: "add", "sub", "mult", "srt"
+
+**HTML Pattern:**
+```html
+<div class="param-subparam">
+  <span class="param-label">[menuLabels[i]]</span>
+  <span class="param-name">[menuNames[i]]</span>
+</div>
+```
+
+**Real Example:**
+```json
+"menuLabels": ["Add", "Substract", "Multiply"],
+"menuNames": ["add", "sub", "mult"]
+```
+
+Becomes:
+```html
+<div class="param-subparam">
+  <span class="param-label">Add</span>
+  <span class="param-name">add</span>
+</div>
+<div class="param-subparam">
+  <span class="param-label">Substract</span>
+  <span class="param-name">sub</span>
+</div>
+<div class="param-subparam">
+  <span class="param-label">Multiply</span>
+  <span class="param-name">mult</span>
+</div>
+```
+
+### Bulk Navigation Updates with sed
+
+When adding or removing operators, you need to update navigation across **all ~30+ HTML files**. Use sed for efficient bulk updates.
+
+**Add navigation link to all files:**
+```bash
+# From the root POPX directory
+find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/existing-operator\/">Existing Operator<\/a><\/li>/a\    <li><a href="RELATIVE_PATH\/my-new-operator\/">My New Operator<\/a><\/li>' {} \;
+```
+
+**Remove navigation link from all files:**
+```bash
+find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/obsolete-operator\/">Obsolete Operator<\/a><\/li>/d' {} \;
+```
+
+**Important Notes:**
+- Paths in sed must match the pattern used across files (use `.*` for flexible path matching)
+- Alphabetical order must be maintained manually
+- Main `index.html` may need separate manual update due to different path structure
+- Always verify changes with grep after running sed
+
+**Verification command:**
+```bash
+# Check that the link was added/removed correctly
+grep -r "My New Operator" docs/
+```
+
+---
+
+## Navigation and Search Integration
+
+When adding a new operator, you must update **three separate navigation systems**:
+
+### 1. Sidebar Navigation (All Pages)
+
+**Files to Update:** ALL ~30+ HTML files across the entire site
+- `index.html` (homepage)
+- All files in `docs/guides/`
+- All files in `docs/operators/generators/`
+- All files in `docs/operators/falloffs/`
+- All files in `docs/operators/modifiers/`
+- All files in `docs/operators/tools/`
+- All files in `docs/operators/simulations/`
+- All files in `docs/contact/`
+
+**What to Update:**
+Add your new operator link to the appropriate sidebar section in alphabetical order.
+
+**Example - Adding "Noise Modifier" to Modifiers section:**
+```html
+<div class="sidebar-subsection">
+  <h4>Modifiers</h4>
+  <div class="sidebar-subsection-content">
+    <ul>
+      <li><a href="../../../operators/modifiers/aim/">Aim</a></li>
+      <li><a href="../../../operators/modifiers/color-modifier/">Color Modifier</a></li>
+      <li><a href="../../../operators/modifiers/magnetize/">Magnetize</a></li>
+      <!-- Add new operator here -->
+      <li><a href="../../../operators/modifiers/noise-modifier/">Noise Modifier</a></li>
+      <li><a href="../../../operators/modifiers/move-along-curve/">Move Along Curve</a></li>
+    </ul>
+  </div>
+</div>
+```
+
+**Path Adjustments:**
+Paths are relative to each file's location. You MUST adjust the path depth:
+- From `index.html` (root): `docs/operators/modifiers/noise-modifier/`
+- From `docs/guides/getting-started/index.html`: `../../operators/modifiers/noise-modifier/`
+- From `docs/operators/modifiers/aim/index.html`: `../noise-modifier/`
+- From `docs/operators/generators/convert/index.html`: `../../modifiers/noise-modifier/`
+
+**Bulk Update with sed:**
+```bash
+# Add link to all pages (example - adjust paths as needed)
+find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/magnetize\/">Magnetize<\/a><\/li>/a\    <li><a href="ADJUST_PATH\/noise-modifier\/">Noise Modifier<\/a><\/li>' {} \;
+```
+
+### 2. Prev/Next Navigation Buttons
+
+**Files to Update:** Only the 2 operators immediately surrounding your new operator
+
+**What to Update:**
+- **Previous operator**: Change its `next` button to point to your new operator
+- **Next operator**: Change its `prev` button to point to your new operator
+
+**Example - Inserting "Noise Modifier" between "Magnetize" and "Move Along Curve":**
+
+**In `magnetize/index.html`** - Update next button:
+```html
+<!-- OLD -->
+<nav class="page-nav">
+  <a href="../color-modifier/" class="page-nav-link page-nav-prev">
+    <div class="page-nav-arrow">←</div>
+    <div class="page-nav-label">
+      <div class="page-nav-title">Color Modifier</div>
+    </div>
+  </a>
+  <a href="../move-along-curve/" class="page-nav-link page-nav-next">
+    <div class="page-nav-label">
+      <div class="page-nav-title">Move Along Curve</div>
+    </div>
+    <div class="page-nav-arrow">→</div>
+  </a>
+</nav>
+
+<!-- NEW -->
+<nav class="page-nav">
+  <a href="../color-modifier/" class="page-nav-link page-nav-prev">
+    <div class="page-nav-arrow">←</div>
+    <div class="page-nav-label">
+      <div class="page-nav-title">Color Modifier</div>
+    </div>
+  </a>
+  <a href="../noise-modifier/" class="page-nav-link page-nav-next">
+    <div class="page-nav-label">
+      <div class="page-nav-title">Noise Modifier</div>
+    </div>
+    <div class="page-nav-arrow">→</div>
+  </a>
+</nav>
+```
+
+**In `move-along-curve/index.html`** - Update prev button:
+```html
+<!-- OLD -->
+<nav class="page-nav">
+  <a href="../magnetize/" class="page-nav-link page-nav-prev">
+    <div class="page-nav-arrow">←</div>
+    <div class="page-nav-label">
+      <div class="page-nav-title">Magnetize</div>
+    </div>
+  </a>
+  <a href="../move-along-mesh/" class="page-nav-link page-nav-next">
+    <div class="page-nav-label">
+      <div class="page-nav-title">Move Along Mesh</div>
+    </div>
+    <div class="page-nav-arrow">→</div>
+  </a>
+</nav>
+
+<!-- NEW -->
+<nav class="page-nav">
+  <a href="../noise-modifier/" class="page-nav-link page-nav-prev">
+    <div class="page-nav-arrow">←</div>
+    <div class="page-nav-label">
+      <div class="page-nav-title">Noise Modifier</div>
+    </div>
+  </a>
+  <a href="../move-along-mesh/" class="page-nav-link page-nav-next">
+    <div class="page-nav-label">
+      <div class="page-nav-title">Move Along Mesh</div>
+    </div>
+    <div class="page-nav-arrow">→</div>
+  </a>
+</nav>
+```
+
+**In your new operator `noise-modifier/index.html`:**
+```html
+<nav class="page-nav">
+  <a href="../magnetize/" class="page-nav-link page-nav-prev">
+    <div class="page-nav-arrow">←</div>
+    <div class="page-nav-label">
+      <div class="page-nav-title">Magnetize</div>
+    </div>
+  </a>
+  <a href="../move-along-curve/" class="page-nav-link page-nav-next">
+    <div class="page-nav-label">
+      <div class="page-nav-title">Move Along Curve</div>
+    </div>
+    <div class="page-nav-arrow">→</div>
+  </a>
+</nav>
+```
+
+### 3. Search Functionality
+
+**Good News:** Search is automatically handled by `assets/js/script.js` - no manual updates needed!
+
+**What Gets Indexed:**
+The search system automatically crawls and indexes:
+- Page titles (h1 tags)
+- Section headings (h2 tags)
+- Parameter page headings (h3 with class="page-heading")
+- Parameter labels and names
+- Parameter descriptions
+- Summary text
+
+**Requirements for Search to Work:**
+1. **Page must be in sidebar navigation** - Search only indexes pages linked in the navigation
+2. **Proper heading hierarchy** - Use h1 for title, h2 for major sections, h3 for parameter pages
+3. **Semantic HTML structure** - Follow the established parameter documentation patterns
+
+**Example heading structure for good search results:**
+```html
+<article class="operator-page">
+  <h1>Noise Modifier</h1>  <!-- Indexed: main title -->
+
+  <section class="summary">
+    <p>Adds procedural noise to particle attributes.</p>  <!-- Indexed: summary -->
+  </section>
+
+  <section id="parameters" class="parameters">
+    <h2>Parameters</h2>  <!-- Indexed: section title -->
+
+    <h3 class="page-heading">Noise</h3>  <!-- Indexed: parameter page -->
+    <h3 class="page-heading">Transform</h3>  <!-- Indexed: parameter page -->
+
+    <div class="parameter-item">
+      <div class="param-header">
+        <span class="param-label">Amplitude</span>  <!-- Indexed: parameter label -->
+        <span class="param-name">Amplitude</span>  <!-- Indexed: parameter name -->
+        <span class="param-description">Strength of the noise effect.</span>  <!-- Indexed: description -->
+      </div>
+    </div>
+  </section>
+
+  <section id="inputs-outputs">
+    <h2>Inputs and Outputs</h2>  <!-- Indexed: section title -->
+  </section>
+</article>
+```
+
+**Search Result Format:**
+When users search, results show:
+- **Page title** (e.g., "Noise Modifier")
+- **Section** where the match was found (e.g., "Parameters > Noise")
+- **Snippet** of matching text with highlighting
+
+**Testing Search:**
+1. Add your operator to the sidebar navigation
+2. Open the site in a browser
+3. Type your operator name in the search bar
+4. Verify it appears in results
+5. Verify clicking the result navigates to your page
+6. Try searching for specific parameters - they should also appear
+
+**Common Search Issues:**
+
+❌ **Issue:** New operator doesn't appear in search
+✅ **Solution:** Check that it's linked in the sidebar navigation
+
+❌ **Issue:** Parameters don't show up in search results
+✅ **Solution:** Ensure proper HTML structure with param-label and param-description
+
+❌ **Issue:** Search results don't show correct section
+✅ **Solution:** Add `class="page-heading"` to parameter page h3 tags
+
+### Navigation Update Checklist
+
+When adding a new operator, verify:
+
+#### ✓ Sidebar Navigation
+- [ ] Added to **all ~30+ HTML files** (homepage, guides, all operators, contact pages)
+- [ ] Link added in correct category section
+- [ ] Maintained alphabetical order
+- [ ] Paths adjusted correctly for each file's location
+- [ ] All sidebar links tested and working
+
+#### ✓ Prev/Next Navigation
+- [ ] Updated **previous operator's next button** to point to new operator
+- [ ] Updated **next operator's prev button** to point to new operator
+- [ ] New operator's prev/next buttons point to correct surrounding operators
+- [ ] Navigation chain tested - clicking through works correctly
+
+#### ✓ Search Integration
+- [ ] Page linked in sidebar (requirement for search indexing)
+- [ ] Proper heading hierarchy (h1, h2, h3 with page-heading class)
+- [ ] Parameter labels and descriptions are complete
+- [ ] Search bar finds the new operator by name
+- [ ] Search finds specific parameters
+- [ ] Search results link correctly to the page
+
+### Quick Update Workflow
+
+**Step 1: Update Sidebar (All Files)**
+```bash
+# Use sed to add link to all files (adjust pattern and paths)
+find docs -name "*.html" -type f -exec sed -i '/<li><a href=".*\/existing-operator\/">Existing Operator<\/a><\/li>/a\    <li><a href="RELATIVE_PATH\/new-operator\/">New Operator<\/a><\/li>' {} \;
+
+# Manually update main index.html (different path structure)
+# Edit: index.html
+```
+
+**Step 2: Update Prev/Next (2 Files Only)**
+```bash
+# Manually edit the 2 surrounding operator files
+# Edit: docs/operators/category/previous-operator/index.html (next button)
+# Edit: docs/operators/category/next-operator/index.html (prev button)
+```
+
+**Step 3: Verify Search (Automatic)**
+```bash
+# No code changes needed - just test in browser:
+# 1. Open site
+# 2. Type operator name in search bar
+# 3. Verify results appear
+# 4. Click result and verify navigation works
+```
+
+**Step 4: Verification**
+```bash
+# Check sidebar was updated everywhere
+grep -r "New Operator" docs/ | wc -l
+# Should show ~30+ matches (one per file)
+
+# Check prev/next navigation updated
+grep -A5 -B5 "page-nav" docs/operators/category/previous-operator/index.html
+grep -A5 -B5 "page-nav" docs/operators/category/next-operator/index.html
+```
+
+---
+
 ## JSON Parameter Structure
 
 ### Basic Parameter Fields
