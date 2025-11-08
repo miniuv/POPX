@@ -1,0 +1,302 @@
+{
+	"parameterPages": {
+		"Noise": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Noise",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Noise",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Noise",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			},
+			"Noisesignature": {
+				"name": "Noisesignature",
+				"label": "Noise Signature",
+				"page": "Noise",
+				"style": "Menu",
+				"menuNames": [
+					"scalar",
+					"vector"
+				],
+				"menuLabels": [
+					"Scalar",
+					"Vector"
+				]
+			},
+			"Userestattr": {
+				"name": "Userestattr",
+				"label": "Use Rest Attribute",
+				"page": "Noise",
+				"style": "Toggle"
+			},
+			"Enabledirattr": {
+				"name": "Enabledirattr",
+				"label": "Enable Direction from Attribute",
+				"page": "Noise",
+				"style": "Toggle"
+			},
+			"Defaultdir": {
+				"name": "Defaultdir",
+				"label": "Default Direction",
+				"page": "Noise",
+				"style": "Int",
+				"size": 3
+			},
+			"Directionattr": {
+				"name": "Directionattr",
+				"label": "Direction Attribute",
+				"page": "Noise",
+				"style": "StrMenu",
+				"menuSource": "op('./noise/dir_att').par.ren0from"
+			},
+			"Curlnoise": {
+				"name": "Curlnoise",
+				"label": "Curl Noise",
+				"page": "Noise",
+				"style": "Toggle"
+			},
+			"Type": {
+				"name": "Type",
+				"label": "Type",
+				"page": "Noise",
+				"style": "Menu",
+				"menuSource": "op('./noise/noise').par.type"
+			},
+			"Seed": {
+				"name": "Seed",
+				"label": "Seed",
+				"page": "Noise",
+				"style": "Float"
+			},
+			"Period": {
+				"name": "Period",
+				"label": "Period",
+				"page": "Noise",
+				"style": "Float"
+			},
+			"Harmon": {
+				"name": "Harmon",
+				"label": "Harmonics",
+				"page": "Noise",
+				"style": "Int"
+			},
+			"Spread": {
+				"name": "Spread",
+				"label": "Harmonic Spread",
+				"page": "Noise",
+				"style": "Float"
+			},
+			"Gain": {
+				"name": "Gain",
+				"label": "Harmonic Gain",
+				"page": "Noise",
+				"style": "Float"
+			},
+			"Amp": {
+				"name": "Amp",
+				"label": "Amplitude",
+				"page": "Noise",
+				"style": "Float",
+				"size": 3
+			},
+			"Exp": {
+				"name": "Exp",
+				"label": "Exponent",
+				"page": "Noise",
+				"style": "Float",
+				"size": 3
+			},
+			"Offset": {
+				"name": "Offset",
+				"label": "Offset",
+				"page": "Noise",
+				"style": "Float",
+				"size": 3
+			}
+		},
+		"Transform": {
+			"Xord": {
+				"name": "Xord",
+				"label": "Transform Order",
+				"page": "Transform",
+				"style": "Menu",
+				"menuSource": "op('./noise/noise').par.xord"
+			},
+			"Rord": {
+				"name": "Rord",
+				"label": "Rotate Order",
+				"page": "Transform",
+				"style": "Menu",
+				"menuSource": "op('./noise/noise').par.rord"
+			},
+			"T": {
+				"name": "T",
+				"label": "Translate",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"R": {
+				"name": "R",
+				"label": "Rotate",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"S": {
+				"name": "S",
+				"label": "Scale",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"P": {
+				"name": "P",
+				"label": "Pivot",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"T4d": {
+				"name": "T4d",
+				"label": "Translate 4D",
+				"page": "Transform",
+				"style": "Float"
+			}
+		},
+		"Affect": {
+			"Mode": {
+				"name": "Mode",
+				"label": "Mode",
+				"page": "Affect",
+				"style": "Menu",
+				"menuNames": [
+					"simple",
+					"advect"
+				],
+				"menuLabels": [
+					"Simple",
+					"Advect"
+				]
+			},
+			"Affectposition": {
+				"name": "Affectposition",
+				"label": "Affect Position",
+				"page": "Affect",
+				"style": "Toggle"
+			},
+			"Positionamount": {
+				"name": "Positionamount",
+				"label": "Position Amount",
+				"page": "Affect",
+				"style": "Float"
+			},
+			"Affectrotation": {
+				"name": "Affectrotation",
+				"label": "Affect Rotation",
+				"page": "Affect",
+				"style": "Toggle"
+			},
+			"Rotationamount": {
+				"name": "Rotationamount",
+				"label": "Rotation Amount",
+				"page": "Affect",
+				"style": "Float"
+			},
+			"Aimweight": {
+				"name": "Aimweight",
+				"label": "Aim Weight",
+				"page": "Affect",
+				"style": "Float"
+			},
+			"Affectscale": {
+				"name": "Affectscale",
+				"label": "Affect Scale",
+				"page": "Affect",
+				"style": "Toggle"
+			},
+			"Scaleamount": {
+				"name": "Scaleamount",
+				"label": "Scale Amount",
+				"page": "Affect",
+				"style": "Float"
+			},
+			"Scaleinrange": {
+				"name": "Scaleinrange",
+				"label": "Scale In Range",
+				"page": "Affect",
+				"style": "Float",
+				"size": 2
+			},
+			"Scaleoutrange": {
+				"name": "Scaleoutrange",
+				"label": "Scale Out Range",
+				"page": "Affect",
+				"style": "Float",
+				"size": 2
+			},
+			"Initializepulse": {
+				"name": "Initializepulse",
+				"label": "Initialize",
+				"page": "Affect",
+				"style": "Pulse"
+			},
+			"Startpulse": {
+				"name": "Startpulse",
+				"label": "Start",
+				"page": "Affect",
+				"style": "Pulse"
+			},
+			"Play": {
+				"name": "Play",
+				"label": "Play",
+				"page": "Affect",
+				"style": "Toggle"
+			},
+			"Steppulse": {
+				"name": "Steppulse",
+				"label": "Step",
+				"page": "Affect",
+				"style": "Pulse"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

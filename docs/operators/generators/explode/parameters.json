@@ -1,0 +1,22 @@
+{
+  "parameterPages": {
+    "Define Pieces": {
+      "Method": {
+        "name": "Method",
+        "label": "Partition Method",
+        "page": "Define Pieces",
+        "style": "Menu",
+        "menuNames": ["primnum", "cluster"],
+        "menuLabels": ["Primitive Number", "Clustering"]
+      },
+      "Scattermethod": {
+        "name": "Scattermethod",
+        "label": "Scatter Method",
+        "page": "Define Pieces",
+        "style": "Menu",
+        "menuNames": ["perprim", "volnondeterministic", "vol"],
+        "menuLabels": ["Per Primitive", "Volume (Non-Deterministic)", "Volume"]
+      }
+    }
+  }
+}

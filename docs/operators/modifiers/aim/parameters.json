@@ -1,0 +1,174 @@
+{
+  "parameterPages": {
+    "General": {
+      "Group": {
+        "name": "Group",
+        "label": "Group",
+        "page": "General",
+        "style": "StrMenu",
+        "menuSource": "op('./applyatt/applyatt/igroup').par.group"
+      },
+      "Dofalloff": {
+        "name": "Dofalloff",
+        "label": "Do Falloff",
+        "page": "General",
+        "style": "Toggle"
+      },
+      "Falloffattr": {
+        "name": "Falloffattr",
+        "label": "Falloff Attribute",
+        "page": "General",
+        "style": "StrMenu",
+        "menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+      }
+    },
+    "Aim": {
+      "Aimmethod": {
+        "name": "Aimmethod",
+        "label": "Aim Method",
+        "page": "Aim",
+        "style": "Menu",
+        "menuNames": ["vector", "object", "points"],
+        "menuLabels": ["Aim Vector", "Aim at Object", "Aim at Points"]
+      },
+      "Aimvector": {
+        "name": "Aimvector",
+        "label": "Aim Vector",
+        "page": "Aim",
+        "style": "Float",
+        "size": 3
+      },
+      "Aimposition": {
+        "name": "Aimposition",
+        "label": "Aim Position",
+        "page": "Aim",
+        "style": "Float",
+        "size": 3
+      },
+      "Displayguideaim": {
+        "name": "Displayguideaim",
+        "label": "Display Aim Guide",
+        "page": "Aim",
+        "style": "Toggle"
+      },
+      "Guidescaleaim": {
+        "name": "Guidescaleaim",
+        "label": "Guide Scale",
+        "page": "Aim",
+        "style": "Float"
+      },
+      "Coloraim": {
+        "name": "Coloraim",
+        "label": "Color",
+        "page": "Aim",
+        "style": "RGBA",
+        "size": 3
+      }
+    },
+    "Up": {
+      "Upmethod": {
+        "name": "Upmethod",
+        "label": "Up Method",
+        "page": "Up",
+        "style": "Menu",
+        "menuNames": ["vector", "object", "points"],
+        "menuLabels": ["Up Vector", "Up at Object", "Up at Points"]
+      },
+      "Upvector": {
+        "name": "Upvector",
+        "label": "Up Vector",
+        "page": "Up",
+        "style": "Float",
+        "size": 3
+      },
+      "Upposition": {
+        "name": "Upposition",
+        "label": "Up Position",
+        "page": "Up",
+        "style": "Float",
+        "size": 3
+      },
+      "Displayguideup": {
+        "name": "Displayguideup",
+        "label": "Display Aim Guide",
+        "page": "Up",
+        "style": "Toggle"
+      },
+      "Guidescaleup": {
+        "name": "Guidescaleup",
+        "label": "Guide Scale",
+        "page": "Up",
+        "style": "Float"
+      },
+      "Colorup": {
+        "name": "Colorup",
+        "label": "Color",
+        "page": "Up",
+        "style": "RGBA",
+        "size": 3
+      }
+    },
+    "Orientation": {
+      "Aimaxis": {
+        "name": "Aimaxis",
+        "label": "Aim Axis",
+        "page": "Orientation",
+        "style": "Menu",
+        "menuNames": ["x", "y", "z"],
+        "menuLabels": ["X", "Y", "Z"]
+      },
+      "Upaxis": {
+        "name": "Upaxis",
+        "label": "Up Axis",
+        "page": "Orientation",
+        "style": "Menu",
+        "menuNames": ["x", "y", "z"],
+        "menuLabels": ["X", "Y", "Z"]
+      },
+      "Invertaim": {
+        "name": "Invertaim",
+        "label": "Invert Aim",
+        "page": "Orientation",
+        "style": "Toggle"
+      },
+      "Invertup": {
+        "name": "Invertup",
+        "label": "Invert Up",
+        "page": "Orientation",
+        "style": "Toggle"
+      },
+      "Constrainaroundup": {
+        "name": "Constrainaroundup",
+        "label": "Constrain Around Up",
+        "page": "Orientation",
+        "style": "Toggle"
+      }
+    },
+    "Common": {
+      "Bypass": {
+        "name": "Bypass",
+        "label": "Bypass",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Freeextragpumem": {
+        "name": "Freeextragpumem",
+        "label": "Free Extra GPU Memory",
+        "page": "Common",
+        "style": "Pulse"
+      },
+      "Renderprimitives": {
+        "name": "Renderprimitives",
+        "label": "Render Primitives",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Srtrst": {
+        "name": "Srtrst",
+        "label": "SRT / RST",
+        "page": "Common",
+        "style": "Toggle"
+      }
+    }
+  }
+}

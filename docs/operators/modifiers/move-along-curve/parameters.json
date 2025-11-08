@@ -1,0 +1,540 @@
+{
+	"parameterPages": {
+		"Move Along Curve": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Move Along Curve",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Curve": {
+				"name": "Curve",
+				"label": "Curve to Attach To",
+				"page": "Move Along Curve",
+				"style": "POP"
+			},
+			"Displaycurve": {
+				"name": "Displaycurve",
+				"label": "Display Curve",
+				"page": "Move Along Curve",
+				"style": "Toggle"
+			},
+			"Color": {
+				"name": "Color",
+				"label": "Color",
+				"page": "Move Along Curve",
+				"style": "RGBA",
+				"size": 3
+			},
+			"Mode": {
+				"name": "Mode",
+				"label": "Mode",
+				"page": "Move Along Curve",
+				"style": "Menu",
+				"menuNames": [
+					"simple",
+					"solver"
+				],
+				"menuLabels": [
+					"Simple",
+					"Solver"
+				]
+			},
+			"Initializepulse": {
+				"name": "Initializepulse",
+				"label": "Initialize",
+				"page": "Move Along Curve",
+				"style": "Pulse"
+			},
+			"Startpulse": {
+				"name": "Startpulse",
+				"label": "Start",
+				"page": "Move Along Curve",
+				"style": "Pulse"
+			},
+			"Play": {
+				"name": "Play",
+				"label": "Play",
+				"page": "Move Along Curve",
+				"style": "Toggle"
+			},
+			"Steppulse": {
+				"name": "Steppulse",
+				"label": "Step",
+				"page": "Move Along Curve",
+				"style": "Pulse"
+			}
+		},
+		"Attach": {
+			"Locktocurve": {
+				"name": "Locktocurve",
+				"label": "Lock to Curve",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Reattachtocurve": {
+				"name": "Reattachtocurve",
+				"label": "Reattach to Curve",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Curveselectmode": {
+				"name": "Curveselectmode",
+				"label": "Curve Select Mode",
+				"page": "Attach",
+				"style": "Menu",
+				"menuNames": [
+					"primi",
+					"nearest",
+					"dist"
+				],
+				"menuLabels": [
+					"Primitive Index",
+					"Use Nearest",
+					"Distribute"
+				]
+			},
+			"Primitiveindex": {
+				"name": "Primitiveindex",
+				"label": "Primitive Index",
+				"page": "Attach",
+				"style": "Int"
+			},
+			"Attachmethod": {
+				"name": "Attachmethod",
+				"label": "Attach Method",
+				"page": "Attach",
+				"style": "Menu",
+				"menuNames": [
+					"nearest",
+					"dist",
+					"attr"
+				],
+				"menuLabels": [
+					"Nearest Point",
+					"Distribute",
+					"Attribute"
+				]
+			},
+			"Searchdistance": {
+				"name": "Searchdistance",
+				"label": "Search Distance",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Attachattr": {
+				"name": "Attachattr",
+				"label": "Attach Attribute",
+				"page": "Attach",
+				"style": "StrMenu",
+				"menuSource": "op('./move_along/iattribute').par.dup0name"
+			},
+			"Snaptocentroid": {
+				"name": "Snaptocentroid",
+				"label": "Snap Centroid to Curve Start",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Doorientsnap": {
+				"name": "Doorientsnap",
+				"label": "Do Orient Snap",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Normalaxis": {
+				"name": "Normalaxis",
+				"label": "Normal Axis",
+				"page": "Attach",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Upaxis": {
+				"name": "Upaxis",
+				"label": "Up Axis",
+				"page": "Attach",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Offset": {
+				"name": "Offset",
+				"label": "Offset",
+				"page": "Attach",
+				"style": "Header"
+			},
+			"Visualizeoffset": {
+				"name": "Visualizeoffset",
+				"label": "Visualize Offset",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Fetchoffsetslines": {
+				"name": "Fetchoffsetslines",
+				"label": "Fetch Offsets Lines",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Maintainoffset": {
+				"name": "Maintainoffset",
+				"label": "Maintain Offset",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Offsetramp": {
+				"name": "Offsetramp",
+				"label": "Open Offset Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Resetoffsetramp": {
+				"name": "Resetoffsetramp",
+				"label": "Reset Offset Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Ramptopoffset": {
+				"name": "Ramptopoffset",
+				"label": "Ramp TOP Offset",
+				"page": "Attach",
+				"style": "TOP"
+			},
+			"Maintainorientoffset": {
+				"name": "Maintainorientoffset",
+				"label": "Maintain Orient Offset",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Orientoffsetramp": {
+				"name": "Orientoffsetramp",
+				"label": "Open Orient Offset Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Resetorientoffsetramp": {
+				"name": "Resetorientoffsetramp",
+				"label": "Reset Orient Offset Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Ramptoporient": {
+				"name": "Ramptoporient",
+				"label": "Ramp TOP Orient",
+				"page": "Attach",
+				"style": "TOP"
+			},
+			"Reorientcurve": {
+				"name": "Reorientcurve",
+				"label": "Reorient Curve",
+				"page": "Attach",
+				"style": "Header"
+			},
+			"Reorientinputcurve": {
+				"name": "Reorientinputcurve",
+				"label": "Reorient Input Curve",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Inverttangent": {
+				"name": "Inverttangent",
+				"label": "Invert Tangent",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Customfirsttangent": {
+				"name": "Customfirsttangent",
+				"label": "Custom First Tangent",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Firsttangent": {
+				"name": "Firsttangent",
+				"label": "First Tangent",
+				"page": "Attach",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Twistamount": {
+				"name": "Twistamount",
+				"label": "Twist Amount",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Twistramp": {
+				"name": "Twistramp",
+				"label": "Open Twist Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Resettwistramp": {
+				"name": "Resettwistramp",
+				"label": "Reset Twist Ramp",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Ramptoptwistcurve": {
+				"name": "Ramptoptwistcurve",
+				"label": "Ramp TOP Twist Curve",
+				"page": "Attach",
+				"style": "TOP"
+			},
+			"Twistpercurve": {
+				"name": "Twistpercurve",
+				"label": "Twist Per Curve",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Resamplecurve": {
+				"name": "Resamplecurve",
+				"label": "Resample Curve",
+				"page": "Attach",
+				"style": "Header"
+			},
+			"Resamplemethod": {
+				"name": "Resamplemethod",
+				"label": "Resample Method",
+				"page": "Attach",
+				"style": "Menu",
+				"menuNames": [
+					"none",
+					"linestrip",
+					"dist"
+				],
+				"menuLabels": [
+					"None",
+					"Divisions per Line Strip",
+					"Distance between Points"
+				]
+			},
+			"Resampledivs": {
+				"name": "Resampledivs",
+				"label": "Divisions",
+				"page": "Attach",
+				"style": "Int"
+			},
+			"Resamplemaxdist": {
+				"name": "Resamplemaxdist",
+				"label": "Max Distance",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Maxverts": {
+				"name": "Maxverts",
+				"label": "Maximum Number of Vertices",
+				"page": "Attach",
+				"style": "Int"
+			},
+			"Maxtries": {
+				"name": "Maxtries",
+				"label": "Max Tries for Binary Search",
+				"page": "Attach",
+				"style": "Int"
+			}
+		},
+		"Animate": {
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Falloffaffectsspeed": {
+				"name": "Falloffaffectsspeed",
+				"label": "Falloff Affects Speed",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Falloffaffectsrotation": {
+				"name": "Falloffaffectsrotation",
+				"label": "Falloff Affects Rotation",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Animate",
+				"style": "StrMenu",
+				"menuSource": "op('./move_along/dup_ifalloff').par.dup0name"
+			},
+			"Goaltype": {
+				"name": "Goaltype",
+				"label": "Goal Type",
+				"page": "Animate",
+				"style": "Menu",
+				"menuNames": [
+					"goalu",
+					"arclen"
+				],
+				"menuLabels": [
+					"Goal U",
+					"Arc Length"
+				]
+			},
+			"Goal": {
+				"name": "Goal",
+				"label": "Goal",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Speed": {
+				"name": "Speed",
+				"label": "Speed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Randomspeed": {
+				"name": "Randomspeed",
+				"label": "Random Speed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Seedspeed": {
+				"name": "Seedspeed",
+				"label": "Seed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Reverse": {
+				"name": "Reverse",
+				"label": "Reverse",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Aligntocurve": {
+				"name": "Aligntocurve",
+				"label": "Align to Curve",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Wrap": {
+				"name": "Wrap",
+				"label": "Wrap",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Outputgoalattributes": {
+				"name": "Outputgoalattributes",
+				"label": "Output Goal Attributes",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Twist": {
+				"name": "Twist",
+				"label": "Twist",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Twistamountanimae": {
+				"name": "Twistamountanimae",
+				"label": "Twist Amount",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Twistrampanimate": {
+				"name": "Twistrampanimate",
+				"label": "Open Twist Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Resettwistrampanimate": {
+				"name": "Resettwistrampanimate",
+				"label": "Reset Twist Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Ramptoptwist": {
+				"name": "Ramptoptwist",
+				"label": "Ramp TOP Twist",
+				"page": "Animate",
+				"style": "TOP"
+			},
+			"Scale": {
+				"name": "Scale",
+				"label": "Scale",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Scalebygoal": {
+				"name": "Scalebygoal",
+				"label": "Scale by Goal",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Remapscale": {
+				"name": "Remapscale",
+				"label": "Remap Scale",
+				"page": "Animate",
+				"style": "XYZW",
+				"size": 2
+			},
+			"Scaleramp": {
+				"name": "Scaleramp",
+				"label": "Open Scale Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Resetscaleramp": {
+				"name": "Resetscaleramp",
+				"label": "Reset Scale Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Ramptopscale": {
+				"name": "Ramptopscale",
+				"label": "Ramp TOP Scale",
+				"page": "Animate",
+				"style": "TOP"
+			},
+			"Acceleration": {
+				"name": "Acceleration",
+				"label": "Acceleration",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Accramp": {
+				"name": "Accramp",
+				"label": "Open Acceleration Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Resetaccramp": {
+				"name": "Resetaccramp",
+				"label": "Reset Acceleration Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Ramptopacc": {
+				"name": "Ramptopacc",
+				"label": "Ramp TOP Acceleration",
+				"page": "Animate",
+				"style": "TOP"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

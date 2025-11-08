@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "Method": {
+      "style": "Menu",
+      "menuNames": ["connectivity", "pieceattr"],
+      "menuLabels": ["Connectivity", "Piece Attribute"]
+    },
+    "Minpointsperpiece": {
+      "name": "Minpointsperpiece",
+      "label": "Minimum Points per Piece",
+      "page": "Convert",
+      "style": "Int"
+    },
+    "Attrclass": {
+      "style": "Menu",
+      "menuSource": "op('./piece_attribute/piece_attribute').par.attrclass"
+    },
+    "Pieceattr": {
+      "style": "StrMenu"
+    },
+    "Transferattrs": {
+      "style": "StrMenu"
+    }
+  }
+}

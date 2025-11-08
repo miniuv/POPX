@@ -1,0 +1,294 @@
+{
+	"parameterPages": {
+		"Move Along Mesh": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Move Along Mesh",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Mesh": {
+				"name": "Mesh",
+				"label": "Mesh to Attach To",
+				"page": "Move Along Mesh",
+				"style": "POP"
+			},
+			"Displaymesh": {
+				"name": "Displaymesh",
+				"label": "Display Mesh",
+				"page": "Move Along Mesh",
+				"style": "Toggle"
+			},
+			"Color": {
+				"name": "Color",
+				"label": "Color",
+				"page": "Move Along Mesh",
+				"style": "RGBA",
+				"size": 3
+			},
+			"Initializepulse": {
+				"name": "Initializepulse",
+				"label": "Initialize",
+				"page": "Move Along Mesh",
+				"style": "Pulse"
+			},
+			"Startpulse": {
+				"name": "Startpulse",
+				"label": "Start",
+				"page": "Move Along Mesh",
+				"style": "Pulse"
+			},
+			"Play": {
+				"name": "Play",
+				"label": "Play",
+				"page": "Move Along Mesh",
+				"style": "Toggle"
+			},
+			"Steppulse": {
+				"name": "Steppulse",
+				"label": "Step",
+				"page": "Move Along Mesh",
+				"style": "Pulse"
+			}
+		},
+		"Attach": {
+			"Locktomesh": {
+				"name": "Locktomesh",
+				"label": "Lock to Mesh",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Reattachtomesh": {
+				"name": "Reattachtomesh",
+				"label": "Reattach to Mesh",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Attachmode": {
+				"name": "Attachmode",
+				"label": "Attach Mode",
+				"page": "Attach",
+				"style": "Menu",
+				"menuNames": [
+					"nearest",
+					"scatter"
+				],
+				"menuLabels": [
+					"Nearest Point",
+					"Scatter"
+				]
+			},
+			"Seed": {
+				"name": "Seed",
+				"label": "Seed",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Searchradius": {
+				"name": "Searchradius",
+				"label": "Search Radius",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Offset": {
+				"name": "Offset",
+				"label": "Offset",
+				"page": "Attach",
+				"style": "Header"
+			},
+			"Visualizeoffset": {
+				"name": "Visualizeoffset",
+				"label": "Visualize Offset",
+				"page": "Attach",
+				"style": "Toggle"
+			},
+			"Fetchoffsetslines": {
+				"name": "Fetchoffsetslines",
+				"label": "Fetch Offsets Lines",
+				"page": "Attach",
+				"style": "Pulse"
+			},
+			"Maintainoffset": {
+				"name": "Maintainoffset",
+				"label": "Maintain Offset",
+				"page": "Attach",
+				"style": "Float"
+			},
+			"Maintainorientoffset": {
+				"name": "Maintainorientoffset",
+				"label": "Maintain Orient Offset",
+				"page": "Attach",
+				"style": "Float"
+			}
+		},
+		"Animate": {
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Animate",
+				"style": "StrMenu",
+				"menuSource": "op('./move_along/dup_ifalloff').par.dup0name"
+			},
+			"Speed": {
+				"name": "Speed",
+				"label": "Speed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Randomspeed": {
+				"name": "Randomspeed",
+				"label": "Random Speed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Seedspeed": {
+				"name": "Seedspeed",
+				"label": "Seed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Lifeh": {
+				"name": "Lifeh",
+				"label": "Life",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Enbalelifetime": {
+				"name": "Enbalelifetime",
+				"label": "Enbale Life Time",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Life": {
+				"name": "Life",
+				"label": "Life",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Lifevariance": {
+				"name": "Lifevariance",
+				"label": "Life Variance",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Randomseed": {
+				"name": "Randomseed",
+				"label": "Random Seed",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Outputlifeattributes": {
+				"name": "Outputlifeattributes",
+				"label": "Output Life Attributes",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Scale": {
+				"name": "Scale",
+				"label": "Scale",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Scalebyage": {
+				"name": "Scalebyage",
+				"label": "Scale by Age",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Remapscale": {
+				"name": "Remapscale",
+				"label": "Remap Scale",
+				"page": "Animate",
+				"style": "XYZW",
+				"size": 2
+			},
+			"Scaleramp": {
+				"name": "Scaleramp",
+				"label": "Open Scale Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Resetscaleramp": {
+				"name": "Resetscaleramp",
+				"label": "Reset Scale Ramp",
+				"page": "Animate",
+				"style": "Pulse"
+			},
+			"Ramptopscale": {
+				"name": "Ramptopscale",
+				"label": "Ramp TOP Scale",
+				"page": "Animate",
+				"style": "TOP"
+			},
+			"Pointrelax": {
+				"name": "Pointrelax",
+				"label": "Point Relax",
+				"page": "Animate",
+				"style": "Header"
+			},
+			"Enablepointrelax": {
+				"name": "Enablepointrelax",
+				"label": "Enable Point Relax",
+				"page": "Animate",
+				"style": "Toggle"
+			},
+			"Relaxiterations": {
+				"name": "Relaxiterations",
+				"label": "Relax Iterations",
+				"page": "Animate",
+				"style": "Int"
+			},
+			"Maxrelaxradius": {
+				"name": "Maxrelaxradius",
+				"label": "Max Relax Radius",
+				"page": "Animate",
+				"style": "Float"
+			},
+			"Maxneighbors": {
+				"name": "Maxneighbors",
+				"label": "Max Neighbors",
+				"page": "Animate",
+				"style": "Int"
+			},
+			"Relaxstrength": {
+				"name": "Relaxstrength",
+				"label": "Relax Strength",
+				"page": "Animate",
+				"style": "Float"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

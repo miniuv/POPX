@@ -1,0 +1,156 @@
+{
+	"parameterPages": {
+		"Transform": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Transform",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Localspace": {
+				"name": "Localspace",
+				"label": "Local Space",
+				"page": "Transform",
+				"style": "Toggle"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Transform",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Transform",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			},
+			"T": {
+				"name": "T",
+				"label": "Translate",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"R": {
+				"name": "R",
+				"label": "Rotate",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"S": {
+				"name": "S",
+				"label": "Scale",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Scale": {
+				"name": "Scale",
+				"label": "Uniform Scale",
+				"page": "Transform",
+				"style": "Float"
+			},
+			"P": {
+				"name": "P",
+				"label": "Pivot",
+				"page": "Transform",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Rord": {
+				"name": "Rord",
+				"label": "Rotate Order",
+				"page": "Transform",
+				"style": "Menu",
+				"menuNames": [
+					"xyz",
+					"xzy",
+					"yxz",
+					"yzx",
+					"zxy",
+					"zyx"
+				],
+				"menuLabels": [
+					"XYZ",
+					"XZY",
+					"YXZ",
+					"YZX",
+					"ZXY",
+					"ZYX"
+				]
+			},
+			"Rmode": {
+				"name": "Rmode",
+				"label": "Rotate Mode",
+				"page": "Transform",
+				"style": "Menu",
+				"menuNames": [
+					"add",
+					"set"
+				],
+				"menuLabels": [
+					"Add",
+					"Set"
+				]
+			},
+			"Smode": {
+				"name": "Smode",
+				"label": "Scale Mode",
+				"page": "Transform",
+				"style": "Menu",
+				"menuNames": [
+					"mult",
+					"replace"
+				],
+				"menuLabels": [
+					"Multiply",
+					"Replace"
+				]
+			},
+			"Pmode": {
+				"name": "Pmode",
+				"label": "Pivot Mode",
+				"page": "Transform",
+				"style": "Menu",
+				"menuNames": [
+					"add",
+					"set"
+				],
+				"menuLabels": [
+					"Add",
+					"Set"
+				]
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

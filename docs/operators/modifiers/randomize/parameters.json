@@ -1,0 +1,391 @@
+{
+	"parameterPages": {
+		"General": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "General",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Localspace": {
+				"name": "Localspace",
+				"label": "Local Space",
+				"page": "General",
+				"style": "Toggle"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "General",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Fallof Attribute",
+				"page": "General",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			}
+		},
+		"Position": {
+			"Posrand": {
+				"name": "Posrand",
+				"label": "Randomize Position",
+				"page": "Position",
+				"style": "Toggle"
+			},
+			"Posseed": {
+				"name": "Posseed",
+				"label": "Seed",
+				"page": "Position",
+				"style": "Float"
+			},
+			"Posminval": {
+				"name": "Posminval",
+				"label": "Min Value",
+				"page": "Position",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Posmaxval": {
+				"name": "Posmaxval",
+				"label": "Max Value",
+				"page": "Position",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Posstep": {
+				"name": "Posstep",
+				"label": "Step",
+				"page": "Position",
+				"style": "Float"
+			}
+		},
+		"Rotation": {
+			"Rotrand": {
+				"name": "Rotrand",
+				"label": "Randomize Orientation",
+				"page": "Rotation",
+				"style": "Toggle"
+			},
+			"Rmode": {
+				"name": "Rmode",
+				"label": "Rotate Mode",
+				"page": "Rotation",
+				"style": "Menu",
+				"menuNames": [
+					"add",
+					"set"
+				],
+				"menuLabels": [
+					"Add",
+					"Set"
+				]
+			},
+			"Rotseed": {
+				"name": "Rotseed",
+				"label": "Seed",
+				"page": "Rotation",
+				"style": "Float"
+			},
+			"Rotminval": {
+				"name": "Rotminval",
+				"label": "Min Value",
+				"page": "Rotation",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Rotmaxval": {
+				"name": "Rotmaxval",
+				"label": "Max Value",
+				"page": "Rotation",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Rotmult": {
+				"name": "Rotmult",
+				"label": "Rotation Multiplier",
+				"page": "Rotation",
+				"style": "Float"
+			},
+			"Rotstep": {
+				"name": "Rotstep",
+				"label": "Step",
+				"page": "Rotation",
+				"style": "Float"
+			},
+			"Rord": {
+				"name": "Rord",
+				"label": "Rotate Order",
+				"page": "Rotation",
+				"style": "Menu",
+				"menuNames": [
+					"xyz",
+					"xzy",
+					"yxz",
+					"yzx",
+					"zxy",
+					"zyx"
+				],
+				"menuLabels": [
+					"XYZ",
+					"XZY",
+					"YXZ",
+					"YZX",
+					"ZXY",
+					"ZYX"
+				]
+			}
+		},
+		"Scale": {
+			"Scalerand": {
+				"name": "Scalerand",
+				"label": "Randomize Scale",
+				"page": "Scale",
+				"style": "Toggle"
+			},
+			"Scaleseed": {
+				"name": "Scaleseed",
+				"label": "Seed",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Scaleminval": {
+				"name": "Scaleminval",
+				"label": "Min Value",
+				"page": "Scale",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Scalemaxval": {
+				"name": "Scalemaxval",
+				"label": "Max Value",
+				"page": "Scale",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Scalestep": {
+				"name": "Scalestep",
+				"label": "Step",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Uscalerand": {
+				"name": "Uscalerand",
+				"label": "Randomize Uniform Scale",
+				"page": "Scale",
+				"style": "Toggle"
+			},
+			"Uscaleseed": {
+				"name": "Uscaleseed",
+				"label": "Seed",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Uscaleminval": {
+				"name": "Uscaleminval",
+				"label": "Min Value",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Uscalemaxval": {
+				"name": "Uscalemaxval",
+				"label": "Max Value",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Uscalestep": {
+				"name": "Uscalestep",
+				"label": "Step",
+				"page": "Scale",
+				"style": "Float"
+			},
+			"Usmode": {
+				"name": "Usmode",
+				"label": "Scale Mode",
+				"page": "Scale",
+				"style": "Menu",
+				"menuNames": [
+					"mult",
+					"replace"
+				],
+				"menuLabels": [
+					"Multiply",
+					"Replace"
+				]
+			}
+		},
+		"Color": {
+			"Colorrand": {
+				"name": "Colorrand",
+				"label": "Randomize Color",
+				"page": "Color",
+				"style": "Toggle"
+			},
+			"Colormode": {
+				"name": "Colormode",
+				"label": "Color Mode",
+				"page": "Color",
+				"style": "Menu",
+				"menuNames": [
+					"set",
+					"add",
+					"mult"
+				],
+				"menuLabels": [
+					"Set",
+					"Add",
+					"Multiply"
+				]
+			},
+			"Colorseed": {
+				"name": "Colorseed",
+				"label": "Seed",
+				"page": "Color",
+				"style": "Float"
+			},
+			"Fromlow": {
+				"name": "Fromlow",
+				"label": "Map from Low",
+				"page": "Color",
+				"style": "Float"
+			},
+			"Fromhigh": {
+				"name": "Fromhigh",
+				"label": "Map from High",
+				"page": "Color",
+				"style": "Float"
+			},
+			"Tolow": {
+				"name": "Tolow",
+				"label": "Map to Low",
+				"page": "Color",
+				"style": "Float"
+			},
+			"Tohigh": {
+				"name": "Tohigh",
+				"label": "Map to High",
+				"page": "Color",
+				"style": "Float"
+			},
+			"Colorramp": {
+				"name": "Colorramp",
+				"label": "Color Ramp",
+				"page": "Color",
+				"style": "Toggle"
+			},
+			"Openramp": {
+				"name": "Openramp",
+				"label": "Open Ramp",
+				"page": "Color",
+				"style": "Pulse"
+			},
+			"Resetramp": {
+				"name": "Resetramp",
+				"label": "Reset Ramp",
+				"page": "Color",
+				"style": "Pulse"
+			},
+			"Ramptop": {
+				"name": "Ramptop",
+				"label": "Ramp TOP",
+				"page": "Color",
+				"style": "TOP"
+			}
+		},
+		"Other": {
+			"Otherrand": {
+				"name": "Otherrand",
+				"label": "Randomize Other",
+				"page": "Other",
+				"style": "Toggle"
+			},
+			"Attribute": {
+				"name": "Attribute",
+				"label": "Attribute (Float)",
+				"page": "Other",
+				"style": "StrMenu",
+				"menuSource": "op('./other/rename_to_iAttribute').par.ren0from"
+			},
+			"Otherseed": {
+				"name": "Otherseed",
+				"label": "Seed",
+				"page": "Other",
+				"style": "Float"
+			},
+			"Otherminval": {
+				"name": "Otherminval",
+				"label": "Min Value",
+				"page": "Other",
+				"style": "Float"
+			},
+			"Othermaxval": {
+				"name": "Othermaxval",
+				"label": "Max Value",
+				"page": "Other",
+				"style": "Float"
+			},
+			"Combineop": {
+				"name": "Combineop",
+				"label": "Combine Operation",
+				"page": "Other",
+				"style": "Menu",
+				"menuNames": [
+					"add",
+					"sub",
+					"mult",
+					"div",
+					"screen",
+					"overlay",
+					"max",
+					"min",
+					"set"
+				],
+				"menuLabels": [
+					"Add",
+					"Substract",
+					"Multiply",
+					"Divide",
+					"Screen",
+					"Overlay",
+					"Maximum",
+					"Minimum",
+					"Set"
+				]
+			},
+			"Swaporder": {
+				"name": "Swaporder",
+				"label": "Swap Operation Order",
+				"page": "Other",
+				"style": "Toggle"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

@@ -1,0 +1,170 @@
+{
+	"parameterPages": {
+		"Spring": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Spring",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Spring",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			},
+			"Position": {
+				"name": "Position",
+				"label": "Position",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Rotation": {
+				"name": "Rotation",
+				"label": "Rotation",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Scale": {
+				"name": "Scale",
+				"label": "Scale",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Other": {
+				"name": "Other",
+				"label": "Other",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Attribute": {
+				"name": "Attribute",
+				"label": "Attribute (Float)",
+				"page": "Spring",
+				"style": "StrMenu",
+				"menuSource": "op('./spring_solver/other_attr').par.ren0from"
+			},
+			"Usemassattr": {
+				"name": "Usemassattr",
+				"label": "Use Mass Attribute",
+				"page": "Spring",
+				"style": "Toggle"
+			},
+			"Massattr": {
+				"name": "Massattr",
+				"label": "Mass Attribute",
+				"page": "Spring",
+				"style": "StrMenu",
+				"menuSource": "op('./spring_solver/mass_from_att').par.ren0from"
+			},
+			"Mass": {
+				"name": "Mass",
+				"label": "Mass",
+				"page": "Spring",
+				"style": "Float"
+			},
+			"Springconst": {
+				"name": "Springconst",
+				"label": "Spring Constant",
+				"page": "Spring",
+				"style": "Float"
+			},
+			"Dampingcoef": {
+				"name": "Dampingcoef",
+				"label": "Damping Coefficient",
+				"page": "Spring",
+				"style": "Float"
+			},
+			"Initializepulse": {
+				"name": "Initializepulse",
+				"label": "Initialize",
+				"page": "Spring",
+				"style": "Pulse"
+			},
+			"Startpulse": {
+				"name": "Startpulse",
+				"label": "Start",
+				"page": "Spring",
+				"style": "Pulse"
+			},
+			"Play": {
+				"name": "Play",
+				"label": "Play",
+				"page": "Spring",
+				"style": "Toggle"
+			}
+		},
+		"Falloff": {
+			"Previewfalloff": {
+				"name": "Previewfalloff",
+				"label": "Preview Falloff",
+				"page": "Falloff",
+				"style": "Toggle"
+			},
+			"Fallofframp": {
+				"name": "Fallofframp",
+				"label": "Falloff Ramp",
+				"page": "Falloff",
+				"style": "Menu",
+				"menuNames": [
+					"heatmap",
+					"blackbody",
+					"infrared",
+					"custom"
+				],
+				"menuLabels": [
+					"Heatmap",
+					"Blackbody",
+					"Infrared",
+					"Custom"
+				]
+			},
+			"Opencustumramp": {
+				"name": "Opencustumramp",
+				"label": "Open Custum Ramp ",
+				"page": "Falloff",
+				"style": "Pulse"
+			},
+			"Resetcustomramp": {
+				"name": "Resetcustomramp",
+				"label": "Reset Custom Ramp",
+				"page": "Falloff",
+				"style": "Pulse"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

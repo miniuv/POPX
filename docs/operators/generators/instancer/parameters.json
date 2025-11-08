@@ -1,0 +1,337 @@
+{
+	"parameterPages": {
+		"Instancing": {
+			"Instancingmethod": {
+				"name": "Instancingmethod",
+				"label": "Instancing Method",
+				"page": "Instancing",
+				"style": "Menu",
+				"menuNames": [
+					"copytopoints",
+					"instancing"
+				],
+				"menuLabels": [
+					"Copy to Points",
+					"Instancing"
+				]
+			},
+			"Indexingmode": {
+				"name": "Indexingmode",
+				"label": "Indexing Mode",
+				"page": "Instancing",
+				"style": "Menu",
+				"menuNames": [
+					"random",
+					"order",
+					"pointattr"
+				],
+				"menuLabels": [
+					"Random",
+					"Order",
+					"Point Attribute"
+				]
+			},
+			"Indexrandomseed": {
+				"name": "Indexrandomseed",
+				"label": "Index Random Seed",
+				"page": "Instancing",
+				"style": "Float"
+			},
+			"Indexattr": {
+				"name": "Indexattr",
+				"label": "Index Attribute",
+				"page": "Instancing",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/popxIndex_from_attribute').par.ren0from"
+			},
+			"Globaltransform": {
+				"name": "Globaltransform",
+				"label": "Global Transform",
+				"page": "Instancing",
+				"style": "Header"
+			},
+			"T": {
+				"name": "T",
+				"label": "Translate",
+				"page": "Instancing",
+				"style": "XYZW",
+				"size": 3
+			},
+			"R": {
+				"name": "R",
+				"label": "Rotate",
+				"page": "Instancing",
+				"style": "XYZW",
+				"size": 3
+			},
+			"S": {
+				"name": "S",
+				"label": "Scale",
+				"page": "Instancing",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Globuniscale": {
+				"name": "Globuniscale",
+				"label": "Uniform Scale",
+				"page": "Instancing",
+				"style": "Float"
+			},
+			"Globaloptions": {
+				"name": "Globaloptions",
+				"label": "Global Options",
+				"page": "Instancing",
+				"style": "Header"
+			},
+			"Pointsonly": {
+				"name": "Pointsonly",
+				"label": "Points Only (No Instances)",
+				"page": "Instancing",
+				"style": "Toggle"
+			},
+			"Outputtemplateattribs": {
+				"name": "Outputtemplateattribs",
+				"label": "Output Template Attributes",
+				"page": "Instancing",
+				"style": "Toggle"
+			},
+			"Centerinstances": {
+				"name": "Centerinstances",
+				"label": "Center Instances",
+				"page": "Instancing",
+				"style": "Toggle"
+			},
+			"Unityscale": {
+				"name": "Unityscale",
+				"label": "Unity Scale",
+				"page": "Instancing",
+				"style": "Toggle"
+			},
+			"Instanceobjects": {
+				"name": "Instanceobjects",
+				"label": "Instance Objects",
+				"page": "Instancing",
+				"style": "Header"
+			},
+			"Instances": {
+				"name": "Instances",
+				"label": "Instance ",
+				"page": "Instancing",
+				"style": "Sequence"
+			},
+			"Instances0pop": {
+				"name": "Pop",
+				"label": "In POP",
+				"page": "Instancing",
+				"style": "POP"
+			},
+			"Instances0transform": {
+				"name": "Transform",
+				"label": "Open Local Transform",
+				"page": "Instancing",
+				"style": "Pulse"
+			},
+			"Instances0probability": {
+				"name": "Probability",
+				"label": "Probability",
+				"page": "Instancing",
+				"style": "Float"
+			},
+			"Instances0centerinstance": {
+				"name": "Centerinstance",
+				"label": "Center Instance",
+				"page": "Instancing",
+				"style": "Toggle"
+			},
+			"Instances0unityscale": {
+				"name": "Unityscale",
+				"label": "Unity Scale",
+				"page": "Instancing",
+				"style": "Toggle"
+			}
+		},
+		"Distribution": {
+			"Distributiontype": {
+				"name": "Distributiontype",
+				"label": "Distribution Type",
+				"page": "Distribution",
+				"style": "Menu",
+				"menuNames": [
+					"linear",
+					"radial",
+					"spherical",
+					"grid",
+					"honeycomb",
+					"pointcloud",
+					"mesh",
+					"curve"
+				],
+				"menuLabels": [
+					"Linear",
+					"Radial",
+					"Spherical",
+					"Grid",
+					"Honeycomb",
+					"Point Cloud",
+					"Mesh",
+					"Curve"
+				]
+			},
+			"Linearsettings": {
+				"name": "Linearsettings",
+				"label": "Open Linear Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Radialsettings": {
+				"name": "Radialsettings",
+				"label": "Open Radial Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Sphericalsettings": {
+				"name": "Sphericalsettings",
+				"label": "Open Spherical Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Gridsettings": {
+				"name": "Gridsettings",
+				"label": "Open Grid Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Honeycombsettings": {
+				"name": "Honeycombsettings",
+				"label": "Open Honeycomb Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Pointcloudsettings": {
+				"name": "Pointcloudsettings",
+				"label": "Open Point Cloud Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Meshsettings": {
+				"name": "Meshsettings",
+				"label": "Open Mesh Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Curvesettings": {
+				"name": "Curvesettings",
+				"label": "Open Curve Settings",
+				"page": "Distribution",
+				"style": "Pulse"
+			},
+			"Templateobject": {
+				"name": "Templateobject",
+				"label": "Template Object",
+				"page": "Distribution",
+				"style": "POP"
+			},
+			"Templategroup": {
+				"name": "Templategroup",
+				"label": "Template Group",
+				"page": "Distribution",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/template_group').par.group"
+			},
+			"Copytemplateattributes": {
+				"name": "Copytemplateattributes",
+				"label": "Copy Template Attributes",
+				"page": "Distribution",
+				"style": "Toggle"
+			},
+			"Attrstocopy": {
+				"name": "Attrstocopy",
+				"label": "Attributes to Copy",
+				"page": "Distribution",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/attribs_to_copy').par.pointattribscope"
+			},
+			"Resettodefault": {
+				"name": "Resettodefault",
+				"label": "Reset All Settings to Default",
+				"page": "Distribution",
+				"style": "Pulse"
+			}
+		},
+		"Sorting": {
+			"Pointsort": {
+				"name": "Pointsort",
+				"label": "Point Sort",
+				"page": "Sorting",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/sort1').par.ptmethod"
+			},
+			"Pointattr": {
+				"name": "Pointattr",
+				"label": "Attribute",
+				"page": "Sorting",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/sort1').par.pointattr"
+			},
+			"Pointuint": {
+				"name": "Pointuint",
+				"label": "Attrib is UInt",
+				"page": "Sorting",
+				"style": "StrMenu",
+				"menuSource": "op('./Distribution/sort1').par.pointuint"
+			},
+			"Pointseed": {
+				"name": "Pointseed",
+				"label": "Seed",
+				"page": "Sorting",
+				"style": "Float"
+			},
+			"Pointprox": {
+				"name": "Pointprox",
+				"label": "Point",
+				"page": "Sorting",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Pointdir": {
+				"name": "Pointdir",
+				"label": "Vector",
+				"page": "Sorting",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Pointobj": {
+				"name": "Pointobj",
+				"label": "Object",
+				"page": "Sorting",
+				"style": "Object"
+			},
+			"Pointrev": {
+				"name": "Pointrev",
+				"label": "Reverse",
+				"page": "Sorting",
+				"style": "Toggle"
+			},
+			"Pointshift": {
+				"name": "Pointshift",
+				"label": "Shift",
+				"page": "Sorting",
+				"style": "Toggle"
+			},
+			"Pointoffset": {
+				"name": "Pointoffset",
+				"label": "Offset",
+				"page": "Sorting",
+				"style": "Int"
+			}
+		},
+		"Common": {
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			}
+		}
+	}
+}

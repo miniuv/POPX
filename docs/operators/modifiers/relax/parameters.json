@@ -1,0 +1,239 @@
+{
+	"parameterPages": {
+		"Relax": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Relax",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/igroup').par.group"
+			},
+			"Solvermode": {
+				"name": "Solvermode",
+				"label": "Solver Mode",
+				"page": "Relax",
+				"style": "Menu",
+				"menuNames": [
+					"simple",
+					"advect"
+				],
+				"menuLabels": [
+					"Simple",
+					"Advect"
+				]
+			},
+			"Relaxmethod": {
+				"name": "Relaxmethod",
+				"label": "Relax Method",
+				"page": "Relax",
+				"style": "Menu",
+				"menuNames": [
+					"nebr",
+					"field"
+				],
+				"menuLabels": [
+					"Neighbor",
+					"Field"
+				]
+			},
+			"Pointsupdatepop": {
+				"name": "Pointsupdatepop",
+				"label": "Target Points Update POP",
+				"page": "Relax",
+				"style": "POP"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Relax",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Relax",
+				"style": "StrMenu",
+				"menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+			},
+			"Relaxiterations": {
+				"name": "Relaxiterations",
+				"label": "Relax Iterations",
+				"page": "Relax",
+				"style": "Int"
+			},
+			"Maxrelaxradius": {
+				"name": "Maxrelaxradius",
+				"label": "Max Relax Radius",
+				"page": "Relax",
+				"style": "Float"
+			},
+			"Maxneighbors": {
+				"name": "Maxneighbors",
+				"label": "Max Neighbors",
+				"page": "Relax",
+				"style": "Int"
+			},
+			"Maxaxisresolution": {
+				"name": "Maxaxisresolution",
+				"label": "Max Axis Resolution",
+				"page": "Relax",
+				"style": "Float"
+			},
+			"Lowerboundsfield": {
+				"name": "Lowerboundsfield",
+				"label": "Lower Bounds",
+				"page": "Relax",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Upperboundsfield": {
+				"name": "Upperboundsfield",
+				"label": "Upper Bounds",
+				"page": "Relax",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Kernelsize": {
+				"name": "Kernelsize",
+				"label": "Kernel Size",
+				"page": "Relax",
+				"style": "Int"
+			},
+			"Relaxstrength": {
+				"name": "Relaxstrength",
+				"label": "Relax Strength",
+				"page": "Relax",
+				"style": "Float"
+			},
+			"Initializepulse": {
+				"name": "Initializepulse",
+				"label": "Initialize",
+				"page": "Relax",
+				"style": "Pulse"
+			},
+			"Startpulse": {
+				"name": "Startpulse",
+				"label": "Start",
+				"page": "Relax",
+				"style": "Pulse"
+			},
+			"Play": {
+				"name": "Play",
+				"label": "Play",
+				"page": "Relax",
+				"style": "Toggle"
+			},
+			"Steppulse": {
+				"name": "Steppulse",
+				"label": "Step",
+				"page": "Relax",
+				"style": "Pulse"
+			}
+		},
+		"Constraint Geometry": {
+			"Constrainttogeo": {
+				"name": "Constrainttogeo",
+				"label": "Constraint to Geometry",
+				"page": "Constraint Geometry",
+				"style": "Toggle"
+			},
+			"Constraintgeo": {
+				"name": "Constraintgeo",
+				"label": "Constraint Geometry",
+				"page": "Constraint Geometry",
+				"style": "POP"
+			},
+			"Opaque": {
+				"name": "Opaque",
+				"label": "Opaque Geometry",
+				"page": "Constraint Geometry",
+				"style": "Toggle"
+			},
+			"Displaygeo": {
+				"name": "Displaygeo",
+				"label": "Display Geometry",
+				"page": "Constraint Geometry",
+				"style": "Toggle"
+			},
+			"Color": {
+				"name": "Color",
+				"label": "Color",
+				"page": "Constraint Geometry",
+				"style": "RGBA",
+				"size": 3
+			}
+		},
+		"Constraint Volume": {
+			"Constrainttovolume": {
+				"name": "Constrainttovolume",
+				"label": "Constraint to Volume",
+				"page": "Constraint Volume",
+				"style": "Toggle"
+			},
+			"Constraintvolume": {
+				"name": "Constraintvolume",
+				"label": "Constraint Volume",
+				"page": "Constraint Volume",
+				"style": "TOP"
+			},
+			"Lowerbounds": {
+				"name": "Lowerbounds",
+				"label": "Lower Bounds",
+				"page": "Constraint Volume",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Upperbounds": {
+				"name": "Upperbounds",
+				"label": "Upper Bounds",
+				"page": "Constraint Volume",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Forcestrength": {
+				"name": "Forcestrength",
+				"label": "Force Strength",
+				"page": "Constraint Volume",
+				"style": "Float"
+			},
+			"Preshrink": {
+				"name": "Preshrink",
+				"label": "Pre-Shrink",
+				"page": "Constraint Volume",
+				"style": "Int"
+			},
+			"Size": {
+				"name": "Size",
+				"label": "Filter Size",
+				"page": "Constraint Volume",
+				"style": "Int"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}

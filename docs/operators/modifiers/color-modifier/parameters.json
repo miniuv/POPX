@@ -1,0 +1,64 @@
+{
+  "parameterPages": {
+    "Color": {
+      "Group": {
+        "name": "Group",
+        "label": "Group",
+        "page": "Color",
+        "style": "StrMenu",
+        "menuSource": "op('./color/lookuptex1').par.group"
+      },
+      "Falloffattr": {
+        "name": "Falloffattr",
+        "label": "Falloff Attribute",
+        "page": "Color",
+        "style": "StrMenu",
+        "menuSource": "op('./color/dup_ifalloff').par.dup0name"
+      },
+      "Openramp": {
+        "name": "Openramp",
+        "label": "Open Ramp",
+        "page": "Color",
+        "style": "Pulse"
+      },
+      "Resetramp": {
+        "name": "Resetramp",
+        "label": "Reset Ramp",
+        "page": "Color",
+        "style": "Pulse"
+      },
+      "Ramptop": {
+        "name": "Ramptop",
+        "label": "Ramp TOP",
+        "page": "Color",
+        "style": "TOP"
+      }
+    },
+    "Common": {
+      "Bypass": {
+        "name": "Bypass",
+        "label": "Bypass",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Freeextragpumem": {
+        "name": "Freeextragpumem",
+        "label": "Free Extra GPU Memory",
+        "page": "Common",
+        "style": "Pulse"
+      },
+      "Renderprimitives": {
+        "name": "Renderprimitives",
+        "label": "Render Primitives",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Srtrst": {
+        "name": "Srtrst",
+        "label": "SRT / RST",
+        "page": "Common",
+        "style": "Toggle"
+      }
+    }
+  }
+}

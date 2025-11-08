@@ -1,0 +1,248 @@
+{
+	"parameterPages": {
+		"Orient Curve": {
+			"Reorientcurve": {
+				"name": "Reorientcurve",
+				"label": "Reorient Curve",
+				"page": "Orient Curve",
+				"style": "Toggle"
+			},
+			"Invertn": {
+				"name": "Invertn",
+				"label": "Invert N",
+				"page": "Orient Curve",
+				"style": "Toggle"
+			},
+			"Customfirsttangent": {
+				"name": "Customfirsttangent",
+				"label": "Custom First Tangent",
+				"page": "Orient Curve",
+				"style": "Toggle"
+			},
+			"Firsttangent": {
+				"name": "Firsttangent",
+				"label": "First Tangent",
+				"page": "Orient Curve",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Twistamount": {
+				"name": "Twistamount",
+				"label": "Twist Amount",
+				"page": "Orient Curve",
+				"style": "Float"
+			},
+			"Twistramp": {
+				"name": "Twistramp",
+				"label": "Open Twist Ramp ",
+				"page": "Orient Curve",
+				"style": "Pulse"
+			},
+			"Resetramp": {
+				"name": "Resetramp",
+				"label": "Reset Ramp",
+				"page": "Orient Curve",
+				"style": "Pulse"
+			},
+			"Ramptoptwist": {
+				"name": "Ramptoptwist",
+				"label": "Ramp TOP Twist",
+				"page": "Orient Curve",
+				"style": "TOP"
+			},
+			"Twistpercurve": {
+				"name": "Twistpercurve",
+				"label": "Twist Per Curve",
+				"page": "Orient Curve",
+				"style": "Toggle"
+			}
+		},
+		"Surface": {
+			"Surfaceshape": {
+				"name": "Surfaceshape",
+				"label": "Surface Shape",
+				"page": "Surface",
+				"style": "Menu",
+				"menuNames": [
+					"input",
+					"tube",
+					"square"
+				],
+				"menuLabels": [
+					"Second Input Cross Sections",
+					"Round Tube",
+					"Square Tube"
+				]
+			},
+			"Width": {
+				"name": "Width",
+				"label": "Width",
+				"page": "Surface",
+				"style": "Float"
+			},
+			"Columbs": {
+				"name": "Columbs",
+				"label": "Columbs",
+				"page": "Surface",
+				"style": "Int"
+			},
+			"Roundcorners": {
+				"name": "Roundcorners",
+				"label": "Round Corners",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Cornerradius": {
+				"name": "Cornerradius",
+				"label": "Corner Radius",
+				"page": "Surface",
+				"style": "Float"
+			},
+			"Cornersides": {
+				"name": "Cornersides",
+				"label": "Corner Sides",
+				"page": "Surface",
+				"style": "Int"
+			},
+			"Scalecrosssections": {
+				"name": "Scalecrosssections",
+				"label": "Scale Cross Sections",
+				"page": "Surface",
+				"style": "Float"
+			},
+			"Skinops": {
+				"name": "Skinops",
+				"label": "Skin",
+				"page": "Surface",
+				"style": "StrMenu",
+				"menuSource": "op('./sweep/skin1').par.skinops"
+			},
+			"Inc": {
+				"name": "Inc",
+				"label": "N",
+				"page": "Surface",
+				"style": "Int"
+			},
+			"Closedsurface": {
+				"name": "Closedsurface",
+				"label": "Closed Surface",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Outputquads": {
+				"name": "Outputquads",
+				"label": "Output Quads",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Applyscale": {
+				"name": "Applyscale",
+				"label": "Apply Scale Along Curve",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Scaleramp": {
+				"name": "Scaleramp",
+				"label": "Open Scale Ramp",
+				"page": "Surface",
+				"style": "Pulse"
+			},
+			"Resetscaleramp": {
+				"name": "Resetscaleramp",
+				"label": "Reset Scale Ramp",
+				"page": "Surface",
+				"style": "Pulse"
+			},
+			"Ramptopscale": {
+				"name": "Ramptopscale",
+				"label": "Ramp TOP Scale",
+				"page": "Surface",
+				"style": "TOP"
+			},
+			"Scalepercurve": {
+				"name": "Scalepercurve",
+				"label": "Scale per Curve",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Applycolor": {
+				"name": "Applycolor",
+				"label": "Apply Color Along Curve",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Colorramp": {
+				"name": "Colorramp",
+				"label": "Open Color Ramp",
+				"page": "Surface",
+				"style": "Pulse"
+			},
+			"Resetcolorramp": {
+				"name": "Resetcolorramp",
+				"label": "Reset Color Ramp",
+				"page": "Surface",
+				"style": "Pulse"
+			},
+			"Ramptopcolor": {
+				"name": "Ramptopcolor",
+				"label": "Ramp TOP Color",
+				"page": "Surface",
+				"style": "TOP"
+			},
+			"Colorpercurve": {
+				"name": "Colorpercurve",
+				"label": "Color per Curve",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Generatevertexnormals": {
+				"name": "Generatevertexnormals",
+				"label": "Generate Vertex Normals",
+				"page": "Surface",
+				"style": "Toggle"
+			},
+			"Maxprimsperpoint": {
+				"name": "Maxprimsperpoint",
+				"label": "Max Number of Primitives per Point",
+				"page": "Surface",
+				"style": "Int"
+			},
+			"Anglenormal": {
+				"name": "Anglenormal",
+				"label": "Angle",
+				"page": "Surface",
+				"style": "Float"
+			}
+		},
+		"Attributes": {
+			"Frombackbonecurves": {
+				"name": "Frombackbonecurves",
+				"label": "From Backbone Curves",
+				"page": "Attributes",
+				"style": "StrMenu",
+				"menuSource": "op('./sweep/copy1').par.templateattr1names"
+			},
+			"Fromcrosssections": {
+				"name": "Fromcrosssections",
+				"label": "From Cross Sections",
+				"page": "Attributes",
+				"style": "StrMenu",
+				"menuSource": "op('./attcombine2').par.input2attrs"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			}
+		}
+	}
+}

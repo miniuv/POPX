@@ -1,0 +1,133 @@
+{
+	"parameterPages": {
+		"Subdivider": {
+			"Maxtriangles": {
+				"name": "Maxtriangles",
+				"label": "Max Triangles",
+				"page": "Subdivider",
+				"style": "Int"
+			},
+			"Subdivisions": {
+				"name": "Subdivisions",
+				"label": "Subdivisions",
+				"page": "Subdivider",
+				"style": "Int"
+			},
+			"Extrudestrength": {
+				"name": "Extrudestrength",
+				"label": "Extrude Strength",
+				"page": "Subdivider",
+				"style": "Float"
+			},
+			"Extrusionfalloffexponent": {
+				"name": "Extrusionfalloffexponent",
+				"label": "Extrusion Falloff Exponent",
+				"page": "Subdivider",
+				"style": "Float"
+			},
+			"Inset": {
+				"name": "Inset",
+				"label": "Inset",
+				"page": "Subdivider",
+				"style": "Float"
+			},
+			"Minimumarea": {
+				"name": "Minimumarea",
+				"label": "Minimum Area",
+				"page": "Subdivider",
+				"style": "Float"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Subdivider",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Subdivider",
+				"style": "StrMenu",
+				"menuSource": "op('./rename_to_ifalloff').par.dup0name"
+			},
+			"Postsubdivide": {
+				"name": "Postsubdivide",
+				"label": "Post Subdivide",
+				"page": "Subdivider",
+				"style": "Toggle"
+			},
+			"Iterations": {
+				"name": "Iterations",
+				"label": "Depth",
+				"page": "Subdivider",
+				"style": "Int"
+			},
+			"Creaseweight": {
+				"name": "Creaseweight",
+				"label": "Crease Weight",
+				"page": "Subdivider",
+				"style": "Float"
+			},
+			"Simplecoeffs": {
+				"name": "Simplecoeffs",
+				"label": "Simple Coefficients",
+				"page": "Subdivider",
+				"style": "Toggle"
+			},
+			"Nml": {
+				"name": "Nml",
+				"label": "Normals Action",
+				"page": "Subdivider",
+				"style": "StrMenu",
+				"menuSource": "op('./normal1').par.nml"
+			},
+			"Attrclass": {
+				"name": "Attrclass",
+				"label": "Attribute Class",
+				"page": "Subdivider",
+				"style": "StrMenu",
+				"menuSource": "op('./normal1').par.attrclass"
+			},
+			"Nmlweighting": {
+				"name": "Nmlweighting",
+				"label": "Normals Weighting",
+				"page": "Subdivider",
+				"style": "StrMenu",
+				"menuSource": "op('./normal1').par.nmlweighting"
+			},
+			"Compnmltech": {
+				"name": "Compnmltech",
+				"label": "Compute Normals Technique",
+				"page": "Subdivider",
+				"style": "StrMenu",
+				"menuSource": "op('.//normal1').par.compnmltech"
+			},
+			"Maxprimsperpoint": {
+				"name": "Maxprimsperpoint",
+				"label": "Max Number of Primitives per Point",
+				"page": "Subdivider",
+				"style": "Int"
+			},
+			"Angle": {
+				"name": "Angle",
+				"label": "Angle",
+				"page": "Subdivider",
+				"style": "Float"
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			}
+		}
+	}
+}

@@ -1,0 +1,132 @@
+{
+  "parameterPages": {
+    "Magnetize": {
+      "Group": {
+        "name": "Group",
+        "label": "Group",
+        "page": "Magnetize",
+        "style": "StrMenu",
+        "menuSource": "op('./applyatt/applyatt/igroup').par.group"
+      },
+      "Magnets": {
+        "name": "Magnets",
+        "label": "Magnets ",
+        "page": "Magnetize",
+        "style": "POP"
+      },
+      "Displaymagents": {
+        "name": "Displaymagents",
+        "label": "Display Magents",
+        "page": "Magnetize",
+        "style": "Toggle"
+      },
+      "Dofalloff": {
+        "name": "Dofalloff",
+        "label": "Do Falloff",
+        "page": "Magnetize",
+        "style": "Toggle"
+      },
+      "Falloffattr": {
+        "name": "Falloffattr",
+        "label": "Falloff Attribute",
+        "page": "Magnetize",
+        "style": "StrMenu",
+        "menuSource": "op('./applyatt/applyatt/rename_to_ifalloff').par.dup0name"
+      },
+      "Forcemode": {
+        "name": "Forcemode",
+        "label": "Force Mode",
+        "page": "Magnetize",
+        "style": "Menu",
+        "menuNames": ["repulse", "attract", "spin"],
+        "menuLabels": ["Repulse", "Attract", "Spin"]
+      },
+      "Searchradius": {
+        "name": "Searchradius",
+        "label": "Search Radius",
+        "page": "Magnetize",
+        "style": "Float"
+      },
+      "Relaxationfactor": {
+        "name": "Relaxationfactor",
+        "label": "Relaxation Factor",
+        "page": "Magnetize",
+        "style": "Float"
+      },
+      "Effectradius": {
+        "name": "Effectradius",
+        "label": "Effect Radius",
+        "page": "Magnetize",
+        "style": "Float"
+      },
+      "Forcestrength": {
+        "name": "Forcestrength",
+        "label": "Force Strength",
+        "page": "Magnetize",
+        "style": "Float"
+      },
+      "Invertspindirection": {
+        "name": "Invertspindirection",
+        "label": "Invert Spin Direction",
+        "page": "Magnetize",
+        "style": "Toggle"
+      },
+      "Affectrotation": {
+        "name": "Affectrotation",
+        "label": "Affect Rotation",
+        "page": "Magnetize",
+        "style": "Toggle"
+      },
+      "Aimweight": {
+        "name": "Aimweight",
+        "label": "Aim Weight",
+        "page": "Magnetize",
+        "style": "Float"
+      },
+      "Initializepulse": {
+        "name": "Initializepulse",
+        "label": "Initialize",
+        "page": "Magnetize",
+        "style": "Pulse"
+      },
+      "Startpulse": {
+        "name": "Startpulse",
+        "label": "Start",
+        "page": "Magnetize",
+        "style": "Pulse"
+      },
+      "Play": {
+        "name": "Play",
+        "label": "Play",
+        "page": "Magnetize",
+        "style": "Toggle"
+      }
+    },
+    "Common": {
+      "Bypass": {
+        "name": "Bypass",
+        "label": "Bypass",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Freeextragpumem": {
+        "name": "Freeextragpumem",
+        "label": "Free Extra GPU Memory",
+        "page": "Common",
+        "style": "Pulse"
+      },
+      "Renderprimitives": {
+        "name": "Renderprimitives",
+        "label": "Render Primitives",
+        "page": "Common",
+        "style": "Toggle"
+      },
+      "Srtrst": {
+        "name": "Srtrst",
+        "label": "SRT / RST",
+        "page": "Common",
+        "style": "Toggle"
+      }
+    }
+  }
+}

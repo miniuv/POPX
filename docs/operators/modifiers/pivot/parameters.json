@@ -1,0 +1,120 @@
+{
+	"parameterPages": {
+		"Pivot": {
+			"Group": {
+				"name": "Group",
+				"label": "Group",
+				"page": "Pivot",
+				"style": "StrMenu",
+				"menuSource": "op('./pivot/igroup').par.group"
+			},
+			"Dofalloff": {
+				"name": "Dofalloff",
+				"label": "Do Falloff",
+				"page": "Pivot",
+				"style": "Toggle"
+			},
+			"Falloffattr": {
+				"name": "Falloffattr",
+				"label": "Falloff Attribute",
+				"page": "Pivot",
+				"style": "StrMenu",
+				"menuSource": "op('./pivot/dup_ifalloff').par.dup0name"
+			},
+			"Mode": {
+				"name": "Mode",
+				"label": "Mode",
+				"page": "Pivot",
+				"style": "Menu",
+				"menuNames": [
+					"center",
+					"bbox",
+					"shift",
+					"setlocal",
+					"setworld"
+				],
+				"menuLabels": [
+					"Center Pivot",
+					"Align to BBox",
+					"Shift Pivot",
+					"Set Pivot (Local)",
+					"Set Pivot (World) "
+				]
+			},
+			"Pivotonly": {
+				"name": "Pivotonly",
+				"label": "Pivot Only",
+				"page": "Pivot",
+				"style": "Toggle"
+			},
+			"Alignmentside": {
+				"name": "Alignmentside",
+				"label": "Alignment Side",
+				"page": "Pivot",
+				"style": "Menu",
+				"menuNames": [
+					"xm",
+					"xp",
+					"ym",
+					"yp",
+					"zm",
+					"zp"
+				],
+				"menuLabels": [
+					"-X",
+					"+X",
+					"-Y",
+					"+Y",
+					"-Z",
+					"+Z"
+				]
+			},
+			"Localspace": {
+				"name": "Localspace",
+				"label": "Local Space",
+				"page": "Pivot",
+				"style": "Toggle"
+			},
+			"Shiftamount": {
+				"name": "Shiftamount",
+				"label": "Shift Amount",
+				"page": "Pivot",
+				"style": "XYZW",
+				"size": 3
+			},
+			"Pivot": {
+				"name": "Pivot",
+				"label": "Pivot",
+				"page": "Pivot",
+				"style": "XYZW",
+				"size": 3
+			}
+		},
+		"Common": {
+			"Bypass": {
+				"name": "Bypass",
+				"label": "Bypass",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Freeextragpumem": {
+				"name": "Freeextragpumem",
+				"label": "Free Extra GPU Memory",
+				"page": "Common",
+				"style": "Pulse"
+			},
+			"Renderprimitives": {
+				"name": "Renderprimitives",
+				"label": "Render Primitives",
+				"page": "Common",
+				"style": "Toggle"
+			},
+			"Srtrst": {
+				"name": "Srtrst",
+				"label": "SRT / RST",
+				"page": "Common",
+				"style": "Toggle"
+			}
+		}
+	}
+}
