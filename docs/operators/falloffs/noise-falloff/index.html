@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POPX Docs | Noise Modifier</title>
-  <meta name="description" content="Displaces particles or instances using procedural noise fields for turbulence and natural motion.">
+  <title>POPX Docs | Noise Falloff</title>
+  <meta name="description" content="Procedural noise-based falloff operator for creating organic, spatial variation in POPX systems.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,8 +91,8 @@
             <h4>Falloffs</h4>
             <div class="sidebar-subsection-content">
               <ul>
-                <li><a href="../../falloffs/noise-falloff/">Noise Falloff</a></li>
-                <li><a href="../../falloffs/shape-falloff/">Shape Falloff</a></li>
+                <li><a href="../noise-falloff/">Noise Falloff</a></li>
+                <li><a href="../shape-falloff/">Shape Falloff</a></li>
               </ul>
             </div>
           </div>
@@ -101,17 +101,17 @@
             <h4>Modifiers</h4>
             <div class="sidebar-subsection-content">
               <ul>
-                <li><a href="../aim/">Aim</a></li>
-                <li><a href="../color-modifier/">Color Modifier</a></li>
-                <li><a href="../magnetize/">Magnetize</a></li>
-                <li><a href="../move-along-curve/">Move Along Curve</a></li>
-                <li><a href="../move-along-mesh/">Move Along Mesh</a></li>
-                <li><a href="../noise-modifier/">Noise Modifier</a></li>
-                <li><a href="../pivot/">Pivot</a></li>
-                <li><a href="../randomize/">Randomize</a></li>
-                <li><a href="../relax/">Relax</a></li>
-                <li><a href="../spring-modifier/">Spring Modifier</a></li>
-                <li><a href="../transform-modifier/">Transform Modifier</a></li>
+                <li><a href="../../modifiers/aim/">Aim</a></li>
+                <li><a href="../../modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../modifiers/relax/">Relax</a></li>
+                <li><a href="../../modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../modifiers/transform-modifier/">Transform Modifier</a></li>
               </ul>
             </div>
           </div>
@@ -148,33 +148,21 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Noise Modifier</h1>
+      <h1 class="operator-title">Noise Falloff</h1>
 
-      <!-- Summary Section -->
-      <section id="summary">
-        <h2>Summary</h2>
+      <section>
+        <h2 id="summary">Summary</h2>
         <p>
-          The <strong>Noise Modifier</strong> displaces each instance using the internal <strong>Noise POP</strong>.
-          It generates procedural motion and directional flow fields that can be used for turbulence, jitter, and natural-looking movement.
+          The Noise Falloff generates procedural noise-based falloff patterns for creating organic, spatial variation in POPX systems. It uses multi-layered noise functions with harmonic detail to produce natural-looking distributions across particles and instances.
         </p>
-
         <p>
-          The <strong>Noise Modifier</strong> supports two modes:
-          <strong>Simple Mode</strong> samples the noise field once to directly displace each instance in space. The effect is immediate and not accumulative over time.
-          <strong>Advect Mode</strong> moves each instance through the noise field progressively, producing smooth, time-dependent motion.
-        </p>
-
-        <p>
-          The <strong>Aim Weight</strong> parameter controls how quickly each instance rotates toward its direction of motion.
-          Lower values result in gradual orientation changes, while higher values make alignment more immediate.
+          Unlike geometric falloffs, Noise Falloff creates continuous, turbulent patterns that can be animated through 4D noise space. The noise field can be transformed, combined with existing falloff values, and remapped for precise artistic control.
         </p>
       </section>
 
-      <!-- Parameters Section -->
-      <section id="parameters">
-        <h2>Parameters</h2>
+      <section>
+        <h2 id="parameters">Parameters</h2>
 
-        <!-- Noise Parameters -->
         <h3 class="page-heading" id="page-noise">Page: Noise</h3>
 
         <div class="parameter-item">
@@ -188,138 +176,19 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Do Falloff</span>
-            <span class="param-name">Dofalloff</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables falloff-based noise intensity control.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Falloff Attribute</span>
-            <span class="param-name">Falloffattr</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Specifies which attribute to use for falloff values.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Noise Signature</span>
-            <span class="param-name">Noisesignature</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Number of noise components to compute.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Scalar</span>
-              <span class="param-name">scalar</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Vector</span>
-              <span class="param-name">vector</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Use Rest Attribute</span>
             <span class="param-name">Userestattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Uses the rest attribute to stabilize the noise reference space.</span>
+            <span class="param-description">When enabled, evaluates noise using rest positions instead of current positions, preserving the noise pattern during deformations.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enable Direction from Attribute</span>
-            <span class="param-name">Enabledirattr</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reads direction values from a point attribute for scalar noise.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Default Direction</span>
-            <span class="param-name">Defaultdir</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Default direction vector when using scalar noise without direction attribute.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Default Direction</span>
-              <span class="param-name">Defaultdir1</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Default Direction</span>
-              <span class="param-name">Defaultdir2</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Default Direction</span>
-              <span class="param-name">Defaultdir3</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Direction Attribute</span>
-            <span class="param-name">Directionattr</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Name of the attribute to use for direction vectors.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Curl Noise</span>
-            <span class="param-name">Curlnoise</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Generates divergence-free curl noise for fluid-like motion.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Determines the noise type.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Perlin 2D (GPU)</span>
-              <span class="param-name">perlin2d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Perlin 3D (GPU)</span>
-              <span class="param-name">perlin3d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Perlin 4D (GPU)</span>
-              <span class="param-name">perlin4d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 2D (GPU)</span>
-              <span class="param-name">simplex2d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 3D (GPU)</span>
-              <span class="param-name">simplex3d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 4D (GPU)</span>
-              <span class="param-name">simplex4d</span>
-            </div>
+            <span class="param-description">Selects the noise algorithm type (referenced from menuSource).</span>
           </div>
         </div>
 
@@ -328,7 +197,7 @@
             <span class="param-label">Seed</span>
             <span class="param-name">Seed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Numerical value that initializes the randomization.</span>
+            <span class="param-description">Numerical value that initializes the randomization, allowing for reproducible noise patterns.</span>
           </div>
         </div>
 
@@ -337,7 +206,7 @@
             <span class="param-label">Period</span>
             <span class="param-name">Period</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Period (scale) of the noise field.</span>
+            <span class="param-description">Controls the scale/frequency of the noise pattern; larger values create broader features.</span>
           </div>
         </div>
 
@@ -346,7 +215,7 @@
             <span class="param-label">Harmonics</span>
             <span class="param-name">Harmon</span>
             <span class="param-separator">–</span>
-            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
+            <span class="param-description">Number of higher-frequency noise layers to combine for additional detail.</span>
           </div>
         </div>
 
@@ -355,7 +224,7 @@
             <span class="param-label">Harmonic Spread</span>
             <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
+            <span class="param-description">Frequency multiplier between successive harmonic layers.</span>
           </div>
         </div>
 
@@ -364,88 +233,48 @@
             <span class="param-label">Harmonic Gain</span>
             <span class="param-name">Gain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
+            <span class="param-description">Amplitude scaling factor applied to each successive harmonic layer.</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normalized Noise</span>
+            <span class="param-name">Normalizednoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, automatically normalizes noise output to 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Amplitude</span>
             <span class="param-name">Amp</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">The noise values amplitude (a scale on the values output).</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Amplitude</span>
-              <span class="param-name">Amp1</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Amplitude</span>
-              <span class="param-name">Amp2</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Amplitude</span>
-              <span class="param-name">Amp3</span>
-            </div>
+            <span class="param-description">Scales the noise output values (available when Normalized Noise is disabled).</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Exponent</span>
             <span class="param-name">Exp</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Exponent</span>
-              <span class="param-name">Exp1</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Exponent</span>
-              <span class="param-name">Exp2</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Exponent</span>
-              <span class="param-name">Exp3</span>
-            </div>
+            <span class="param-description">Applies a power function to the noise values, affecting contrast and distribution.</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Offset</span>
             <span class="param-name">Offset</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Adds an offset to the resulting value.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Offset</span>
-              <span class="param-name">Offset1</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Offset</span>
-              <span class="param-name">Offset2</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Offset</span>
-              <span class="param-name">Offset3</span>
-            </div>
+            <span class="param-description">Adds a constant offset to the noise output (available when Normalized Noise is disabled).</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Transform Parameters -->
         <h3 class="page-heading" id="page-transform">Page: Transform</h3>
 
         <div class="param-group">
@@ -455,7 +284,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
+            <span class="param-group-description">Order in which Scale, Rotate, and Translate operations are applied to the noise space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -492,7 +321,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
+            <span class="param-group-description">Order in which rotations around the X, Y, and Z axes are applied to the noise space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -529,7 +358,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Translate the instances through the noise space.</span>
+            <span class="param-group-description">Translates sampling positions through the noise space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -554,7 +383,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Rotate the instances around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+            <span class="param-group-description">Rotates sampling positions around the X, Y, and Z axes in noise space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -579,7 +408,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
+            <span class="param-group-description">Scales the noise space along each axis, affecting feature density.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -604,7 +433,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">The pivot position for the transform rotates and scales.</span>
+            <span class="param-group-description">Pivot point around which rotations and scaling are performed.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -627,180 +456,269 @@
             <span class="param-label">Translate 4D</span>
             <span class="param-name">T4d</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translates the instances through the 4th noise dimension.</span>
+            <span class="param-description">Animates through the fourth dimension of 4D noise types (perlin4d, simplex4d).</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Affect Parameters -->
-        <h3 class="page-heading" id="page-affect">Page: Affect</h3>
+        <h3 class="page-heading" id="page-falloff">Page: Falloff</h3>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Mode</span>
-            <span class="param-name">Mode</span>
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineop</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Switches between Simple Mode and Advect Mode.</span>
+            <span class="param-group-description">Mathematical operation used to combine this falloff with existing falloff values.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Simple</span>
-              <span class="param-name">simple</span>
+              <span class="param-label">Add</span>
+              <span class="param-name">add</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Advect</span>
-              <span class="param-name">advect</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Affect Position</span>
-            <span class="param-name">Affectposition</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables noise-based position displacement.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Position Amount</span>
-            <span class="param-name">Positionamount</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls the intensity of position displacement.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Affect Rotation</span>
-            <span class="param-name">Affectrotation</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables noise-based rotation changes.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Rotation Amount</span>
-            <span class="param-name">Rotationamount</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls the intensity of rotation changes.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Aim Weight</span>
-            <span class="param-name">Aimweight</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Defines how fast instances rotate toward their direction of motion.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Affect Scale</span>
-            <span class="param-name">Affectscale</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables noise-based scale changes.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Scale Amount</span>
-            <span class="param-name">Scaleamount</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls the intensity of scale changes.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Scale In Range</span>
-            <span class="param-name">Scaleinrange</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Input range for noise values that affect scale.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Scale In Range</span>
-              <span class="param-name">Scaleinrange1</span>
+              <span class="param-label">Substract</span>
+              <span class="param-name">sub</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale In Range</span>
-              <span class="param-name">Scaleinrange2</span>
+              <span class="param-label">Multiply</span>
+              <span class="param-name">mult</span>
             </div>
+            <div class="param-subparam">
+              <span class="param-label">Divide</span>
+              <span class="param-name">div</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Screen</span>
+              <span class="param-name">screen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Overlay</span>
+              <span class="param-name">overlay</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Maximum</span>
+              <span class="param-name">max</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Minimum</span>
+              <span class="param-name">min</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Falloff Attribute</span>
+            <span class="param-name">Combineattributescope</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Swap Operation Order</span>
+            <span class="param-name">Swaporder</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the order of operands in the combine operation (A op B becomes B op A).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Strength</span>
+            <span class="param-name">Combinestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Falloff Attribute</span>
+            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes falloff values using a color ramp.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Scale Out Range</span>
-            <span class="param-name">Scaleoutrange</span>
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Output range for scale values applied to particles.</span>
+            <span class="param-group-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Scale Out Range</span>
-              <span class="param-name">Scaleoutrange1</span>
+              <span class="param-label">Heatmap</span>
+              <span class="param-name">heatmap</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Scale Out Range</span>
-              <span class="param-name">Scaleoutrange2</span>
+              <span class="param-label">Blackbody</span>
+              <span class="param-name">blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+              <span class="param-name">infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Initialize</span>
-            <span class="param-name">Initializepulse</span>
+            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets advection simulation state.</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Start</span>
-            <span class="param-name">Startpulse</span>
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Begins advection simulation from the current state.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Play</span>
-            <span class="param-name">Play</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Toggles advection simulation playback.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Step</span>
-            <span class="param-name">Steppulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Advances advection simulation by one frame.</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Common Parameters -->
+        <h3 class="page-heading" id="page-remap">Page: Remap</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clamp</span>
+            <span class="param-name">Clamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, constrains falloff values to the 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fit</span>
+            <span class="param-name">Fit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables remapping of falloff values from an input range to an output range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Input Min Max</span>
+            <span class="param-name">Auto</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically determines input range from actual min/max falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Min</span>
+            <span class="param-name">Inputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Max</span>
+            <span class="param-name">Inputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Min</span>
+            <span class="param-name">Outputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Max</span>
+            <span class="param-name">Outputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the falloff values (1 - value).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Remap Ramp</span>
+            <span class="param-name">Enableremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Remap Ramp</span>
+            <span class="param-name">Remapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Remap Ramp</span>
+            <span class="param-name">Resetremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">External TOP operator containing a custom remap curve texture.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
         <h3 class="page-heading" id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
@@ -863,15 +781,15 @@
             <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX_out1</span>
+            <span class="param-text">Geometry with falloff attribute applied</span>
           </div>
         </div>
       </section>
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../move-along-mesh/" class="nav-button prev">Move Along Mesh</a>
-        <a href="../pivot/" class="nav-button next">Pivot</a>
+        <a href="../../generators/sweep/" class="nav-button prev">Sweep</a>
+        <a href="../shape-falloff/" class="nav-button next">Shape Falloff</a>
       </nav>
     </main>
 
@@ -884,7 +802,8 @@
           <ul>
             <li><a href="#page-noise">Page: Noise</a></li>
             <li><a href="#page-transform">Page: Transform</a></li>
-            <li><a href="#page-affect">Page: Affect</a></li>
+            <li><a href="#page-falloff">Page: Falloff</a></li>
+            <li><a href="#page-remap">Page: Remap</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>
