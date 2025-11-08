@@ -741,7 +741,11 @@ const searchIndex = [
     path: 'docs/guides/installation/',
     type: 'Guide',
     category: 'Guides',
-    sections: []
+    sections: [
+      { title: 'Download POPX', anchor: '#download' },
+      { title: 'System Requirements', anchor: '#requirements' },
+      { title: 'Installation Steps', anchor: '#installation' }
+    ]
   },
   {
     title: 'Tutorials',
@@ -756,14 +760,22 @@ const searchIndex = [
     path: 'docs/contact/contact-us/',
     type: 'Contact',
     category: 'Contact',
-    sections: []
+    sections: [
+      { title: 'Support Email', anchor: '#support-email' },
+      { title: 'Reporting Bugs', anchor: '#reporting-bugs' },
+      { title: 'Response Time', anchor: '#response-time' }
+    ]
   },
   {
     title: 'Community',
     path: 'docs/contact/community/',
     type: 'Contact',
     category: 'Contact',
-    sections: []
+    sections: [
+      { title: 'Patreon', anchor: '#patreon' },
+      { title: 'Discord Community', anchor: '#discord' },
+      { title: 'Community Guidelines', anchor: '#community-guidelines' }
+    ]
   },
   // Operators - Generators
   {
