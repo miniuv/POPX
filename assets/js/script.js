@@ -1010,6 +1010,20 @@ const searchIndex = [
   },
   // Falloffs
   {
+    title: 'Combine Falloff',
+    path: 'docs/operators/falloffs/combine-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Combine', anchor: '#page-combine', keywords: ['add', 'subtract', 'multiply', 'divide', 'screen', 'overlay', 'maximum', 'minimum', 'operation'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['preview', 'ramp', 'heatmap', 'blackbody', 'infrared'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Noise Falloff',
     path: 'docs/operators/falloffs/noise-falloff/',
     type: 'Operator',
