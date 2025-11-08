@@ -730,6 +730,8 @@ pre code {
 .theme-selector-button:active,
 .theme-selector-button:focus {
   outline: none;
+  box-shadow: none;
+  border: none;
 }
 
 .theme-selector.active .theme-selector-button {
