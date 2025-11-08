@@ -848,7 +848,7 @@
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Noise algorithm to use (Perlin, Simplex, Worley, etc.).</span>
+            <span class="param-description">Determines the noise type.</span>
           </div>
         </div>
 
@@ -857,7 +857,7 @@
             <span class="param-label">Seed</span>
             <span class="param-name">Seed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed value for noise generation, changing this produces different noise patterns.</span>
+            <span class="param-description">Numerical value that initializes the randomization.</span>
           </div>
         </div>
 
@@ -866,7 +866,7 @@
             <span class="param-label">Period</span>
             <span class="param-name">Period</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Base frequency of the noise pattern, controlling the scale of noise features.</span>
+            <span class="param-description">Period (scale) of the noise field.</span>
           </div>
         </div>
 
@@ -875,7 +875,7 @@
             <span class="param-label">Harmonics</span>
             <span class="param-name">Harmon</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of octaves of noise to layer together for more detailed patterns.</span>
+            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
           </div>
         </div>
 
@@ -884,7 +884,7 @@
             <span class="param-label">Harmonic Spread</span>
             <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frequency multiplier between successive harmonics (lacunarity).</span>
+            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
           </div>
         </div>
 
@@ -893,7 +893,7 @@
             <span class="param-label">Harmonic Gain</span>
             <span class="param-name">Gain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Amplitude multiplier for each successive harmonic (persistence).</span>
+            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
           </div>
         </div>
 
@@ -902,7 +902,7 @@
             <span class="param-label">Amplitude</span>
             <span class="param-name">Amp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Overall intensity of the noise effect on the falloff values.</span>
+            <span class="param-description">The noise values amplitude (a scale on the values output).</span>
           </div>
         </div>
 
@@ -911,7 +911,7 @@
             <span class="param-label">Exponent</span>
             <span class="param-name">Exp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to noise values, affecting their distribution curve.</span>
+            <span class="param-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
           </div>
         </div>
 
@@ -920,7 +920,7 @@
             <span class="param-label">Offset</span>
             <span class="param-name">Offset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Constant value added to noise results before combining with falloff.</span>
+            <span class="param-description">Adds an offset to the resulting value.</span>
           </div>
         </div>
 
@@ -931,7 +931,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Order in which Scale, Rotate, and Translate operations are applied to the noise space.</span>
+            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -968,7 +968,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Order in which rotations around the X, Y, and Z axes are applied to noise space.</span>
+            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -1005,7 +1005,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Translation offset applied to noise sampling coordinates.</span>
+            <span class="param-group-description">Translate the points through the noise space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -1030,7 +1030,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Rotation angles in degrees applied to noise sampling coordinates.</span>
+            <span class="param-group-description">Rotate the points around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -1055,7 +1055,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Scale factors applied to noise sampling coordinates.</span>
+            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -1080,7 +1080,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Pivot point around which noise space rotations and scaling are performed.</span>
+            <span class="param-group-description">The pivot point for the transform rotates and scales.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -1103,7 +1103,7 @@
             <span class="param-label">Translate 4D</span>
             <span class="param-name">T4dnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Fourth-dimensional translation offset for 4D noise types (Perlin 4D, Simplex 4D).</span>
+            <span class="param-description">Translates the points through the 4th noise dimension.</span>
           </div>
         </div>
 
