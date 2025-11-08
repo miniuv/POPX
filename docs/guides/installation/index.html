@@ -177,18 +177,56 @@
 
       <section>
         <h2 id="requirements">System Requirements</h2>
-        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>TouchDesigner:</strong> 2025 Experimental (2025.xxx) or newer — required to access the new POPs (Point Operators) family.</li>
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU:</strong> NVIDIA or AMD GPU with support for Vulkan 1.1.</li>
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);">
-            <strong>Operating System:</strong>
-            <ul style="line-height: 1.8; margin-left: 20px; margin-top: 6px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
-              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>Windows 10/11</strong> — full support for all GPU features.</li>
-              <li style="margin-bottom: 6px; color: var(--color-text-muted);"><strong>macOS Monterey (12) or newer</strong> — functional, but with limited GPU feature support.</li>
-            </ul>
-          </li>
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);"><strong>GPU Memory:</strong> Minimum 4 GB VRAM, 8 GB+ recommended for large simulations.</li>
-        </ul>
+
+        <div style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); padding: 20px 24px; background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+          <h3 style="color: var(--color-text); font-size: 20px; margin-top: 0; margin-bottom: 16px; font-weight: 600;">Windows</h3>
+
+          <p style="font-size: 15px; margin-bottom: 8px;"><strong>Operating System</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 16px;">
+            <li style="color: var(--color-text-muted);">Microsoft Windows 10 / Windows 11</li>
+          </ul>
+
+          <p style="font-size: 15px; margin-bottom: 8px;"><strong>Hardware</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 16px;">
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">A minimum of 4GB GPU memory, 8GB+ is recommended.</li>
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">The most recent Nvidia drivers, AMD drivers or Intel drivers are recommended.</li>
+            <li style="color: var(--color-text-muted);">TouchDesigner requires a GPU and drivers that support Vulkan 1.1.</li>
+          </ul>
+
+          <p style="font-size: 14px; margin-bottom: 8px;"><strong>Nvidia GPUs</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 16px;">
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">Nvidia Geforce 1000-series or better.</li>
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">Nvidia Quadro/RTX Pascal series or better.</li>
+            <li style="color: var(--color-text-muted);">Requires Driver 530.00 or newer. Driver 581.00 or later recommended.</li>
+          </ul>
+
+          <p style="font-size: 14px; margin-bottom: 8px;"><strong>AMD GPUs</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 16px;">
+            <li style="color: var(--color-text-muted);">AMD Radeon 5000 series or better (RDNA architecture GPUs).</li>
+          </ul>
+
+          <p style="font-size: 14px; margin-bottom: 8px;"><strong>Intel GPUs</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 0;">
+            <li style="color: var(--color-text-muted);">Intel 500 and newer GPUs (not the 5000, 6000 series).</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); padding: 20px 24px; background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+          <h3 style="color: var(--color-text); font-size: 20px; margin-top: 0; margin-bottom: 16px; font-weight: 600;">Apple Mac</h3>
+
+          <p style="font-size: 15px; margin-bottom: 8px;"><strong>Operating System</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 16px;">
+            <li style="color: var(--color-text-muted);">Apple macOS 13 (Ventura) and up</li>
+          </ul>
+
+          <p style="font-size: 15px; margin-bottom: 8px;"><strong>Hardware</strong></p>
+          <ul style="line-height: 1.6; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent); margin-bottom: 0;">
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">Mac Pro / iMac / Mac Mini / MacBook Pro / MacBook Air 2020+</li>
+            <li style="margin-bottom: 4px; color: var(--color-text-muted);">Your Mac must support macOS 13 or higher, but we recommend running the latest macOS.</li>
+            <li style="color: var(--color-text-muted);">We highly recommend a Mac with Apple Silicon for TouchDesigner. For Intel-based Macs we recommend a model with a discrete AMD GPU.</li>
+          </ul>
+        </div>
+
         <div style="margin-top: var(--spacing-md); padding: 16px 20px; background: rgba(200, 60, 60, 0.08); border-left: 3px solid rgba(200, 60, 60, 0.5); border-radius: 4px;">
           <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-style: italic;">
             <strong>⚠️ Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
@@ -199,7 +237,7 @@
       <section>
         <h2 id="installation">Installation Steps</h2>
         <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Subscribe to the POPX Tier on Patreon and download the <code>POPX.tox</code> package.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Subscribe to the <a href="#" style="color: var(--color-accent); text-decoration: none; border-bottom: 1px solid var(--color-accent); transition: all 0.2s ease;" onmouseover="this.style.color='var(--color-accent-hover)'; this.style.borderBottomColor='var(--color-accent-hover)'" onmouseout="this.style.color='var(--color-accent)'; this.style.borderBottomColor='var(--color-accent)'">POPX Tier on Patreon</a> and download the <code>POPX.tox</code> package.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Open your TouchDesigner project.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Drag the <code>POPX.tox</code> file directly into your network.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Your project may freeze momentarily while the system initializes — this is normal.</li>
