@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POPX Docs | Shape Falloff</title>
+  <meta name="description" content="Shape-based falloff operator for creating distance fields from geometric primitives.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar-logo-container">
+      <a href="/" class="top-bar-logo">
+        <img src="../../../../media/popx_logo_full_light.png" alt="POPX Docs" class="logo-light">
+        <img src="../../../../media/popx_logo_full_dark.png" alt="POPX Docs" class="logo-dark">
+      </a>
+      <div class="logo-tagline">
+        <div>POPs Extension</div>
+        <div>for TouchDesigner</div>
+      </div>
+    </div>
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../falloff-field/">Falloff Field</a></li>
+                <li><a href="../radial-falloff/">Radial Falloff</a></li>
+                <li><a href="../shape-falloff/">Shape Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../modifiers/aim/">Aim</a></li>
+                <li><a href="../../modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../modifiers/relax/">Relax</a></li>
+                <li><a href="../../modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Shape Falloff</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Shape Falloff</strong> operator generates falloff values based on signed distance fields (SDFs) from various geometric primitives.
+          It provides precise control over falloff distribution using mathematical shape definitions including spheres, boxes, cylinders, tori, planes, and more.
+        </p>
+
+        <p>
+          This operator supports 12 different shape types, each with configurable parameters for size, radius, height, and roundness.
+          The signed distance field approach ensures smooth, continuous falloff values that can be precisely controlled with transition ranges and remapping options.
+        </p>
+
+        <p>
+          <strong>Use Cases:</strong>
+        </p>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 8px; color: var(--color-text-muted);">Creating localized effects within specific geometric regions</li>
+          <li style="margin-bottom: 8px; color: var(--color-text-muted);">Defining soft boundaries for particle attraction or repulsion</li>
+          <li style="margin-bottom: 8px; color: var(--color-text-muted);">Generating masks for procedural texturing and material blending</li>
+          <li style="color: var(--color-text-muted);">Building complex falloff patterns by combining multiple shape falloffs</li>
+        </ul>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Shape Parameters -->
+        <h3 id="page-shape">Page: Shape</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Spec POP</span>
+            <span class="param-name">Specpop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference POP operator to use for falloff specification and spatial transformation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Shape Type</span>
+            <span class="param-name">Shapetype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the geometric primitive used to generate the signed distance field.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Sphere</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Box</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Torus</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cylinder Infinite</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cylinder Capped</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cylinder Rounded</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Capsule</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">X-Plane</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y-Plane</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z-Plane</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Parabola</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Line Projection</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Shape</span>
+            <span class="param-name">Displayshape</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, renders a visual representation of the shape in the viewport for reference.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Shape Color</span>
+            <span class="param-name">Shapecolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color used to display the shape when Display Shape is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">R</span>
+              <span class="param-name">Shapecolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">G</span>
+              <span class="param-name">Shapecolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">B</span>
+              <span class="param-name">Shapecolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Dimensions of the box shape (available when Shape Type is set to Box).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Sizex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Sizey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Sizez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Rad</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Radius parameters for the selected shape type.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Radx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Rady</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Radz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Height</span>
+            <span class="param-name">Height</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Height parameter for Cylinder Rounded shape type.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Roundness</span>
+            <span class="param-name">Roundness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls edge rounding for Box and Cylinder Rounded shape types.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Point A</span>
+            <span class="param-name">Pointa</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">First endpoint for Cylinder Capped, Capsule, and Line Projection shapes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Pointax</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Pointay</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Pointaz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Point B</span>
+            <span class="param-name">Pointb</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Second endpoint for Cylinder Capped, Capsule, and Line Projection shapes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Pointbx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Pointby</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Pointbz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Exponential power for the Parabola shape type, controlling the curvature steepness.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Strength</span>
+            <span class="param-name">Strength</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Strength parameters for the Parabola shape type.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Strengthx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Strengthy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transition Range</span>
+            <span class="param-name">Transitionrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Defines the distance over which the falloff transitions from full strength to zero, creating smooth gradients.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transition Align</span>
+            <span class="param-name">Transitionalign</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the alignment of the transition range relative to the shape boundary (inward, centered, or outward).</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transition Type</span>
+            <span class="param-name">Transitiontype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Interpolation curve used for the transition range (Linear, Smooth, Ease In, Ease Out, etc.).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Transform Parameters -->
+        <h3 id="page-transform">Page: Transform</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order in which Scale, Rotate, and Translate operations are applied to the shape.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale Rotate Translate</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale Translate Rotate</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Scale Translate</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Translate Scale</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Scale Rotate</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Rotate Scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order in which rotations around the X, Y, and Z axes are applied.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rx Ry Rz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rx Rz Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rx Rz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rz Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Rx Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Ry Rx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translation offset applied to the shape in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Tz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation angles in degrees around the X, Y, and Z axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Rz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factors applied to the shape along each axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Sz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Pivot point around which rotations and scaling are performed.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Pz</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Falloff Parameters -->
+        <h3 id="page-falloff">Page: Falloff</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Mathematical operation used to combine this falloff with existing falloff values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Subtract</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Multiply</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Divide</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Screen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Overlay</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Maximum</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Minimum</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Falloff Attribute</span>
+            <span class="param-name">Combineattributescope</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Swap Operation Order</span>
+            <span class="param-name">Swaporder</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the order of operands in the combine operation (A op B becomes B op A).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Strength</span>
+            <span class="param-name">Combinestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Falloff Attribute</span>
+            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes falloff values using a color ramp applied to point colors.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custom Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Noise Parameters -->
+        <h3 id="page-noise">Page: Noise</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Noise</span>
+            <span class="param-name">Applynoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, adds procedural noise to the falloff values for organic variation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineopnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How noise values are combined with the base falloff (Add or Multiply).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Multiply</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Noise algorithm to use (Perlin, Simplex, Worley, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed value for noise generation, changing this produces different noise patterns.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Period</span>
+            <span class="param-name">Period</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Base frequency of the noise pattern, controlling the scale of noise features.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonics</span>
+            <span class="param-name">Harmon</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of octaves of noise to layer together for more detailed patterns.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Spread</span>
+            <span class="param-name">Spread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frequency multiplier between successive harmonics (lacunarity).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Gain</span>
+            <span class="param-name">Gain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amplitude multiplier for each successive harmonic (persistence).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Amplitude</span>
+            <span class="param-name">Amp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Overall intensity of the noise effect on the falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Power function applied to noise values, affecting their distribution curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Offset</span>
+            <span class="param-name">Offset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Constant value added to noise results before combining with falloff.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xordnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order in which Scale, Rotate, and Translate operations are applied to the noise space.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rordnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order in which rotations around the X, Y, and Z axes are applied to noise space.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">Tnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translation offset applied to noise sampling coordinates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Tnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Tnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Tnoisez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">Rnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation angles in degrees applied to noise sampling coordinates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Rnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Rnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Rnoisez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Snoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factors applied to noise sampling coordinates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Snoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Snoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Snoisez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">Pnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Pivot point around which noise space rotations and scaling are performed.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">X</span>
+              <span class="param-name">Pnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Y</span>
+              <span class="param-name">Pnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Z</span>
+              <span class="param-name">Pnoisez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate 4D</span>
+            <span class="param-name">T4dnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Fourth-dimensional translation offset for 4D noise types (Perlin 4D, Simplex 4D).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Remap Parameters -->
+        <h3 id="page-remap">Page: Remap</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clamp</span>
+            <span class="param-name">Clamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, constrains falloff values to the 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fit</span>
+            <span class="param-name">Fit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables remapping of falloff values from an input range to an output range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Input Min Max</span>
+            <span class="param-name">Auto</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically determines input range from actual min/max falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Min</span>
+            <span class="param-name">Inputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Max</span>
+            <span class="param-name">Inputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Min</span>
+            <span class="param-name">Outputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Max</span>
+            <span class="param-name">Outputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the falloff values (1 - value).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Remap Ramp</span>
+            <span class="param-name">Enableremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Remap Ramp</span>
+            <span class="param-name">Remapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Remap Ramp</span>
+            <span class="param-name">Resetremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">External TOP operator containing a custom remap curve texture.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 id="page-common">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry with falloff attribute applied</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../radial-falloff/" class="nav-button prev">Radial Falloff</a>
+        <a href="../../modifiers/aim/" class="nav-button next">Aim</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-shape">Page: Shape</a></li>
+            <li><a href="#page-transform">Page: Transform</a></li>
+            <li><a href="#page-falloff">Page: Falloff</a></li>
+            <li><a href="#page-noise">Page: Noise</a></li>
+            <li><a href="#page-remap">Page: Remap</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

@@ -995,6 +995,24 @@ const searchIndex = [
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
+  },
+  // Falloffs
+  {
+    title: 'Shape Falloff',
+    path: 'docs/operators/falloffs/shape-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Shape', anchor: '#page-shape', keywords: ['sphere', 'box', 'torus', 'cylinder', 'capsule', 'plane', 'parabola'] },
+      { title: 'Page: Transform', anchor: '#page-transform', keywords: ['translate', 'rotate', 'scale', 'pivot'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'blend', 'attribute'] },
+      { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
   }
 ];
 
