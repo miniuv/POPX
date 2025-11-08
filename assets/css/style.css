@@ -691,8 +691,7 @@ pre code {
 
 .theme-selector-button {
   background: var(--color-bg-panel);
-  border: 1px solid var(--color-border);
-  border-left: 1px solid var(--color-border);
+  border: none;
   border-radius: 0;
   padding: 10px 16px 10px 16px;
   color: var(--color-text-muted);
@@ -731,6 +730,11 @@ pre code {
 .theme-selector-button:active,
 .theme-selector-button:focus {
   outline: none;
+}
+
+.theme-selector.active .theme-selector-button {
+  border: 1px solid var(--color-border);
+  border-bottom: none;
 }
 
 .theme-icon {
