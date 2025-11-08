@@ -692,24 +692,41 @@ pre code {
 }
 
 .theme-selector-button {
-  background: var(--color-bg-panel);
+  background: var(--color-bg-panel) !important;
   border: none !important;
-  border-radius: 0;
+  border-radius: 0 !important;
   padding: 10px 16px 10px 16px;
   color: var(--color-text-muted);
   font-size: 14px;
   font-family: var(--font-family);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   position: relative;
   min-width: 110px;
-  outline: none !important;
+  outline: 0 !important;
   box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline-offset: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.theme-selector-button::-moz-focus-inner {
+  border: 0 !important;
+  padding: 0 !important;
+  outline: 0 !important;
 }
 
 .theme-selector-button * {
@@ -740,11 +757,18 @@ pre code {
 
 .theme-selector-button:active,
 .theme-selector-button:focus,
-.theme-selector-button:focus-visible {
-  outline: none !important;
+.theme-selector-button:focus-visible,
+.theme-selector-button:focus-within {
+  outline: 0 !important;
   box-shadow: none !important;
   border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  outline-offset: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  background: var(--color-bg-panel) !important;
+  border-radius: 0 !important;
 }
 
 .theme-selector.active .theme-selector-button {
@@ -772,6 +796,9 @@ pre code {
 
 .theme-selector-button:active:not(.theme-selector.active .theme-selector-button) {
   border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: var(--color-bg-panel) !important;
 }
 
 .theme-icon {
