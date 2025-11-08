@@ -1706,8 +1706,9 @@ section > p {
   text-align: center;
   margin-bottom: var(--spacing-xl);
   line-height: 1.6;
-  white-space: nowrap;
   max-width: 600px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .home-links {
@@ -2090,6 +2091,36 @@ section > p {
   .nav-button {
     width: 100%;
     justify-content: center;
+  }
+
+  /* Home page mobile adjustments */
+  .home-container {
+    min-height: 60vh;
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .home-tagline {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0 var(--spacing-sm);
+  }
+
+  .home-links {
+    max-width: 100%;
+    gap: var(--spacing-md);
+  }
+
+  .home-link-button {
+    padding: var(--spacing-md);
+    min-height: 80px;
+  }
+
+  .home-link-title {
+    font-size: 18px;
+  }
+
+  .home-link-description {
+    font-size: 13px;
   }
 }
 
