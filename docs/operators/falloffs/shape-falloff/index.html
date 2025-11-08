@@ -159,13 +159,16 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Shape Falloff</strong> operator generates falloff values based on signed distance fields (SDFs) from various geometric primitives.
-          It provides precise control over falloff distribution using mathematical shape definitions including spheres, boxes, cylinders, tori, planes, and more.
+          The <strong>Shape Falloff</strong> generates a Falloff Attribute based on signed distance fields (SDFs) computed from various geometric primitives.
+          Internally, it uses the Field POP to calculate distance-based influence regions with smooth gradients and precise transitions.
         </p>
 
         <p>
-          This operator supports 12 different shape types, each with configurable parameters for size, radius, height, and roundness.
-          The signed distance field approach ensures smooth, continuous falloff values that can be precisely controlled with transition ranges and remapping options.
+          It provides accurate control over falloff distribution using mathematical shape definitions such as spheres, boxes, cylinders, and planes, with adjustable parameters for size, radius, height, and roundness.
+        </p>
+
+        <p>
+          This approach ensures continuous, easily controllable falloff values that can be refined through transition ranges and remapping options.
         </p>
 
         <p>
