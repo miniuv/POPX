@@ -228,6 +228,15 @@ p {
   font-size: clamp(16px, 3vw, 20px);
   font-weight: 600;
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.contact-email a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 /* Note text styling */
@@ -2081,6 +2090,13 @@ section > p {
     max-width: 100%;
     width: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Ensure all content respects container width */
+  .main-content * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .operator-grid {
@@ -2202,7 +2218,14 @@ section > p {
 
   /* Section content indentation */
   section > *:not(h2) {
-    padding-left: 0.5rem;
+    padding-left: 0.25rem;
+  }
+
+  /* Ensure tables don't overflow on mobile */
+  .parameter-table {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    width: calc(100% + 0.5rem);
   }
 
   /* Adjust h2 padding for mobile */
@@ -2339,7 +2362,13 @@ section > p {
   }
 
   section > *:not(h2) {
-    padding-left: 0.3rem;
+    padding-left: 0;
+  }
+
+  /* Remove card margins on very small screens */
+  .card {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
