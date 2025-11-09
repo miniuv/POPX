@@ -976,15 +976,15 @@ pre code {
   height: 40px;
   width: 40px;
   z-index: 101;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
+  background: transparent;
+  border: none;
   color: var(--color-accent);
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
   padding: 0;
-  border-radius: 8px;
+  border-radius: 0;
   line-height: 1;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
   align-items: center;
@@ -993,11 +993,10 @@ pre code {
 
 .mobile-menu-toggle:hover {
   color: var(--color-accent-hover);
-  background: var(--color-bg-secondary);
 }
 
 .mobile-menu-toggle:active {
-  background: var(--color-bg-elevated);
+  background: transparent;
 }
 
 .mobile-menu-toggle:focus {
