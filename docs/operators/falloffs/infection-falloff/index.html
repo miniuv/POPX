@@ -561,7 +561,7 @@
             <span class="param-label">Preview Falloff</span>
             <span class="param-name">Previewfalloff</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Visualize falloff values using a color ramp applied to point colors.</span>
+            <span class="param-description">When enabled, visualizes falloff values using a color ramp.</span>
           </div>
         </div>
 
@@ -572,7 +572,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Color ramp preset for falloff visualization.</span>
+            <span class="param-group-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -599,7 +599,7 @@
             <span class="param-label">Open Custum Ramp</span>
             <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Open the custom ramp editor for designing custom falloff visualization.</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
           </div>
         </div>
 
@@ -608,7 +608,7 @@
             <span class="param-label">Reset Custom Ramp</span>
             <span class="param-name">Resetcustomramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reset the custom ramp to default linear gradient.</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
           </div>
         </div>
 
@@ -807,7 +807,7 @@
             <span class="param-label">Clamp</span>
             <span class="param-name">Clamp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Clamp final falloff values to 0-1 range.</span>
+            <span class="param-description">When enabled, constrains falloff values to the 0-1 range.</span>
           </div>
         </div>
 
@@ -816,7 +816,7 @@
             <span class="param-label">Fit</span>
             <span class="param-name">Fit</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable value range remapping from input range to output range.</span>
+            <span class="param-description">Enables remapping of falloff values from an input range to an output range.</span>
           </div>
         </div>
 
@@ -825,7 +825,7 @@
             <span class="param-label">Auto Input Min Max</span>
             <span class="param-name">Auto</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Automatically detect min/max values from infection falloff for fitting.</span>
+            <span class="param-description">Automatically determines input range from actual min/max falloff values.</span>
           </div>
         </div>
 
@@ -834,7 +834,7 @@
             <span class="param-label">Input Min</span>
             <span class="param-name">Inputmin</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Minimum value of input range for fitting.</span>
+            <span class="param-description">Minimum value of the input range for remapping.</span>
           </div>
         </div>
 
@@ -843,7 +843,7 @@
             <span class="param-label">Input Max</span>
             <span class="param-name">Inputmax</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum value of input range for fitting.</span>
+            <span class="param-description">Maximum value of the input range for remapping.</span>
           </div>
         </div>
 
@@ -852,7 +852,7 @@
             <span class="param-label">Output Min</span>
             <span class="param-name">Outputmin</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Minimum value of output range for fitting.</span>
+            <span class="param-description">Minimum value of the output range for remapping.</span>
           </div>
         </div>
 
@@ -861,7 +861,7 @@
             <span class="param-label">Output Max</span>
             <span class="param-name">Outputmax</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum value of output range for fitting.</span>
+            <span class="param-description">Maximum value of the output range for remapping.</span>
           </div>
         </div>
 
@@ -870,7 +870,7 @@
             <span class="param-label">Invert</span>
             <span class="param-name">Invert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Invert falloff values (1 becomes 0, 0 becomes 1).</span>
+            <span class="param-description">Reverses the falloff values (1 - value).</span>
           </div>
         </div>
 
@@ -879,7 +879,7 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Apply a custom ramp curve to remap falloff values.</span>
+            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
           </div>
         </div>
 
@@ -888,7 +888,7 @@
             <span class="param-label">Open Remap Ramp</span>
             <span class="param-name">Remapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Open the remap ramp editor for custom value mapping curves.</span>
+            <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
         </div>
 
@@ -897,7 +897,7 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reset remap ramp to default linear curve.</span>
+            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
           </div>
         </div>
 
@@ -906,7 +906,7 @@
             <span class="param-label">Ramp TOP</span>
             <span class="param-name">Ramptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Use an external TOP as the remap ramp lookup.</span>
+            <span class="param-description">External TOP operator containing a custom remap curve texture.</span>
           </div>
         </div>
 
@@ -920,7 +920,7 @@
             <span class="param-label">Bypass</span>
             <span class="param-name">Bypass</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Bypass this operator and pass input geometry through unchanged.</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
           </div>
         </div>
 
@@ -929,7 +929,7 @@
             <span class="param-label">Free Extra GPU Memory</span>
             <span class="param-name">Freeextragpumem</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Manually free any extra GPU memory allocated by this operator.</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
           </div>
         </div>
 
@@ -938,7 +938,7 @@
             <span class="param-label">Render Primitives</span>
             <span class="param-name">Renderprimitives</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable rendering of geometry primitives.</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
           </div>
         </div>
 
@@ -947,7 +947,7 @@
             <span class="param-label">SRT / RST</span>
             <span class="param-name">Srtrst</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Toggle between Scale-Rotate-Translate and Rotate-Scale-Translate transformation order.</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
           </div>
         </div>
       </section>
