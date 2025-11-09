@@ -216,6 +216,26 @@ p {
   color: var(--color-text-muted);
 }
 
+/* Intro text styling */
+.intro-text {
+  font-size: clamp(16px, 2.5vw, 18px);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Contact email styling */
+.contact-email {
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Note text styling */
+.note-text {
+  margin-top: var(--spacing-md);
+  color: var(--color-text-muted);
+}
+
 hr.section-divider {
   border: none;
   border-top: 1px solid #333;
@@ -251,6 +271,24 @@ pre code {
   padding: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+/* Code block container */
+.code-block {
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-block pre {
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 /* ===========================
@@ -1423,6 +1461,17 @@ pre code {
   color: var(--color-text);
 }
 
+.card ul {
+  padding-left: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+}
+
+.card li {
+  margin-bottom: var(--spacing-xs);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Operator Grid */
 .operator-grid {
   display: grid;
@@ -2172,6 +2221,34 @@ section > p {
   .button-group {
     flex-direction: column;
     gap: 0;
+  }
+
+  /* Card mobile adjustments */
+  .card {
+    padding: var(--spacing-sm);
+  }
+
+  .card h3 {
+    font-size: clamp(15px, 3.5vw, 18px);
+  }
+
+  .card h4 {
+    font-size: clamp(14px, 3vw, 16px);
+  }
+
+  .card ul {
+    padding-left: var(--spacing-sm);
+  }
+
+  .card li {
+    font-size: clamp(13px, 2.5vw, 14px);
+    line-height: 1.7;
+  }
+
+  /* Code block mobile adjustments */
+  .code-block pre {
+    font-size: 12px;
+    overflow-x: auto;
   }
 
   .page-navigation {
