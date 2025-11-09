@@ -104,6 +104,10 @@ window.addEventListener('componentsLoaded', function() {
   if (!appInitialized) {
     appInitialized = true;
     initializeApp();
+
+    // Update theme button after components are loaded
+    const savedTheme = localStorage.getItem('popx-theme') || 'auto';
+    updateThemeButton(savedTheme);
   }
 });
 
@@ -119,6 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // Components are already loaded, initialize immediately
       appInitialized = true;
       initializeApp();
+
+      // Update theme button after components are loaded
+      const savedTheme = localStorage.getItem('popx-theme') || 'auto';
+      updateThemeButton(savedTheme);
     } else {
       // Wait a bit to see if components load
       setTimeout(function() {
