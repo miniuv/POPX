@@ -93,6 +93,7 @@
             <div class="sidebar-subsection-content">
               <ul>
                 <li><a href="../combine-falloff/">Combine Falloff</a></li>
+                <li><a href="../curve-falloff/">Curve Falloff</a></li>
                 <li><a href="../infection-falloff/">Infection Falloff</a></li>
                 <li><a href="../noise-falloff/">Noise Falloff</a></li>
                 <li><a href="../shape-falloff/">Shape Falloff</a></li>
@@ -390,25 +391,32 @@
 
       </section>
 
-      <!-- Inputs and Outputs Section -->
-      <section id="inputs-outputs">
-        <h2>Inputs and Outputs</h2>
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
 
-        <h3 id="inputs">Inputs</h3>
-        <div class="io-table">
-          <div class="io-item">
-            <span class="io-label">Input 0</span>
-            <span class="io-separator">–</span>
-            <span class="io-text">Particle geometry to process</span>
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
           </div>
         </div>
+      </section>
 
-        <h3 id="outputs">Outputs</h3>
-        <div class="io-table">
-          <div class="io-item">
-            <span class="io-label">Output 0</span>
-            <span class="io-separator">–</span>
-            <span class="io-text">Geometry with combined falloff attribute applied</span>
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry with falloff attribute applied</span>
           </div>
         </div>
       </section>
@@ -416,7 +424,7 @@
       <!-- Page Navigation -->
       <nav class="page-navigation">
         <a href="../../generators/sweep/" class="nav-button prev">Sweep</a>
-        <a href="../infection-falloff/" class="nav-button next">Infection Falloff</a>
+        <a href="../curve-falloff/" class="nav-button next">Curve Falloff</a>
       </nav>
     </main>
 
