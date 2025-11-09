@@ -664,6 +664,15 @@ function initThemeSelector() {
   applyTheme(savedTheme);
   updateThemeButton(savedTheme);
 
+  // Set initial selected state in dropdown
+  themeOptions.forEach(option => {
+    if (option.dataset.theme === savedTheme) {
+      option.classList.add('selected');
+    } else {
+      option.classList.remove('selected');
+    }
+  });
+
   // Toggle dropdown
   themeButton.addEventListener('click', function(e) {
     e.stopPropagation();
