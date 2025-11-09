@@ -15,6 +15,11 @@
   --color-border: #1a1a1a;
   --color-border-light: #222222;
 
+  /* Scrollbar colors - Dark Theme */
+  --scrollbar-track: #0e0e0e;
+  --scrollbar-thumb: #2b2b2b;
+  --scrollbar-thumb-hover: #3b3b3b;
+
   /* All categories use red accent */
   --color-generator: #B8003A;
   --color-modifier: #B8003A;
@@ -66,6 +71,11 @@
   --color-text-muted: #666666;
   --color-border: #e0e0e0;
   --color-border-light: #d0d0d0;
+
+  /* Scrollbar colors - Light Theme */
+  --scrollbar-track: #f5f5f5;
+  --scrollbar-thumb: #d0d0d0;
+  --scrollbar-thumb-hover: #b8b8b8;
 }
 
 /* Light Theme - Parameter Name Background */
@@ -121,40 +131,23 @@ body.page-transitioning {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0e0e0e;
+  background: var(--scrollbar-track);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2b2b2b;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b3b3b;
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2b2b2b #0e0e0e;
-}
-
-/* Light theme scrollbars */
-html[data-theme="light"] ::-webkit-scrollbar-track {
-  background: #e8e8e8;
-}
-
-html[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #b0b0b0;
-}
-
-html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #909090;
-}
-
-html[data-theme="light"] {
-  scrollbar-color: #b0b0b0 #e8e8e8;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 a {

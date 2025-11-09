@@ -4,9 +4,11 @@
 
 // Apply theme immediately (before DOMContentLoaded) to prevent flash
 (function() {
-  const savedTheme = localStorage.getItem('popx-theme') || 'dark';
+  const savedTheme = localStorage.getItem('popx-theme') || 'auto';
   if (savedTheme === 'auto') {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    // Auto theme follows system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
   } else {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }
@@ -644,8 +646,8 @@ function initThemeSelector() {
 
   if (!themeButton || !themeDropdown || !themeSelector) return;
 
-  // Load saved theme or default to dark
-  const savedTheme = localStorage.getItem('popx-theme') || 'dark';
+  // Load saved theme or default to auto
+  const savedTheme = localStorage.getItem('popx-theme') || 'auto';
   applyTheme(savedTheme);
   updateThemeButton(savedTheme);
 
@@ -679,12 +681,22 @@ function initThemeSelector() {
       this.classList.add('selected');
     });
   });
+
+  // Listen for system theme changes when in auto mode
+  const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  systemThemeMedia.addEventListener('change', (e) => {
+    const currentTheme = localStorage.getItem('popx-theme') || 'auto';
+    if (currentTheme === 'auto') {
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    }
+  });
 }
 
 function applyTheme(theme) {
   if (theme === 'auto') {
-    // Auto theme defaults to dark mode
-    document.documentElement.setAttribute('data-theme', 'dark');
+    // Auto theme follows system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
   } else {
     document.documentElement.setAttribute('data-theme', theme);
   }
