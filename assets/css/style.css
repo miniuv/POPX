@@ -971,7 +971,7 @@ pre code {
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 0;
+  top: -5px;
   right: var(--spacing-md);
   height: var(--nav-height);
   z-index: 101;
