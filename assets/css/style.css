@@ -1005,17 +1005,27 @@ pre code {
   pointer-events: none;
 }
 
-.mobile-menu-toggle:hover {
-  color: var(--color-accent-hover);
-  background: var(--color-bg-secondary);
+@media (hover: hover) and (pointer: fine) {
+  .mobile-menu-toggle:hover {
+    color: var(--color-accent-hover);
+    background: var(--color-bg-secondary);
+  }
 }
 
 .mobile-menu-toggle:active {
-  background: var(--color-bg-elevated);
+  color: var(--color-accent) !important;
+  background: var(--color-bg-elevated) !important;
 }
 
 .mobile-menu-toggle:focus {
   outline: none;
+  color: var(--color-accent);
+  background: var(--color-bg-elevated);
+}
+
+.mobile-menu-toggle:focus:not(:focus-visible) {
+  color: var(--color-accent);
+  background: var(--color-bg-elevated);
 }
 
 /* ===========================
