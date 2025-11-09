@@ -141,20 +141,28 @@ body.page-transitioning {
 }
 
 /* Light theme scrollbars */
-[data-theme="light"] ::-webkit-scrollbar-track {
-  background: #f0f0f0;
+[data-theme="light"] ::-webkit-scrollbar-track,
+[data-theme="light"] body ::-webkit-scrollbar-track,
+[data-theme="light"] html ::-webkit-scrollbar-track {
+  background: #e8e8e8 !important;
 }
 
-[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #c0c0c0;
+[data-theme="light"] ::-webkit-scrollbar-thumb,
+[data-theme="light"] body ::-webkit-scrollbar-thumb,
+[data-theme="light"] html ::-webkit-scrollbar-thumb {
+  background: #b0b0b0 !important;
 }
 
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover,
+[data-theme="light"] body ::-webkit-scrollbar-thumb:hover,
+[data-theme="light"] html ::-webkit-scrollbar-thumb:hover {
+  background: #909090 !important;
 }
 
+[data-theme="light"],
+[data-theme="light"] body,
 [data-theme="light"] * {
-  scrollbar-color: #c0c0c0 #f0f0f0;
+  scrollbar-color: #b0b0b0 #e8e8e8 !important;
 }
 
 a {
