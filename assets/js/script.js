@@ -47,12 +47,8 @@
     });
   }
 
-  // Apply states immediately if DOM is already loaded, otherwise wait
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyAccordionStates);
-  } else {
-    applyAccordionStates();
-  }
+  // Wait for components to load before applying accordion states
+  window.addEventListener('componentsLoaded', applyAccordionStates);
 })();
 
 // ===========================
@@ -86,7 +82,7 @@ function initPageTransitions() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function initializeApp() {
   initPageTransitions();
   initMobileMenu();
   initScrollSpy();
@@ -96,6 +92,29 @@ document.addEventListener('DOMContentLoaded', function() {
   initSidebarSwipe();
   initThemeSelector();
   initSearch();
+}
+
+// Track if app has been initialized
+let appInitialized = false;
+
+// Wait for components to load before initializing
+window.addEventListener('componentsLoaded', function() {
+  if (!appInitialized) {
+    appInitialized = true;
+    initializeApp();
+  }
+});
+
+// Fallback: if componentsLoaded hasn't fired after DOM is ready, init anyway
+document.addEventListener('DOMContentLoaded', function() {
+  // Wait a bit to see if components load
+  setTimeout(function() {
+    if (!appInitialized && !document.querySelector('.sidebar')) {
+      console.warn('Sidebar not found after component load, initializing anyway');
+      appInitialized = true;
+      initializeApp();
+    }
+  }, 100);
 
   // Fade in body after content is ready
   document.body.classList.remove('page-transitioning');

@@ -23,133 +23,14 @@
     }
   </script>
   <!-- Top Navigation Bar -->
-  <header class="top-bar">
-    <div class="top-bar-logo-container">
-      <a href="/" class="top-bar-logo">
-        <img src="../../../../media/popx_logo_full_light.png" alt="POPX Docs" class="logo-light">
-        <img src="../../../../media/popx_logo_full_dark.png" alt="POPX Docs" class="logo-dark">
-      </a>
-      <div class="logo-tagline">
-        <div>POPs Extension</div>
-        <div>for TouchDesigner</div>
-      </div>
-    </div>
-
-    <!-- Search Bar (Desktop Only) -->
-    <div class="top-bar-search">
-      <div class="search-input-wrapper">
-        <span class="search-icon">⌕</span>
-        <input type="text" placeholder="Search" aria-label="Search">
-      </div>
-    </div>
-
-    <!-- Theme Selector (Desktop Only) -->
-    <div class="theme-selector">
-      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
-      <div class="theme-selector-dropdown">
-        <div class="theme-option selected" data-theme="dark">Dark</div>
-        <div class="theme-option" data-theme="light">Light</div>
-        <div class="theme-option" data-theme="auto">Auto</div>
-      </div>
-    </div>
-  </header>
+  <div id="navbar-container"></div>
 
   <div class="page-layout">
     <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    <div id="mobile-menu-container"></div>
 
     <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <h3>Guides</h3>
-        <div class="sidebar-section-content">
-          <ul>
-            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
-            <li><a href="../../../guides/installation/">Installation</a></li>
-            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="sidebar-section">
-        <h3>Operators</h3>
-        <div class="sidebar-section-content">
-
-          <div class="sidebar-subsection">
-            <h4>Generators</h4>
-            <div class="sidebar-subsection-content">
-              <ul>
-                <li><a href="../convert/">Convert</a></li>
-                <li><a href="../explode/">Explode</a></li>
-                <li><a href="../instancer/">Instancer</a></li>
-                <li><a href="../subdivider/">Subdivider</a></li>
-                <li><a href="../sweep/">Sweep</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="sidebar-subsection">
-            <h4>Falloffs</h4>
-            <div class="sidebar-subsection-content">
-              <ul>
-                <li><a href="../../falloffs/combine-falloff/">Combine Falloff</a></li>
-                <li><a href="../../falloffs/curve-falloff/">Curve Falloff</a></li>
-                <li><a href="../../falloffs/falloff-from-attribute/">Falloff From Attribute</a></li>
-                <li><a href="../../falloffs/infection-falloff/">Infection Falloff</a></li>
-                <li><a href="../../falloffs/noise-falloff/">Noise Falloff</a></li>
-                <li><a href="../../falloffs/shape-falloff/">Shape Falloff</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="sidebar-subsection">
-            <h4>Modifiers</h4>
-            <div class="sidebar-subsection-content">
-              <ul>
-                <li><a href="../../modifiers/aim/">Aim</a></li>
-                <li><a href="../../modifiers/color-modifier/">Color Modifier</a></li>
-                <li><a href="../../modifiers/magnetize/">Magnetize</a></li>
-                <li><a href="../../modifiers/move-along-curve/">Move Along Curve</a></li>
-                <li><a href="../../modifiers/move-along-mesh/">Move Along Mesh</a></li>
-                <li><a href="../../modifiers/noise-modifier/">Noise Modifier</a></li>
-                <li><a href="../../modifiers/pivot/">Pivot</a></li>
-                <li><a href="../../modifiers/randomize/">Randomize</a></li>
-                <li><a href="../../modifiers/relax/">Relax</a></li>
-                <li><a href="../../modifiers/spring-modifier/">Spring Modifier</a></li>
-                <li><a href="../../modifiers/transform-modifier/">Transform Modifier</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="sidebar-subsection">
-            <h4>Tools</h4>
-            <div class="sidebar-subsection-content">
-              <ul>
-              </ul>
-            </div>
-          </div>
-
-          <div class="sidebar-subsection">
-            <h4>Simulations</h4>
-            <div class="sidebar-subsection-content">
-              <ul>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="sidebar-section">
-        <h3>Contact</h3>
-        <div class="sidebar-section-content">
-          <ul>
-            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
-            <li><a href="../../../contact/community/">Community</a></li>
-          </ul>
-        </div>
-      </div>
-    </aside>
+    <div id="sidebar-container"></div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -373,9 +254,9 @@
     </aside>
   </div>
 
-  <!-- Mobile Menu Overlay -->
-  <div class="menu-overlay"></div>
+  <div id="menu-overlay-container"></div>
 
+  <script src="../../../../assets/js/component-loader.js"></script>
   <script src="../../../../assets/js/script.js"></script>
 </body>
 </html>
