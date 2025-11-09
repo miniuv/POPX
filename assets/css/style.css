@@ -974,9 +974,9 @@ pre code {
   top: 12px;
   right: var(--spacing-md);
   min-height: 46px;
-  min-width: 52px;
+  min-width: 64px;
   height: 46px;
-  width: 52px;
+  width: 64px;
   z-index: 101;
   background: transparent;
   border: none;
