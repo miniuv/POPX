@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Combine Falloff | POPX</title>
-  <meta name="description" content="Combine multiple falloff attributes using mathematical operations for layered and complex falloff effects.">
+  <title>Falloff From Attribute | POPX</title>
+  <meta name="description" content="Creates falloff values from existing point attributes.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,11 @@
 </head>
 <body>
   <script>
+    // Clean URL - remove index.html if present
+    if (window.location.pathname.endsWith('/index.html')) {
+      window.history.replaceState(null, '', window.location.pathname.replace('/index.html', ''));
+    }
+
     // Prevent flash during page transitions
     if (performance.navigation.type === 1) {
       // Page was reloaded, no transition needed
@@ -125,6 +130,8 @@
             <h4>Tools</h4>
             <div class="sidebar-subsection-content">
               <ul>
+                <li><a href="../../tools/attribute-manager/">Attribute Manager</a></li>
+                <li><a href="../../tools/voxelize/">Voxelize</a></li>
               </ul>
             </div>
           </div>
@@ -133,6 +140,8 @@
             <h4>Simulations</h4>
             <div class="sidebar-subsection-content">
               <ul>
+                <li><a href="../../simulations/flip-solver/">FLIP Solver</a></li>
+                <li><a href="../../simulations/sph-solver/">SPH Solver</a></li>
               </ul>
             </div>
           </div>
@@ -153,41 +162,47 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Combine Falloff</h1>
+      <h1>Falloff From Attribute</h1>
+      <span class="badge badge-falloff">Falloff</span>
 
-      <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Combine Falloff</strong> operator merges multiple falloff attributes using mathematical operations to create layered and complex falloff effects.
-          It supports various combination modes including addition, subtraction, multiplication, division, screen, overlay, and min/max operations.
+          The Falloff From Attribute operator converts existing point attributes into falloff values. This allows you to use any numeric attribute (such as point index, custom data, or calculated values) as a falloff source, providing flexible control over how modifiers and effects are applied across your geometry.
         </p>
-
         <p>
-          This operator enables sophisticated falloff composition by allowing you to stack and blend multiple falloff sources with independent gain controls.
-          Each falloff input can be individually weighted and processed through a unified combination pipeline.
-        </p>
-
-        <p>
-          The result can be previewed with customizable color ramps (heatmap, blackbody, infrared, or custom) and output to a specified attribute for use in downstream operators.
+          The operator can optionally combine the attribute-based falloff with existing falloff values using various mathematical operations, and includes remapping controls to fine-tune the output range and distribution.
         </p>
       </section>
 
-      <!-- Parameters Section -->
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Combine Page -->
-        <h3 id="page-combine" class="page-heading">Page: Combine</h3>
+        <!-- Attribute Page -->
+        <h3 id="page-attribute" class="page-heading">Page: Attribute</h3>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Group</span>
             <span class="param-name">Group</span>
             <span class="param-separator">–</span>
-            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+            <span class="param-description">Point group to apply the falloff to. Leave empty to affect all points.</span>
           </div>
         </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Attribute</span>
+            <span class="param-name">Inputattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the point attribute to read and convert into falloff values. Default is _PointI (point index).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Falloff Page -->
+        <h3 id="page-falloff" class="page-heading">Page: Falloff</h3>
 
         <div class="param-group">
           <div class="param-group-header">
@@ -196,7 +211,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Mathematical operation used to combine falloff attributes.</span>
+            <span class="param-group-description">Mathematical operation used to combine the attribute-based falloff with existing falloff values.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -231,6 +246,19 @@
               <span class="param-label">Minimum</span>
               <span class="param-name">min</span>
             </div>
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Falloff Attribute</span>
+            <span class="param-name">Combineattributescope</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the existing falloff attribute to combine with. Only used when Combine Operation is not "Set".</span>
           </div>
         </div>
 
@@ -239,7 +267,16 @@
             <span class="param-label">Swap Operation Order</span>
             <span class="param-name">Swaporder</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reverses the order of operands in the combination operation (useful for non-commutative operations like subtraction and division).</span>
+            <span class="param-description">Reverses the order of operands in the combine operation (e.g., A + B becomes B + A).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Strength</span>
+            <span class="param-name">Combinestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blending factor between the original and combined falloff values (0.0 to 1.0).</span>
           </div>
         </div>
 
@@ -248,50 +285,9 @@
             <span class="param-label">Output Falloff Attribute</span>
             <span class="param-name">Outputfalloffattribute</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the attribute where the combined falloff result will be stored.</span>
+            <span class="param-description">Name of the attribute to write the final falloff values to. Default is popxFalloff.</span>
           </div>
         </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Falloff</span>
-            <span class="param-name">Falloffs</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Sequence of falloff inputs to combine. Each entry specifies a POP source, falloff attribute, and gain multiplier.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item parameter-item-indented">
-          <div class="param-header">
-            <span class="param-label">In POP(s)</span>
-            <span class="param-name">Falloffs0pop</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reference to the POP operator containing the falloff attribute to combine.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item parameter-item-indented">
-          <div class="param-header">
-            <span class="param-label">Falloff Attribute</span>
-            <span class="param-name">Falloffs0falloffattribute</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Name of the falloff attribute to read from the specified POP.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item parameter-item-indented">
-          <div class="param-header">
-            <span class="param-label">Gain</span>
-            <span class="param-name">Falloffs0gain</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Multiplier applied to the falloff value before combining (0.0 to 1.0).</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Falloff Page -->
-        <h3 id="page-falloff" class="page-heading">Page: Falloff</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -351,6 +347,119 @@
 
         <hr class="section-divider">
 
+        <!-- Remap Page -->
+        <h3 id="page-remap" class="page-heading">Page: Remap</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clamp</span>
+            <span class="param-name">Clamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, constrains falloff values to the 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fit</span>
+            <span class="param-name">Fit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables remapping of falloff values from an input range to an output range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Input Min Max</span>
+            <span class="param-name">Auto</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically determines input range from actual min/max falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Min</span>
+            <span class="param-name">Inputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Max</span>
+            <span class="param-name">Inputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Min</span>
+            <span class="param-name">Outputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Max</span>
+            <span class="param-name">Outputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the falloff values (1 - value).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Remap Ramp</span>
+            <span class="param-name">Enableremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Remap Ramp</span>
+            <span class="param-name">Remapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Remap Ramp</span>
+            <span class="param-name">Resetremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
         <!-- Common Page -->
         <h3 id="page-common" class="page-heading">Page: Common</h3>
 
@@ -389,7 +498,6 @@
             <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
           </div>
         </div>
-
       </section>
 
       <!-- Inputs Section -->
@@ -402,7 +510,7 @@
             <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+            <span class="param-text">POPX Geometry or regular geometry with the attribute to convert to falloff</span>
           </div>
         </div>
       </section>
@@ -424,8 +532,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../../generators/sweep/" class="nav-button prev">Sweep</a>
-        <a href="../curve-falloff/" class="nav-button next">Curve Falloff</a>
+        <a href="../curve-falloff/" class="nav-button prev">Curve Falloff</a>
+        <a href="../infection-falloff/" class="nav-button next">Infection Falloff</a>
       </nav>
     </main>
 
@@ -434,11 +542,14 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li><a href="#parameters">Parameters</a></li>
-        <li><a href="#page-combine">Page: Combine</a></li>
-        <li><a href="#page-falloff">Page: Falloff</a></li>
-        <li><a href="#page-common">Page: Common</a></li>
-        <li><a href="#inputs-outputs">Inputs and Outputs</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-attribute">Attribute</a></li>
+            <li><a href="#page-falloff">Falloff</a></li>
+            <li><a href="#page-remap">Remap</a></li>
+            <li><a href="#page-common">Common</a></li>
+          </ul>
+        </li>
         <li><a href="#inputs">Inputs</a></li>
         <li><a href="#outputs">Outputs</a></li>
       </ul>
