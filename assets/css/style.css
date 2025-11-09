@@ -140,6 +140,23 @@ body.page-transitioning {
   scrollbar-color: #2b2b2b #0e0e0e;
 }
 
+/* Light theme scrollbars */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+[data-theme="light"] * {
+  scrollbar-color: #c0c0c0 #f0f0f0;
+}
+
 a {
   color: var(--color-accent);
   text-decoration: none;
