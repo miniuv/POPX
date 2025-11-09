@@ -670,7 +670,8 @@ function initThemeSelector() {
   // Load saved theme or default to auto
   const savedTheme = localStorage.getItem('popx-theme') || 'auto';
   applyTheme(savedTheme);
-  updateThemeButton(savedTheme);
+  // Note: updateThemeButton is called after componentsLoaded event fires
+  // to ensure the button exists before we try to update it
 
   // Set initial selected state in dropdown
   themeOptions.forEach(option => {
