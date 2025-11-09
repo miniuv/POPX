@@ -1024,6 +1024,23 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Infection Falloff',
+    path: 'docs/operators/falloffs/infection-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Infection', anchor: '#page-infection', keywords: ['spread', 'propagation', 'radius', 'connectivity', 'infection rate', 'dissipation', 'resistance', 'reinfection', 'simulation', 'play', 'step'] },
+      { title: 'Page: Seed', anchor: '#page-seed', keywords: ['seed points', 'selection', 'spatial', 'POP', 'attribute', 'transition', 'dynamic'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'blend', 'attribute', 'preview', 'ramp'] },
+      { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics', 'amplitude', 'frequency'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Noise Falloff',
     path: 'docs/operators/falloffs/noise-falloff/',
     type: 'Operator',

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infection Falloff | POPX</title>
+  <meta name="description" content="Simulation-based falloff operator that spreads values across geometry using infection-style propagation algorithms.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar-logo-container">
+      <a href="/" class="top-bar-logo">
+        <img src="../../../../media/popx_logo_full_light.png" alt="POPX Docs" class="logo-light">
+        <img src="../../../../media/popx_logo_full_dark.png" alt="POPX Docs" class="logo-dark">
+      </a>
+      <div class="logo-tagline">
+        <div>POPs Extension</div>
+        <div>for TouchDesigner</div>
+      </div>
+    </div>
+
+    <!-- Search Bar (Desktop Only) -->
+    <div class="top-bar-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+
+    <!-- Theme Selector (Desktop Only) -->
+    <div class="theme-selector">
+      <button class="theme-selector-button" aria-label="Select theme">Dark</button>
+      <div class="theme-selector-dropdown">
+        <div class="theme-option selected" data-theme="dark">Dark</div>
+        <div class="theme-option" data-theme="light">Light</div>
+        <div class="theme-option" data-theme="auto">Auto</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Guides</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../guides/getting-started/">Getting Started</a></li>
+            <li><a href="../../../guides/installation/">Installation</a></li>
+            <li><a href="../../../guides/tutorials/">Tutorials</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Operators</h3>
+        <div class="sidebar-section-content">
+
+          <div class="sidebar-subsection">
+            <h4>Generators</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../generators/convert/">Convert</a></li>
+                <li><a href="../../generators/explode/">Explode</a></li>
+                <li><a href="../../generators/instancer/">Instancer</a></li>
+                <li><a href="../../generators/subdivider/">Subdivider</a></li>
+                <li><a href="../../generators/sweep/">Sweep</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Falloffs</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../combine-falloff/">Combine Falloff</a></li>
+                <li><a href="../infection-falloff/">Infection Falloff</a></li>
+                <li><a href="../noise-falloff/">Noise Falloff</a></li>
+                <li><a href="../shape-falloff/">Shape Falloff</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Modifiers</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+                <li><a href="../../modifiers/aim/">Aim</a></li>
+                <li><a href="../../modifiers/color-modifier/">Color Modifier</a></li>
+                <li><a href="../../modifiers/magnetize/">Magnetize</a></li>
+                <li><a href="../../modifiers/move-along-curve/">Move Along Curve</a></li>
+                <li><a href="../../modifiers/move-along-mesh/">Move Along Mesh</a></li>
+                <li><a href="../../modifiers/noise-modifier/">Noise Modifier</a></li>
+                <li><a href="../../modifiers/pivot/">Pivot</a></li>
+                <li><a href="../../modifiers/randomize/">Randomize</a></li>
+                <li><a href="../../modifiers/relax/">Relax</a></li>
+                <li><a href="../../modifiers/spring-modifier/">Spring Modifier</a></li>
+                <li><a href="../../modifiers/transform-modifier/">Transform Modifier</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Tools</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-subsection">
+            <h4>Simulations</h4>
+            <div class="sidebar-subsection-content">
+              <ul>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="sidebar-section-content">
+          <ul>
+            <li><a href="../../../contact/contact-us/">Contact Us</a></li>
+            <li><a href="../../../contact/community/">Community</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Infection Falloff</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Infection Falloff</strong> operator creates dynamic, simulation-based falloff patterns by propagating values across geometry using infection-style spreading algorithms.
+          Starting from seed points or regions, the infection spreads to neighboring points based on proximity or connectivity, creating organic growth patterns.
+        </p>
+
+        <p>
+          This operator supports both radius-based and connectivity-based infection methods, with control over infection rate, dissipation, resistance, and reinfection behavior.
+          Distance-weighted spreading creates natural falloff gradients, while the simulation can be played, stepped, or controlled manually for precise timing.
+        </p>
+
+        <p>
+          Seed selection can be defined through spatial fields (sphere, box), specific POP inputs, or existing attributes, with optional transition ranges for smooth seed boundaries.
+          The result can be combined with existing falloff attributes, previewed with color ramps, and optionally enhanced with procedural noise.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Infection Page -->
+        <h3 id="page-infection" class="page-heading">Page: Infection</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Infect By</span>
+            <span class="param-name">Infectby</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method used to determine how infection spreads between points.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">radius</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Connectivity</span>
+              <span class="param-name">connectivity</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Distribution</span>
+            <span class="param-name">Distribution</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Distribution method for radius-based infection.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default</span>
+              <span class="param-name">default</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Unique</span>
+              <span class="param-name">unique</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Closest</span>
+              <span class="param-name">closest</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Search Radius</span>
+            <span class="param-name">Searchradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance for finding neighboring points to infect (radius mode only).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Connections</span>
+            <span class="param-name">Maxconnections</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of connections each point can have for infection spreading.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Infection Rate</span>
+            <span class="param-name">Infectionrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Speed at which infection values spread from infected to uninfected points.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Distance Weighted Spread</span>
+            <span class="param-name">Distanceweightedspread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable distance-based falloff for infection spreading, creating smoother gradients.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Weight Amount</span>
+            <span class="param-name">Weightamount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of distance-based weighting (when Distance Weighted Spread is enabled).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Dissipation Rate</span>
+            <span class="param-name">Dissipationrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rate at which infection values decrease over time, creating decay effects.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Reinfection</span>
+            <span class="param-name">Enablereinfection</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allow previously infected points to be reinfected after dissipation (requires Dissipation Rate > 0).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Threshold</span>
+            <span class="param-name">Threshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum infection value required before a point can be reinfected (requires reinfection enabled).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Resistance</span>
+            <span class="param-name">Resistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resistance to infection spreading, slowing down the infection process.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reset the infection simulation to initial state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Start the infection simulation from current state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Continuously run the infection simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Advance the infection simulation by one step.</span>
+          </div>
+        </div>
+
+        <!-- Seed Page -->
+        <h3 id="page-seed" class="page-heading">Page: Seed</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Seed Selection</span>
+            <span class="param-name">Displayseedselection</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the seed selection region for infection starting points.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Dynamic Seed</span>
+            <span class="param-name">Enabledynamicseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allow seed points to change dynamically during simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Threshold</span>
+            <span class="param-name">Seedthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value required for seed selection.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Spec POP</span>
+            <span class="param-name">Specpop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specify a POP network to use as seed points for infection.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Center</span>
+            <span class="param-name">Center</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Center position of the seed selection region.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Rad</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the seed selection region in each axis.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transition Range</span>
+            <span class="param-name">Transitionrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Distance over which seed values transition from 1 to 0 at the region boundary.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transition Align</span>
+            <span class="param-name">Transitionalign</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Alignment of the transition zone (inward, centered, or outward).</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transition Type</span>
+            <span class="param-name">Transitiontype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Curve type for seed region transition falloff.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Seed Attribute</span>
+            <span class="param-name">Useseedattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use an existing point attribute to define seed values instead of spatial selection.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed Attribute</span>
+            <span class="param-name">Seedattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to use for seed values (when Use Seed Attribute is enabled).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Seed Attribute</span>
+            <span class="param-name">Outputseedattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Write the seed selection values to an output attribute.</span>
+          </div>
+        </div>
+
+        <!-- Falloff Page -->
+        <h3 id="page-falloff" class="page-heading">Page: Falloff</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Mathematical operation for combining infection falloff with existing falloff attributes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Add</span>
+              <span class="param-name">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Substract</span>
+              <span class="param-name">sub</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Multiply</span>
+              <span class="param-name">mult</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Divide</span>
+              <span class="param-name">div</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Screen</span>
+              <span class="param-name">screen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Overlay</span>
+              <span class="param-name">overlay</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Maximum</span>
+              <span class="param-name">max</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Minimum</span>
+              <span class="param-name">min</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Falloff Attribute</span>
+            <span class="param-name">Combineattributescope</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the falloff attribute to combine with (when Combine Operation is not Set).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Swap Operation Order</span>
+            <span class="param-name">Swaporder</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverse the order of operands in the combination operation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Combine Strength</span>
+            <span class="param-name">Combinestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount between original and combined falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Falloff Attribute</span>
+            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to write the final falloff values to.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize falloff values using a color ramp applied to point colors.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color ramp preset for falloff visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+              <span class="param-name">heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+              <span class="param-name">blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+              <span class="param-name">infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Open the custom ramp editor for designing custom falloff visualization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reset the custom ramp to default linear gradient.</span>
+          </div>
+        </div>
+
+        <!-- Noise Page -->
+        <h3 id="page-noise" class="page-heading">Page: Noise</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Noise</span>
+            <span class="param-name">Applynoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Add procedural noise to the infection falloff values.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine Operation</span>
+            <span class="param-name">Combineopnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to combine noise with infection falloff values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Add</span>
+              <span class="param-name">add</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Multiply</span>
+              <span class="param-name">mult</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Noise algorithm type (Perlin, Simplex, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for noise generation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Period</span>
+            <span class="param-name">Period</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frequency of the noise pattern.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonics</span>
+            <span class="param-name">Harmon</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of octaves for fractal noise detail.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Spread</span>
+            <span class="param-name">Spread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frequency multiplier between octaves.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Gain</span>
+            <span class="param-name">Gain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amplitude multiplier for each successive octave.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Amplitude</span>
+            <span class="param-name">Amp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Overall strength of the noise effect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Power curve applied to noise values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Offset</span>
+            <span class="param-name">Offset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Constant value added to noise output.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xordnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order of scale, rotate, and translate transformations for noise space.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rordnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation axis order for noise space transformation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">Tnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation offset for noise sampling coordinates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">Rnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation of noise sampling space in degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Snoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for noise sampling coordinates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">Pnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pivot point for noise space transformations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate 4D</span>
+            <span class="param-name">T4dnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation in the 4th dimension for 4D noise types.</span>
+          </div>
+        </div>
+
+        <!-- Remap Page -->
+        <h3 id="page-remap" class="page-heading">Page: Remap</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clamp</span>
+            <span class="param-name">Clamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Clamp final falloff values to 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fit</span>
+            <span class="param-name">Fit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable value range remapping from input range to output range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Input Min Max</span>
+            <span class="param-name">Auto</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically detect min/max values from infection falloff for fitting.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Min</span>
+            <span class="param-name">Inputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of input range for fitting.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Max</span>
+            <span class="param-name">Inputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of input range for fitting.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Min</span>
+            <span class="param-name">Outputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of output range for fitting.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Max</span>
+            <span class="param-name">Outputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of output range for fitting.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Invert falloff values (1 becomes 0, 0 becomes 1).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Remap Ramp</span>
+            <span class="param-name">Enableremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply a custom ramp curve to remap falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Remap Ramp</span>
+            <span class="param-name">Remapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Open the remap ramp editor for custom value mapping curves.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Remap Ramp</span>
+            <span class="param-name">Resetremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reset remap ramp to default linear curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use an external TOP as the remap ramp lookup.</span>
+          </div>
+        </div>
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Bypass this operator and pass input geometry through unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Manually free any extra GPU memory allocated by this operator.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable rendering of geometry primitives.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle between Scale-Rotate-Translate and Rotate-Scale-Translate transformation order.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs and Outputs Section -->
+      <section id="inputs-outputs">
+        <h2>Inputs and Outputs</h2>
+
+        <h3 id="inputs">Inputs</h3>
+        <div class="io-table">
+          <div class="io-item">
+            <span class="io-label">Input 0</span>
+            <span class="io-separator">–</span>
+            <span class="io-text">Geometry to apply infection falloff</span>
+          </div>
+          <div class="io-item">
+            <span class="io-label">Input 1 (Optional)</span>
+            <span class="io-separator">–</span>
+            <span class="io-text">Seed points geometry or POP for infection starting points</span>
+          </div>
+        </div>
+
+        <h3 id="outputs">Outputs</h3>
+        <div class="io-table">
+          <div class="io-item">
+            <span class="io-label">Output 0</span>
+            <span class="io-separator">–</span>
+            <span class="io-text">Geometry with infection falloff attribute applied</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../combine-falloff/" class="nav-button prev">Combine Falloff</a>
+        <a href="../noise-falloff/" class="nav-button next">Noise Falloff</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#page-infection">Page: Infection</a></li>
+        <li><a href="#page-seed">Page: Seed</a></li>
+        <li><a href="#page-falloff">Page: Falloff</a></li>
+        <li><a href="#page-noise">Page: Noise</a></li>
+        <li><a href="#page-remap">Page: Remap</a></li>
+        <li><a href="#page-common">Page: Common</a></li>
+        <li><a href="#inputs-outputs">Inputs and Outputs</a></li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay"></div>
+
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>
