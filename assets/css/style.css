@@ -997,14 +997,11 @@ pre code {
 }
 
 .mobile-menu-toggle:active {
-  color: var(--color-accent-hover);
-  background: var(--color-bg-secondary);
-  transform: scale(0.95);
+  background: var(--color-bg-elevated);
 }
 
 .mobile-menu-toggle:focus {
   outline: none;
-  background: var(--color-bg-elevated);
 }
 
 /* ===========================
