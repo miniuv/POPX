@@ -109,14 +109,27 @@ window.addEventListener('componentsLoaded', function() {
 
 // Fallback: if componentsLoaded hasn't fired after DOM is ready, init anyway
 document.addEventListener('DOMContentLoaded', function() {
-  // Wait a bit to see if components load
-  setTimeout(function() {
-    if (!appInitialized && !document.querySelector('.sidebar')) {
-      console.warn('Sidebar not found after component load, initializing anyway');
+  // Check if components are already loaded (event may have fired before listener was registered)
+  if (!appInitialized) {
+    // Check if navbar and sidebar exist
+    const navbar = document.querySelector('.top-bar');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (navbar && sidebar) {
+      // Components are already loaded, initialize immediately
       appInitialized = true;
       initializeApp();
+    } else {
+      // Wait a bit to see if components load
+      setTimeout(function() {
+        if (!appInitialized) {
+          console.warn('Components not found after waiting, initializing anyway');
+          appInitialized = true;
+          initializeApp();
+        }
+      }, 200);
     }
-  }, 100);
+  }
 
   // Fade in body after content is ready
   document.body.classList.remove('page-transitioning');
