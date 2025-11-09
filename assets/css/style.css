@@ -971,20 +971,23 @@ pre code {
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 14px;
+  top: 0;
   right: var(--spacing-md);
+  height: var(--nav-height);
   z-index: 101;
   background: transparent;
   border: none;
   color: var(--color-accent);
   font-size: 28px;
   cursor: pointer;
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
+  padding: 0 10px;
+  border-radius: 0;
   line-height: 1;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobile-menu-toggle:hover {
@@ -992,7 +995,7 @@ pre code {
 }
 
 .mobile-menu-toggle:active {
-  transform: scale(0.95);
+  color: var(--color-accent-hover);
   background: transparent;
 }
 
@@ -2078,7 +2081,7 @@ section > p {
   }
 
   .mobile-menu-toggle {
-    display: block;
+    display: flex;
   }
 
   .top-bar {
