@@ -983,15 +983,22 @@ pre code {
   border-radius: var(--radius-sm);
   line-height: 1;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .mobile-menu-toggle:hover {
   color: var(--color-accent-hover);
-  background: rgba(217, 0, 64, 0.08);
 }
 
 .mobile-menu-toggle:active {
   transform: scale(0.95);
+  background: transparent;
+}
+
+.mobile-menu-toggle:focus {
+  outline: none;
+  background: transparent;
 }
 
 /* ===========================
