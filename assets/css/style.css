@@ -971,19 +971,20 @@ pre code {
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 0;
+  top: 10px;
   right: var(--spacing-md);
-  height: var(--nav-height);
+  height: 40px;
+  width: 40px;
   z-index: 101;
-  background: transparent;
-  border: none;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
   color: var(--color-accent);
-  font-size: 28px;
+  font-size: 24px;
   cursor: pointer;
-  padding: 0 10px;
-  border-radius: 0;
+  padding: 0;
+  border-radius: 8px;
   line-height: 1;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
   align-items: center;
@@ -992,16 +993,18 @@ pre code {
 
 .mobile-menu-toggle:hover {
   color: var(--color-accent-hover);
+  background: var(--color-bg-secondary);
 }
 
 .mobile-menu-toggle:active {
   color: var(--color-accent-hover);
-  background: transparent;
+  background: var(--color-bg-secondary);
+  transform: scale(0.95);
 }
 
 .mobile-menu-toggle:focus {
   outline: none;
-  background: transparent;
+  background: var(--color-bg-elevated);
 }
 
 /* ===========================
@@ -2460,6 +2463,10 @@ section > p {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 99;
+}
+
+[data-theme="light"] .menu-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .menu-overlay.active {
