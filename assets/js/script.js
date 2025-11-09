@@ -1024,6 +1024,37 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Curve Falloff',
+    path: 'docs/operators/falloffs/curve-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Curve', anchor: '#page-curve', keywords: ['distance', 'curve', 'position', 'parametric', 'u', 'closest point'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['preview', 'ramp', 'heatmap', 'blackbody', 'infrared'] },
+      { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics', 'amplitude', 'frequency'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Falloff From Attribute',
+    path: 'docs/operators/falloffs/falloff-from-attribute/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Attribute', anchor: '#page-attribute', keywords: ['group', 'input', 'attribute', 'point', 'convert'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'operation', 'blend', 'attribute', 'preview', 'ramp'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Infection Falloff',
     path: 'docs/operators/falloffs/infection-falloff/',
     type: 'Operator',

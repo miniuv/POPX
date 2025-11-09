@@ -386,23 +386,70 @@ You only need to update 2 existing operator pages - the ones immediately surroun
 
 ### Step 8: Update Search Functionality
 
-The search functionality is automatically handled by `assets/js/script.js`. However, you need to ensure your page has proper heading structure for search indexing:
+**CRITICAL:** Search is NOT automatic - you MUST manually add new operators to the search index!
 
-```html
-<h1>[Operator Name]</h1>
-<h2>Parameters</h2>
-<h3 class="page-heading">[Page Name]</h3>
-<!-- etc -->
+**What to Update:**
+File: `assets/js/script.js`
+Location: Around line 726 (search for `const searchIndex = [`)
+
+**How to Add:**
+
+1. Find the correct category section in searchIndex (Guides, Contact, Generators, Falloffs, Modifiers, Tools, Simulations)
+2. Add your operator in alphabetical order within its category
+3. Use this template:
+
+```javascript
+{
+  title: 'Your Operator Name',
+  path: 'docs/operators/category/your-operator/',
+  type: 'Operator',
+  category: 'Category Name',
+  sections: [
+    { title: 'Summary', anchor: '#summary' },
+    { title: 'Page: Page Name', anchor: '#page-pagename', keywords: ['keyword1', 'keyword2'] },
+    { title: 'Page: Common', anchor: '#page-common' },
+    { title: 'Inputs', anchor: '#inputs' },
+    { title: 'Outputs', anchor: '#outputs' }
+  ]
+},
 ```
 
-**Search indexes:**
-- Page title (h1)
-- Section headings (h2)
-- Page headings (h3)
-- Parameter labels
-- Parameter descriptions
+**Example - Adding Curve Falloff:**
+```javascript
+{
+  title: 'Curve Falloff',
+  path: 'docs/operators/falloffs/curve-falloff/',
+  type: 'Operator',
+  category: 'Falloffs',
+  sections: [
+    { title: 'Summary', anchor: '#summary' },
+    { title: 'Page: Curve', anchor: '#page-curve', keywords: ['distance', 'curve', 'position', 'parametric'] },
+    { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['preview', 'ramp', 'heatmap'] },
+    { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex'] },
+    { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert'] },
+    { title: 'Page: Common', anchor: '#page-common' },
+    { title: 'Inputs', anchor: '#inputs' },
+    { title: 'Outputs', anchor: '#outputs' }
+  ]
+},
+```
 
-No additional configuration is needed - the search bar will automatically find your page once it's added to the navigation.
+**Important Notes:**
+- Path must match your operator's directory path exactly (no leading slash)
+- Category must match one of the sidebar categories
+- List ALL major sections and parameter pages from your operator
+- Anchors must match the `id` attributes in your HTML
+- Keywords (optional) improve discoverability
+- Maintain alphabetical order within each category
+- Don't forget the trailing comma after the closing brace
+
+**Verification:**
+After adding to searchIndex:
+1. Open the site in a browser
+2. Type your operator name in the search bar
+3. Verify it appears in results
+4. Click the result and verify navigation works
+5. Try searching for parameter page names and keywords
 
 ### Step 9: Create Table of Contents
 
@@ -448,10 +495,15 @@ Before finalizing, verify the following checklist:
 - [ ] New operator's prev/next buttons point to correct surrounding operators
 
 #### ✓ Search and TOC
+- [ ] **Operator added to searchIndex array in assets/js/script.js** (CRITICAL!)
+- [ ] Entry added in correct category and alphabetical order
+- [ ] All parameter pages listed in sections array with anchors
+- [ ] Keywords added for important sections
 - [ ] Proper heading hierarchy (h1, h2, h3)
 - [ ] Section IDs added for anchor links
 - [ ] Page-heading class on parameter page h3 tags
-- [ ] Search functionality finds the new page
+- [ ] Search functionality finds the new page by name
+- [ ] Search finds specific parameters and keywords
 
 #### ✓ Parameters
 - [ ] All parameters from JSON exported and integrated
