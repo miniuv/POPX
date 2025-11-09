@@ -978,9 +978,9 @@ pre code {
   background: transparent;
   border: none;
   color: var(--color-accent);
-  font-size: 28px;
+  font-size: 40px;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 15px;
   border-radius: 0;
   line-height: 1;
   transition: color 0.2s ease;
