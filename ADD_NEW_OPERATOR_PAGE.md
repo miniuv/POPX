@@ -580,6 +580,69 @@ POPX operator parameters are exported from TouchDesigner as JSON data. This data
 
 ---
 
+## Standardization Rules for Falloff Operators
+
+**CRITICAL:** When adding a new Falloff operator, certain parameter pages must be standardized across ALL falloff operators to ensure consistency.
+
+### Pages That Must Be Identical
+
+The following parameter pages should have **identical descriptions** across all Falloff operators (Combine Falloff, Infection Falloff, Noise Falloff, Shape Falloff):
+
+1. **Page: Common** - All parameters (Bypass, Free Extra GPU Memory, Render Primitives, SRT/RST)
+2. **Page: Remap** - All parameters (Clamp, Fit, Auto Input Min Max, Input Min/Max, Output Min/Max, Invert, Enable Remap Ramp, Open Remap Ramp, Reset Remap Ramp, Ramp TOP)
+3. **Page: Falloff** - Preview section only (Preview Falloff, Falloff Ramp, Open Custom Ramp, Reset Custom Ramp)
+
+### Reference Source
+
+Use **Shape Falloff** as the reference source for standardized parameter descriptions.
+
+### Exception: Operator-Specific Pages
+
+**Do NOT standardize** operator-specific parameter pages:
+- **Noise Falloff**: Page: Noise (unique noise parameters)
+- **Shape Falloff**: Page: Shape (unique shape parameters)
+- **Infection Falloff**: Page: Seed, Page: Falloff (unique infection parameters beyond preview section)
+- **Combine Falloff**: Page: Combine (unique combine operation parameters)
+
+### Standardized Descriptions Reference
+
+**Page: Falloff (Preview section):**
+- **Preview Falloff**: "When enabled, visualizes falloff values using a color ramp."
+- **Falloff Ramp**: "Color ramp preset used for visualizing falloff values when Preview Falloff is enabled."
+- **Open Custom Ramp**: "Opens the custom color ramp editor for defining a custom falloff visualization gradient."
+- **Reset Custom Ramp**: "Resets the custom color ramp to its default state."
+
+**Page: Remap:**
+- **Clamp**: "When enabled, constrains falloff values to the 0-1 range."
+- **Fit**: "Enables remapping of falloff values from an input range to an output range."
+- **Auto Input Min Max**: "Automatically determines input range from actual min/max falloff values."
+- **Input Min**: "Minimum value of the input range for remapping."
+- **Input Max**: "Maximum value of the input range for remapping."
+- **Output Min**: "Minimum value of the output range for remapping."
+- **Output Max**: "Maximum value of the output range for remapping."
+- **Invert**: "Reverses the falloff values (1 - value)."
+- **Enable Remap Ramp**: "Applies a custom curve to remap falloff values non-linearly."
+- **Open Remap Ramp**: "Opens the ramp editor for defining the custom remapping curve."
+- **Reset Remap Ramp**: "Resets the remapping curve to a linear ramp."
+- **Ramp TOP**: "External TOP containing a custom remap curve texture."
+
+**Page: Common:**
+- **Bypass**: "Pass through the first input to the output unchanged."
+- **Free Extra GPU Memory**: "Free memory that has accumulated when output memory has grown and shrunk."
+- **Render Primitives**: "Toggles rendering of POPX Geometry or shows it as point instances only."
+- **SRT / RST**: "Sets the transform order when using POPX Geometry as built-in TouchDesigner instances."
+
+### Workflow for New Falloff Operators
+
+1. Create the operator page with its unique parameters
+2. Add the standardized Page: Common section
+3. Add the standardized Page: Remap section (if applicable)
+4. Add the standardized Page: Falloff preview section (if applicable)
+5. Copy descriptions EXACTLY from Shape Falloff for these sections
+6. Verify all descriptions match across falloff operators
+
+---
+
 ## Obtaining Complete Parameter Exports from TouchDesigner
 
 This section explains how to get **complete parameter exports** from TouchDesigner operators, which include all metadata needed for accurate documentation.
