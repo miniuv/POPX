@@ -971,17 +971,27 @@ pre code {
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 12px;
-  right: var(--spacing-sm);
+  top: 14px;
+  right: var(--spacing-md);
   z-index: 101;
-  background: var(--color-bg-panel);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  font-size: 24px;
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-size: 28px;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: var(--radius-sm);
   line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+  color: var(--color-accent-hover);
+  background: rgba(217, 0, 64, 0.08);
+}
+
+.mobile-menu-toggle:active {
+  transform: scale(0.95);
 }
 
 /* ===========================
