@@ -1165,6 +1165,23 @@ const searchIndex = [
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
+  },
+  {
+    title: 'Spread Falloff',
+    path: 'docs/operators/falloffs/spread-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Spread', anchor: '#page-spread', keywords: ['topology', 'distribution', 'connections', 'width'] },
+      { title: 'Page: Seed', anchor: '#page-seed', keywords: ['threshold', 'attribute', 'spatial', 'selection'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'blend', 'attribute'] },
+      { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
   }
 ];
 

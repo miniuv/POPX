@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infection Falloff | POPX</title>
-  <meta name="description" content="Simulation-based falloff operator that spreads values across geometry using infection-style propagation algorithms.">
+  <title>Spread Falloff | POPX</title>
+  <meta name="description" content="Create falloff patterns that spread outward from seed points through neighboring connections in POPX.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,24 +34,17 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Infection Falloff</h1>
+      <h1>Spread Falloff</h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Infection Falloff</strong> operator creates dynamic, simulation-based falloff patterns by propagating values across geometry using infection-style spreading algorithms.
-          Starting from seed points or regions, the infection spreads to neighboring points based on proximity or connectivity, creating organic growth patterns.
+          The <strong>Spread Falloff</strong> operator creates falloff patterns that propagate outward from seed points through neighboring point connections. Unlike distance-based falloffs that radiate uniformly, Spread Falloff follows the topology and connectivity of your geometry, creating organic wave-like patterns that respect the structure of your mesh.
         </p>
 
         <p>
-          This operator supports both radius-based and connectivity-based infection methods, with control over infection rate, dissipation, resistance, and reinfection behavior.
-          Distance-weighted spreading creates natural falloff gradients, while the simulation can be played, stepped, or controlled manually for precise timing.
-        </p>
-
-        <p>
-          Seed selection can be defined through spatial fields (sphere, box), specific POP inputs, or existing attributes, with optional transition ranges for smooth seed boundaries.
-          The result can be combined with existing falloff attributes, previewed with color ramps, and optionally enhanced with procedural noise.
+          This operator is ideal for creating effects that travel across surfaces, such as ripples, infection patterns, growth simulations, or any effect where you want falloff to spread through connected points rather than purely by distance. The falloff strength diminishes as it moves further from the seed points, creating smooth gradients along the mesh topology.
         </p>
       </section>
 
@@ -59,26 +52,26 @@
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Infection Page -->
-        <h3 id="page-infection" class="page-heading">Page: Infection</h3>
+        <!-- Spread Page -->
+        <h3 id="page-spread" class="page-heading">Page: Spread</h3>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Group</span>
             <span class="param-name">Group</span>
             <span class="param-separator">–</span>
-            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+            <span class="param-description">Specifies which point group to apply the spread falloff to. Leave empty to process all points.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Infect By</span>
-            <span class="param-name">Infectby</span>
+            <span class="param-label">Spread By</span>
+            <span class="param-name">Spreadby</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Method used to determine how infection spreads between points.</span>
+            <span class="param-group-description">Determines how the operator identifies neighboring points for spread propagation.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -99,7 +92,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Distribution method for radius-based infection.</span>
+            <span class="param-group-description">Controls how neighboring points are selected when using radius-based search.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -122,7 +115,7 @@
             <span class="param-label">Search Radius</span>
             <span class="param-name">Searchradius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum distance for finding neighboring points to infect (radius mode only).</span>
+            <span class="param-description">The maximum distance within which points are considered neighbors for spread propagation.</span>
           </div>
         </div>
 
@@ -131,106 +124,25 @@
             <span class="param-label">Max Connections</span>
             <span class="param-name">Maxconnections</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of connections each point can have for infection spreading.</span>
+            <span class="param-description">Limits the maximum number of neighboring connections each point can have.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Infection Rate</span>
-            <span class="param-name">Infectionrate</span>
+            <span class="param-label">Falloff Width</span>
+            <span class="param-name">Falloffwidth</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Speed at which infection values spread from infected to uninfected points.</span>
+            <span class="param-description">Controls how quickly the falloff strength diminishes as it spreads from the seed points.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Distance Weighted Spread</span>
-            <span class="param-name">Distanceweightedspread</span>
+            <span class="param-label">Spread</span>
+            <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable distance-based falloff for infection spreading, creating smoother gradients.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Weight Amount</span>
-            <span class="param-name">Weightamount</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Strength of distance-based weighting (when Distance Weighted Spread is enabled).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Dissipation Rate</span>
-            <span class="param-name">Dissipationrate</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Rate at which infection values decrease over time, creating decay effects.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Reinfection</span>
-            <span class="param-name">Enablereinfection</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Allow previously infected points to be reinfected after dissipation (requires Dissipation Rate > 0).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Threshold</span>
-            <span class="param-name">Threshold</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Minimum infection value required before a point can be reinfected (requires reinfection enabled).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Resistance</span>
-            <span class="param-name">Resistance</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Resistance to infection spreading, slowing down the infection process.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Initialize</span>
-            <span class="param-name">Initializepulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reset the infection simulation to initial state.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Start</span>
-            <span class="param-name">Startpulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Start the infection simulation from current state.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Play</span>
-            <span class="param-name">Play</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Continuously run the infection simulation.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Step</span>
-            <span class="param-name">Steppulse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Advance the infection simulation by one step.</span>
+            <span class="param-description">Adds randomization to the spread pattern, creating more organic and varied falloff.</span>
           </div>
         </div>
 
@@ -245,15 +157,6 @@
             <span class="param-name">Displayseedselection</span>
             <span class="param-separator">–</span>
             <span class="param-description">Visualize the seed selection region for infection starting points.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Dynamic Seed</span>
-            <span class="param-name">Enabledynamicseed</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Allow seed points to change dynamically during simulation.</span>
           </div>
         </div>
 
@@ -947,7 +850,7 @@
             <span class="param-separator">–</span>
             <span class="param-name">Seed POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Seed points geometry for infection starting points</span>
+            <span class="param-text">Seed points geometry for spread starting points</span>
           </div>
         </div>
       </section>
@@ -969,8 +872,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../falloff-from-attribute/" class="nav-button prev">Falloff From Attribute</a>
-        <a href="../noise-falloff/" class="nav-button next">Noise Falloff</a>
+        <a href="../../shape-falloff/" class="nav-button prev">Shape Falloff</a>
+        <a href="../../../modifiers/aim/" class="nav-button next">Aim</a>
       </nav>
     </main>
 
@@ -979,14 +882,16 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li><a href="#parameters">Parameters</a></li>
-        <li><a href="#page-infection">Page: Infection</a></li>
-        <li><a href="#page-seed">Page: Seed</a></li>
-        <li><a href="#page-falloff">Page: Falloff</a></li>
-        <li><a href="#page-noise">Page: Noise</a></li>
-        <li><a href="#page-remap">Page: Remap</a></li>
-        <li><a href="#page-common">Page: Common</a></li>
-        <li><a href="#inputs-outputs">Inputs and Outputs</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-spread">Page: Spread</a></li>
+            <li><a href="#page-seed">Page: Seed</a></li>
+            <li><a href="#page-falloff">Page: Falloff</a></li>
+            <li><a href="#page-noise">Page: Noise</a></li>
+            <li><a href="#page-remap">Page: Remap</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
         <li><a href="#inputs">Inputs</a></li>
         <li><a href="#outputs">Outputs</a></li>
       </ul>
