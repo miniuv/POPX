@@ -54,38 +54,18 @@
 })();
 
 // ===========================
-// Scroll Position Persistence
+// Sidebar/TOC Scroll Position Persistence
 // ===========================
 (function() {
   const SCROLL_STORAGE_KEY = 'popx-scroll-positions';
 
-  // IMMEDIATE scroll restoration (runs synchronously as script loads)
-  // This prevents the jump to top on page load
-  try {
-    const stored = sessionStorage.getItem(SCROLL_STORAGE_KEY);
-    if (stored) {
-      const positions = JSON.parse(stored);
-      if (Date.now() - positions.timestamp <= 300000 && positions.main) {
-        // Use history.scrollRestoration to prevent browser from scrolling to top
-        if ('scrollRestoration' in history) {
-          history.scrollRestoration = 'manual';
-        }
-        // Schedule immediate scroll restoration
-        window.scrollTo(0, positions.main);
-      }
-    }
-  } catch (e) {
-    console.warn('Failed to immediately restore scroll:', e);
-  }
-
-  // Save scroll positions before unload
+  // Save scroll positions before unload (only sidebar and TOC, not main content)
   function saveScrollPositions() {
     const sidebar = document.querySelector('.sidebar');
     const toc = document.querySelector('.toc');
 
     const positions = {
       sidebar: sidebar ? sidebar.scrollTop : 0,
-      main: window.scrollY || window.pageYOffset || 0,
       toc: toc ? toc.scrollTop : 0,
       timestamp: Date.now()
     };
@@ -97,7 +77,7 @@
     }
   }
 
-  // Restore scroll positions after load
+  // Restore scroll positions after load (only sidebar and TOC)
   function restoreScrollPositions() {
     try {
       const stored = sessionStorage.getItem(SCROLL_STORAGE_KEY);
@@ -105,7 +85,7 @@
 
       const positions = JSON.parse(stored);
 
-      // Only restore if saved within the last 5 minutes (to avoid stale positions)
+      // Only restore if saved within the last 5 minutes
       if (Date.now() - positions.timestamp > 300000) {
         sessionStorage.removeItem(SCROLL_STORAGE_KEY);
         return;
@@ -114,79 +94,32 @@
       const sidebar = document.querySelector('.sidebar');
       const toc = document.querySelector('.toc');
 
-      // Restore sidebar immediately
+      // Restore sidebar scroll
       if (sidebar && positions.sidebar) {
         sidebar.scrollTop = positions.sidebar;
       }
 
-      // Use multiple restoration attempts for window scroll (main content) to ensure it sticks
-      if (positions.main) {
-        // First attempt
-        window.scrollTo(0, positions.main);
-
-        // Second attempt after animation frame
-        requestAnimationFrame(() => {
-          window.scrollTo(0, positions.main);
-
-          // Third attempt after another frame to ensure it sticks
-          requestAnimationFrame(() => {
-            window.scrollTo(0, positions.main);
-          });
-        });
-      }
-
-      // Use multiple restoration attempts for TOC to ensure it sticks
+      // Restore TOC scroll
       if (toc && positions.toc) {
-        // First attempt
         toc.scrollTop = positions.toc;
-
-        // Second attempt after animation frame
-        requestAnimationFrame(() => {
-          toc.scrollTop = positions.toc;
-
-          // Third attempt after another frame to ensure it sticks
-          requestAnimationFrame(() => {
-            toc.scrollTop = positions.toc;
-          });
-        });
       }
     } catch (e) {
       console.warn('Failed to restore scroll positions:', e);
     }
   }
 
-  // Save scroll positions periodically and before navigation
+  // Save scroll positions before navigation
   window.addEventListener('beforeunload', saveScrollPositions);
 
-  // Also save on visibility change (when tab loses focus)
+  // Also save on visibility change
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       saveScrollPositions();
     }
   });
 
-  // Restore scroll positions IMMEDIATELY on DOMContentLoaded (before components finish loading)
-  // This prevents the flash/jump to top
-  document.addEventListener('DOMContentLoaded', function() {
-    const stored = sessionStorage.getItem(SCROLL_STORAGE_KEY);
-    if (stored) {
-      try {
-        const positions = JSON.parse(stored);
-        if (Date.now() - positions.timestamp <= 300000) {
-          // Restore main window scroll immediately to prevent jump
-          if (positions.main) {
-            window.scrollTo(0, positions.main);
-          }
-        }
-      } catch (e) {
-        console.warn('Failed to quick-restore scroll:', e);
-      }
-    }
-  });
-
-  // Also restore after components are loaded (for sidebars)
+  // Restore after components are loaded
   window.addEventListener('componentsLoaded', function() {
-    // Small delay to ensure components are fully rendered
     setTimeout(restoreScrollPositions, 50);
   });
 })();
@@ -195,14 +128,13 @@
 // Page Transitions
 // ===========================
 function initPageTransitions() {
-  // Helper function to save scroll positions
+  // Helper function to save sidebar/TOC scroll positions before navigation
   function saveScrollPositionsBeforeNav() {
     const sidebar = document.querySelector('.sidebar');
     const toc = document.querySelector('.toc');
 
     const positions = {
       sidebar: sidebar ? sidebar.scrollTop : 0,
-      main: window.scrollY || window.pageYOffset || 0,
       toc: toc ? toc.scrollTop : 0,
       timestamp: Date.now()
     };
@@ -229,7 +161,7 @@ function initPageTransitions() {
         e.preventDefault();
         const targetUrl = link.href;
 
-        // Save scroll positions before navigating
+        // Save sidebar/TOC scroll positions
         saveScrollPositionsBeforeNav();
 
         // Add transitioning class for fade out
@@ -253,7 +185,7 @@ function initPageTransitions() {
         e.preventDefault();
         const targetUrl = button.href;
 
-        // Save scroll positions before navigating
+        // Save sidebar/TOC scroll positions
         saveScrollPositionsBeforeNav();
 
         // Add transitioning class for fade out
@@ -271,12 +203,7 @@ function initPageTransitions() {
 function initializeApp() {
   initPageTransitions();
   initMobileMenu();
-
-  // Delay scroll spy initialization to prevent interference with scroll restoration
-  setTimeout(() => {
-    initScrollSpy();
-  }, 200);
-
+  initScrollSpy();
   initSidebarState();
   initSmoothScroll();
   initParameterGroups();
