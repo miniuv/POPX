@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLA | POPX</title>
+  <meta name="description" content="Diffusion-Limited Aggregation simulation creating organic branching structures through particle attachment with optional mesh and volume outputs.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>DLA</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>DLA (Diffusion-Limited Aggregation)</strong> is a GPU-accelerated simulation that creates organic branching structures by simulating particles randomly walking through space until they attach to an existing structure.
+          This operator generates coral-like, lightning, or crystalline growth patterns through a simple attachment rule: particles stick when they come within a specified distance of the growing structure.
+        </p>
+
+        <p>
+          The simulation progresses by spawning particles at random positions within simulation bounds and allowing them to diffuse until they encounter the structure.
+          You control the density and character of the branching through parameters like search distance (how far particles look for attachment points) and attach distance (how close they must be to stick).
+          The simulation can be initialized, played continuously, or stepped frame-by-frame for precise control over growth progression.
+        </p>
+
+        <p>
+          DLA outputs the point cloud structure and optionally generates polygonal meshes through marching cubes or volumetric representations for rendering.
+          The Outputs page provides extensive control over mesh resolution, blur filtering, and volume density for different visualization styles.
+          This makes DLA suitable for creating natural growth patterns, procedural coral structures, electrical discharge effects, or abstract organic forms.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- DLA Page -->
+        <h3 id="page-dla" class="page-heading">Page: DLA</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Simulation Bounds</span>
+            <span class="param-name">Simulationbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the cubic space where particles spawn and diffuse (XYZ dimensions).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls simulation speed per frame (higher values = faster growth).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Number of Points</span>
+            <span class="param-name">Numberofpoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of diffusing particles in the simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Search Distance</span>
+            <span class="param-name">Maxsearchdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance particles search for attachment points (affects branch density).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attach Distance</span>
+            <span class="param-name">Attachdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Distance threshold for particles to stick to the structure (smaller = finer detail).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for particle spawn positions and diffusion paths.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset simulation and create initial seed point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to begin simulation from initialized state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle continuous simulation playback.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to advance simulation by one frame while paused.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Outputs Page -->
+        <h3 id="page-outputs" class="page-heading">Page: Outputs</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Mesh</span>
+            <span class="param-name">Mesh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for mesh output settings.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Polygonize</span>
+            <span class="param-name">Polygonize</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Converts point cloud to polygonal mesh using marching cubes algorithm.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Resolution</span>
+            <span class="param-name">Meshresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Voxel grid resolution for mesh generation (higher = more detail, slower).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Blur</span>
+            <span class="param-name">Enableblur</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies smoothing filter to mesh before polygonization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur filter type (catmull-rom, gaussian, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Downsamples volume before blur for performance (1 = no downsample).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size (larger = smoother, more computation).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Threshold</span>
+            <span class="param-name">Threshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Isosurface threshold for mesh extraction (lower = thicker mesh).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extend</span>
+            <span class="param-name">Extend</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">How to handle volume edges (zero, hold, repeat, mirror).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Shared Points</span>
+            <span class="param-name">Sharedpoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Welds duplicate vertices for cleaner topology.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Alt</span>
+            <span class="param-name">Alt</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Alternative point sharing algorithm.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Volume</span>
+            <span class="param-name">Volumeh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for volumetric output settings.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Volume</span>
+            <span class="param-name">Volume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Generates volumetric TOP output for rendering with volume materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Resolution</span>
+            <span class="param-name">Volumeresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">3D texture resolution for volume rendering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Base color for volume rendering (RGB).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Density Scale</span>
+            <span class="param-name">Densityscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for volume opacity (higher = more opaque).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Blur</span>
+            <span class="param-name">Enableblur2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies smoothing filter to volume texture.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur filter type for volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extend</span>
+            <span class="param-name">Extend2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Edge handling mode for volume blur.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Downsamples volume before blur for performance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for volume smoothing.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Seed Points (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Optional initial seed points to start growth from custom positions</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">DLA structure as point cloud (and optional mesh/volume based on Outputs settings)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../../tools/voxelize/" class="nav-button prev">Voxelize</a>
+        <a href="../dlg/" class="nav-button next">DLG</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-dla">Page: DLA</a></li>
+            <li><a href="#page-outputs">Page: Outputs</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

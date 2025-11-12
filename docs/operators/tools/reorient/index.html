@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reorient | POPX</title>
+  <meta name="description" content="Replace local orientation frames of packed primitives using point attributes or reference geometry without modifying underlying transforms.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Reorient</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Reorient</strong> creates a quaternion point attribute, <code>p@mops_orient</code>, that acts as a replacement for a packed primitive's existing local orientation frame without modifying the underlying transforms at all.
+          In plainer terms, this resets the rotation axes of the packed primitives without visibly moving anything, providing more accurate orientation for subsequent transformations.
+        </p>
+
+        <p>
+          The operator is particularly useful after using operations like Explode, where you want pieces to move outward along their local axes rather than in a uniform direction.
+          Normally when you convert or explode geometry, the local orientations of each packed primitive are left at default, causing all pieces to move in the same direction when transformed.
+          Reorient solves this by transferring orientation from reference geometry or point attributes to your packed primitives.
+        </p>
+
+        <p>
+          You can source orientation data from point attributes (quaternion, two vectors, or matrix) or from reference geometry using proximity-based neighbor matching.
+          When using reference geometry, the operator finds the closest points on the reference mesh and transfers their orientation to your instances.
+          This makes it easy to reorient exploded pieces based on the original mesh surface normals, or to apply custom orientation patterns from template geometry.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Reorient Page -->
+        <h3 id="page-reorient" class="page-heading">Page: Reorient</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Orient Source</span>
+            <span class="param-name">Orientsource</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines whether to read orientation from point attributes or reference geometry.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point Attribute</span>
+              <span class="param-name">ptattr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Reference Geometry</span>
+              <span class="param-name">refgeo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reference Geometry</span>
+            <span class="param-name">Referencegeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP geometry to use as reference for transferring orientation when Orient Source is set to Reference Geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors Distance</span>
+            <span class="param-name">Maxdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance to search for nearest neighbor points on reference geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Distribution</span>
+            <span class="param-name">Distribution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Method for selecting neighbor points (e.g., Closest, Weighted, etc.).</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attribute Type</span>
+            <span class="param-name">Attributetype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Type of orientation data to read from point attributes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Quaternion</span>
+              <span class="param-name">quat</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Two Vectors</span>
+              <span class="param-name">vectors</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Matrix</span>
+              <span class="param-name">matrix</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Quaternion Attribute</span>
+            <span class="param-name">Quatattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the quaternion attribute to read when Attribute Type is Quaternion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normal Attribute</span>
+            <span class="param-name">Normalattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the normal vector attribute when Attribute Type is Two Vectors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Up Attribute</span>
+            <span class="param-name">Upattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the up vector attribute when Attribute Type is Two Vectors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Matrix Attribute</span>
+            <span class="param-name">Matrixattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the matrix attribute to read when Attribute Type is Matrix.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with packed primitives to reorient</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Reference geometry or points with orientation attributes (optional)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with updated p@mops_orient attribute</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../preview-falloff/" class="nav-button prev">Preview Falloff</a>
+        <a href="../unpack/" class="nav-button next">Unpack</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-reorient">Page: Reorient</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

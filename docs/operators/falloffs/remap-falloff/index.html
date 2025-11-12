@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remap Falloff | POPX</title>
+  <meta name="description" content="Remaps existing falloff attribute values using fit ranges, clamping, inversion, and custom ramp curves.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Remap Falloff</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Remap Falloff</strong> operator transforms existing falloff attribute values using various remapping techniques including range fitting, clamping, inversion, absolute values, and custom curve-based transformations.
+          This operator is essential for fine-tuning and adjusting falloff patterns created by other falloff operators.
+        </p>
+
+        <p>
+          The operator supports automatic or manual input range detection, custom output ranges, and optional custom ramp curves for non-linear transformations.
+          You can clamp values to specific ranges, invert falloff patterns, or apply absolute values for symmetrical effects.
+        </p>
+
+        <p>
+          The remapped results can be written to the same attribute or a different one, and previewed with color ramps for visual feedback.
+          This makes Remap Falloff a powerful post-processing tool for refining falloff values to match specific artistic or technical requirements.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Remap Page -->
+        <h3 id="page-remap" class="page-heading">Page: Remap</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Attribute</span>
+            <span class="param-name">Inputattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the falloff attribute to read values from for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Attribute</span>
+            <span class="param-name">Outputattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to write the remapped falloff values to.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clamp</span>
+            <span class="param-name">Clamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, constrains falloff values to the 0-1 range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fit</span>
+            <span class="param-name">Fit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables remapping of falloff values from an input range to an output range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Input Min Max</span>
+            <span class="param-name">Auto</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically determines input range from actual min/max falloff values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Min</span>
+            <span class="param-name">Inputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Max</span>
+            <span class="param-name">Inputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the input range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Min</span>
+            <span class="param-name">Outputmin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Max</span>
+            <span class="param-name">Outputmax</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value of the output range for remapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Absolute Value</span>
+            <span class="param-name">Absvalue</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Converts all falloff values to their absolute values (positive only).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reverses the falloff values (1 - value).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Remap Ramp</span>
+            <span class="param-name">Enableremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Remap Ramp</span>
+            <span class="param-name">Remapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Remap Ramp</span>
+            <span class="param-name">Resetremapramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ramp TOP</span>
+            <span class="param-name">Ramptop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Falloff Page -->
+        <h3 id="page-falloff" class="page-heading">Page: Falloff</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes falloff values using a color ramp.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+              <span class="param-name">heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+              <span class="param-name">blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+              <span class="param-name">infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry or regular geometry with falloff attribute to remap</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with remapped falloff attribute</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../noise-falloff/" class="nav-button prev">Noise Falloff</a>
+        <a href="../shape-falloff/" class="nav-button next">Shape Falloff</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-remap">Page: Remap</a></li>
+            <li><a href="#page-falloff">Page: Falloff</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

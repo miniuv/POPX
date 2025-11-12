@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview Falloff | POPX</title>
+  <meta name="description" content="Visualize falloff attribute values using color ramps with preset or custom gradients.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Preview Falloff</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Preview Falloff</strong> visualizes falloff attribute values using color ramps, making it easy to understand and debug falloff patterns in your scene.
+          This operator is an essential tool for working with falloff-based effects, providing immediate visual feedback about how falloff values are distributed across your geometry.
+        </p>
+
+        <p>
+          The operator supports multiple preset color ramps including Heatmap, Blackbody, and Infrared, each offering different visual representations of falloff intensity.
+          You can also define custom color gradients for specific visualization needs or artistic requirements.
+          The color mapping allows you to quickly identify areas of high and low falloff influence.
+        </p>
+
+        <p>
+          Preview Falloff reads any falloff attribute from your geometry and applies the selected color ramp to vertex colors, making the falloff values visible in the viewport.
+          This is particularly useful when setting up complex falloff networks, debugging falloff combinations, or fine-tuning falloff parameters to achieve desired effects.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Preview Page -->
+        <h3 id="page-preview" class="page-heading">Page: Preview</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the falloff attribute to visualize.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Falloff</span>
+            <span class="param-name">Previewfalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes falloff values using a color ramp.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Falloff Ramp</span>
+            <span class="param-name">Fallofframp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color ramp preset used for visualizing falloff values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+              <span class="param-name">heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+              <span class="param-name">blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+              <span class="param-name">infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custom Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with falloff attribute to visualize</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with color-mapped falloff visualization</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../popx-to/" class="nav-button prev">POPX to</a>
+        <a href="../reorient/" class="nav-button next">Reorient</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-preview">Page: Preview</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

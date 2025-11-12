@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Path Tracer | POPX</title>
+  <meta name="description" content="GPU-accelerated physically-based path tracing renderer using Ray POP for ray-geometry intersections with Disney BRDF material model.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Path Tracer</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Path Tracer</strong> is a GPU-accelerated physically-based renderer that uses the Ray POP operator internally to compute ray-geometry intersections.
+          This operator implements Monte Carlo path tracing with the Disney principled BRDF material model, enabling realistic lighting and material simulation.
+          The path tracer supports progressive rendering for clean convergence, depth of field effects through aperture simulation, and HDR tone mapping for proper exposure control.
+        </p>
+
+        <p>
+          The operator provides comprehensive material controls following the Disney BRDF standard, including base color, metallic/roughness workflows, specular reflections with anisotropic highlights, subsurface scattering, sheen for fabric-like materials, clearcoat layering, and transmission for glass.
+          Lighting is handled through environment maps (HDR images) and direct light sources (point, spot, and area lights) with full transform controls.
+          You can override existing materials on input geometry or respect per-primitive material attributes.
+        </p>
+
+        <p>
+          Path Tracer outputs rendered images as TOP textures with optional tone mapping and exposure adjustment.
+          Progressive rendering accumulates samples over time for noise reduction, while temporal smoothing provides frame-to-frame coherence for animations.
+          The renderer supports adjustable ray counts per pixel, bounce depth limits, and camera effects including depth of field with focal length and aperture controls.
+          This makes Path Tracer ideal for high-quality offline rendering, lookdev workflows, physically accurate lighting studies, or real-time progressive preview of complex scenes.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Path Tracing Page -->
+        <h3 id="page-path-tracing" class="page-heading">Page: Path Tracing</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Path Tracing</span>
+            <span class="param-name">Enable</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Master toggle for path tracing rendering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset</span>
+            <span class="param-name">Reset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset progressive accumulation and restart rendering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lock Input</span>
+            <span class="param-name">Lockinput</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Freeze input geometry to prevent updates during progressive rendering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Progressive Rendering</span>
+            <span class="param-name">Progressiverendering</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Accumulate samples over time for noise-free convergence.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Temporal Smoothing</span>
+            <span class="param-name">Temporalsmoothing</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frame blending amount for temporal coherence (0 = none, 1 = maximum).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render TOP</span>
+            <span class="param-name">Rendertop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to Render TOP providing camera and viewport settings.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rays per Pixel</span>
+            <span class="param-name">Raysperpixel</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of rays cast per pixel per frame (higher = less noise).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Bounces</span>
+            <span class="param-name">Maxbounces</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum ray bounce depth for global illumination (higher = more indirect light).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Opaque Geometry</span>
+            <span class="param-name">Opaque</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Treat all geometry as opaque (faster but disables transmission).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Aperture</span>
+            <span class="param-name">Aperture</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Camera aperture size for depth of field (0 = infinite focus, larger = shallower DOF).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Focal Length</span>
+            <span class="param-name">Focallength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Distance from camera where objects are in sharp focus.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Tone Map</span>
+            <span class="param-name">Enabletonemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply tone mapping to convert HDR output to display range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exposure</span>
+            <span class="param-name">Exposure</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Exposure multiplier for tone mapping (higher = brighter).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Material Page -->
+        <h3 id="page-material" class="page-heading">Page: Material</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Override if Material Exists</span>
+            <span class="param-name">Overrideifmaterialexists</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply material parameters even when geometry has existing material attributes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Base</span>
+            <span class="param-name">Base</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for base material properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Base Color</span>
+            <span class="param-name">Basecolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Diffuse albedo color (RGB).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Metallic</span>
+            <span class="param-name">Metallic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Metallic appearance (0 = dielectric, 1 = metal).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Roughness</span>
+            <span class="param-name">Roughness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Surface roughness (0 = mirror smooth, 1 = fully rough).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular</span>
+            <span class="param-name">Specularh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for specular reflection properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular</span>
+            <span class="param-name">Specular</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specular reflection strength for dielectrics.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Tint</span>
+            <span class="param-name">Speculartint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Tint specular reflection with base color (0 = white, 1 = colored).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic</span>
+            <span class="param-name">Anisotropic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Anisotropic highlight stretching (0 = isotropic, 1 = fully anisotropic).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic Rotation</span>
+            <span class="param-name">Anisotropicrotation</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation angle for anisotropic highlights (0-1 = 0-360 degrees).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Surface</span>
+            <span class="param-name">Surface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for surface scattering properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Subsurface</span>
+            <span class="param-name">Subsurface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Subsurface scattering amount for translucent materials like skin or wax.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen</span>
+            <span class="param-name">Sheenh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for fabric sheen properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen</span>
+            <span class="param-name">Sheen</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Soft velvet-like reflection for fabrics and cloth.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen Tint</span>
+            <span class="param-name">Sheentint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Tint sheen with base color (0 = white, 1 = colored).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat</span>
+            <span class="param-name">Clearcoath</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for clearcoat layer properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat</span>
+            <span class="param-name">Clearcoat</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Secondary specular layer for car paint or lacquered surfaces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat Gloss</span>
+            <span class="param-name">Clearcoatgloss</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Glossiness of clearcoat layer (0 = rough, 1 = glossy).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Advanced</span>
+            <span class="param-name">Advanced</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for advanced material properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">IOR</span>
+            <span class="param-name">Ior</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Index of refraction for dielectrics (1.0 = air, 1.45 = plastic, 1.5 = glass).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transmission</span>
+            <span class="param-name">Transmission</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light transmission through surface for glass and transparent materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emission</span>
+            <span class="param-name">Emissionh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for emissive light properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emission</span>
+            <span class="param-name">Emission</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Emissive color for self-illuminating surfaces (RGB, values > 1 = bright lights).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Lights Page -->
+        <h3 id="page-lights" class="page-heading">Page: Lights</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Environment Light</span>
+            <span class="param-name">Enableenv</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable image-based lighting from environment map.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Environment</span>
+            <span class="param-name">Renderenv</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Show environment map in background when rays miss geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Environment Map Intensity</span>
+            <span class="param-name">Envmapintensity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for environment light contribution.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Environment Map</span>
+            <span class="param-name">Environmentmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">HDR environment texture (equirectangular/latlong format).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Direct Light</span>
+            <span class="param-name">Enabledirectlight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable direct lighting from point/spot/area lights.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Lights</span>
+            <span class="param-name">Renderlights</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Show light geometry in render (visible area lights).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lights</span>
+            <span class="param-name">Lights</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of light sources with individual properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Light Type</span>
+            <span class="param-name">Lights0lighttype</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Type of light source (Point, Spot, or Area).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Lights0color</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light color (RGB).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Dimmer</span>
+            <span class="param-name">Lights0dimmer</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light intensity multiplier.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Lights0xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Order of transformation operations (Scale/Rotate/Translate).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Lights0rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation axis order (XYZ, XZY, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">Lights0t</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light position in world space (XYZ).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">Lights0r</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light rotation (XYZ degrees).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Lights0s</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light scale for area lights (XYZ).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Lights0scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform scale multiplier for all axes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bi-Directional</span>
+            <span class="param-name">Lights0bidirectional</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Area lights emit from both sides of surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cone Angle</span>
+            <span class="param-name">Lights0coneangle</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Spotlight cone angle in degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cone Delta</span>
+            <span class="param-name">Lights0conedelta</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Spotlight falloff width at cone edge.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cone Rolloff</span>
+            <span class="param-name">Lights0coneroll</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Spotlight intensity falloff curve (1 = linear, higher = sharper).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Geometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Scene geometry to render with path tracing</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Rendered Image</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">TOP texture with path traced image (HDR or tone mapped based on settings)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../mesh-fill/" class="nav-button prev">Mesh Fill</a>
+        <a href="../physarum/" class="nav-button next">Physarum</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-path-tracing">Page: Path Tracing</a></li>
+            <li><a href="#page-material">Page: Material</a></li>
+            <li><a href="#page-lights">Page: Lights</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

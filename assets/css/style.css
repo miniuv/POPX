@@ -84,6 +84,11 @@
   color: #555555;
 }
 
+/* Light Theme - Subparameter Name Background */
+[data-theme="light"] .param-subparam .param-name {
+  background-color: #e8e8e8;
+}
+
 /* Light Theme - Search Overlay Background */
 [data-theme="light"] .search-overlay {
   background: rgba(255, 255, 255, 0.75);

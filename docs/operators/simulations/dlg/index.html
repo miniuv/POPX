@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLG | POPX</title>
+  <meta name="description" content="Differential Line Growth simulation creating organic branching patterns through edge subdivision with curvature-based growth and constraint systems.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>DLG</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>DLG (Differential Line Growth)</strong> is a GPU-accelerated simulation that creates organic branching line patterns through iterative edge subdivision based on neighbor proximity.
+          This operator generates complex, brain coral-like structures by splitting edges when vertices become too crowded, allowing the line to grow and fold upon itself in intricate ways.
+          The algorithm checks each vertex against its neighbors within a maximum distance, and subdivides edges when density thresholds are exceeded, creating natural-looking growth patterns.
+        </p>
+
+        <p>
+          The simulation operates on line strips (open or closed loops) and can optionally use curvature information to influence growth direction, creating more varied branching behavior.
+          You control growth characteristics through parameters like growth strength (subdivision rate), max distance (neighbor search radius), max neighbors (crowding threshold), and vertex limits to cap complexity.
+          The line is smoothed each iteration using gaussian or other filter types to maintain organic curves, with adjustable edge distance and smoothing effect controlling the final aesthetic.
+        </p>
+
+        <p>
+          DLG supports constraint systems to guide growth within specific regions: geometry constraints project vertices onto surfaces (creating growth confined to objects), while volume constraints use 3D textures to define allowed growth spaces with force-based repulsion.
+          Optional noise can be applied to vertex positions for additional variation, with full control over perlin noise parameters including harmonics, amplitude, and animation.
+          Bounding limits allow clamping growth to specific XYZ ranges, making DLG ideal for organic decoration, procedural lace patterns, coral structures, brain-like forms, and abstract linear art.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- DLG Page -->
+        <h3 id="page-dlg" class="page-heading">Page: DLG</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Line Update POP</span>
+            <span class="param-name">Lineupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP operator that receives updated line geometry from simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Growth Strength</span>
+            <span class="param-name">Growthstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rate of edge subdivision and line growth per iteration.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Curvature</span>
+            <span class="param-name">Usecurvature</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Influences growth direction based on line curvature for varied branching.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Distance</span>
+            <span class="param-name">Maxdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Search radius for neighbor proximity checks (smaller = denser growth).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum neighbor count before edge subdivision triggers.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Number of Vertices</span>
+            <span class="param-name">Maxverts</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Vertex limit to prevent infinite growth and control complexity.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Line Strips</span>
+            <span class="param-name">Linestrips</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Close (connected loops) or Open (line segments with endpoints).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Type</span>
+            <span class="param-name">Filtertype</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Smoothing filter algorithm (gaussian, box, etc.) for line curves.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Edge Distance</span>
+            <span class="param-name">Filterdist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Smoothing kernel size along edges (larger = smoother curves).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Smooth Effect</span>
+            <span class="param-name">Effect</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount between original and smoothed positions (0-1).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset simulation with initial line geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to begin simulation from initialized state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle continuous simulation playback.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to advance simulation by one iteration while paused.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraint Geometry Page -->
+        <h3 id="page-constraint-geometry" class="page-heading">Page: Constraint Geometry</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint to Geometry</span>
+            <span class="param-name">Constrainttogeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Projects line vertices onto collision geometry surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Geometry</span>
+            <span class="param-name">Constraintgeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP geometry to constrain line growth onto.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Opaque Geometry</span>
+            <span class="param-name">Opaque</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Treats geometry as solid (vs. hollow shell) for projection.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Geometry</span>
+            <span class="param-name">Displaygeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes constraint geometry in output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display color for constraint geometry visualization (RGB).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraint Volume Page -->
+        <h3 id="page-constraint-volume" class="page-heading">Page: Constraint Volume</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint to Volume</span>
+            <span class="param-name">Constrainttovolume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Confines line growth within 3D texture-defined volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Volume</span>
+            <span class="param-name">Constraintvolume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">3D texture where white regions allow growth, black blocks it.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum XYZ position of volume constraint region.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum XYZ position of volume constraint region.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Force Strength</span>
+            <span class="param-name">Forcestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of repulsion force from volume boundaries.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Downsamples volume before blur for performance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for smoothing volume constraint field.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Noise Page -->
+        <h3 id="page-noise" class="page-heading">Page: Noise</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Noise</span>
+            <span class="param-name">Applynoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Adds perlin noise displacement to vertex positions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for noise pattern generation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Period</span>
+            <span class="param-name">Period</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Base frequency of noise (smaller = larger features).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonics</span>
+            <span class="param-name">Harmon</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of octaves for fractal noise detail.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Spread</span>
+            <span class="param-name">Spread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frequency multiplier between octaves (typically 2.0).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Gain</span>
+            <span class="param-name">Gain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amplitude falloff per octave (lower = smoother).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Amplitude</span>
+            <span class="param-name">Amp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Overall noise displacement magnitude.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Power function applied to noise values for contrast control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Offset</span>
+            <span class="param-name">Offset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Constant added to noise output for bias adjustment.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Animate</span>
+            <span class="param-name">Animate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Time-based noise evolution speed for animated variation.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Bounds Page -->
+        <h3 id="page-bounds" class="page-heading">Page: Bounds</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Limit Type Minimum</span>
+            <span class="param-name">Mintype</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">How to handle vertices below minimum (off, clamp, wrap, mirror).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Limit Type Maximum</span>
+            <span class="param-name">Maxtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">How to handle vertices above maximum (off, clamp, wrap, mirror).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Value</span>
+            <span class="param-name">Min</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Lower bound for XYZ position limits.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Value</span>
+            <span class="param-name">Max</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Upper bound for XYZ position limits.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Initial Line</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Line geometry (open or closed strips) to initialize differential growth from</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Constraint Geometry (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POP geometry surface to project line vertices onto</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Constraint Volume (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">3D texture defining allowed growth volume</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Grown line geometry with subdivided edges and smoothed curves</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../dla/" class="nav-button prev">DLA</a>
+        <a href="../flow/" class="nav-button next">Flow</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-dlg">Page: DLG</a></li>
+            <li><a href="#page-constraint-geometry">Page: Constraint Geometry</a></li>
+            <li><a href="#page-constraint-volume">Page: Constraint Volume</a></li>
+            <li><a href="#page-noise">Page: Noise</a></li>
+            <li><a href="#page-bounds">Page: Bounds</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

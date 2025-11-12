@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extract Attributes | POPX</title>
+  <meta name="description" content="Extract intrinsic transform attributes from packed primitives as standard Houdini point attributes for use with Copy to Points and other SOPs.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Extract Attributes</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Extract Attributes</strong> is the complement to Apply Attributes, taking the intrinsic attributes that define a packed primitive's transform matrix and writing them out as typical Houdini template point attributes.
+          This operator converts packed primitive transforms into standard point attributes like <code>v@N</code>, <code>v@up</code>, <code>p@orient</code>, <code>v@scale</code>, and <code>v@pivot</code> that you can use with a Copy to Points SOP or similar operations.
+        </p>
+
+        <p>
+          The operator is essential for bridging POPX geometry with traditional Houdini workflows.
+          After processing geometry through the POPX pipeline with various transformations and effects, Extract Attributes allows you to export those transforms as standard attributes that work seamlessly with native Houdini nodes.
+          This makes it easy to use POPX-processed instances as template points for copying, or to integrate POPX results into conventional geometry workflows.
+        </p>
+
+        <p>
+          You can choose to extract the full transform, including position, rotation, and scale, or selectively extract specific components like pivot points or POPX-specific orientation data.
+          This flexibility allows you to control exactly which transformation data is passed downstream, optimizing your workflow for specific use cases like instancing, copying, or constraint systems.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Extract Page -->
+        <h3 id="page-extract" class="page-heading">Page: Extract</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extract Full Transform</span>
+            <span class="param-name">Extractfulltransform</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Extracts complete transformation data including position, rotation, and scale as point attributes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extract Pivot</span>
+            <span class="param-name">Extractpivot</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Extracts pivot point data as v@pivot attribute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extract POPX Orient</span>
+            <span class="param-name">Extractpopxorient</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Extracts POPX-specific orientation data as p@orient attribute.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with packed primitive transforms to extract</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Point geometry with extracted transform attributes (v@N, v@up, p@orient, v@scale, v@pivot)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../delete/" class="nav-button prev">Delete</a>
+        <a href="../geometry/" class="nav-button next">Geometry</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-extract">Page: Extract</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

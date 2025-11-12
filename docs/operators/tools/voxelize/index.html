@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxelize | POPX</title>
+  <meta name="description" content="Convert mesh or point cloud geometry into a 3D texture volume representation with configurable resolution and bounds.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Voxelize</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Voxelize</strong> converts mesh or point cloud geometry into a 3D texture volume representation.
+          This operator transforms traditional polygon-based geometry into a volumetric voxel grid, enabling volume rendering, simulation, and other volumetric effects.
+        </p>
+
+        <p>
+          The operator supports two modes: Mesh and Point Cloud. In Mesh mode, geometry is voxelized using ray casting techniques to determine interior/exterior regions.
+          In Point Cloud mode, individual points are converted directly into voxel density values, with optional point count limits for performance optimization.
+        </p>
+
+        <p>
+          The voxelization process offers extensive control over resolution, bounds, colors, and density. You can define custom spatial bounds, adjust the maximum axis resolution, and control how colors are applied to the volume.
+          Optional blur filtering can smooth the resulting volume, and background colors can be set for empty voxel regions.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Voxelize Page -->
+        <h3 id="page-voxelize" class="page-heading">Page: Voxelize</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Voxelize Mode</span>
+            <span class="param-name">Voxelizemode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines whether to voxelize mesh geometry or point cloud data.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Mesh</span>
+              <span class="param-name">mesh</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Point Cloud</span>
+              <span class="param-name">pointcloud</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Axis Resolution</span>
+            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum resolution along the longest axis of the voxel grid.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum XYZ coordinates of the voxelization volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum XYZ coordinates of the voxelization volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Margin</span>
+            <span class="param-name">Margin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Additional padding around the geometry bounds.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Get Bounds</span>
+            <span class="param-name">Getbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically calculate bounds from input geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Bounds</span>
+            <span class="param-name">Displaybounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the voxelization volume bounds as a bounding box.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Ray Direction Mode</span>
+            <span class="param-name">Raydirmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining ray directions when voxelizing meshes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">constant</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inside Sphere</span>
+              <span class="param-name">insidesphere</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ray Direction</span>
+            <span class="param-name">Raydir</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Direction vector for ray casting when Ray Direction Mode is set to Constant.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Max Point Count</span>
+            <span class="param-name">Enablemaxpointcount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Limits the number of points processed when voxelizing point clouds.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Point Count</span>
+            <span class="param-name">Maxpointcount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of points to process for point cloud voxelization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Override if Color Exists</span>
+            <span class="param-name">Overrideifexists</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, uses the Color parameter instead of vertex colors from the geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">RGB color applied to voxels.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Density Scale</span>
+            <span class="param-name">Densityscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for voxel density values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Background Color</span>
+            <span class="param-name">Bgcolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">RGB color for empty voxel regions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Background Alpha</span>
+            <span class="param-name">Bgalpha</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Alpha value for empty voxel regions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Blur</span>
+            <span class="param-name">Enableblur</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies blur filtering to smooth the voxelized volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur filter type (e.g., Catmull-Rom, Gaussian).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extend</span>
+            <span class="param-name">Extend</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Edge extension mode for blur filtering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resolution reduction before applying blur for performance optimization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the blur filter kernel.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Mesh or point cloud geometry to voxelize</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">3D texture volume representation of the input geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../visualize-frame/" class="nav-button prev">Visualize Frame</a>
+        <a href="../../simulations/dla/" class="nav-button next">DLA</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-voxelize">Page: Voxelize</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

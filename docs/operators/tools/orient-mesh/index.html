@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orient Mesh | POPX</title>
+  <meta name="description" content="Compute orientation frames on mesh geometry with advanced options for curl noise and blurring to prepare surfaces for Move Along Mesh operations.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Orient Mesh</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Orient Mesh</strong> computes orientation frames on input geometry, functioning like a more advanced version of the Polyframe SOP with additional features for creating complex surface flows.
+          This operator is essential for preparing meshes before using them with the Move Along Mesh operator, as it defines the up vector (visualized in yellow) that determines the direction of motion across the surface.
+        </p>
+
+        <p>
+          For easy "swirling" movement over a mesh, try setting the Compute Method to "N and Up" and enable "Cross Up Vector".
+          This will "wrap" the yellow up vector along the surface of the mesh, creating natural flowing motion paths.
+          You can optionally add curl noise to get more swirly behavior, or enable blurring to soften rough patches and create smoother orientation transitions across the surface.
+        </p>
+
+        <p>
+          The operator offers multiple compute methods including polygon-based computation, normal and up vector calculations, and quaternion-based orientation.
+          Combined with optional curl noise and blur stages, Orient Mesh provides complete control over surface orientation frames for advanced motion graphics workflows.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Orient Mesh Page -->
+        <h3 id="page-orient-mesh" class="page-heading">Page: Orient Mesh</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Up Vector</span>
+            <span class="param-name">Visualizeupvector</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, displays the up vector as yellow lines for debugging orientation frames.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Length Scale</span>
+            <span class="param-name">Lengthscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the length of the visualized up vector lines.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Color</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Color of the visualized up vector lines.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Compute Method</span>
+            <span class="param-name">Computemethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for computing orientation frames on the mesh.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Compute From Polygons</span>
+              <span class="param-name">poly</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">N and Up</span>
+              <span class="param-name">nup</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Use Orient</span>
+              <span class="param-name">orient</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Compute Normals</span>
+            <span class="param-name">Computenormals</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Computes surface normals when using N and Up method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Auto Up</span>
+            <span class="param-name">Autoup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically computes up vector when using N and Up method.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Up Vector</span>
+            <span class="param-name">Upvector</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Manual up vector direction when Auto Up is disabled.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Style</span>
+            <span class="param-name">Style</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Style for polygon-based orientation computation.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">First Edge</span>
+              <span class="param-name">first</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Two Edges</span>
+              <span class="param-name">two</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive Centroid</span>
+              <span class="param-name">prim</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Texture UV</span>
+              <span class="param-name">uv</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Texture UV Gradient</span>
+              <span class="param-name">uvgrad</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Attribute Gradient</span>
+              <span class="param-name">attgrad</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute Name</span>
+            <span class="param-name">Attributename</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Attribute to use for UV or gradient-based orientation styles.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Make Frame Orthogonal</span>
+            <span class="param-name">Makeortho</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Ensures the orientation frame vectors are perfectly orthogonal.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert N</span>
+            <span class="param-name">Invertn</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the normal vector direction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert Up</span>
+            <span class="param-name">Invertup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the up vector direction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cross Up Vector</span>
+            <span class="param-name">Crossupvector</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Wraps the up vector along the surface for swirling motion effects.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Tangent</span>
+            <span class="param-name">Outputtangent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs tangent vector attribute in addition to normal and up vectors.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Curl Noise Page -->
+        <h3 id="page-curl-noise" class="page-heading">Page: Curl Noise</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Curl Noise</span>
+            <span class="param-name">Enablecurlnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies curl noise to orientation vectors for organic swirling effects.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Blend with Original</span>
+            <span class="param-name">Blendwithoriginal</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blends curl noise with original orientation from 0 (full noise) to 1 (original).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Type of noise to use for curl noise generation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for noise pattern variation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Period</span>
+            <span class="param-name">Period</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Period of noise repetition.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonics</span>
+            <span class="param-name">Harmon</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of octaves of noise to layer together.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Spread</span>
+            <span class="param-name">Spread</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Frequency multiplier between each harmonic octave.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Harmonic Gain</span>
+            <span class="param-name">Gain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amplitude scaling for each successive harmonic.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Amplitude</span>
+            <span class="param-name">Amp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Overall amplitude of the noise effect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Exponent applied to noise values for contrast adjustment.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Transform Page -->
+        <h3 id="page-transform" class="page-heading">Page: Transform</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Order of transform operations (SRT, STR, etc.) for curl noise.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Order of rotation axes (XYZ, ZYX, etc.) for curl noise.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation offset for noise sampling space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation of noise sampling space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale of noise sampling space (higher values = smaller features).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pivot point for rotation and scaling of noise space.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate 4D</span>
+            <span class="param-name">T4d</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation in the fourth dimension for 4D noise types.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Blur Page -->
+        <h3 id="page-blur" class="page-heading">Page: Blur</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Blur</span>
+            <span class="param-name">Enableblur</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies blur to orientation vectors to smooth rough transitions.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Influence Type</span>
+            <span class="param-name">Influencetype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining point influence during blur.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Connectivity</span>
+              <span class="param-name">conn</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Proximity</span>
+              <span class="param-name">prox</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Iterations</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of blur passes to apply.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Kernal Radius</span>
+            <span class="param-name">Kernalradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Search radius for proximity-based blur influence.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry or mesh to compute orientation frames on</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry with computed orientation frame attributes (v@N, v@up, v@tangent)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../orient-curve/" class="nav-button prev">Orient Curve</a>
+        <a href="../popx-to/" class="nav-button next">POPX to</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-orient-mesh">Page: Orient Mesh</a></li>
+            <li><a href="#page-curl-noise">Page: Curl Noise</a></li>
+            <li><a href="#page-transform">Page: Transform</a></li>
+            <li><a href="#page-blur">Page: Blur</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

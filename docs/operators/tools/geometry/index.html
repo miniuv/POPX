@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometry | POPX</title>
+  <meta name="description" content="Render POPX Geometry with material assignment per instance index, similar to TouchDesigner Geometry COMP but designed for POPX structure.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Geometry</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Geometry</strong> renders POPX Geometry with material assignment capabilities, functioning like TouchDesigner's Geometry COMP but specifically designed to fit the POPX Geometry structure.
+          This operator allows you to apply different materials to each instance based on its index value.
+        </p>
+
+        <p>
+          The operator provides a sequence of material slots where you can assign different materials to instances.
+          Each instance in your POPX Geometry will use the material corresponding to its index, allowing for varied visual appearance across your instanced objects without requiring multiple render passes.
+        </p>
+
+        <p>
+          This makes Geometry essential for final rendering of POPX scenes where you need material variation across instances, such as rendering a crowd with different clothing materials, architectural elements with varied surface treatments, or any scenario requiring per-instance material control.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Instances Page -->
+        <h3 id="page-instances" class="page-heading">Page: Instances</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Instances</span>
+            <span class="param-name">Instances</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of instance material slots. Click + to add more material assignments.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Material</span>
+            <span class="param-name">Material</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Material to apply to instances with the corresponding index value.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry to render with assigned materials</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Render</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Rendered output with materials applied per instance index</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../extract-attributes/" class="nav-button prev">Extract Attributes</a>
+        <a href="../index-from-attribute/" class="nav-button next">Index From Attribute</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-instances">Page: Instances</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

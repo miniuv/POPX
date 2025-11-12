@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesh Fill | POPX</title>
+  <meta name="description" content="GPU-accelerated simulation that fills mesh volumes or surfaces with particles using density-guided algorithm for organic space-filling patterns.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Mesh Fill</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Mesh Fill</strong> is a GPU-accelerated simulation that fills mesh volumes or surfaces with particles using a density-guided algorithm.
+          This operator drives points to move inside mesh geometry or volumetric fields, gradually filling the space with organic growth patterns.
+          The simulation creates natural space-filling behavior by guiding particles through density fields generated from input geometry.
+        </p>
+
+        <p>
+          The operator supports both mesh-based and volume-based inputs with automatic voxelization for mesh geometry.
+          You can control whether particles fill the entire interior volume or only the surface boundary, with adjustable radius controlling how closely particles pack together.
+          Filtering parameters allow smoothing of the density field for more uniform or organic filling patterns.
+          Optional seeding from density allows controlled spawning of new particles during simulation.
+        </p>
+
+        <p>
+          Mesh Fill outputs the filled point cloud and optionally generates trail geometry showing particle movement paths.
+          The simulation includes standard playback controls (initialize, start, play) for controlling fill progression.
+          This makes Mesh Fill ideal for creating organic growth animations, volumetric filling effects, space colonization patterns, or particle-based mesh representations.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Mesh Fill Page -->
+        <h3 id="page-mesh-fill" class="page-heading">Page: Mesh Fill</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls simulation speed per frame (higher values = faster filling).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Switch to Volume Input</span>
+            <span class="param-name">Switchtovolumeinput</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use 3D texture input instead of mesh geometry for density field.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normalize Input Mesh</span>
+            <span class="param-name">Normalizeinputmesh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale input mesh to unit size before voxelization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Axis Resolution</span>
+            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Voxel grid resolution for mesh-to-volume conversion (higher = more detail).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Precision</span>
+            <span class="param-name">Precision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture precision for density field (16-bit or 32-bit float).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fill Surface Only</span>
+            <span class="param-name">Fillsurface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Restricts particles to surface boundary instead of filling entire volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Radius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Particle spacing radius controlling packing density (smaller = tighter packing).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Scale</span>
+            <span class="param-name">Filterscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for density field filtering iterations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for density field smoothing.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset simulation and prepare density field.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to begin filling simulation from initialized state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle continuous simulation playback.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Seed Page -->
+        <h3 id="page-seed" class="page-heading">Page: Seed</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Spawn From Density</span>
+            <span class="param-name">Spawn</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables spawning new particles from density field during simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed Count</span>
+            <span class="param-name">Seedcount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of seed particles to spawn per frame when spawning enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for particle spawn positions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Attempts</span>
+            <span class="param-name">Maxattempts</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum spawn position attempts before giving up (prevents infinite loops).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Trails Page -->
+        <h3 id="page-trails" class="page-heading">Page: Trails</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Active</span>
+            <span class="param-name">Activetrails</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables trail geometry generation showing particle movement paths.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Always Cook</span>
+            <span class="param-name">Alwayscook</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Forces trail geometry to update every frame regardless of changes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Length</span>
+            <span class="param-name">Length</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum trail length in frames (history buffer size).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Type</span>
+            <span class="param-name">Filtertype</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Smoothing filter for trail curve (gaussian, catmull-rom, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Edge Distance</span>
+            <span class="param-name">Filterdist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Distance metric for edge filtering along trail curves.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Effect</span>
+            <span class="param-name">Effect</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Smoothing effect strength (0 = no smoothing, 1 = full effect).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">End Points Fixed</span>
+            <span class="param-name">Endpointsfixed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Prevents smoothing from moving trail endpoints.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Mesh or Volume</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Mesh geometry or 3D texture volume defining fill space</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Initial Particles (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Optional starting particles to seed the fill simulation</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Particles</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Filled point cloud with particles distributed through mesh volume or surface</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Trails (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Curve geometry showing particle movement paths (when Active enabled)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../flow/" class="nav-button prev">Flow</a>
+        <a href="../path-tracer/" class="nav-button next">Path Tracer</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-mesh-fill">Page: Mesh Fill</a></li>
+            <li><a href="#page-seed">Page: Seed</a></li>
+            <li><a href="#page-trails">Page: Trails</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

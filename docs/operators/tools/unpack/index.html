@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unpack | POPX</title>
+  <meta name="description" content="Convert POPX Geometry into POP geometry by unpacking packed points structure and extracting underlying geometry.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Unpack</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Unpack</strong> converts POPX Geometry into POP geometry by unpacking the packed points structure and extracting the underlying geometry.
+          This operator reveals the actual mesh or primitive data that was stored inside the packed primitives.
+        </p>
+
+        <p>
+          Unlike POPX to which strips packed structure and returns clean points, Unpack extracts the full geometry contained within each packed primitive, giving you access to the vertices, faces, and primitive structure of the instanced objects.
+          This is useful when you need to work with the actual geometry rather than just point representations.
+        </p>
+
+        <p>
+          You can optionally apply the packed primitive's transform to the unpacked geometry, and selectively transfer point attributes and groups from the packed points to the unpacked geometry.
+          This gives you control over what data is preserved during the unpacking process.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Unpack Page -->
+        <h3 id="page-unpack" class="page-heading">Page: Unpack</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Transform</span>
+            <span class="param-name">Applytransform</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, applies the packed primitive's transform matrix to the unpacked geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transfer Attributes</span>
+            <span class="param-name">Transferattrs</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which point attributes to transfer from the packed points to the unpacked geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transfer Groups</span>
+            <span class="param-name">Transfergroups</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which point groups to transfer from the packed points to the unpacked geometry.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with packed primitives to unpack</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Unpacked POP geometry with extracted mesh/primitive data</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../reorient/" class="nav-button prev">Reorient</a>
+        <a href="../visualize-frame/" class="nav-button next">Visualize Frame</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-unpack">Page: Unpack</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

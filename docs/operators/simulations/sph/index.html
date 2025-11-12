@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPH | POPX</title>
+  <meta name="description" content="GPU-accelerated Smoothed Particle Hydrodynamics solver for liquid and granular simulations with collision geometry and container support.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>SPH</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>SPH (Smoothed Particle Hydrodynamics)</strong> is a GPU-accelerated particle-based fluid solver that simulates liquids and granular materials by treating them as collections of interacting particles.
+          This operator uses the SPH method where each particle carries physical properties like density, pressure, and velocity, and interacts with neighbors within a smoothing radius.
+          The solver supports two modes: Fluids for liquid simulations with viscosity and surface tension, and Grains for granular materials like sand with repulsion and attraction forces.
+        </p>
+
+        <p>
+          The simulation computes particle interactions through neighbor searches within the smoothing radius, calculating density-based pressure forces to maintain target density and optional viscosity forces for fluid thickness.
+          You control the physical behavior through parameters like target density (incompressibility), viscosity (fluid thickness), cohesion (particle stickiness), surface tension (droplet formation), and adhesion (sticking to surfaces).
+          The solver uses substeps and iterations to improve stability and accuracy, with adjustable time scaling for slow-motion or accelerated effects.
+        </p>
+
+        <p>
+          SPH supports multiple collision types including ground planes, bounding boxes, arbitrary collision geometry, and volumetric container geometry for creating vessels.
+          The simulation updates particles connected to a target POP operator, allowing integration with existing particle systems or starting from scratch with a specified particle count.
+          This makes SPH suitable for water splashes, pouring liquids, sand and debris, viscous fluids like honey, and interactive particle-based effects.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- SPH Page -->
+        <h3 id="page-sph" class="page-heading">Page: SPH</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Particles Update POP</span>
+            <span class="param-name">Particlesupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP operator that receives particle position and velocity updates from simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Solver Mode</span>
+            <span class="param-name">Solvermode</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Simulation mode: Fluids for liquids with viscosity, Grains for granular materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Substeps</span>
+            <span class="param-name">Substeps</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of solver substeps per frame (higher = more stable, slower).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Iterations</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Solver iterations per substep for constraint satisfaction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Scale</span>
+            <span class="param-name">Timescale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global time multiplier for simulation speed (1.0 = real-time).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Read-only display of effective timestep after substeps and time scale.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Number of Particles</span>
+            <span class="param-name">Numberofparticles</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Particle count when no input connected (spawned at initialization).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Smoothing Radius</span>
+            <span class="param-name">Smoothingradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Interaction distance for neighbor particle forces (smaller = finer detail, more computation).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum neighbor count per particle for force calculations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset simulation and spawn initial particles.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to begin simulation from initialized state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle continuous simulation playback.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to advance simulation by one frame while paused.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Properties Page -->
+        <h3 id="page-properties" class="page-heading">Page: Properties</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fluids</span>
+            <span class="param-name">Fluids</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for fluid mode properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Density</span>
+            <span class="param-name">Targetdensity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rest density the solver tries to maintain (higher = more incompressible).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Viscosity</span>
+            <span class="param-name">Viscosity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Fluid thickness and resistance to flow (0 = water-like, 1 = very viscous).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cohesion</span>
+            <span class="param-name">Cohesion</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Particle attraction force creating sticky fluid behavior.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Surface Tension</span>
+            <span class="param-name">Surfacetension</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Force causing droplet formation and surface smoothing.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Adhesion</span>
+            <span class="param-name">Adhesion</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Particle sticking force to collision surfaces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Grains</span>
+            <span class="param-name">Grains</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for grain mode properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Repulsion Weight</span>
+            <span class="param-name">Repulsionweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of particle-particle repulsion force for granular materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attraction Weight</span>
+            <span class="param-name">Attractionweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of particle-particle attraction for clumping behavior.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Collisions Page -->
+        <h3 id="page-collisions" class="page-heading">Page: Collisions</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Ground Collision</span>
+            <span class="param-name">Enablegroundcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables infinite ground plane collision.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ground Position</span>
+            <span class="param-name">Groundposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">XYZ position of ground plane (typically Y-axis height).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Ground</span>
+            <span class="param-name">Displayground</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes ground plane in output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Bounding Box</span>
+            <span class="param-name">Enablebbox</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables box-shaped collision boundary from POP geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bounding Box</span>
+            <span class="param-name">Bbox</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP geometry defining box collision bounds.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Bounding Box</span>
+            <span class="param-name">Displaybbox</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes bounding box collision geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Geometry Collision</span>
+            <span class="param-name">Enablecollisiongeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables collision with arbitrary POP geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Collision Geometry</span>
+            <span class="param-name">Collisiongeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP geometry for surface collision detection.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Opaque Geometry</span>
+            <span class="param-name">Opaque</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Treats collision geometry as solid (vs. hollow shell).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Collision Geometry</span>
+            <span class="param-name">Displaycollisiongeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes collision geometry in output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Container Geometry</span>
+            <span class="param-name">Enablecontainergeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables volumetric container collision using voxelized geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Axis Resolution</span>
+            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Voxel resolution for container geometry (higher = more accurate, slower).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Force Collision</span>
+            <span class="param-name">Forcecollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Aggressively keeps particles inside container (may reduce realism).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrink</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Downsamples container volume before blur for performance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for smoothing container voxel field.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Container Geometry</span>
+            <span class="param-name">Containergeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP geometry to voxelize into collision container.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Container Geometry</span>
+            <span class="param-name">Displaycontainergeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes container geometry in output.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Forces Page -->
+        <h3 id="page-forces" class="page-heading">Page: Forces</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Gravity</span>
+            <span class="param-name">Gravity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Gravity force vector in world space (default: 0, -9.81, 0).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Gravity Multiplier</span>
+            <span class="param-name">Gravitymultiplier</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scales gravity force magnitude.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Velocity Damping</span>
+            <span class="param-name">Velocitydamping</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global velocity decay per frame (0 = no damping, 1 = instant stop).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Static Threshold</span>
+            <span class="param-name">Staticthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Velocity threshold below which dynamic friction becomes static friction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Dynamic Scale</span>
+            <span class="param-name">Dynamicscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Dynamic friction coefficient for moving particles.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Limit Acceleration</span>
+            <span class="param-name">Limitacc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Clamps particle acceleration to prevent instability.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Acceleration</span>
+            <span class="param-name">Maxacc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum allowed acceleration magnitude.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Initial Particles (Optional)</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POP particles to initialize simulation from custom positions and velocities</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Simulated particles with updated positions and velocities</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../physarum/" class="nav-button prev">Physarum</a>
+        <a href="#" class="nav-button next disabled">Next</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-sph">Page: SPH</a></li>
+            <li><a href="#page-properties">Page: Properties</a></li>
+            <li><a href="#page-collisions">Page: Collisions</a></li>
+            <li><a href="#page-forces">Page: Forces</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spread Falloff | POPX</title>
-  <meta name="description" content="Create falloff patterns that spread outward from seed points through neighboring connections in POPX.">
+  <title>Texture Falloff | POPX</title>
+  <meta name="description" content="Applies falloff values to points by sampling a texture using point positions or custom attributes.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,17 +34,24 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Spread Falloff</h1>
+      <h1>Texture Falloff</h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Spread Falloff</strong> operator creates falloff patterns that propagate outward from seed points through neighboring point connections. Unlike distance-based falloffs that radiate uniformly, Spread Falloff follows the topology and connectivity of your geometry, creating organic wave-like patterns that respect the structure of your mesh.
+          The <strong>Texture Falloff</strong> operator applies falloff values by sampling a texture (TOP) using point positions or custom attributes as UV coordinates.
+          This allows for highly customizable falloff patterns driven by images, procedural textures, or animated content.
         </p>
 
         <p>
-          This operator is ideal for creating effects that travel across surfaces, such as ripples, infection patterns, growth simulations, or any effect where you want falloff to spread through connected points rather than purely by distance. The falloff strength diminishes as it moves further from the seed points, creating smooth gradients along the mesh topology.
+          The operator supports various lookup channels (luminance, RGB, alpha), multiple extend modes (repeat, mirror, hold, zero), and interpolation options.
+          Transform controls allow you to translate, rotate, and scale the sampling space, with optional normalization for consistent results regardless of geometry bounds.
+        </p>
+
+        <p>
+          The resulting falloff values can be combined with existing falloff attributes, enhanced with procedural noise, remapped with custom curves, and previewed with color ramps.
+          This makes Texture Falloff ideal for creating complex, art-directable patterns by painting falloff maps in external tools or using TouchDesigner's procedural generation capabilities.
         </p>
       </section>
 
@@ -52,217 +59,192 @@
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Spread Page -->
-        <h3 id="page-spread" class="page-heading">Page: Spread</h3>
+        <!-- Texture Page -->
+        <h3 id="page-texture" class="page-heading">Page: Texture</h3>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Group</span>
             <span class="param-name">Group</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies which point group to apply the spread falloff to. Leave empty to process all points.</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Texture (TOP)</span>
+            <span class="param-name">Top</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to the texture operator to sample for falloff values.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Spread By</span>
-            <span class="param-name">Spreadby</span>
+            <span class="param-label">Lookup Channel </span>
+            <span class="param-name">Lookupchannel</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Determines how the operator identifies neighboring points for spread propagation.</span>
+            <span class="param-group-description">Which channel or combination of channels to use for falloff values.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Radius</span>
-              <span class="param-name">radius</span>
+              <span class="param-label">Luminance</span>
+              <span class="param-name">luminance</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Connectivity</span>
-              <span class="param-name">connectivity</span>
+              <span class="param-label">Red</span>
+              <span class="param-name">red</span>
             </div>
+            <div class="param-subparam">
+              <span class="param-label">Green</span>
+              <span class="param-name">green</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blue</span>
+              <span class="param-name">blue</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Alpha</span>
+              <span class="param-name">alpha</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">RGB Average</span>
+              <span class="param-name">rgbaverage</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">RGBA Average</span>
+              <span class="param-name">average</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">RGB Maximum</span>
+              <span class="param-name">rgbmax</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">RGBA Maximum</span>
+              <span class="param-name">max</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pixel Centered Sampling Location</span>
+            <span class="param-name">Pixelcentered</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, samples from pixel centers rather than corners for more accurate results.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cyclic Lookup</span>
+            <span class="param-name">Cyclic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables cyclic texture coordinate wrapping for seamless tiling.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Distribution</span>
-            <span class="param-name">Distribution</span>
+            <span class="param-label">Input Extend Mode</span>
+            <span class="param-name">Inputextend</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Controls how neighboring points are selected when using radius-based search.</span>
+            <span class="param-group-description">How to handle texture coordinates outside the 0-1 range.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Default</span>
-              <span class="param-name">default</span>
+              <span class="param-label">Hold</span>
+              <span class="param-name">hold</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Unique</span>
-              <span class="param-name">unique</span>
+              <span class="param-label">Zero</span>
+              <span class="param-name">zero</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Closest</span>
-              <span class="param-name">closest</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Search Radius</span>
-            <span class="param-name">Searchradius</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">The maximum distance within which points are considered neighbors for spread propagation.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Max Connections</span>
-            <span class="param-name">Maxconnections</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Limits the maximum number of neighboring connections each point can have.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Falloff Width</span>
-            <span class="param-name">Falloffwidth</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls how quickly the falloff strength diminishes as it spreads from the seed points.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Spread</span>
-            <span class="param-name">Spread</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Adds randomization to the spread pattern, creating more organic and varied falloff.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Seed Page -->
-        <h3 id="page-seed" class="page-heading">Page: Seed</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Display Seed Selection</span>
-            <span class="param-name">Displayseedselection</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize the seed selection region for infection starting points.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Threshold</span>
-            <span class="param-name">Seedthreshold</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Minimum value required for seed selection.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specification POP</span>
-            <span class="param-name">Specpop</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Specify a POP network to use as seed points for infection.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Center</span>
-            <span class="param-name">Center</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Center position of the seed selection region.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Radius</span>
-            <span class="param-name">Rad</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Size of the seed selection region in each axis.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Transition Range</span>
-            <span class="param-name">Transitionrange</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Distance over which seed values transition from 1 to 0 at the region boundary.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Transition Align</span>
-            <span class="param-name">Transitionalign</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Alignment of the transition zone (inward, centered, or outward).</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Transition Type</span>
-            <span class="param-name">Transitiontype</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Curve type for seed region transition falloff.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Linear</span>
-              <span class="param-name">linear</span>
+              <span class="param-label">Repeat</span>
+              <span class="param-name">repeat</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Smooth Step</span>
-              <span class="param-name">smoothstep</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Ease In Ease Out</span>
-              <span class="param-name">easeinout</span>
+              <span class="param-label">Mirror</span>
+              <span class="param-name">mirror</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Use Seed Attribute</span>
-            <span class="param-name">Useseedattribute</span>
+            <span class="param-label">Interpolate</span>
+            <span class="param-name">Interpolate</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Use an existing point attribute to define seed values instead of spatial selection.</span>
+            <span class="param-description">Enables bilinear filtering for smooth texture sampling between pixels.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Seed Attribute</span>
-            <span class="param-name">Seedattribute</span>
+            <span class="param-label">Use Depth Offset</span>
+            <span class="param-name">Usedepthoffset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the attribute to use for seed values (when Use Seed Attribute is enabled).</span>
+            <span class="param-description">Uses the Z coordinate as a depth offset when sampling the texture.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Output Seed Attribute</span>
-            <span class="param-name">Outputseedattribute</span>
+            <span class="param-label">Normalize Space</span>
+            <span class="param-name">Normalizespace</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Write the seed selection values to an output attribute.</span>
+            <span class="param-description">Normalizes point positions to 0-1 range based on bounding box before sampling.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation offset for texture sampling coordinates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation of texture sampling space in degrees.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for texture sampling coordinates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pivot point for texture space transformations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform scaling factor applied to all axes equally.</span>
           </div>
         </div>
 
@@ -848,9 +830,9 @@
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1 (Optional)</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Seed POP</span>
+            <span class="param-name">Texture TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Seed points geometry for spread starting points</span>
+            <span class="param-text">Texture to sample for falloff values (alternative to Texture (TOP) parameter)</span>
           </div>
         </div>
       </section>
@@ -865,15 +847,15 @@
             <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with falloff attribute applied</span>
+            <span class="param-text">POPX Geometry with applied texture falloff attribute</span>
           </div>
         </div>
       </section>
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../shape-falloff/" class="nav-button prev">Shape Falloff</a>
-        <a href="../texture-falloff/" class="nav-button next">Texture Falloff</a>
+        <a href="../spread-falloff/" class="nav-button prev">Spread Falloff</a>
+        <a href="../../modifiers/aim/" class="nav-button next">Aim</a>
       </nav>
     </main>
 
@@ -882,10 +864,10 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li><a href="#parameters">Parameters</a>
+        <li>
+          <a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-spread">Page: Spread</a></li>
-            <li><a href="#page-seed">Page: Seed</a></li>
+            <li><a href="#page-texture">Page: Texture</a></li>
             <li><a href="#page-falloff">Page: Falloff</a></li>
             <li><a href="#page-noise">Page: Noise</a></li>
             <li><a href="#page-remap">Page: Remap</a></li>

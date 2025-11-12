@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index From Attribute | POPX</title>
+  <meta name="description" content="Create index attributes from existing attributes by remapping values to integer ranges for controlling instance variation.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Index From Attribute</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Index From Attribute</strong> creates a point attribute <code>i@mops_index</code> that the POPX Instancer will use by default to determine what instances to place on different points when the "Indexing Mode" of the POPX Instancer is set to "Point Attribute."
+          This operator creates this index from any existing attribute by remapping it to a given minimum and maximum integer range.
+        </p>
+
+        <p>
+          The operator is essential for creating variation in instanced geometry based on other attribute data like falloff values, noise patterns, or custom attributes.
+          By converting continuous attribute values into discrete integer indices, you can map different geometry variations to different regions of your point cloud based on any attribute-driven pattern.
+          The defaults remap the <code>f@mops_falloff</code> attribute to a range of index integers from 0 to 3.
+        </p>
+
+        <p>
+          You can control the number of index steps (discrete variations), the starting index value, and the input attribute range to remap from.
+          A debug color mode is available to visualize the index distribution across your geometry.
+          This makes it easy to see how different index values are distributed and verify that your remapping produces the desired variation pattern before connecting to an Instancer.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Index Page -->
+        <h3 id="page-index" class="page-heading">Page: Index</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Attribute</span>
+            <span class="param-name">Inputattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to read and remap to index values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Attribute Range</span>
+            <span class="param-name">Inputattrrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum and maximum values of the input attribute range to remap from.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Index Steps</span>
+            <span class="param-name">Indexsteps</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of discrete index values to generate (number of variations).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Index Start</span>
+            <span class="param-name">Indexstart</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Starting integer value for the index range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Attribute</span>
+            <span class="param-name">Outputattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute to write index values to.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Debug Color</span>
+            <span class="param-name">Debugcolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes index values using vertex colors for debugging.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with source attribute to convert to index</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with generated index attribute (i@mops_index)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../geometry/" class="nav-button prev">Geometry</a>
+        <a href="../material/" class="nav-button next">Material</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-index">Page: Index</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

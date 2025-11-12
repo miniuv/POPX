@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material | POPX</title>
+  <meta name="description" content="Applies Disney BRDF material attributes to geometry for use with the Path Tracer operator, enabling custom per-primitive material properties.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Material</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Material</strong> is a utility operator that applies Disney BRDF material attributes to geometry for use with the Path Tracer operator.
+          This operator writes material properties as primitive attributes, allowing you to create custom per-primitive materials instead of using the Path Tracer's built-in global material.
+          The Material operator provides the same comprehensive Disney principled BRDF parameters as the Path Tracer, including base color, metallic/roughness workflow, specular properties, subsurface scattering, sheen, clearcoat, transmission, and emission.
+        </p>
+
+        <p>
+          By using the Material operator, you can assign different material properties to different parts of your geometry, enabling multi-material scenes for path traced rendering.
+          The operator supports material override control, allowing you to choose whether to replace existing material attributes or preserve them.
+          All material parameters follow the Disney BRDF standard, ensuring physically accurate rendering with intuitive artist-friendly controls.
+        </p>
+
+        <p>
+          Material outputs geometry with material attributes written to primitive data, ready to be consumed by the Path Tracer.
+          This workflow separates material definition from the rendering process, allowing you to build complex material libraries and apply them flexibly across your geometry.
+          When used with the Path Tracer's "Override if Material Exists" toggle disabled, the Path Tracer will read and respect these per-primitive material attributes instead of using its global material settings.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Material Page -->
+        <h3 id="page-material" class="page-heading">Page: Material</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Override if Material Exists</span>
+            <span class="param-name">Overrideifmaterialexists</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply material parameters even when geometry already has material attributes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Base</span>
+            <span class="param-name">Base</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for base material properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Base Color</span>
+            <span class="param-name">Basecolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Diffuse albedo color (RGB).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Metallic</span>
+            <span class="param-name">Metallic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Metallic appearance (0 = dielectric, 1 = metal).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Roughness</span>
+            <span class="param-name">Roughness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Surface roughness (0 = mirror smooth, 1 = fully rough).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular</span>
+            <span class="param-name">Specularh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for specular reflection properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular</span>
+            <span class="param-name">Specular</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specular reflection strength for dielectrics.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Tint</span>
+            <span class="param-name">Speculartint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Tint specular reflection with base color (0 = white, 1 = colored).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic</span>
+            <span class="param-name">Anisotropic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Anisotropic highlight stretching (0 = isotropic, 1 = fully anisotropic).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic Rotation</span>
+            <span class="param-name">Anisotropicrotation</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation angle for anisotropic highlights (0-1 = 0-360 degrees).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Surface</span>
+            <span class="param-name">Surface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for surface scattering properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Subsurface</span>
+            <span class="param-name">Subsurface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Subsurface scattering amount for translucent materials like skin or wax.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen</span>
+            <span class="param-name">Sheenh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for fabric sheen properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen</span>
+            <span class="param-name">Sheen</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Soft velvet-like reflection for fabrics and cloth.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen Tint</span>
+            <span class="param-name">Sheentint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Tint sheen with base color (0 = white, 1 = colored).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat</span>
+            <span class="param-name">Clearcoath</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for clearcoat layer properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat</span>
+            <span class="param-name">Clearcoat</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Secondary specular layer for car paint or lacquered surfaces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat Gloss</span>
+            <span class="param-name">Clearcoatgloss</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Glossiness of clearcoat layer (0 = rough, 1 = glossy).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Advanced</span>
+            <span class="param-name">Advanced</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for advanced material properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">IOR</span>
+            <span class="param-name">Ior</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Index of refraction for dielectrics (1.0 = air, 1.45 = plastic, 1.5 = glass).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transmission</span>
+            <span class="param-name">Transmission</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Light transmission through surface for glass and transparent materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emission</span>
+            <span class="param-name">Emissionh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Header for emissive light properties.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emission</span>
+            <span class="param-name">Emission</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Emissive color for self-illuminating surfaces (RGB, values > 1 = bright lights).</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Geometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Input geometry to receive material attributes</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">Geometry with Material</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry with Disney BRDF material attributes written to primitive data</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../index-from-attribute/" class="nav-button prev">Index From Attribute</a>
+        <a href="../merge/" class="nav-button next">Merge</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-material">Page: Material</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

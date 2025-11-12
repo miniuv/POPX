@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete | POPX</title>
+  <meta name="description" content="Delete points from POPX Geometry based on attributes, patterns, groups, bounding volumes, or thinning operations.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Delete</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Delete</strong> removes points from POPX Geometry based on various selection criteria, functioning like TouchDesigner's Delete POP but specifically designed for POPX Geometry structure.
+          This operator provides multiple methods for selecting which points to delete including attribute tests, pattern matching, group membership, bounding volume tests, and thinning operations.
+        </p>
+
+        <p>
+          The operator offers flexible selection through sequences of rules that can be combined with AND/OR logic.
+          You can delete points based on attribute values (using comparison functions), point number patterns, group assignments, or spatial bounding tests.
+          Additionally, the Thin page provides pattern-based deletion using step intervals and random probabilities for creating sparse point distributions.
+        </p>
+
+        <p>
+          Each selection method can be inverted to keep the selected points and delete everything else, and multiple rules can be combined to create complex selection criteria.
+          This makes Delete essential for culling unwanted geometry, creating variations through thinning, or isolating specific subsets of your POPX Geometry for further processing.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Delete Page -->
+        <h3 id="page-delete" class="page-heading">Page: Delete</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Whether to delete selected points or keep them.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Delete</span>
+              <span class="param-name">delete</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Keep</span>
+              <span class="param-name">keep</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Copy Topology Info Back to CPU</span>
+            <span class="param-name">Cpureadback</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Copies topology information back to CPU memory for further processing.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Attribute Page -->
+        <h3 id="page-attribute" class="page-heading">Page: Attribute</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Attr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of attribute-based selection rules. Click + to add more tests.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine</span>
+            <span class="param-name">Combine</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to combine this rule with previous rules.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">OR</span>
+              <span class="param-name">or</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">AND</span>
+              <span class="param-name">and</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Inattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of attribute to test.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Function</span>
+            <span class="param-name">Func</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Comparison function (less than, greater than, equal, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Value</span>
+            <span class="param-name">Value</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Value to compare attribute against.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the selection for this attribute test.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Thin Page -->
+        <h3 id="page-thin" class="page-heading">Page: Thin</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enabled</span>
+            <span class="param-name">Thinenabled</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables thinning operation to reduce point density.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Out Range</span>
+            <span class="param-name">Thinoutrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Limits thinning to a specific range of point indices.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Range Start</span>
+            <span class="param-name">Thinrangestart</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Starting index for thin range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Range Length</span>
+            <span class="param-name">Thinrangelength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of points in thin range.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Step</span>
+            <span class="param-name">Thinstep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Keep every Nth point (e.g., 2 keeps every other point).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Random</span>
+            <span class="param-name">Thinrandom</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Probability of randomly deleting points (0 = no random deletion, 1 = delete all).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thin Random Seed</span>
+            <span class="param-name">Thinrandomseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for thin random deletion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Thininvert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the thinning selection.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Pattern Page -->
+        <h3 id="page-pattern" class="page-heading">Page: Pattern</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pattern</span>
+            <span class="param-name">Pattern</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of pattern-based selection rules.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine</span>
+            <span class="param-name">Combine</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to combine this pattern rule with previous rules.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">OR</span>
+              <span class="param-name">or</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">AND</span>
+              <span class="param-name">and</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pattern</span>
+            <span class="param-name">Pattern</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Point number pattern to match (e.g., "0-10", "5 10 15", etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the pattern selection.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Group Page -->
+        <h3 id="page-group" class="page-heading">Page: Group</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of group-based selection rules.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine</span>
+            <span class="param-name">Combine</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to combine this group rule with previous rules.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">OR</span>
+              <span class="param-name">or</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">AND</span>
+              <span class="param-name">and</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Name</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of group to select.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the group selection.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Bounding Page -->
+        <h3 id="page-bounding" class="page-heading">Page: Bounding</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bound</span>
+            <span class="param-name">Bound</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sequence of bounding volume selection rules.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Combine</span>
+            <span class="param-name">Combine</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to combine this bounding rule with previous rules.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">OR</span>
+              <span class="param-name">or</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">AND</span>
+              <span class="param-name">and</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Inattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Attribute to test against bounding volume (typically P for position).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bounding Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Type of bounding volume (Bounding Box, Sphere, etc.).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">Translate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Translation of the bounding volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">Rotate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rotation of the bounding volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale of the bounding volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Invert</span>
+            <span class="param-name">Invert</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Inverts the bounding volume selection.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bypass</span>
+            <span class="param-name">Bypass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pass through the first input to the output unchanged.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Primitives</span>
+            <span class="param-name">Renderprimitives</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggles rendering of POPX Geometry or shows it as point instances only.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">SRT / RST</span>
+            <span class="param-name">Srtrst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the transform order when using POPX Geometry as built-in TouchDesigner instances.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry to delete points from</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-separator">–</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX Geometry with selected points removed</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../apply-attributes/" class="nav-button prev">Apply Attributes</a>
+        <a href="../extract-attributes/" class="nav-button next">Extract Attributes</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-delete">Page: Delete</a></li>
+            <li><a href="#page-attribute">Page: Attribute</a></li>
+            <li><a href="#page-thin">Page: Thin</a></li>
+            <li><a href="#page-pattern">Page: Pattern</a></li>
+            <li><a href="#page-group">Page: Group</a></li>
+            <li><a href="#page-bounding">Page: Bounding</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>
