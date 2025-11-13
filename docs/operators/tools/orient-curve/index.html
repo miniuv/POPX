@@ -111,12 +111,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">First Tangent</span>
             <span class="param-name">Firsttangent</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Custom tangent vector direction for the first curve point.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Custom tangent vector direction for the first curve point.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangentx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangenty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">First Tangent</span>
+              <span class="param-name">Firsttangentz</span>
+            </div>
           </div>
         </div>
 
@@ -131,28 +147,28 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Twist Ramp</span>
-            <span class="param-name">Twistramp</span>
+            <span class="param-label">Open Twist Ramp </span>
+            <span class="param-name">Opentwistramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Opens the ramp editor for defining custom twist modulation along the curve.</span>
+            <span class="param-description">Opens the twist ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Reset Ramp</span>
-            <span class="param-name">Resetramp</span>
+            <span class="param-label">Reset Twist Ramp</span>
+            <span class="param-name">Resettwistramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the twist ramp to a linear curve.</span>
+            <span class="param-description">Resets the twist ramp to default.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Ramp TOP Twist</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-name">Ramptoptwist</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom twist ramp texture.</span>
+            <span class="param-description">Reference to an external Ramp TOP or any other 2D texture for twist control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -161,7 +177,7 @@
             <span class="param-label">Twist Per Curve</span>
             <span class="param-name">Twistpercurve</span>
             <span class="param-separator">–</span>
-            <span class="param-description">When enabled, applies twist ramp independently to each curve primitive.</span>
+            <span class="param-description">When enabled with an external TOP, maps the ramp or texture to each curve individually for per-curve twist variation.</span>
           </div>
         </div>
 

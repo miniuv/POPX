@@ -40,7 +40,7 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Convert</strong> transforms regular geometry into <strong>POPX Geometry</strong> by packing, if necessary, and adding the required attributes. It can partition geometry by <strong>connectivity</strong> (separate primitives) or by an existing <strong>piece attribute</strong>. The operator also includes a built-in <strong>Rest Attribute</strong> that other POPX nodes can reference. Since Convert doesn't automatically determine local axis orientation, you may need to use <strong>POPX Reorient</strong> on the generated instances to align orientations correctly.
+          The <strong>Convert</strong> transforms regular POP Geometry into <strong>POPX Geometry</strong> by packing, if necessary, and adding the required attributes. It can partition geometry by <strong>connectivity</strong> (separate primitives) or by an existing <strong>piece attribute</strong>. Since Convert doesn't automatically determine local axis orientation, you may need to use <strong>POPX Reorient</strong> on the generated instances to align orientations correctly.
         </p>
       </section>
 
@@ -54,7 +54,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Partition Method</span>
-            <span class="param-name">Method</span>
+            <span class="param-name">Partitionmethod</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -75,7 +75,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Min Points per Piece</span>
-            <span class="param-name">Maxneighbors</span>
+            <span class="param-name">Minpointsperpiece</span>
             <span class="param-separator">–</span>
             <span class="param-description">Minimum number of points required for a piece.</span>
           </div>
@@ -83,10 +83,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Passes</span>
-            <span class="param-name">Npasses</span>
+            <span class="param-label">Search Passes</span>
+            <span class="param-name">Searchpasses</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of connectivity passes.</span>
+            <span class="param-description">Number of passes to search for connectivity.</span>
           </div>
         </div>
 

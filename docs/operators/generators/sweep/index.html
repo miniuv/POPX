@@ -40,7 +40,7 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Sweep</strong> turns curves into polygons, with many output options. You can create tubes, square profiles, or use custom cross-sections from a second input. The operator provides extensive control over orientation, twist, scaling, and color along the curve path.
+          The <strong>Sweep</strong> turns curves into polygons, with many output options. You can create tubes, square profiles, or use custom cross-sections from a second input. The operator provides extensive control over orientation, twist, scaling, and color along the curve path. When <strong>Reorient Curve</strong> is enabled, Sweep uses the Orient Curve operator internally to properly align the curve's normal and tangent vectors along its path, ensuring smooth, evenly-distributed geometry without unwanted twisting or deformation in the resulting surface.
         </p>
       </section>
 
@@ -115,7 +115,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Twist Ramp</span>
-            <span class="param-name">Twistramp</span>
+            <span class="param-name">Opentwistramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the twist ramp editor.</span>
           </div>
@@ -123,8 +123,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Reset Ramp</span>
-            <span class="param-name">Resetramp</span>
+            <span class="param-label">Reset Twist Ramp</span>
+            <span class="param-name">Resettwistramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Resets the twist ramp to default.</span>
           </div>
@@ -135,7 +135,7 @@
             <span class="param-label">Ramp TOP Twist</span>
             <span class="param-name">Ramptoptwist</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference to an external Ramp TOP for twist control. When specified, overrides the internal ramp editor.</span>
+            <span class="param-description">Reference to an external Ramp TOP or any other 2D texture for twist control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -144,7 +144,7 @@
             <span class="param-label">Twist Per Curve</span>
             <span class="param-name">Twistpercurve</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies twist independently to each curve.</span>
+            <span class="param-description">When enabled with an external TOP, maps the ramp or texture to each curve individually for per-curve twist variation.</span>
           </div>
         </div>
 
@@ -189,7 +189,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Columns</span>
+            <span class="param-label">Columbs</span>
             <span class="param-name">Columbs</span>
             <span class="param-separator">–</span>
             <span class="param-description">Number of columns for round tube cross-section.</span>
@@ -296,7 +296,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Scale Ramp</span>
-            <span class="param-name">Scaleramp</span>
+            <span class="param-name">Openscaleramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the scale ramp editor.</span>
           </div>
@@ -325,7 +325,7 @@
             <span class="param-label">Scale per Curve</span>
             <span class="param-name">Scalepercurve</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies scale independently to each curve.</span>
+            <span class="param-description">When enabled with an external TOP, maps the ramp or texture to each curve individually for per-curve scale variation.</span>
           </div>
         </div>
 
@@ -341,7 +341,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Color Ramp</span>
-            <span class="param-name">Colorramp</span>
+            <span class="param-name">Opencolorramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the color ramp editor.</span>
           </div>
@@ -370,7 +370,7 @@
             <span class="param-label">Color per Curve</span>
             <span class="param-name">Colorpercurve</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies color independently to each curve.</span>
+            <span class="param-description">When enabled with an external TOP, maps the ramp or texture to each curve individually for per-curve color variation.</span>
           </div>
         </div>
 
