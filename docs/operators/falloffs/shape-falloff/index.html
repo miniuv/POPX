@@ -41,15 +41,21 @@
         <h2>Summary</h2>
         <p>
           The <strong>Shape Falloff</strong> generates a Falloff Attribute based on signed distance fields (SDFs) computed from various geometric primitives.
-          Internally, it uses the Field POP to calculate distance-based influence regions with smooth gradients and precise transitions.
+          Internally, uses the Field POP to calculate distance-based influence regions with smooth gradients and precise transitions.
         </p>
 
         <p>
-          It provides accurate control over falloff distribution using mathematical shape definitions such as spheres, boxes, cylinders, and planes, with adjustable parameters for size, radius, height, and roundness.
+          Provides accurate control over falloff distribution using mathematical shape definitions such as spheres, boxes, cylinders, and planes, with adjustable parameters for size, radius, height, and roundness.
         </p>
 
         <p>
-          This approach ensures continuous, easily controllable falloff values that can be refined through transition ranges and remapping options.
+          <strong>Multiple shapes in one Shape Falloff:</strong> A parameter called Specification POP is a pointer to a POP where each point is a specification defining a separate shape - one point per shape.
+          The attributes of the specification POP are named the same as parameter tokens in the Shape Falloff, and override the parameters for each shape.
+          Menus and toggles are represented as integers, starting at 0 for the first menu entry.
+          You need only to create a Point POP with attributes named as the Shape Falloff parameters, and then add a point per shape, and set their values.
+          (An attribute sizex will override the Size X (sizex) parameter.)
+          Alternately you can generate points procedurally with attributes that match the Shape Falloff parameter names.
+          The workflow is the same as multiple strings defined in a specification DAT of the Geo Text COMP and the Text COMP.
         </p>
       </section>
 
@@ -74,7 +80,7 @@
             <span class="param-label">Specification POP</span>
             <span class="param-name">Specpop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference POP operator to use for falloff specification and spatial transformation.</span>
+            <span class="param-description">Reference to a POP where each point is a specification defining a separate shape.</span>
           </div>
         </div>
 
@@ -85,7 +91,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Selects the geometric primitive used to generate the signed distance field.</span>
+            <span class="param-group-description">Select the shape of the field.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -150,8 +156,8 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Shape Color</span>
-            <span class="param-name">Shapecolor</span>
+            <span class="param-label">Display Color</span>
+            <span class="param-name">Displaycolor</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -159,16 +165,16 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Shape Color</span>
-              <span class="param-name">Shapecolorr</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Shape Color</span>
-              <span class="param-name">Shapecolorg</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Shape Color</span>
-              <span class="param-name">Shapecolorb</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorb</span>
             </div>
           </div>
         </div>
@@ -180,7 +186,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Dimensions of the box shape (available when Shape Type is set to Box).</span>
+            <span class="param-group-description">The geometry 3D size.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -205,7 +211,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Radius parameters for the selected shape type.</span>
+            <span class="param-group-description">Radius of falloff shape.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -228,7 +234,7 @@
             <span class="param-label">Height</span>
             <span class="param-name">Height</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Height parameter for Cylinder Rounded shape type.</span>
+            <span class="param-description">The height of the tube.</span>
           </div>
         </div>
 
@@ -237,7 +243,7 @@
             <span class="param-label">Roundness</span>
             <span class="param-name">Roundness</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Controls edge rounding for Box and Cylinder Rounded shape types.</span>
+            <span class="param-description">Roundness factor for rounded falloff shape modes.</span>
           </div>
         </div>
 
@@ -248,7 +254,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">First endpoint for Cylinder Capped, Capsule, and Line Projection shapes.</span>
+            <span class="param-group-description">Shape first point.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -273,7 +279,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Second endpoint for Cylinder Capped, Capsule, and Line Projection shapes.</span>
+            <span class="param-group-description">Shape second point.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -296,7 +302,7 @@
             <span class="param-label">Exponent</span>
             <span class="param-name">Exponent</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Exponential power for the Parabola shape type, controlling the curvature steepness.</span>
+            <span class="param-description">Sets the exponent on parabola falloff shapes.</span>
           </div>
         </div>
 
@@ -307,7 +313,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Strength parameters for the Parabola shape type.</span>
+            <span class="param-group-description">Sets the falloff shape strength.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -326,7 +332,7 @@
             <span class="param-label">Transition Range</span>
             <span class="param-name">Transitionrange</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Defines the distance over which the falloff transitions from full strength to zero, creating smooth gradients.</span>
+            <span class="param-description">Determines a transition range for weights.</span>
           </div>
         </div>
 
@@ -335,7 +341,7 @@
             <span class="param-label">Transition Align</span>
             <span class="param-name">Transitionalign</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Controls the alignment of the transition range relative to the shape boundary (inward, centered, or outward).</span>
+            <span class="param-description">Determines a transition offset for weights.</span>
           </div>
         </div>
 
@@ -346,7 +352,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Interpolation curve used for the transition range (Linear, Smooth, Ease In, Ease Out, etc.).</span>
+            <span class="param-group-description">Determines a transition function for weights.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -372,7 +378,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Transform Order</span>
-            <span class="param-name">Xord</span>
+            <span class="param-name">Xordfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -409,7 +415,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Rotate Order</span>
-            <span class="param-name">Rord</span>
+            <span class="param-name">Rordfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -446,7 +452,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Translate</span>
-            <span class="param-name">T</span>
+            <span class="param-name">Tfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -455,15 +461,15 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Translate</span>
-              <span class="param-name">Tx</span>
+              <span class="param-name">Tfalloffx</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Translate</span>
-              <span class="param-name">Ty</span>
+              <span class="param-name">Tfalloffy</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Translate</span>
-              <span class="param-name">Tz</span>
+              <span class="param-name">Tfalloffz</span>
             </div>
           </div>
         </div>
@@ -471,7 +477,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Rotate</span>
-            <span class="param-name">R</span>
+            <span class="param-name">Rfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -480,15 +486,15 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Rotate</span>
-              <span class="param-name">Rx</span>
+              <span class="param-name">Rfalloffx</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Rotate</span>
-              <span class="param-name">Ry</span>
+              <span class="param-name">Rfalloffy</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Rotate</span>
-              <span class="param-name">Rz</span>
+              <span class="param-name">Rfalloffz</span>
             </div>
           </div>
         </div>
@@ -496,7 +502,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Scale</span>
-            <span class="param-name">S</span>
+            <span class="param-name">Sfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -505,15 +511,15 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Scale</span>
-              <span class="param-name">Sx</span>
+              <span class="param-name">Sfalloffx</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Scale</span>
-              <span class="param-name">Sy</span>
+              <span class="param-name">Sfalloffy</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Scale</span>
-              <span class="param-name">Sz</span>
+              <span class="param-name">Sfalloffz</span>
             </div>
           </div>
         </div>
@@ -521,7 +527,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Pivot</span>
-            <span class="param-name">P</span>
+            <span class="param-name">Pfalloff</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -530,15 +536,15 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Pivot</span>
-              <span class="param-name">Px</span>
+              <span class="param-name">Pfalloffx</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Pivot</span>
-              <span class="param-name">Py</span>
+              <span class="param-name">Pfalloffy</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Pivot</span>
-              <span class="param-name">Pz</span>
+              <span class="param-name">Pfalloffz</span>
             </div>
           </div>
         </div>
@@ -600,7 +606,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Falloff Attribute</span>
-            <span class="param-name">Combineattributescope</span>
+            <span class="param-name">Combattrscope</span>
             <span class="param-separator">–</span>
             <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
           </div>
@@ -618,7 +624,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Strength</span>
-            <span class="param-name">Combinestrength</span>
+            <span class="param-name">Combstrength</span>
             <span class="param-separator">–</span>
             <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
           </div>
@@ -627,7 +633,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Falloff Attribute</span>
-            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-name">Outputfalloffattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
           </div>
@@ -1098,14 +1104,14 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+            <span class="param-description">Applies a custom curve defined by a ramp to remap the falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Remap Ramp</span>
-            <span class="param-name">Remapramp</span>
+            <span class="param-name">Openremapramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
@@ -1116,16 +1122,16 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+            <span class="param-description">Resets the remap ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-label">Remap TOP </span>
+            <span class="param-name">Remaptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+            <span class="param-description">Reference to an external TOP for remap control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -1178,10 +1184,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
       </section>
@@ -1193,10 +1198,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with falloff attribute applied</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

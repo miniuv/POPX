@@ -40,12 +40,12 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Remap Falloff</strong> operator transforms existing falloff attribute values using various remapping techniques including range fitting, clamping, inversion, absolute values, and custom curve-based transformations.
-          This operator is essential for fine-tuning and adjusting falloff patterns created by other falloff operators.
+          The <strong>Remap Falloff</strong> transforms existing falloff attribute values using various remapping techniques including range fitting, clamping, inversion, absolute values, and custom curve-based transformations.
+          Essential for fine-tuning and adjusting falloff patterns created by other falloff operators.
         </p>
 
         <p>
-          The operator supports automatic or manual input range detection, custom output ranges, and optional custom ramp curves for non-linear transformations.
+          Supports automatic or manual input range detection, custom output ranges, and optional custom ramp curves for non-linear transformations.
           You can clamp values to specific ranges, invert falloff patterns, or apply absolute values for symmetrical effects.
         </p>
 
@@ -74,7 +74,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Input Attribute</span>
-            <span class="param-name">Inputattribute</span>
+            <span class="param-name">Inputattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the falloff attribute to read values from for remapping.</span>
           </div>
@@ -83,7 +83,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Attribute</span>
-            <span class="param-name">Outputattribute</span>
+            <span class="param-name">Outputattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the attribute to write the remapped falloff values to.</span>
           </div>
@@ -175,14 +175,14 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+            <span class="param-description">Applies a custom curve defined by a ramp to remap the falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Remap Ramp</span>
-            <span class="param-name">Remapramp</span>
+            <span class="param-name">Openremapramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
@@ -193,16 +193,16 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+            <span class="param-description">Resets the remap ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-label">Remap TOP</span>
+            <span class="param-name">Remaptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+            <span class="param-description">Reference to an external TOP for remap control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -251,7 +251,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-label">Open Custom Ramp</span>
             <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
@@ -316,10 +316,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry with falloff attribute to remap</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
       </section>
@@ -331,17 +330,16 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with remapped falloff attribute</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../noise-falloff/" class="nav-button prev">Noise Falloff</a>
+        <a href="../object-falloff/" class="nav-button prev">Object Falloff</a>
         <a href="../shape-falloff/" class="nav-button next">Shape Falloff</a>
       </nav>
     </main>

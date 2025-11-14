@@ -40,12 +40,12 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Texture Falloff</strong> operator applies falloff values by sampling a texture (TOP) using point positions or custom attributes as UV coordinates.
+          The <strong>Texture Falloff</strong> applies falloff values by sampling 2D or 3D textures (TOP) using point positions or custom attributes as UVW coordinates.
           This allows for highly customizable falloff patterns driven by images, procedural textures, or animated content.
         </p>
 
         <p>
-          The operator supports various lookup channels (luminance, RGB, alpha), multiple extend modes (repeat, mirror, hold, zero), and interpolation options.
+          Supports various lookup channels (luminance, RGB, alpha), multiple extend modes (repeat, mirror, hold, zero), and interpolation options.
           Transform controls allow you to translate, rotate, and scale the sampling space, with optional normalization for consistent results regardless of geometry bounds.
         </p>
 
@@ -76,13 +76,95 @@
             <span class="param-label">Texture (TOP)</span>
             <span class="param-name">Top</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference to the texture operator to sample for falloff values.</span>
+            <span class="param-description">TOP to use for lookup.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Custom UVW</span>
+            <span class="param-name">Usecustomuvw</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, uses custom attributes for texture coordinate lookup instead of world position.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lookup Index Attribute U</span>
+            <span class="param-name">Lookupindexattr0</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Attribute to use as the index for the U coordinate of the lookup. Only active when Use Custom UVW is enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lookup Index Attribute V</span>
+            <span class="param-name">Lookupindexattr1</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Attribute to use as the index for the V coordinate of the lookup. Only active when Use Custom UVW is enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lookup Index Attribute W</span>
+            <span class="param-name">Lookupindexattr2</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Attribute to use as the index for the W coordinate of the lookup. Only active when Use Custom UVW is enabled.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Lookup Channel </span>
+            <span class="param-label">Lookup Index Offset</span>
+            <span class="param-name">Lookupindexoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Offset applied to custom UVW coordinates before sampling. Only active when Use Custom UVW is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lookup Index Offset</span>
+              <span class="param-name">Lookupindexoffset1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Index Offset</span>
+              <span class="param-name">Lookupindexoffset2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Index Offset</span>
+              <span class="param-name">Lookupindexoffset3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lookup Index Units</span>
+            <span class="param-name">Indexunit</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Units for lookup index attribute. Only active when Use Custom UVW is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Normalized</span>
+              <span class="param-name">normalized</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pixels</span>
+              <span class="param-name">pixels</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lookup Channel</span>
             <span class="param-name">Lookupchannel</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
@@ -129,21 +211,53 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Pixel Centered Sampling Location</span>
             <span class="param-name">Pixelcentered</span>
             <span class="param-separator">–</span>
-            <span class="param-description">When enabled, samples from pixel centers rather than corners for more accurate results.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Enable input remapping to sample pixels centers.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pixel Centered Sampling Location</span>
+              <span class="param-name">Pixelcentered1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pixel Centered Sampling Location</span>
+              <span class="param-name">Pixelcentered2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pixel Centered Sampling Location</span>
+              <span class="param-name">Pixelcentered3</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Cyclic Lookup</span>
             <span class="param-name">Cyclic</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables cyclic texture coordinate wrapping for seamless tiling.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">When enabled, the index wraps so the end connects back to the start, letting the full range map evenly across the cycle.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Cyclic Lookup</span>
+              <span class="param-name">Cyclic1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cyclic Lookup</span>
+              <span class="param-name">Cyclic2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cyclic Lookup</span>
+              <span class="param-name">Cyclic3</span>
+            </div>
           </div>
         </div>
 
@@ -154,7 +268,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">How to handle texture coordinates outside the 0-1 range.</span>
+            <span class="param-group-description">What happens when the lookup index attribute is outside of the valid range.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -181,7 +295,7 @@
             <span class="param-label">Interpolate</span>
             <span class="param-name">Interpolate</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables bilinear filtering for smooth texture sampling between pixels.</span>
+            <span class="param-description">When on, the TOP can be interpolated between pixels. When off, the nearest pixel used.</span>
           </div>
         </div>
 
@@ -190,52 +304,116 @@
             <span class="param-label">Use Depth Offset</span>
             <span class="param-name">Usedepthoffset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Uses the Z coordinate as a depth offset when sampling the texture.</span>
+            <span class="param-description">Enable using the texture's depth offset for Texture 3D TOPs.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normalize Space</span>
-            <span class="param-name">Normalizespace</span>
+            <span class="param-label">Normalize Sampling Position</span>
+            <span class="param-name">Normalizesamplepos</span>
             <span class="param-separator">–</span>
             <span class="param-description">Normalizes point positions to 0-1 range based on bounding box before sampling.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Translate</span>
             <span class="param-name">T</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation offset for texture sampling coordinates.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translation offset for texture sampling coordinates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Rotate</span>
             <span class="param-name">R</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation of texture sampling space in degrees.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation of texture sampling space in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Scale</span>
             <span class="param-name">S</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale factor for texture sampling coordinates.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for texture sampling coordinates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Pivot</span>
             <span class="param-name">P</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Pivot point for texture space transformations.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Pivot point for texture space transformations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
           </div>
         </div>
 
@@ -253,61 +431,21 @@
         <!-- Falloff Page -->
         <h3 id="page-falloff" class="page-heading">Page: Falloff</h3>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Combine Operation</span>
             <span class="param-name">Combineop</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Mathematical operation for combining infection falloff with existing falloff attributes.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Add</span>
-              <span class="param-name">add</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Substract</span>
-              <span class="param-name">sub</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Multiply</span>
-              <span class="param-name">mult</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Divide</span>
-              <span class="param-name">div</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Screen</span>
-              <span class="param-name">screen</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Overlay</span>
-              <span class="param-name">overlay</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Maximum</span>
-              <span class="param-name">max</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Minimum</span>
-              <span class="param-name">min</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Set</span>
-              <span class="param-name">set</span>
-            </div>
+            <span class="param-description">Mathematical operation used to combine this falloff with existing falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Falloff Attribute</span>
-            <span class="param-name">Combineattributescope</span>
+            <span class="param-name">Combattrscope</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the falloff attribute to combine with (when Combine Operation is not Set).</span>
+            <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
           </div>
         </div>
 
@@ -316,25 +454,25 @@
             <span class="param-label">Swap Operation Order</span>
             <span class="param-name">Swaporder</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reverse the order of operands in the combination operation.</span>
+            <span class="param-description">Reverses the order of operands in the combine operation (A op B becomes B op A).</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Strength</span>
-            <span class="param-name">Combinestrength</span>
+            <span class="param-name">Combstrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Blend amount between original and combined falloff values.</span>
+            <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Falloff Attribute</span>
-            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-name">Outputfalloffattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the attribute to write the final falloff values to.</span>
+            <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
           </div>
         </div>
 
@@ -347,38 +485,18 @@
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Falloff Ramp</span>
             <span class="param-name">Fallofframp</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Heatmap</span>
-              <span class="param-name">heatmap</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Blackbody</span>
-              <span class="param-name">blackbody</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Infrared</span>
-              <span class="param-name">infrared</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Custom</span>
-              <span class="param-name">custom</span>
-            </div>
+            <span class="param-description">Color ramp preset used for visualizing falloff values when Preview Falloff is enabled.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-label">Open Custom Ramp</span>
             <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
@@ -404,65 +522,25 @@
             <span class="param-label">Apply Noise</span>
             <span class="param-name">Applynoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Add procedural noise to the infection falloff values.</span>
+            <span class="param-description">When enabled, adds procedural noise to the falloff values for organic variation.</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Combine Operation</span>
             <span class="param-name">Combineopnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">How to combine noise with infection falloff values.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Add</span>
-              <span class="param-name">add</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Multiply</span>
-              <span class="param-name">mult</span>
-            </div>
+            <span class="param-description">How noise values are combined with the base falloff (Add or Multiply).</span>
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Noise algorithm type (Perlin, Simplex, etc.).</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Perlin 2D (GPU)</span>
-              <span class="param-name">perlin2d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Perlin 3D (GPU)</span>
-              <span class="param-name">perlin3d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Perlin 4D (GPU)</span>
-              <span class="param-name">perlin4d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 2D (GPU)</span>
-              <span class="param-name">simplex2d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 3D (GPU)</span>
-              <span class="param-name">simplex3d</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Simplex 4D (GPU)</span>
-              <span class="param-name">simplex4d</span>
-            </div>
+            <span class="param-description">Noise algorithm type (Perlin, Simplex, etc.).</span>
           </div>
         </div>
 
@@ -471,7 +549,7 @@
             <span class="param-label">Seed</span>
             <span class="param-name">Seed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for noise generation.</span>
+            <span class="param-description">Numerical value that initializes the randomization.</span>
           </div>
         </div>
 
@@ -480,7 +558,7 @@
             <span class="param-label">Period</span>
             <span class="param-name">Period</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frequency of the noise pattern.</span>
+            <span class="param-description">Period (scale) of the noise field.</span>
           </div>
         </div>
 
@@ -489,7 +567,7 @@
             <span class="param-label">Harmonics</span>
             <span class="param-name">Harmon</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of octaves for fractal noise detail.</span>
+            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
           </div>
         </div>
 
@@ -498,7 +576,7 @@
             <span class="param-label">Harmonic Spread</span>
             <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frequency multiplier between octaves.</span>
+            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
           </div>
         </div>
 
@@ -507,7 +585,7 @@
             <span class="param-label">Harmonic Gain</span>
             <span class="param-name">Gain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Amplitude multiplier for each successive octave.</span>
+            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
           </div>
         </div>
 
@@ -516,7 +594,7 @@
             <span class="param-label">Amplitude</span>
             <span class="param-name">Amp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Overall strength of the noise effect.</span>
+            <span class="param-description">The noise values amplitude (a scale on the values output).</span>
           </div>
         </div>
 
@@ -525,7 +603,7 @@
             <span class="param-label">Exponent</span>
             <span class="param-name">Exp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power curve applied to noise values.</span>
+            <span class="param-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
           </div>
         </div>
 
@@ -534,7 +612,7 @@
             <span class="param-label">Offset</span>
             <span class="param-name">Offset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Constant value added to noise output.</span>
+            <span class="param-description">Adds an offset to the resulting value.</span>
           </div>
         </div>
 
@@ -545,7 +623,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Order of scale, rotate, and translate transformations for noise space.</span>
+            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -582,7 +660,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Rotation axis order for noise space transformation.</span>
+            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -612,39 +690,103 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Translate</span>
             <span class="param-name">Tnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation offset for noise sampling coordinates.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translate the points through the noise space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tnoisez</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Rotate</span>
             <span class="param-name">Rnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation of noise sampling space in degrees.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotate the points around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rnoisez</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Scale</span>
             <span class="param-name">Snoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale factor for noise sampling coordinates.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Snoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Snoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Snoisez</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Pivot</span>
             <span class="param-name">Pnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Pivot point for noise space transformations.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">The pivot point for the transform rotates and scales.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pnoisex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pnoisey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pnoisez</span>
+            </div>
           </div>
         </div>
 
@@ -653,7 +795,7 @@
             <span class="param-label">Translate 4D</span>
             <span class="param-name">T4dnoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation in the 4th dimension for 4D noise types.</span>
+            <span class="param-description">Translates the points through the 4th noise dimension.</span>
           </div>
         </div>
 
@@ -739,14 +881,14 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+            <span class="param-description">Applies a custom curve defined by a ramp to remap the falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Remap Ramp</span>
-            <span class="param-name">Remapramp</span>
+            <span class="param-name">Openremapramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
@@ -757,16 +899,16 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+            <span class="param-description">Resets the remap ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-label">Remap TOP </span>
+            <span class="param-name">Remaptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+            <span class="param-description">Reference to an external TOP for remap control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -819,20 +961,18 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
-            <span class="param-label">Input 1 (Optional)</span>
+            <span class="param-label">Input 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Texture TOP</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Texture to sample for falloff values (alternative to Texture (TOP) parameter)</span>
+            <span class="param-text">Texture</span>
           </div>
         </div>
       </section>
@@ -844,10 +984,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with applied texture falloff attribute</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
