@@ -50,12 +50,11 @@
         </p>
 
         <p>
-          It supports multiple falloff modes including distance to curve, distance multiplied by curve position, and pure curve position,
-          enabling diverse creative workflows for particle distribution and procedural effects.
+          It supports multiple falloff modes: distance to the closest point on the curve, the normalized position along the curve of the closest point multiplied by distance, and the normalized position along the curve of the closest point.
         </p>
 
         <p>
-          The operator includes curve resampling options for optimizing performance and visualization, along with complete spatial transformation controls.
+          Includes curve resampling options for optimizing performance and visualization, along with complete spatial transformation controls.
         </p>
       </section>
 
@@ -80,7 +79,7 @@
             <span class="param-label">Curve Geometry (POP)</span>
             <span class="param-name">Curvegeometry</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference POP operator containing the curve geometry used for distance calculations.</span>
+            <span class="param-description">Reference to curve geometry. Used when Input 1 is not connected.</span>
           </div>
         </div>
 
@@ -95,8 +94,8 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Color</span>
+            <span class="param-label">Display Color</span>
+            <span class="param-name">Displaycolor</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -104,20 +103,16 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorr</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorg</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorb</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colora</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorb</span>
             </div>
           </div>
         </div>
@@ -134,15 +129,15 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Distance to Curve</span>
-              <span class="param-name">distancetocurve</span>
+              <span class="param-name">dist</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Distance Times Curve Position</span>
-              <span class="param-name">distancetimescurveposition</span>
+              <span class="param-name">distcurve</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Curve Position</span>
-              <span class="param-name">curveposition</span>
+              <span class="param-name">curve</span>
             </div>
           </div>
         </div>
@@ -172,16 +167,20 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Method used for resampling the curve geometry.</span>
+            <span class="param-group-description">Line strip resample method.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Equal Segments</span>
-              <span class="param-name">equalsegments</span>
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Length</span>
-              <span class="param-name">length</span>
+              <span class="param-label">Divisions per Line Strip</span>
+              <span class="param-name">linestrip</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Distance between Points</span>
+              <span class="param-name">dist</span>
             </div>
           </div>
         </div>
@@ -189,36 +188,36 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Divisions</span>
-            <span class="param-name">Divisions</span>
+            <span class="param-name">Resampledivs</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of divisions for Equal Segments resampling method.</span>
+            <span class="param-description">The number of divisions.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Segment Length</span>
-            <span class="param-name">Maxsegmentlength</span>
+            <span class="param-label">Max Distance</span>
+            <span class="param-name">Resamplemaxdist</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum segment length for Length resampling method.</span>
+            <span class="param-description">Maximum distance between points.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Verts</span>
+            <span class="param-label">Maximum Number of Vertices</span>
             <span class="param-name">Maxverts</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of vertices allowed after resampling.</span>
+            <span class="param-description">Sets the number of vertices to be allocated.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Tries</span>
+            <span class="param-label">Max Tries for Binary Search</span>
             <span class="param-name">Maxtries</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum iteration attempts for resampling convergence.</span>
+            <span class="param-description">Max number of iterations for binary search when linearly resampling.</span>
           </div>
         </div>
 
@@ -374,7 +373,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Uniform Scale</span>
-            <span class="param-name">Uniformscale</span>
+            <span class="param-name">Scale</span>
             <span class="param-separator">–</span>
             <span class="param-description">Uniform scaling factor applied equally across all axes.</span>
           </div>
@@ -462,7 +461,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Falloff Attribute</span>
-            <span class="param-name">Combineattributescope</span>
+            <span class="param-name">Combattrscope</span>
             <span class="param-separator">–</span>
             <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
           </div>
@@ -480,7 +479,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Strength</span>
-            <span class="param-name">Combinestrength</span>
+            <span class="param-name">Combstrength</span>
             <span class="param-separator">–</span>
             <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
           </div>
@@ -489,7 +488,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Falloff Attribute</span>
-            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-name">Outputfalloffattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
           </div>
@@ -960,14 +959,14 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+            <span class="param-description">Applies a custom curve defined by a ramp to remap the falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Remap Ramp</span>
-            <span class="param-name">Remapramp</span>
+            <span class="param-name">Openremapramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
@@ -978,16 +977,16 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+            <span class="param-description">Resets the remap ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-label">Remap TOP </span>
+            <span class="param-name">Remaptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+            <span class="param-description">Reference to an external TOP for remap control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -1040,20 +1039,18 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Curve POP</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Curve geometry for distance-based falloff calculations</span>
+            <span class="param-text">Curve Geometry</span>
           </div>
         </div>
       </section>
@@ -1065,10 +1062,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with falloff attribute applied</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

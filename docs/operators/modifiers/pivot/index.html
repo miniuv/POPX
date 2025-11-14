@@ -40,17 +40,17 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Pivot</strong> operator adjusts the pivot points of instances relative to their individual bounding boxes.
-          This operator allows you to move pivots either as a transformation of the instance itself, or as an invisible pivot-only adjustment.
+          The <strong>Pivot</strong> adjusts the pivot points of instances relative to their individual bounding boxes.
+          It allows moving pivots either as a transformation of the instance itself, or as an invisible pivot-only adjustment.
         </p>
 
         <p>
-          You can use this operator to ensure that the pivots of objects of different sizes and shapes are all scaling or rotating from the same relative positions.
+          Ensures that the pivots of objects of different sizes and shapes are all scaling or rotating from the same relative positions.
           This is particularly useful when you need consistent transformation behavior across heterogeneous instance collections.
         </p>
 
         <p>
-          The operator supports multiple modes: <strong>Center Pivot</strong> (centers the pivot), <strong>Align to BBox</strong> (aligns to bounding box sides), <strong>Shift Pivot</strong> (offsets by a specific amount), <strong>Set Pivot (Local)</strong> (sets an explicit local-space position), and <strong>Set Pivot (World)</strong> (sets an explicit world-space position).
+          Supports multiple modes: <strong>Center Pivot</strong> (centers the pivot), <strong>Align to BBox</strong> (aligns to bounding box sides), <strong>Shift Pivot</strong> (offsets by a specific amount), <strong>Set Pivot (Local)</strong> (sets an explicit local-space position), and <strong>Set Pivot (World)</strong> (sets an explicit world-space position).
           Optional falloff-based modulation enables spatially varying pivot adjustments.
         </p>
       </section>
@@ -276,7 +276,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX Geometry</span>
@@ -291,7 +290,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX_out1</span>

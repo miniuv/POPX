@@ -44,10 +44,10 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The Falloff From Attribute operator converts existing point attributes into falloff values. This allows you to use any numeric attribute (such as point index, custom data, or calculated values) as a falloff source, providing flexible control over how modifiers and effects are applied across your geometry.
+          The <strong>Falloff From Attribute</strong> converts existing point attributes into falloff values. This allows you to use any numeric attribute (such as point index, custom data, or calculated values) as a falloff source, providing flexible control over how modifiers and effects are applied across your geometry.
         </p>
         <p>
-          The operator can optionally combine the attribute-based falloff with existing falloff values using various mathematical operations, and includes remapping controls to fine-tune the output range and distribution.
+          Can optionally combine the attribute-based falloff with existing falloff values using various mathematical operations, and includes remapping controls to fine-tune the output range and distribution.
         </p>
       </section>
 
@@ -62,7 +62,7 @@
             <span class="param-label">Group</span>
             <span class="param-name">Group</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Point group to apply the falloff to. Leave empty to affect all points.</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
           </div>
         </div>
 
@@ -83,7 +83,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Combine Operation</span>
-            <span class="param-name">Combineop</span>
+            <span class="param-name">Combop</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -132,9 +132,9 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Falloff Attribute</span>
-            <span class="param-name">Combineattributescope</span>
+            <span class="param-name">Combattrscope</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the existing falloff attribute to combine with. Only used when Combine Operation is not "Set".</span>
+            <span class="param-description">Specifies which falloff attribute to combine with when Combine Operation is not set to Set.</span>
           </div>
         </div>
 
@@ -143,25 +143,25 @@
             <span class="param-label">Swap Operation Order</span>
             <span class="param-name">Swaporder</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reverses the order of operands in the combine operation (e.g., A + B becomes B + A).</span>
+            <span class="param-description">Reverses the order of operands in the combine operation (A op B becomes B op A).</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Combine Strength</span>
-            <span class="param-name">Combinestrength</span>
+            <span class="param-name">Combstrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Blending factor between the original and combined falloff values (0.0 to 1.0).</span>
+            <span class="param-description">Blending factor for the combine operation, ranging from 0 (no effect) to 1 (full effect).</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Falloff Attribute</span>
-            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-name">Outputfalloffattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the attribute to write the final falloff values to. Default is popxFalloff.</span>
+            <span class="param-description">Name of the attribute where the final falloff values will be stored.</span>
           </div>
         </div>
 
@@ -205,7 +205,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-label">Open Custom Ramp</span>
             <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
@@ -303,14 +303,14 @@
             <span class="param-label">Enable Remap Ramp</span>
             <span class="param-name">Enableremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Applies a custom curve to remap falloff values non-linearly.</span>
+            <span class="param-description">Applies a custom curve defined by a ramp to remap the falloff values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Remap Ramp</span>
-            <span class="param-name">Remapramp</span>
+            <span class="param-name">Openremapramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the ramp editor for defining the custom remapping curve.</span>
           </div>
@@ -321,16 +321,16 @@
             <span class="param-label">Reset Remap Ramp</span>
             <span class="param-name">Resetremapramp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Resets the remapping curve to a linear ramp.</span>
+            <span class="param-description">Resets the remap ramp editor.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP</span>
-            <span class="param-name">Ramptop</span>
+            <span class="param-label">Remap TOP </span>
+            <span class="param-name">Remaptop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">External TOP containing a custom remap curve texture.</span>
+            <span class="param-description">Reference to an external TOP for remap control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -383,10 +383,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry with the attribute to convert to falloff</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
       </section>
@@ -398,10 +397,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with falloff attribute applied</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

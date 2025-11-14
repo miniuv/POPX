@@ -40,18 +40,18 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Relax</strong> operator applies a relaxation algorithm to spread instances apart and prevent overlaps.
+          The <strong>Relax</strong> applies a relaxation algorithm to spread instances apart and prevent overlaps.
           It uses iterative solving to push overlapping instances away from each other, creating more evenly distributed spacing.
         </p>
 
         <p>
-          You can optionally provide constraint geometry (surface) or a constraint volume (3D texture) to keep instances from flying off into space.
-          The operator supports two solver modes: <strong>Simple</strong> for immediate single-frame relaxation, and <strong>Advect</strong> for progressive time-dependent solving.
+          Optionally provide constraint geometry (surface) or a constraint volume (3D texture) to keep instances from flying off into space.
+          Supports two solver modes: <strong>Simple</strong> for immediate single-frame relaxation, and <strong>Advect</strong> for progressive time-dependent solving.
         </p>
 
         <p>
-          Relax supports two methods: <strong>Neighbor</strong> (searches for nearby instances within a radius) and <strong>Field</strong> (uses a voxel-based field approach).
-          The operator considers the <strong>PointScale</strong> attribute of each instance as its radius for overlap detection. If there is no PointScale attribute, the radius defaults to half of the search radius.
+          Supports two methods: <strong>Neighbor</strong> (searches for nearby instances within a radius) and <strong>Field</strong> (uses a voxel-based field approach).
+          Considers the <strong>PointScale</strong> attribute of each instance as its radius for overlap detection. If there is no PointScale attribute, the radius defaults to half of the search radius.
           Optional falloff-based modulation enables spatially varying relaxation effects.
         </p>
       </section>
@@ -496,7 +496,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX Geometry</span>
@@ -506,7 +505,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">Constraint Geometry</span>
@@ -531,7 +529,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX_out1</span>

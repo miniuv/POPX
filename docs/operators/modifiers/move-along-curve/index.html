@@ -40,8 +40,8 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Move Along Curve</strong> operator attaches instances to a curve and animates them along the path using Line Strip POP.
-          This operator works in two phases similar to Move Along Mesh: first, it attaches instances to the curve based on proximity, distribution, or attributes; second, it moves instances along the path either procedurally or through a solver.
+          The <strong>Move Along Curve</strong> attaches instances to a curve and animates them along the path using Line Strip POP.
+          It works in two phases similar to Move Along Mesh: first, attaches instances to the curve based on proximity, distribution, or attributes; second, moves instances along the path either procedurally or through a solver.
         </p>
 
         <p>
@@ -55,8 +55,8 @@
         </p>
 
         <p>
-          The Animation step allows you to either procedurally move instances along the curve based on the <strong>Goal</strong> parameter, or push the instances per timestep in a solver.
-          Solver mode additionally allows you to create trails that emit from each instance.
+          The Animation step allows procedurally moving instances along the curve based on the <strong>Goal</strong> parameter, or pushing the instances per timestep in a solver.
+          Solver mode additionally allows creating trails that emit from each instance.
         </p>
       </section>
 
@@ -895,7 +895,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX Geometry</span>
@@ -905,7 +904,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">Curve to Attach To</span>
@@ -920,7 +918,6 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">POPX_out1</span>

@@ -40,17 +40,17 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          The <strong>Combine Falloff</strong> operator merges multiple falloff attributes using mathematical operations to create layered and complex falloff effects.
+          The <strong>Combine Falloff</strong> merges multiple falloff attributes using mathematical operations to create layered and complex falloff effects.
           It supports various combination modes including addition, subtraction, multiplication, division, screen, overlay, and min/max operations.
         </p>
 
         <p>
-          This operator enables sophisticated falloff composition by allowing you to stack and blend multiple falloff sources with independent gain controls.
+          Enables falloff composition by allowing you to stack and blend multiple falloff sources with independent gain controls.
           Each falloff input can be individually weighted and processed through a unified combination pipeline.
         </p>
 
         <p>
-          The result can be previewed with customizable color ramps (heatmap, blackbody, infrared, or custom) and output to a specified attribute for use in downstream operators.
+          The result can be previewed with customizable color ramps (heatmap, blackbody, infrared, or custom) and output to a specified attribute for use downstream.
         </p>
       </section>
 
@@ -127,7 +127,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Falloff Attribute</span>
-            <span class="param-name">Outputfalloffattribute</span>
+            <span class="param-name">Outputfalloffattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the attribute where the combined falloff result will be stored.</span>
           </div>
@@ -154,7 +154,7 @@
         <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Falloff Attribute</span>
-            <span class="param-name">Falloffs0falloffattribute</span>
+            <span class="param-name">Falloffs0falloffattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the falloff attribute to read from the specified POP.</span>
           </div>
@@ -214,7 +214,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Custum Ramp</span>
+            <span class="param-label">Open Custom Ramp</span>
             <span class="param-name">Opencustumramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the custom color ramp editor for defining a custom falloff visualization gradient.</span>
@@ -277,13 +277,25 @@
       <section id="inputs">
         <h2>Inputs</h2>
 
+        <p>
+          The number of input connectors is automatically linked to the <strong>Falloff</strong> sequential parameter. Increasing the number of Falloff blocks will create corresponding geometry inputs, each associated with one falloff source. Removing a block will remove its input.
+        </p>
+
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or regular geometry to apply falloff to</span>
+            <span class="param-text">POPX/POP Geometry 1</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX/POP Geometry 2</span>
           </div>
         </div>
       </section>
@@ -295,10 +307,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with falloff attribute applied</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
