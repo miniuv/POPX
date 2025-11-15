@@ -90,8 +90,8 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Color</span>
+            <span class="param-label">Display Color</span>
+            <span class="param-name">Displaycolor</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -99,16 +99,16 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorr</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorg</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorb</span>
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorb</span>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@
             <span class="param-label">Lock to Mesh</span>
             <span class="param-name">Locktomesh</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Locks the initial attachment positions so they don't need to be recalculated every frame, improving performance. Instances still move along the mesh based on their locked attachment points.</span>
+            <span class="param-description">Locks the initial attachment positions so they don't need to be recalculated every frame, improving performance.</span>
           </div>
         </div>
 
@@ -213,6 +213,24 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Maintain Offset</span>
+            <span class="param-name">Maintainoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount for maintaining the original offset distance from the mesh surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maintain Orient Offset</span>
+            <span class="param-name">Maintainorientoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blend amount between the original orientation and the mesh orientation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Visualize Offset</span>
             <span class="param-name">Visualizeoffset</span>
             <span class="param-separator">–</span>
@@ -226,24 +244,6 @@
             <span class="param-name">Fetchoffsetslines</span>
             <span class="param-separator">–</span>
             <span class="param-description">Creates a select POP with the selected offsets lines of the instances for visualization.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Maintain Offset</span>
-            <span class="param-name">Maintainoffset</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Blend amount for maintaining the original offset distance from the mesh surface. 0 means instances stick to the surface, 1 means they maintain their original distance.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Maintain Orient Offset</span>
-            <span class="param-name">Maintainorientoffset</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Blend amount for maintaining the original orientation offset from the mesh orientation. 0 means instances adopt the mesh orientation, 1 means they maintain their original rotation.</span>
           </div>
         </div>
 
@@ -291,7 +291,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Seed</span>
-            <span class="param-name">Seedspeed</span>
+            <span class="param-name">Speedseed</span>
             <span class="param-separator">–</span>
             <span class="param-description">Random seed value for speed randomization.</span>
           </div>
@@ -299,8 +299,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enbale Life Time</span>
-            <span class="param-name">Enbalelifetime</span>
+            <span class="param-label">Enable Life Time</span>
+            <span class="param-name">Enablelifetime</span>
             <span class="param-separator">–</span>
             <span class="param-description">Enables lifetime-based effects for instances, causing them to age and potentially be removed after a certain duration.</span>
           </div>
@@ -326,8 +326,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Random Seed</span>
-            <span class="param-name">Randomseed</span>
+            <span class="param-label">Seed</span>
+            <span class="param-name">Lifeseed</span>
             <span class="param-separator">–</span>
             <span class="param-description">Random seed value for lifetime variance.</span>
           </div>
@@ -375,7 +375,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Open Scale Ramp</span>
-            <span class="param-name">Scaleramp</span>
+            <span class="param-name">Openscaleramp</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the internal scale ramp editor for creating custom scale curves over lifetime.</span>
           </div>
@@ -392,10 +392,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP Scale</span>
-            <span class="param-name">Ramptopscale</span>
+            <span class="param-label">Scale TOP</span>
+            <span class="param-name">Scaletop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference to an external Ramp TOP for scale control. When specified, overrides the internal ramp editor.</span>
+            <span class="param-description">Reference to an external TOP for scale control. When specified, overrides the internal ramp editor.</span>
           </div>
         </div>
 
@@ -495,7 +495,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
 

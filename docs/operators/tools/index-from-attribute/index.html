@@ -40,14 +40,14 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Index From Attribute</strong> creates a point attribute <code>i@mops_index</code> that the POPX Instancer will use by default to determine what instances to place on different points when the "Indexing Mode" of the POPX Instancer is set to "Point Attribute."
+          <strong>Index From Attribute</strong> creates a point attribute <code>popxIndex</code> that the POPX Instancer will use by default to determine what instances to place on different points when the "Indexing Mode" of the POPX Instancer is set to "Point Attribute."
           This operator creates this index from any existing attribute by remapping it to a given minimum and maximum integer range.
         </p>
 
         <p>
           The operator is essential for creating variation in instanced geometry based on other attribute data like falloff values, noise patterns, or custom attributes.
           By converting continuous attribute values into discrete integer indices, you can map different geometry variations to different regions of your point cloud based on any attribute-driven pattern.
-          The defaults remap the <code>f@mops_falloff</code> attribute to a range of index integers from 0 to 3.
+          The defaults remap the <code>popxFalloff</code> attribute to a range of index integers from 0 to 3.
         </p>
 
         <p>
@@ -178,7 +178,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with source attribute to convert to index</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
       </section>
@@ -192,7 +192,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with generated index attribute (i@mops_index)</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

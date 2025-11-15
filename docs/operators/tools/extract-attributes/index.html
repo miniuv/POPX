@@ -40,19 +40,19 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Extract Attributes</strong> is the complement to Apply Attributes, taking the intrinsic attributes that define a packed primitive's transform matrix and writing them out as typical Houdini template point attributes.
-          This operator converts packed primitive transforms into standard point attributes like <code>v@N</code>, <code>v@up</code>, <code>p@orient</code>, <code>v@scale</code>, and <code>v@pivot</code> that you can use with a Copy to Points SOP or similar operations.
+          <strong>Extract Attributes</strong> is the complement to Apply Attributes, taking the intrinsic attributes that define a POPX Geometry's transform matrix (the internal representation of position, rotation, scale, and pivot stored within each packed point) and writing them out as typical TouchDesigner template point attributes.
+          This operator converts POPX Geometry transforms into standard point attributes like <code>N</code>, <code>Up</code>, <code>Orient</code>, <code>Scale</code>, <code>Pivot</code>, and <code>Euler</code> (for rotation in Euler degrees) that you can use with a Copy to Points POP or instancing with Geometry COMP in TouchDesigner.
         </p>
 
         <p>
-          The operator is essential for bridging POPX geometry with traditional Houdini workflows.
-          After processing geometry through the POPX pipeline with various transformations and effects, Extract Attributes allows you to export those transforms as standard attributes that work seamlessly with native Houdini nodes.
+          The operator is essential for bridging POPX geometry with traditional TouchDesigner workflows.
+          After processing geometry through the POPX pipeline with various transformations and effects, Extract Attributes allows you to export those transforms as standard attributes that work seamlessly with native TouchDesigner nodes.
           This makes it easy to use POPX-processed instances as template points for copying, or to integrate POPX results into conventional geometry workflows.
         </p>
 
         <p>
-          You can choose to extract the full transform, including position, rotation, and scale, or selectively extract specific components like pivot points or POPX-specific orientation data.
-          This flexibility allows you to control exactly which transformation data is passed downstream, optimizing your workflow for specific use cases like instancing, copying, or constraint systems.
+          You can choose to extract the full transform, including position, rotation, and scale, or selectively extract specific components like pivot points or the popxOrient attribute.
+          This flexibility allows you to control exactly which transformation data is passed downstream, optimizing your workflow for specific use cases like instancing or copying.
         </p>
       </section>
 
@@ -75,7 +75,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Extract Full Transform</span>
-            <span class="param-name">Extractfulltransform</span>
+            <span class="param-name">Extractfullxform</span>
             <span class="param-separator">–</span>
             <span class="param-description">Extracts complete transformation data including position, rotation, and scale as point attributes.</span>
           </div>
@@ -86,7 +86,7 @@
             <span class="param-label">Extract Pivot</span>
             <span class="param-name">Extractpivot</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Extracts pivot point data as v@pivot attribute.</span>
+            <span class="param-description">Extracts pivot point data as Pivot attribute.</span>
           </div>
         </div>
 
@@ -95,7 +95,7 @@
             <span class="param-label">Extract POPX Orient</span>
             <span class="param-name">Extractpopxorient</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Extracts POPX-specific orientation data as p@orient attribute.</span>
+            <span class="param-description">Extracts popxOrient attribute as Orient attribute.</span>
           </div>
         </div>
 
@@ -150,7 +150,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with packed primitive transforms to extract</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
       </section>
@@ -164,7 +164,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Point geometry with extracted transform attributes (v@N, v@up, p@orient, v@scale, v@pivot)</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

@@ -45,7 +45,7 @@
         </p>
 
         <p>
-          The operator uses the <code>f@mops_falloff</code> point attribute (or custom falloff attribute) to blend transformations smoothly.
+          The operator uses the <code>popxFalloff</code> point attribute (or custom falloff attribute) to blend transformations smoothly.
           Orientations are blended using slerp (spherical linear interpolation) for natural rotation interpolation, while translations and scales are linearly interpolated.
           This ensures smooth, predictable motion even with complex falloff patterns.
         </p>
@@ -85,9 +85,9 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Falloff Attribute</span>
-            <span class="param-name">Falloffattribute</span>
+            <span class="param-name">Falloffattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the falloff attribute to use for blending transformations (default: mops_falloff).</span>
+            <span class="param-description">Name of the falloff attribute to use for blending transformations (default: popxFalloff).</span>
           </div>
         </div>
 
@@ -139,7 +139,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Rotate Mode</span>
-            <span class="param-name">Rotatemode</span>
+            <span class="param-name">Rotmode</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -160,7 +160,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Rotate Order</span>
-            <span class="param-name">Rotateorder</span>
+            <span class="param-name">Rord</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -206,7 +206,7 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">Multiply</span>
-              <span class="param-name">multiply</span>
+              <span class="param-name">mult</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">Replace</span>
@@ -223,7 +223,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Copy Attributes</span>
-            <span class="param-name">Copyattributes</span>
+            <span class="param-name">Copyattrs</span>
             <span class="param-separator">–</span>
             <span class="param-description">When enabled, copies point attributes from template geometry to instances.</span>
           </div>
@@ -232,7 +232,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Attributes To Copy</span>
-            <span class="param-name">Attributestocopy</span>
+            <span class="param-name">Attrstocopy</span>
             <span class="param-separator">–</span>
             <span class="param-description">Space-separated list of attribute names to copy from template points.</span>
           </div>
@@ -241,7 +241,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Create popxId Attribute if Missing</span>
-            <span class="param-name">Createpopxidattributeifmissing</span>
+            <span class="param-name">Createid</span>
             <span class="param-separator">–</span>
             <span class="param-description">Automatically creates unique popxId attributes for instances that don't have one.</span>
           </div>
@@ -250,7 +250,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Orient Attribute</span>
-            <span class="param-name">Outputorientattribute</span>
+            <span class="param-name">Outputorientattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Outputs orientation data as an attribute for downstream operators.</span>
           </div>
@@ -259,7 +259,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Output Scale Attribute</span>
-            <span class="param-name">Outputscaleattribute</span>
+            <span class="param-name">Outputscaleattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Outputs scale data as an attribute for downstream operators.</span>
           </div>
@@ -316,17 +316,16 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry to transform</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Template</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Template points containing transformation attributes</span>
+            <span class="param-text">Template Points</span>
           </div>
         </div>
       </section>
@@ -340,7 +339,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Transformed POPX Geometry with applied attributes</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

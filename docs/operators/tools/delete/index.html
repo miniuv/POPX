@@ -40,19 +40,11 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Delete</strong> removes points from POPX Geometry based on various selection criteria, functioning like TouchDesigner's Delete POP but specifically designed for POPX Geometry structure.
-          This operator provides multiple methods for selecting which points to delete including attribute tests, pattern matching, group membership, bounding volume tests, and thinning operations.
+          The <strong>Delete</strong> operator uses the Delete POP internally to remove (or keep) packed points (instances) using 5 methods found on the Attribute, Thin, Pattern, Group and Bounding pages. On the Attribute page you can delete based on the values of point attributes. On the Thin page you can delete based on parameter-defined ranges, steps or randomly. You can delete based on patterns using Pattern Matching on the Pattern page. You can delete based on point groups on the Group page. You can delete based on bounding ranges on any attribute on the Bounding page.
         </p>
 
         <p>
-          The operator offers flexible selection through sequences of rules that can be combined with AND/OR logic.
-          You can delete points based on attribute values (using comparison functions), point number patterns, group assignments, or spatial bounding tests.
-          Additionally, the Thin page provides pattern-based deletion using step intervals and random probabilities for creating sparse point distributions.
-        </p>
-
-        <p>
-          Each selection method can be inverted to keep the selected points and delete everything else, and multiple rules can be combined to create complex selection criteria.
-          This makes Delete essential for culling unwanted geometry, creating variations through thinning, or isolating specific subsets of your POPX Geometry for further processing.
+          Four of the methods let you build the logic using sequential blocks of parameters. For example on the Attribute page, one block selects P(0) > 0 and another that selects P(1) < 0 and ANDed together they will delete packed points in a quarter of the space.
         </p>
       </section>
 
@@ -70,7 +62,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Whether to delete selected points or keep them.</span>
+            <span class="param-group-description">Inverts the selection of elements being deleted.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -89,7 +81,7 @@
             <span class="param-label">Copy Topology Info Back to CPU</span>
             <span class="param-name">Cpureadback</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Copies topology information back to CPU memory for further processing.</span>
+            <span class="param-description">Enable copying the point count and topology information held on the GPU to the CPU.</span>
           </div>
         </div>
 
@@ -103,64 +95,76 @@
             <span class="param-label">Attribute</span>
             <span class="param-name">Attr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sequence of attribute-based selection rules. Click + to add more tests.</span>
+            <span class="param-description">Start of Sequential Parameter Blocks to create new attributes.</span>
           </div>
         </div>
 
-        <div class="param-group">
+        <div class="param-group parameter-item-indented">
           <div class="param-group-header">
             <span class="param-label">Combine</span>
-            <span class="param-name">Combine</span>
+            <span class="param-name">Attr0combine</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">How to combine this rule with previous rules.</span>
+            <span class="param-group-description">Specify how to combine the current attribute condition block with the one above.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">OR</span>
+              <span class="param-label">And</span>
+              <span class="param-name">and</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Or</span>
               <span class="param-name">or</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">AND</span>
-              <span class="param-name">and</span>
+              <span class="param-label">Exclusive Or</span>
+              <span class="param-name">xor</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not And</span>
+              <span class="param-name">nand</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not Or</span>
+              <span class="param-name">nor</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Attribute</span>
-            <span class="param-name">Inattr</span>
+            <span class="param-name">Attr0inattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of attribute to test.</span>
+            <span class="param-description">Name of attribute for conditions.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Function</span>
-            <span class="param-name">Func</span>
+            <span class="param-name">Attr0func</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Comparison function (less than, greater than, equal, etc.).</span>
+            <span class="param-description">Comparison function used to determine which elements are selected based on its attribute value.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Value</span>
-            <span class="param-name">Value</span>
+            <span class="param-name">Attr0value</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Value to compare attribute against.</span>
+            <span class="param-description">Attribute value.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Invert</span>
-            <span class="param-name">Invert</span>
+            <span class="param-name">Attr0invert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Inverts the selection for this attribute test.</span>
+            <span class="param-description">Invert the selection resulting from the current conditions in the block.</span>
           </div>
         </div>
 
@@ -174,7 +178,7 @@
             <span class="param-label">Enabled</span>
             <span class="param-name">Thinenabled</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables thinning operation to reduce point density.</span>
+            <span class="param-description">Enable thinning by index range, index step or random index.</span>
           </div>
         </div>
 
@@ -183,7 +187,7 @@
             <span class="param-label">Thin Out Range</span>
             <span class="param-name">Thinoutrange</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Limits thinning to a specific range of point indices.</span>
+            <span class="param-description">Enable index-based point filtering.</span>
           </div>
         </div>
 
@@ -192,7 +196,7 @@
             <span class="param-label">Thin Range Start</span>
             <span class="param-name">Thinrangestart</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Starting index for thin range.</span>
+            <span class="param-description">Determines the starting index for range-based point filtering.</span>
           </div>
         </div>
 
@@ -201,7 +205,7 @@
             <span class="param-label">Thin Range Length</span>
             <span class="param-name">Thinrangelength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of points in thin range.</span>
+            <span class="param-description">Determines the number of points being filtered by index range.</span>
           </div>
         </div>
 
@@ -210,7 +214,7 @@
             <span class="param-label">Thin Step</span>
             <span class="param-name">Thinstep</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Keep every Nth point (e.g., 2 keeps every other point).</span>
+            <span class="param-description">Filters every Nth point.</span>
           </div>
         </div>
 
@@ -219,7 +223,7 @@
             <span class="param-label">Thin Random</span>
             <span class="param-name">Thinrandom</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Probability of randomly deleting points (0 = no random deletion, 1 = delete all).</span>
+            <span class="param-description">Determines the proportion of points randomly filtered.</span>
           </div>
         </div>
 
@@ -228,7 +232,7 @@
             <span class="param-label">Thin Random Seed</span>
             <span class="param-name">Thinrandomseed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for thin random deletion.</span>
+            <span class="param-description">Sets the random seed for points being randomly filtered.</span>
           </div>
         </div>
 
@@ -237,7 +241,7 @@
             <span class="param-label">Invert</span>
             <span class="param-name">Thininvert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Inverts the thinning selection.</span>
+            <span class="param-description">Invert the selection resulting from the current conditions in the block.</span>
           </div>
         </div>
 
@@ -251,46 +255,58 @@
             <span class="param-label">Pattern</span>
             <span class="param-name">Pattern</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sequence of pattern-based selection rules.</span>
+            <span class="param-description">Start of Sequential Parameter Blocks for index-matching pattern.</span>
           </div>
         </div>
 
-        <div class="param-group">
+        <div class="param-group parameter-item-indented">
           <div class="param-group-header">
             <span class="param-label">Combine</span>
-            <span class="param-name">Combine</span>
+            <span class="param-name">Pattern0combine</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">How to combine this pattern rule with previous rules.</span>
+            <span class="param-group-description">Specify how to combine the current pattern condition block with the one above.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">OR</span>
+              <span class="param-label">And</span>
+              <span class="param-name">and</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Or</span>
               <span class="param-name">or</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">AND</span>
-              <span class="param-name">and</span>
+              <span class="param-label">Exclusive Or</span>
+              <span class="param-name">xor</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not And</span>
+              <span class="param-name">nand</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not Or</span>
+              <span class="param-name">nor</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Pattern</span>
-            <span class="param-name">Pattern</span>
+            <span class="param-name">Pattern0pattern</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Point number pattern to match (e.g., "0-10", "5 10 15", etc.).</span>
+            <span class="param-description">Index-matching pattern.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Invert</span>
-            <span class="param-name">Invert</span>
+            <span class="param-name">Pattern0invert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Inverts the pattern selection.</span>
+            <span class="param-description">Invert the selection resulting from the current conditions in the block.</span>
           </div>
         </div>
 
@@ -304,46 +320,58 @@
             <span class="param-label">Group</span>
             <span class="param-name">Group</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sequence of group-based selection rules.</span>
+            <span class="param-description">Start of Sequential Parameter Blocks for input groups.</span>
           </div>
         </div>
 
-        <div class="param-group">
+        <div class="param-group parameter-item-indented">
           <div class="param-group-header">
             <span class="param-label">Combine</span>
-            <span class="param-name">Combine</span>
+            <span class="param-name">Group0combine</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">How to combine this group rule with previous rules.</span>
+            <span class="param-group-description">Specify how to combine the current group condition block with the one above.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">OR</span>
+              <span class="param-label">And</span>
+              <span class="param-name">and</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Or</span>
               <span class="param-name">or</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">AND</span>
-              <span class="param-name">and</span>
+              <span class="param-label">Exclusive Or</span>
+              <span class="param-name">xor</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not And</span>
+              <span class="param-name">nand</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not Or</span>
+              <span class="param-name">nor</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Group</span>
-            <span class="param-name">Name</span>
+            <span class="param-name">Group0name</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of group to select.</span>
+            <span class="param-description">The name of the group to use.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Invert</span>
-            <span class="param-name">Invert</span>
+            <span class="param-name">Group0invert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Inverts the group selection.</span>
+            <span class="param-description">Invert the selection resulting from the current conditions in the block.</span>
           </div>
         </div>
 
@@ -357,82 +385,94 @@
             <span class="param-label">Bound</span>
             <span class="param-name">Bound</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sequence of bounding volume selection rules.</span>
+            <span class="param-description">Start of Sequential Parameter Blocks for bounding volumes.</span>
           </div>
         </div>
 
-        <div class="param-group">
+        <div class="param-group parameter-item-indented">
           <div class="param-group-header">
             <span class="param-label">Combine</span>
-            <span class="param-name">Combine</span>
+            <span class="param-name">Bound0combine</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">How to combine this bounding rule with previous rules.</span>
+            <span class="param-group-description">Specify how to combine the current bounding condition block with the one above.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">OR</span>
+              <span class="param-label">And</span>
+              <span class="param-name">and</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Or</span>
               <span class="param-name">or</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">AND</span>
-              <span class="param-name">and</span>
+              <span class="param-label">Exclusive Or</span>
+              <span class="param-name">xor</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not And</span>
+              <span class="param-name">nand</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Not Or</span>
+              <span class="param-name">nor</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Attribute</span>
-            <span class="param-name">Inattr</span>
+            <span class="param-name">Bound0inattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Attribute to test against bounding volume (typically P for position).</span>
+            <span class="param-description">Name of position attribute.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Bounding Type</span>
-            <span class="param-name">Type</span>
+            <span class="param-name">Bound0type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Type of bounding volume (Bounding Box, Sphere, etc.).</span>
+            <span class="param-description">Bounding volume type.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Translate</span>
-            <span class="param-name">Translate</span>
+            <span class="param-name">Bound0translate</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation of the bounding volume.</span>
+            <span class="param-description">Translate the bounding volume.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Rotate</span>
-            <span class="param-name">Rotate</span>
+            <span class="param-name">Bound0rotate</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation of the bounding volume.</span>
+            <span class="param-description">Rotate the bounding volume.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Scale</span>
-            <span class="param-name">Scale</span>
+            <span class="param-name">Bound0scale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale of the bounding volume.</span>
+            <span class="param-description">Scale the bounding volume.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Invert</span>
-            <span class="param-name">Invert</span>
+            <span class="param-name">Bound0invert</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Inverts the bounding volume selection.</span>
+            <span class="param-description">Invert the selection resulting from the current conditions in the block.</span>
           </div>
         </div>
 
@@ -487,7 +527,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry to delete points from</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
       </section>
@@ -501,7 +541,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with selected points removed</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
