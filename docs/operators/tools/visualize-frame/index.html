@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visualize Frame | POPX</title>
-  <meta name="description" content="Visualize local orientation axes of packed primitives and any geometry with orient, normal, and up attributes.">
+  <meta name="description" content="Visualize local orientation axes of POPX Geometry instances and any geometry with orient, normal, and up attributes.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,12 +40,12 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Visualize Frame</strong> is a handy tool for quickly visualizing the local orientation axes of any packed primitive.
+          <strong>Visualize Frame</strong> is a handy tool for quickly visualizing the local orientation axes of POPX Geometry instances.
           This operator creates visual representations of coordinate frames, making it easy to debug and understand the orientation of geometry in your scene.
         </p>
 
         <p>
-          The operator can visualize the orientations of packed primitives, as well as any other meshes or points that have a <code>p@orient</code> attribute, or <code>v@N</code> and <code>v@up</code> attributes.
+          The operator can visualize the orientations of POPX Geometry instances, as well as any other meshes or points that have an <code>Orient</code> attribute, or <code>N</code> and <code>Up</code> attributes.
           This makes it an invaluable debugging tool for understanding how transformations and rotations are applied to geometry.
         </p>
 
@@ -112,7 +112,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or geometry with orientation attributes to visualize</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
       </section>
@@ -126,7 +126,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with visualized orientation frame axes</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

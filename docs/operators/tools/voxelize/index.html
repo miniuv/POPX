@@ -46,6 +46,7 @@
 
         <p>
           The operator supports two modes: Mesh and Point Cloud. In Mesh mode, geometry is voxelized using ray casting techniques to determine interior/exterior regions.
+          When voxelizing meshes, the Hit Attributes output provides ray casting hit information including attributes like RayHitNormal, RayNumHits, RayInside, and RayDistance, making it useful for advanced volume generation workflows.
           In Point Cloud mode, individual points are converted directly into voxel density values, with optional point count limits for performance optimization.
         </p>
 
@@ -190,7 +191,7 @@
             <span class="param-label">Override if Color Exists</span>
             <span class="param-name">Overrideifexists</span>
             <span class="param-separator">–</span>
-            <span class="param-description">When enabled, uses the Color parameter instead of vertex colors from the geometry.</span>
+            <span class="param-description">When enabled, uses the Color parameter instead of point color from the geometry.</span>
           </div>
         </div>
 
@@ -239,21 +240,69 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Blur filter type (e.g., Catmull-Rom, Gaussian).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Blur filter type.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Catmull-Rom</span>
+              <span class="param-name">catmull</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gaussian</span>
+              <span class="param-name">gaussian</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Box</span>
+              <span class="param-name">box</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bartlette</span>
+              <span class="param-name">bartlette</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sinc</span>
+              <span class="param-name">sinc</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Hanning</span>
+              <span class="param-name">hanning</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackman</span>
+              <span class="param-name">blackman</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Extend</span>
             <span class="param-name">Extend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Edge extension mode for blur filtering.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Edge extension mode for blur filtering.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Hold</span>
+              <span class="param-name">hold</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Repeat</span>
+              <span class="param-name">repeat</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Mirror</span>
+              <span class="param-name">mirror</span>
+            </div>
           </div>
         </div>
 
@@ -308,7 +357,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Mesh or point cloud geometry to voxelize</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
       </section>
@@ -320,10 +369,18 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
             <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">3D texture volume representation of the input geometry</span>
+            <span class="param-text">Voxel Volume</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Hit Attributes</span>
           </div>
         </div>
       </section>

@@ -40,14 +40,14 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Reorient</strong> creates a quaternion point attribute, <code>p@mops_orient</code>, that acts as a replacement for a packed primitive's existing local orientation frame without modifying the underlying transforms at all.
-          In plainer terms, this resets the rotation axes of the packed primitives without visibly moving anything, providing more accurate orientation for subsequent transformations.
+          <strong>Reorient</strong> creates a quaternion point attribute, <code>p@popxOrient</code>, that acts as a replacement for a POPX Geometry instance's existing local orientation frame without modifying the underlying transforms at all.
+          In plainer terms, this resets the rotation axes of the POPX Geometry instances without visibly moving anything, providing more accurate orientation for subsequent transformations.
         </p>
 
         <p>
           The operator is particularly useful after using operations like Explode, where you want pieces to move outward along their local axes rather than in a uniform direction.
-          Normally when you convert or explode geometry, the local orientations of each packed primitive are left at default, causing all pieces to move in the same direction when transformed.
-          Reorient solves this by transferring orientation from reference geometry or point attributes to your packed primitives.
+          Normally when you convert or explode geometry, the local orientations of each POPX Geometry instance are left at default, causing all pieces to move in the same direction when transformed.
+          Reorient solves this by transferring orientation from reference geometry or point attributes to your POPX Geometry instances.
         </p>
 
         <p>
@@ -97,9 +97,9 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Reference Geometry</span>
-            <span class="param-name">Referencegeometry</span>
+            <span class="param-name">Referencegeo</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP geometry to use as reference for transferring orientation when Orient Source is set to Reference Geometry.</span>
+            <span class="param-description">POP geometry to use as reference for transferring orientation. Used when Input 1 is not connected.</span>
           </div>
         </div>
 
@@ -124,7 +124,7 @@
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Attribute Type</span>
-            <span class="param-name">Attributetype</span>
+            <span class="param-name">Attrtype</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -233,7 +233,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with packed primitives to reorient</span>
+            <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
 
@@ -242,7 +242,7 @@
             <span class="param-label">Input 1</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Reference geometry or points with orientation attributes (optional)</span>
+            <span class="param-text">Reference Geometry</span>
           </div>
         </div>
       </section>
@@ -256,7 +256,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with updated p@mops_orient attribute</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

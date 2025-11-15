@@ -40,7 +40,7 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Orient Mesh</strong> computes orientation frames on input geometry, functioning like a more advanced version of the Polyframe SOP with additional features for creating complex surface flows.
+          <strong>Orient Mesh</strong> computes orientation frames on input geometry with additional features for creating complex surface flows.
           This operator is essential for preparing meshes before using them with the Move Along Mesh operator, as it defines the up vector (visualized in yellow) that determines the direction of motion across the surface.
         </p>
 
@@ -265,12 +265,40 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Type of noise to use for curl noise generation.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Noise algorithm type (Perlin, Simplex, etc.).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Perlin 2D (GPU)</span>
+              <span class="param-name">perlin2d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Perlin 3D (GPU)</span>
+              <span class="param-name">perlin3d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Perlin 4D (GPU)</span>
+              <span class="param-name">perlin4d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simplex 2D (GPU)</span>
+              <span class="param-name">simplex2d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simplex 3D (GPU)</span>
+              <span class="param-name">simplex3d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simplex 4D (GPU)</span>
+              <span class="param-name">simplex4d</span>
+            </div>
           </div>
         </div>
 
@@ -279,7 +307,7 @@
             <span class="param-label">Seed</span>
             <span class="param-name">Seed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for noise pattern variation.</span>
+            <span class="param-description">Numerical value that initializes the randomization.</span>
           </div>
         </div>
 
@@ -288,7 +316,7 @@
             <span class="param-label">Period</span>
             <span class="param-name">Period</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Period of noise repetition.</span>
+            <span class="param-description">Period (scale) of the noise field.</span>
           </div>
         </div>
 
@@ -297,7 +325,7 @@
             <span class="param-label">Harmonics</span>
             <span class="param-name">Harmon</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of octaves of noise to layer together.</span>
+            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
           </div>
         </div>
 
@@ -306,7 +334,7 @@
             <span class="param-label">Harmonic Spread</span>
             <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frequency multiplier between each harmonic octave.</span>
+            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
           </div>
         </div>
 
@@ -315,7 +343,7 @@
             <span class="param-label">Harmonic Gain</span>
             <span class="param-name">Gain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Amplitude scaling for each successive harmonic.</span>
+            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
           </div>
         </div>
 
@@ -324,7 +352,7 @@
             <span class="param-label">Amplitude</span>
             <span class="param-name">Amp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Overall amplitude of the noise effect.</span>
+            <span class="param-description">The noise values amplitude (a scale on the values output).</span>
           </div>
         </div>
 
@@ -333,66 +361,181 @@
             <span class="param-label">Exponent</span>
             <span class="param-name">Exp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Exponent applied to noise values for contrast adjustment.</span>
+            <span class="param-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
           </div>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- Transform Page -->
-        <h3 id="page-transform" class="page-heading">Page: Transform</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Transform Order</span>
             <span class="param-name">Xord</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Order of transform operations (SRT, STR, etc.) for curl noise.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale Rotate Translate</span>
+              <span class="param-name">srt</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale Translate Rotate</span>
+              <span class="param-name">str</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Scale Translate</span>
+              <span class="param-name">rst</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Translate Scale</span>
+              <span class="param-name">rts</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Scale Rotate</span>
+              <span class="param-name">tsr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Rotate Scale</span>
+              <span class="param-name">trs</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Rotate Order</span>
             <span class="param-name">Rord</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Order of rotation axes (XYZ, ZYX, etc.) for curl noise.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rx Ry Rz</span>
+              <span class="param-name">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rx Rz Ry</span>
+              <span class="param-name">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rx Rz</span>
+              <span class="param-name">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rz Rx</span>
+              <span class="param-name">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Rx Ry</span>
+              <span class="param-name">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Ry Rx</span>
+              <span class="param-name">zyx</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Translate</span>
             <span class="param-name">T</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation offset for noise sampling space.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translate the points through the noise space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Rotate</span>
             <span class="param-name">R</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation of noise sampling space.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotate the points around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Scale</span>
             <span class="param-name">S</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale of noise sampling space (higher values = smaller features).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">These three fields scale the Source geometry in the three axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Pivot</span>
             <span class="param-name">P</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Pivot point for rotation and scaling of noise space.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">The pivot point for the transform rotates and scales.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
           </div>
         </div>
 
@@ -401,7 +544,7 @@
             <span class="param-label">Translate 4D</span>
             <span class="param-name">T4d</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Translation in the fourth dimension for 4D noise types.</span>
+            <span class="param-description">Translates the points through the 4th noise dimension.</span>
           </div>
         </div>
 
@@ -491,7 +634,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry or mesh to compute orientation frames on</span>
+            <span class="param-text">Input Mesh</span>
           </div>
         </div>
       </section>
@@ -505,7 +648,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Geometry with computed orientation frame attributes (v@N, v@up, v@tangent)</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
@@ -527,7 +670,6 @@
           <ul>
             <li><a href="#page-orient-mesh">Page: Orient Mesh</a></li>
             <li><a href="#page-curl-noise">Page: Curl Noise</a></li>
-            <li><a href="#page-transform">Page: Transform</a></li>
             <li><a href="#page-blur">Page: Blur</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>

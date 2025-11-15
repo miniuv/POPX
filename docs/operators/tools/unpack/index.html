@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unpack | POPX</title>
-  <meta name="description" content="Convert POPX Geometry into POP geometry by unpacking packed points structure and extracting underlying geometry.">
+  <meta name="description" content="Convert POPX Geometry into POP geometry by unpacking POPX Geometry instances and extracting underlying geometry.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,17 +40,17 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Unpack</strong> converts POPX Geometry into POP geometry by unpacking the packed points structure and extracting the underlying geometry.
-          This operator reveals the actual mesh or primitive data that was stored inside the packed primitives.
+          <strong>Unpack</strong> converts POPX Geometry into POP geometry by unpacking the POPX Geometry instances and extracting the underlying geometry.
+          This operator reveals the actual mesh or primitive data that was stored inside the POPX Geometry instances.
         </p>
 
         <p>
-          Unlike POPX to which strips packed structure and returns clean points, Unpack extracts the full geometry contained within each packed primitive, giving you access to the vertices, faces, and primitive structure of the instanced objects.
+          Unlike <strong>POPX to</strong> which strips packed structure and returns clean points, Unpack extracts the full geometry contained within each POPX Geometry instance, giving you access to the vertices, faces, and primitive structure of the instanced objects.
           This is useful when you need to work with the actual geometry rather than just point representations.
         </p>
 
         <p>
-          You can optionally apply the packed primitive's transform to the unpacked geometry, and selectively transfer point attributes and groups from the packed points to the unpacked geometry.
+          You can optionally apply the POPX Geometry instance's transform to the unpacked geometry, and selectively transfer point attributes and groups from the POPX Geometry instances to the unpacked geometry.
           This gives you control over what data is preserved during the unpacking process.
         </p>
       </section>
@@ -67,7 +67,7 @@
             <span class="param-label">Apply Transform</span>
             <span class="param-name">Applytransform</span>
             <span class="param-separator">–</span>
-            <span class="param-description">When enabled, applies the packed primitive's transform matrix to the unpacked geometry.</span>
+            <span class="param-description">When enabled, applies the POPX Geometry instance's transform matrix to the unpacked geometry.</span>
           </div>
         </div>
 
@@ -76,7 +76,7 @@
             <span class="param-label">Transfer Attributes</span>
             <span class="param-name">Transferattrs</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies which point attributes to transfer from the packed points to the unpacked geometry.</span>
+            <span class="param-description">Specifies which point attributes to transfer from the POPX Geometry instances to the unpacked geometry.</span>
           </div>
         </div>
 
@@ -85,7 +85,7 @@
             <span class="param-label">Transfer Groups</span>
             <span class="param-name">Transfergroups</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Specifies which point groups to transfer from the packed points to the unpacked geometry.</span>
+            <span class="param-description">Specifies which point groups to transfer from the POPX Geometry instances to the unpacked geometry.</span>
           </div>
         </div>
 
@@ -113,7 +113,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POPX Geometry with packed primitives to unpack</span>
+            <span class="param-text">POPX Geometry</span>
           </div>
         </div>
       </section>
@@ -127,7 +127,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Unpacked POP geometry with extracted mesh/primitive data</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>

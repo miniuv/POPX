@@ -118,13 +118,25 @@
       <section id="inputs">
         <h2>Inputs</h2>
 
+        <p>
+          The number of input connectors is automatically linked to the <strong>In POP(s)</strong> sequential parameter. Increasing the number of POP blocks will create corresponding geometry inputs. Removing a block will remove its input.
+        </p>
+
         <div class="parameter-item">
           <div class="param-header param-header-inline">
-            <span class="param-label">Inputs 0+</span>
-            <span class="param-separator">–</span>
+            <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Multiple POPX Geometry streams to merge (dynamic sequence)</span>
+            <span class="param-text">POPX/POP Geometry 1</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX/POP Geometry 2</span>
           </div>
         </div>
       </section>
@@ -138,7 +150,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Combined POPX Geometry from all input streams</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
