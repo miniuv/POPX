@@ -219,11 +219,14 @@ let appInitialized = false;
 window.addEventListener('componentsLoaded', function() {
   if (!appInitialized) {
     appInitialized = true;
-    initializeApp();
+    // Small delay to ensure DOM is fully updated after component replacement
+    setTimeout(() => {
+      initializeApp();
 
-    // Update theme button after components are loaded
-    const savedTheme = localStorage.getItem('popx-theme') || 'auto';
-    updateThemeButton(savedTheme);
+      // Update theme button after components are loaded
+      const savedTheme = localStorage.getItem('popx-theme') || 'auto';
+      updateThemeButton(savedTheme);
+    }, 50);
   }
 });
 
@@ -236,13 +239,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
 
     if (navbar && sidebar) {
-      // Components are already loaded, initialize immediately
+      // Components are already loaded, initialize with a small delay
       appInitialized = true;
-      initializeApp();
+      setTimeout(() => {
+        initializeApp();
 
-      // Update theme button after components are loaded
-      const savedTheme = localStorage.getItem('popx-theme') || 'auto';
-      updateThemeButton(savedTheme);
+        // Update theme button after components are loaded
+        const savedTheme = localStorage.getItem('popx-theme') || 'auto';
+        updateThemeButton(savedTheme);
+      }, 50);
     } else {
       // Wait a bit to see if components load
       setTimeout(function() {
@@ -251,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
           appInitialized = true;
           initializeApp();
         }
-      }, 200);
+      }, 250);
     }
   }
 
