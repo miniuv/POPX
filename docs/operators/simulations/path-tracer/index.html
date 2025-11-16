@@ -52,7 +52,7 @@
         </p>
 
         <p>
-          Path Tracer outputs rendered images as TOP textures with optional tone mapping and exposure adjustment.
+          Path Tracer renders images to the Render TOP specified in the parameter with optional tone mapping and exposure adjustment.
           Progressive rendering accumulates samples over time for noise reduction, while temporal smoothing provides frame-to-frame coherence for animations.
           The renderer supports adjustable ray counts per pixel, bounce depth limits, and camera effects including depth of field with focal length and aperture controls.
           This makes Path Tracer ideal for high-quality offline rendering, lookdev workflows, physically accurate lighting studies, or real-time progressive preview of complex scenes.
@@ -107,7 +107,7 @@
             <span class="param-label">Temporal Smoothing</span>
             <span class="param-name">Temporalsmoothing</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frame blending amount for temporal coherence (0 = none, 1 = maximum).</span>
+            <span class="param-description">Frame blending amount for temporal coherence. Available when progressive rendering is off.</span>
           </div>
         </div>
 
@@ -116,7 +116,7 @@
             <span class="param-label">Render TOP</span>
             <span class="param-name">Rendertop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference to Render TOP providing camera and viewport settings.</span>
+            <span class="param-description">Reference to Render TOP providing camera and viewport settings that the path tracer will render to.</span>
           </div>
         </div>
 
@@ -125,7 +125,7 @@
             <span class="param-label">Rays per Pixel</span>
             <span class="param-name">Raysperpixel</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of rays cast per pixel per frame (higher = less noise).</span>
+            <span class="param-description">Number of rays cast per pixel per frame.</span>
           </div>
         </div>
 
@@ -134,7 +134,7 @@
             <span class="param-label">Max Bounces</span>
             <span class="param-name">Maxbounces</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum ray bounce depth for global illumination (higher = more indirect light).</span>
+            <span class="param-description">Maximum ray bounce depth for global illumination.</span>
           </div>
         </div>
 
@@ -143,7 +143,7 @@
             <span class="param-label">Opaque Geometry</span>
             <span class="param-name">Opaque</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Treat all geometry as opaque (faster but disables transmission).</span>
+            <span class="param-description">Treat all geometry as opaque.</span>
           </div>
         </div>
 
@@ -152,7 +152,7 @@
             <span class="param-label">Aperture</span>
             <span class="param-name">Aperture</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Camera aperture size for depth of field (0 = infinite focus, larger = shallower DOF).</span>
+            <span class="param-description">Camera aperture size for depth of field.</span>
           </div>
         </div>
 
@@ -179,7 +179,7 @@
             <span class="param-label">Exposure</span>
             <span class="param-name">Exposure</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Exposure multiplier for tone mapping (higher = brighter).</span>
+            <span class="param-description">Exposure multiplier for tone mapping.</span>
           </div>
         </div>
 
@@ -197,21 +197,32 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Base</span>
-            <span class="param-name">Base</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for base material properties.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Base Color</span>
             <span class="param-name">Basecolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Diffuse albedo color (RGB).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Diffuse albedo color.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorb</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolora</span>
+            </div>
           </div>
         </div>
 
@@ -220,7 +231,7 @@
             <span class="param-label">Metallic</span>
             <span class="param-name">Metallic</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Metallic appearance (0 = dielectric, 1 = metal).</span>
+            <span class="param-description">Metallic appearance.</span>
           </div>
         </div>
 
@@ -229,16 +240,7 @@
             <span class="param-label">Roughness</span>
             <span class="param-name">Roughness</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Surface roughness (0 = mirror smooth, 1 = fully rough).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specular</span>
-            <span class="param-name">Specularh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for specular reflection properties.</span>
+            <span class="param-description">Surface roughness.</span>
           </div>
         </div>
 
@@ -256,7 +258,7 @@
             <span class="param-label">Specular Tint</span>
             <span class="param-name">Speculartint</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Tint specular reflection with base color (0 = white, 1 = colored).</span>
+            <span class="param-description">Tint specular reflection with base color.</span>
           </div>
         </div>
 
@@ -265,7 +267,7 @@
             <span class="param-label">Anisotropic</span>
             <span class="param-name">Anisotropic</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Anisotropic highlight stretching (0 = isotropic, 1 = fully anisotropic).</span>
+            <span class="param-description">Anisotropic highlight stretching.</span>
           </div>
         </div>
 
@@ -274,16 +276,7 @@
             <span class="param-label">Anisotropic Rotation</span>
             <span class="param-name">Anisotropicrot</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation angle for anisotropic highlights (0-1 = 0-360 degrees).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Surface</span>
-            <span class="param-name">Surface</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for surface scattering properties.</span>
+            <span class="param-description">Rotation angle for anisotropic highlights.</span>
           </div>
         </div>
 
@@ -293,15 +286,6 @@
             <span class="param-name">Subsurface</span>
             <span class="param-separator">–</span>
             <span class="param-description">Subsurface scattering amount for translucent materials like skin or wax.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen</span>
-            <span class="param-name">Sheenh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for fabric sheen properties.</span>
           </div>
         </div>
 
@@ -319,16 +303,7 @@
             <span class="param-label">Sheen Tint</span>
             <span class="param-name">Sheentint</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Tint sheen with base color (0 = white, 1 = colored).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Clearcoat</span>
-            <span class="param-name">Clearcoath</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for clearcoat layer properties.</span>
+            <span class="param-description">Tint sheen with base color.</span>
           </div>
         </div>
 
@@ -346,16 +321,7 @@
             <span class="param-label">Clearcoat Gloss</span>
             <span class="param-name">Clearcoatgloss</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Glossiness of clearcoat layer (0 = rough, 1 = glossy).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Advanced</span>
-            <span class="param-name">Advanced</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for advanced material properties.</span>
+            <span class="param-description">Glossiness of clearcoat layer.</span>
           </div>
         </div>
 
@@ -364,7 +330,7 @@
             <span class="param-label">IOR</span>
             <span class="param-name">Ior</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Index of refraction for dielectrics (1.0 = air, 1.45 = plastic, 1.5 = glass).</span>
+            <span class="param-description">Index of refraction for dielectrics.</span>
           </div>
         </div>
 
@@ -377,21 +343,32 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Emission</span>
-            <span class="param-name">Emissionh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for emissive light properties.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Emission</span>
             <span class="param-name">Emission</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Emissive color for self-illuminating surfaces (RGB, values > 1 = bright lights).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Emissive color for self-illuminating surfaces.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Emission</span>
+              <span class="param-name">Emissionr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Emission</span>
+              <span class="param-name">Emissiong</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Emission</span>
+              <span class="param-name">Emissionb</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Emission</span>
+              <span class="param-name">Emissiona</span>
+            </div>
           </div>
         </div>
 
@@ -432,7 +409,7 @@
             <span class="param-label">Environment Map</span>
             <span class="param-name">Environmentmap</span>
             <span class="param-separator">–</span>
-            <span class="param-description">HDR environment texture (equirectangular/latlong format).</span>
+            <span class="param-description">HDR environment texture.</span>
           </div>
         </div>
 
@@ -441,7 +418,7 @@
             <span class="param-label">Enable Direct Light</span>
             <span class="param-name">Enabledirectlight</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable direct lighting from point/spot/area lights.</span>
+            <span class="param-description">Enable direct lighting.</span>
           </div>
         </div>
 
@@ -450,7 +427,7 @@
             <span class="param-label">Render Lights</span>
             <span class="param-name">Renderlights</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Show light geometry in render (visible area lights).</span>
+            <span class="param-description">Show light geometry in render.</span>
           </div>
         </div>
 
@@ -495,7 +472,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Light color RGB.</span>
+            <span class="param-group-description">Light color.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -547,7 +524,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Light position in world space XYZ.</span>
+            <span class="param-group-description">Light position in world space.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -572,7 +549,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Light rotation XYZ degrees.</span>
+            <span class="param-group-description">Light rotation in degrees for spot and area lights.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -597,7 +574,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Light scale for area lights XYZ.</span>
+            <span class="param-group-description">Light scale for area lights only.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -620,7 +597,7 @@
             <span class="param-label">Uniform Scale</span>
             <span class="param-name">Lights0scale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Uniform scale multiplier for all axes.</span>
+            <span class="param-description">Uniform scale multiplier for all axes for area lights.</span>
           </div>
         </div>
 

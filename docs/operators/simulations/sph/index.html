@@ -53,7 +53,6 @@
 
         <p>
           SPH supports multiple collision types including ground planes, bounding boxes, arbitrary collision geometry, and volumetric container geometry for creating vessels.
-          The simulation updates particles connected to a target POP operator, allowing integration with existing particle systems or starting from scratch with a specified particle count.
           This makes SPH suitable for water splashes, pouring liquids, sand and debris, viscous fluids like honey, and interactive particle-based effects.
         </p>
       </section>
@@ -70,7 +69,7 @@
             <span class="param-label">Target Particles Update POP</span>
             <span class="param-name">Particlesupdatepop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP operator that receives particle position and velocity updates from simulation.</span>
+            <span class="param-description">Reference to a POP node downstream in the network. This reference will cause a feedback loop and re-injects the particles next frame.</span>
           </div>
         </div>
 
@@ -88,7 +87,7 @@
             <span class="param-label">Substeps</span>
             <span class="param-name">Substeps</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of solver substeps per frame (higher = more stable, slower).</span>
+            <span class="param-description">Number of solver substeps per frame.</span>
           </div>
         </div>
 
@@ -106,7 +105,7 @@
             <span class="param-label">Time Scale</span>
             <span class="param-name">Timescale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Global time multiplier for simulation speed (1.0 = real-time).</span>
+            <span class="param-description">Global time multiplier for simulation speed.</span>
           </div>
         </div>
 
@@ -115,16 +114,16 @@
             <span class="param-label">Time Step</span>
             <span class="param-name">Timestep</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Read-only display of effective timestep after substeps and time scale.</span>
+            <span class="param-description">Read-only display of effective timestep, equal to 1/FPS of TouchDesigner.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Number of Particles</span>
-            <span class="param-name">Numberofparticles</span>
+            <span class="param-name">Numparticles</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Particle count when no input connected (spawned at initialization).</span>
+            <span class="param-description">Particle count when no input connected.</span>
           </div>
         </div>
 
@@ -133,7 +132,7 @@
             <span class="param-label">Smoothing Radius</span>
             <span class="param-name">Smoothingradius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Interaction distance for neighbor particle forces (smaller = finer detail, more computation).</span>
+            <span class="param-description">Interaction distance for neighbor particle forces.</span>
           </div>
         </div>
 
@@ -189,19 +188,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Fluids</span>
-            <span class="param-name">Fluids</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for fluid mode properties.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Target Density</span>
             <span class="param-name">Targetdensity</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rest density the solver tries to maintain (higher = more incompressible).</span>
+            <span class="param-description">Rest density the solver tries to maintain.</span>
           </div>
         </div>
 
@@ -210,7 +200,7 @@
             <span class="param-label">Viscosity</span>
             <span class="param-name">Viscosity</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Fluid thickness and resistance to flow (0 = water-like, 1 = very viscous).</span>
+            <span class="param-description">Fluid thickness and resistance to flow.</span>
           </div>
         </div>
 
@@ -238,15 +228,6 @@
             <span class="param-name">Adhesion</span>
             <span class="param-separator">–</span>
             <span class="param-description">Particle sticking force to collision surfaces.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Grains</span>
-            <span class="param-name">Grains</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for grain mode properties.</span>
           </div>
         </div>
 
@@ -287,7 +268,7 @@
             <span class="param-label">Ground Position</span>
             <span class="param-name">Groundposition</span>
             <span class="param-separator">–</span>
-            <span class="param-description">XYZ position of ground plane (typically Y-axis height).</span>
+            <span class="param-description">XYZ position of ground plane.</span>
           </div>
         </div>
 
@@ -327,6 +308,56 @@
           </div>
         </div>
 
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Toggle to enable lower bounding planes for XYZ axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerbounds1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerbounds2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerbounds3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Toggle to enable upper bounding planes for XYZ axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperbounds1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperbounds2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperbounds3</span>
+            </div>
+          </div>
+        </div>
+
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Enable Geometry Collision</span>
@@ -350,7 +381,7 @@
             <span class="param-label">Opaque Geometry</span>
             <span class="param-name">Opaque</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Treats collision geometry as solid (vs. hollow shell).</span>
+            <span class="param-description">Treats collision geometry as solid.</span>
           </div>
         </div>
 
@@ -377,7 +408,7 @@
             <span class="param-label">Max Axis Resolution</span>
             <span class="param-name">Maxaxisresolution</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Voxel resolution for container geometry (higher = more accurate, slower).</span>
+            <span class="param-description">Voxel resolution for container geometry.</span>
           </div>
         </div>
 
@@ -386,7 +417,7 @@
             <span class="param-label">Force Collision</span>
             <span class="param-name">Forcecollision</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Aggressively keeps particles inside container (may reduce realism).</span>
+            <span class="param-description">Aggressively keeps particles inside container.</span>
           </div>
         </div>
 
@@ -436,7 +467,7 @@
             <span class="param-label">Gravity</span>
             <span class="param-name">Gravity</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Gravity force vector in world space (default: 0, -9.81, 0).</span>
+            <span class="param-description">Gravity force vector in world space.</span>
           </div>
         </div>
 
@@ -454,7 +485,7 @@
             <span class="param-label">Velocity Damping</span>
             <span class="param-name">Velocitydamping</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Global velocity decay per frame (0 = no damping, 1 = instant stop).</span>
+            <span class="param-description">Global velocity decay per frame.</span>
           </div>
         </div>
 
@@ -516,10 +547,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Initial Particles (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">POP particles to initialize simulation from custom positions and velocities</span>
+            <span class="param-text">Particles In</span>
           </div>
         </div>
       </section>
@@ -533,7 +563,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Simulated particles with updated positions and velocities</span>
+            <span class="param-text">Particles Out</span>
           </div>
         </div>
       </section>
