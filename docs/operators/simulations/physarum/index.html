@@ -71,7 +71,7 @@
             <span class="param-label">Target Particles Update POP</span>
             <span class="param-name">Particlesupdatepop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP operator that receives particle position and direction updates.</span>
+            <span class="param-description">Reference to a POP node downstream in the network. This reference will cause a feedback loop and re-injects the particles next frame.</span>
           </div>
         </div>
 
@@ -80,7 +80,7 @@
             <span class="param-label">Target Trail Update TOP</span>
             <span class="param-name">Trailupdatetop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">TOP operator that receives trail texture (pheromone map) updates.</span>
+            <span class="param-description">Reference to a TOP node downstream in the network. This reference will cause a feedback loop and re-injects the trail deposit texture next frame.</span>
           </div>
         </div>
 
@@ -581,7 +581,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Particles</span>
+            <span class="param-text">Particles In</span>
           </div>
         </div>
 
@@ -604,7 +604,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Particles</span>
+            <span class="param-text">Particles Out</span>
           </div>
         </div>
 

@@ -612,7 +612,7 @@
             <span class="param-label">Target Particles Update POP</span>
             <span class="param-name">Particlesupdatepop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP operator to receive advected particle updates.</span>
+            <span class="param-description">Reference to a POP node downstream in the network. This reference will cause a feedback loop and re-injects the particles next frame.</span>
           </div>
         </div>
 
@@ -637,9 +637,9 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Number Of Particles</span>
-            <span class="param-name">Particles</span>
+            <span class="param-name">Numparticles</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of particles in system.</span>
+            <span class="param-description">Maximum particles spawned.</span>
           </div>
         </div>
 
@@ -881,7 +881,7 @@
             <span class="param-label">Input 2</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Particle Source</span>
+            <span class="param-text">Particles In</span>
           </div>
         </div>
       </section>
@@ -922,7 +922,7 @@
             <span class="param-label">Output 3</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Particles</span>
+            <span class="param-text">Particles Out</span>
           </div>
         </div>
       </section>
