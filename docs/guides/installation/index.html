@@ -43,7 +43,7 @@
         </p>
 
         <div style="margin: var(--spacing-lg) 0; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-          <a href="#" class="btn btn-primary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Subscribe on Patreon</a>
+          <button id="patreon-subscribe-btn" class="btn btn-primary" style="min-width: 200px; padding: 14px 28px; font-size: 15px; cursor: pointer; border: none;">Subscribe on Patreon</button>
           <a href="#" class="btn btn-secondary" style="min-width: 200px; padding: 14px 28px; font-size: 15px;">Watch Installation Guide</a>
         </div>
 
@@ -54,6 +54,7 @@
         <p>
           Each release includes the POPX operators package and an example project file to help you get started quickly.
         </p>
+
       </section>
 
       <section>
@@ -146,6 +147,83 @@
   </div>
 
   <div id="menu-overlay-container"></div>
+
+  <!-- Patreon Subscribe Modal -->
+  <div id="patreon-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); z-index: 10000; align-items: center; justify-content: center; padding: 16px;">
+    <div style="background: var(--color-bg); border-radius: 12px; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; position: relative; border: 1px solid var(--color-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+      <button id="modal-close" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; color: var(--color-text-muted); font-size: 28px; cursor: pointer; line-height: 1; padding: 4px 8px; transition: color 0.2s ease, background 0.2s ease; width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; z-index: 1;">&times;</button>
+
+      <h2 style="margin-top: 0; margin-bottom: 20px; color: var(--color-text); font-size: clamp(20px, 5vw, 24px); font-weight: 600; padding-right: 40px;">Important Note Before Downloading</h2>
+
+      <p style="margin-bottom: 16px; line-height: 1.7; color: var(--color-text-muted); font-size: clamp(14px, 3vw, 15px);">
+        POPX is released under the <strong style="color: var(--color-text);">MIT License</strong>, which technically allows anyone to use and modify the files.
+      </p>
+
+      <p style="margin-bottom: 16px; line-height: 1.7; color: var(--color-text-muted); font-size: clamp(14px, 3vw, 15px);">
+        <strong style="color: var(--color-text);">However, we kindly ask that you do not share, copy, or distribute POPX outside of the official POPX Patreon tier.</strong>
+      </p>
+
+      <p style="margin-bottom: 16px; line-height: 1.7; color: var(--color-text-muted); font-size: clamp(14px, 3vw, 15px);">
+        POPX represents years of TouchDesigner development, research, and careful engineering. If someone wants access to POPX, please direct them to the Patreon page so they can support the project themselves.
+      </p>
+
+      <p style="margin-bottom: 24px; line-height: 1.7; color: var(--color-text-muted); font-size: clamp(14px, 3vw, 15px);">
+        Your respect and support make this work possible and help POPX continue to grow and improve. Thank you for being part of this community.
+      </p>
+
+      <div style="text-align: center; margin-top: 28px;">
+        <a href="https://www.patreon.com/POPX" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-block; width: 100%; max-width: 300px; padding: 14px 28px; font-size: clamp(15px, 3.5vw, 16px); text-decoration: none;">Continue to Patreon</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Patreon Modal Logic
+    const patreonModal = document.getElementById('patreon-modal');
+    const patreonBtn = document.getElementById('patreon-subscribe-btn');
+    const modalClose = document.getElementById('modal-close');
+
+    if (patreonBtn) {
+      patreonBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        patreonModal.style.display = 'flex';
+      });
+    }
+
+    if (modalClose) {
+      // Handle close button hover states
+      modalClose.addEventListener('mouseenter', function() {
+        this.style.color = 'var(--color-text)';
+        this.style.background = 'var(--color-bg-secondary)';
+      });
+
+      modalClose.addEventListener('mouseleave', function() {
+        this.style.color = 'var(--color-text-muted)';
+        this.style.background = 'transparent';
+      });
+
+      // Handle close button click
+      modalClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        patreonModal.style.display = 'none';
+      });
+    }
+
+    // Close modal when clicking outside the content
+    patreonModal.addEventListener('click', function(e) {
+      if (e.target === patreonModal) {
+        patreonModal.style.display = 'none';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && patreonModal.style.display === 'flex') {
+        patreonModal.style.display = 'none';
+      }
+    });
+  </script>
 
   <script src="../../../assets/js/component-loader.js"></script>
   <script src="../../../assets/js/script.js"></script>
