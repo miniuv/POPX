@@ -232,12 +232,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Color</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Display Color</span>
+            <span class="param-name">Displaycolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Display color for constraint geometry visualization (RGB).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Display color for constraint geometry visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorb</span>
+            </div>
           </div>
         </div>
 
@@ -467,30 +483,27 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Initial Line</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Line geometry (open or closed strips) to initialize differential growth from</span>
+            <span class="param-text">Line Growth Source</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Constraint Geometry (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">POP geometry surface to project line vertices onto</span>
+            <span class="param-text">Constraint Geometry</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 2</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Constraint Volume (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture defining allowed growth volume</span>
+            <span class="param-text">Constraint Volume</span>
           </div>
         </div>
       </section>
@@ -504,7 +517,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Grown line geometry with subdivided edges and smoothed curves</span>
+            <span class="param-text">Output Line</span>
           </div>
         </div>
       </section>
