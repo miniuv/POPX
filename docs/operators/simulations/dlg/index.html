@@ -193,6 +193,87 @@
 
         <hr class="section-divider">
 
+        <!-- Bounds Page -->
+        <h3 id="page-bounds" class="page-heading">Page: Bounds</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Limit Type Minimum</span>
+            <span class="param-name">Mintype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to handle vertices below minimum.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Off</span>
+              <span class="param-name">off</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clamp</span>
+              <span class="param-name">clamp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Loop</span>
+              <span class="param-name">loop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Zig Zag</span>
+              <span class="param-name">zigzag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Limit Type Maximum</span>
+            <span class="param-name">Maxtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to handle vertices above maximum.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Off</span>
+              <span class="param-name">off</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clamp</span>
+              <span class="param-name">clamp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Loop</span>
+              <span class="param-name">loop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Zig Zag</span>
+              <span class="param-name">zigzag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Value</span>
+            <span class="param-name">Min</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Lower bound for XYZ position limits.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Value</span>
+            <span class="param-name">Max</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Upper bound for XYZ position limits.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
         <!-- Constraint Geometry Page -->
         <h3 id="page-constraint-geometry" class="page-heading">Page: Constraint Geometry</h3>
 
@@ -280,21 +361,53 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Lower Bounds</span>
             <span class="param-name">Lowerbounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Minimum XYZ position of volume constraint region.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum position of volume constraint region.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Upper Bounds</span>
             <span class="param-name">Upperbounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum XYZ position of volume constraint region.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum position of volume constraint region.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsz</span>
+            </div>
           </div>
         </div>
 
@@ -422,47 +535,6 @@
 
         <hr class="section-divider">
 
-        <!-- Bounds Page -->
-        <h3 id="page-bounds" class="page-heading">Page: Bounds</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Limit Type Minimum</span>
-            <span class="param-name">Mintype</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">How to handle vertices below minimum (off, clamp, wrap, mirror).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Limit Type Maximum</span>
-            <span class="param-name">Maxtype</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">How to handle vertices above maximum (off, clamp, wrap, mirror).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Minimum Value</span>
-            <span class="param-name">Min</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Lower bound for XYZ position limits.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Maximum Value</span>
-            <span class="param-name">Max</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Upper bound for XYZ position limits.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
         <!-- Common Page -->
         <h3 id="page-common" class="page-heading">Page: Common</h3>
 
@@ -538,10 +610,10 @@
           <a href="#parameters">Parameters</a>
           <ul>
             <li><a href="#page-dlg">Page: DLG</a></li>
+            <li><a href="#page-bounds">Page: Bounds</a></li>
             <li><a href="#page-constraint-geometry">Page: Constraint Geometry</a></li>
             <li><a href="#page-constraint-volume">Page: Constraint Volume</a></li>
             <li><a href="#page-noise">Page: Noise</a></li>
-            <li><a href="#page-bounds">Page: Bounds</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

@@ -52,7 +52,7 @@
         </p>
 
         <p>
-          Physarum supports optional volume constraints to confine particle movement within 3D texture-defined regions using force-based repulsion.
+          Physarum supports optional volume constraints to confine particle movement within texture-defined regions using force-based repulsion (2D texture in 2D mode, 3D texture in 3D mode).
           The simulation outputs both particle positions and the trail texture, allowing visualization of the particle swarm itself or just the accumulated trail patterns.
           Boundary behaviors (off, clamp, loop, zigzag) control how particles interact with simulation bounds.
           This makes Physarum ideal for generative network art, organic vein patterns, maze generation, path optimization visualization, neural network aesthetics, and procedural mycelium textures.
@@ -84,48 +84,112 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Simulation Space</span>
-            <span class="param-name">Simulationspace</span>
+            <span class="param-name">Simspace</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Dimensionality of simulation (2D for flat patterns, 3D for volumetric).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Dimensionality of simulation.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">3D</span>
+              <span class="param-name">3d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">2D</span>
+              <span class="param-name">2d</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Max Axis Resolution</span>
-            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-name">Maxaxisres</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum voxel/pixel resolution for longest axis of trail texture.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Bounds Size</span>
             <span class="param-name">Boundssize</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Physical size of simulation volume in world units (XYZ).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Simulation Resolution</span>
-            <span class="param-name">Simulationresolution</span>
+            <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-description">Read-only display of actual trail texture resolution (XYZ voxels/pixels).</span>
+            <span class="param-group-description">Physical size of simulation volume in world units.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Bounds Size</span>
+              <span class="param-name">Boundssizex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bounds Size</span>
+              <span class="param-name">Boundssizey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bounds Size</span>
+              <span class="param-name">Boundssizez</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Simulation Resolution</span>
+            <span class="param-name">Simres</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Read-only display of actual trail texture resolution.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Simresx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Simresy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Simresz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Bounds Type</span>
             <span class="param-name">Boundstype</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Boundary behavior: Off (no bounds), Clamp (stop at edges), Loop (wrap), Zig Zag (reflect).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Boundary behavior.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Off</span>
+              <span class="param-name">off</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clamp</span>
+              <span class="param-name">clamp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Loop</span>
+              <span class="param-name">loop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Zig Zag</span>
+              <span class="param-name">zigzag</span>
+            </div>
           </div>
         </div>
 
@@ -158,15 +222,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Sense</span>
-            <span class="param-name">Sense</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for sensor sampling parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Sensor Distance Base</span>
             <span class="param-name">Sensordistancebase</span>
             <span class="param-separator">–</span>
@@ -179,7 +234,7 @@
             <span class="param-label">Sensor Distance Power</span>
             <span class="param-name">Sensordistancepower</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to random sensor distance variation.</span>
+            <span class="param-description">Power function applied to trial-sampled sensor distance variation.</span>
           </div>
         </div>
 
@@ -188,7 +243,7 @@
             <span class="param-label">Sensor Distance Scale</span>
             <span class="param-name">Sensordistancescale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for random sensor distance variation range.</span>
+            <span class="param-description">Multiplier for trial-sampled sensor distance variation range.</span>
           </div>
         </div>
 
@@ -197,7 +252,7 @@
             <span class="param-label">Sensor Angle Base</span>
             <span class="param-name">Sensoranglebase</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Base angle offset for left/right sensors from forward direction (degrees).</span>
+            <span class="param-description">Base angle offset for sensors from forward direction (degrees).</span>
           </div>
         </div>
 
@@ -206,7 +261,7 @@
             <span class="param-label">Sensor Angle Power</span>
             <span class="param-name">Sensoranglepower</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to random sensor angle variation.</span>
+            <span class="param-description">Power function applied to trial-sampled sensor angle variation.</span>
           </div>
         </div>
 
@@ -215,16 +270,7 @@
             <span class="param-label">Sensor Angle Scale</span>
             <span class="param-name">Sensoranglescale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for random sensor angle variation range (degrees).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Move</span>
-            <span class="param-name">Move</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for movement and rotation parameters.</span>
+            <span class="param-description">Multiplier for trial-sampled sensor angle variation range (degrees).</span>
           </div>
         </div>
 
@@ -242,7 +288,7 @@
             <span class="param-label">Rotation Angle Power</span>
             <span class="param-name">Rotationanglepower</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to random rotation angle variation.</span>
+            <span class="param-description">Power function applied to trial-sampled rotation angle variation.</span>
           </div>
         </div>
 
@@ -251,7 +297,7 @@
             <span class="param-label">Rotation Angle Scale</span>
             <span class="param-name">Rotationanglescale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for random rotation angle variation range (degrees).</span>
+            <span class="param-description">Multiplier for trial-sampled rotation angle variation range (degrees).</span>
           </div>
         </div>
 
@@ -269,7 +315,7 @@
             <span class="param-label">Move Distance Power</span>
             <span class="param-name">Movedistancepower</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to random move distance variation.</span>
+            <span class="param-description">Power function applied to trial-sampled move distance variation.</span>
           </div>
         </div>
 
@@ -278,16 +324,7 @@
             <span class="param-label">Move Distance Scale</span>
             <span class="param-name">Movedistancescale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for random move distance variation range.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Diffuse</span>
-            <span class="param-name">Diffuse</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for trail texture processing parameters.</span>
+            <span class="param-description">Multiplier for trial-sampled move distance variation range.</span>
           </div>
         </div>
 
@@ -303,27 +340,75 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Diffuse Passes</span>
-            <span class="param-name">Npasses</span>
+            <span class="param-name">Diffusepasses</span>
             <span class="param-separator">–</span>
             <span class="param-description">Number of blur iterations to spread trails (0 = no diffusion).</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Type</span>
             <span class="param-name">Type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Blur filter algorithm for diffusion (Catmull-Rom, Gaussian, Box, etc.).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Blur filter algorithm for diffusion.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Catmull-Rom</span>
+              <span class="param-name">catmull</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gaussian</span>
+              <span class="param-name">gaussian</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Box</span>
+              <span class="param-name">box</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bartlette</span>
+              <span class="param-name">bartlette</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sinc</span>
+              <span class="param-name">sinc</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Hanning</span>
+              <span class="param-name">hanning</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackman</span>
+              <span class="param-name">blackman</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Extend</span>
             <span class="param-name">Extend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Edge handling for blur (Hold, Repeat, Mirror).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Edge handling for blur.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Hold</span>
+              <span class="param-name">hold</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Repeat</span>
+              <span class="param-name">repeat</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Mirror</span>
+              <span class="param-name">mirror</span>
+            </div>
           </div>
         </div>
 
@@ -336,21 +421,53 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Filter Scale</span>
             <span class="param-name">Filterscale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Per-axis multiplier for filter kernel size (XYZ).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Per-axis multiplier for filter kernel size.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Filter Scale</span>
+              <span class="param-name">Filterscale1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Filter Scale</span>
+              <span class="param-name">Filterscale2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Filter Scale</span>
+              <span class="param-name">Filterscale3</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sample Step (Pixels)</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Sample Step</span>
             <span class="param-name">Offset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sample offset distance for blur in pixels (XYZ).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sample offset distance for blur in pixels.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Sample Step</span>
+              <span class="param-name">Offsetx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sample Step</span>
+              <span class="param-name">Offsety</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sample Step</span>
+              <span class="param-name">Offsetz</span>
+            </div>
           </div>
         </div>
 
@@ -400,7 +517,7 @@
             <span class="param-label">Constraint to Volume</span>
             <span class="param-name">Constrainttovolume</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Confines particle movement within 3D texture-defined regions.</span>
+            <span class="param-description">Confines particle movement within texture-defined regions.</span>
           </div>
         </div>
 
@@ -409,7 +526,7 @@
             <span class="param-label">Constraint Volume</span>
             <span class="param-name">Constraintvolume</span>
             <span class="param-separator">–</span>
-            <span class="param-description">3D texture where white regions allow movement, black blocks it.</span>
+            <span class="param-description">Texture where white regions allow movement, black blocks it (2D in 2D mode, 3D in 3D mode).</span>
           </div>
         </div>
 
@@ -462,20 +579,18 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Initial Particles (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">POP particles with positions and directions to initialize simulation</span>
+            <span class="param-text">Particles</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Constraint Volume (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture defining allowed movement regions</span>
+            <span class="param-text">Constraint Volume</span>
           </div>
         </div>
       </section>
@@ -487,20 +602,27 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Particles</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">POP particles with updated positions and directions</span>
+            <span class="param-text">Particles</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Trail Texture</span>
+            <span class="param-text">Trail</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">2D or 3D texture containing accumulated pheromone trail map</span>
+            <span class="param-text">Deposit</span>
           </div>
         </div>
       </section>

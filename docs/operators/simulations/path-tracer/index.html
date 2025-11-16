@@ -191,7 +191,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Override if Material Exists</span>
-            <span class="param-name">Overrideifmaterialexists</span>
+            <span class="param-name">Overrideifexists</span>
             <span class="param-separator">–</span>
             <span class="param-description">Apply material parameters even when geometry has existing material attributes.</span>
           </div>
@@ -272,7 +272,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Anisotropic Rotation</span>
-            <span class="param-name">Anisotropicrotation</span>
+            <span class="param-name">Anisotropicrot</span>
             <span class="param-separator">–</span>
             <span class="param-description">Rotation angle for anisotropic highlights (0-1 = 0-360 degrees).</span>
           </div>
@@ -463,25 +463,57 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
             <span class="param-label">Light Type</span>
-            <span class="param-name">Lights0lighttype</span>
+            <span class="param-name">Lights0type</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Type of light source (Point, Spot, or Area).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Type of light source.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point Light</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spot Light</span>
+              <span class="param-name">spot</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Area Light</span>
+              <span class="param-name">area</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Color</span>
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
+            <span class="param-label">Light Color</span>
             <span class="param-name">Lights0color</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Light color (RGB).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Light color RGB.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Light Color</span>
+              <span class="param-name">Lights0colorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Light Color</span>
+              <span class="param-name">Lights0colorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Light Color</span>
+              <span class="param-name">Lights0colorb</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Dimmer</span>
             <span class="param-name">Lights0dimmer</span>
@@ -490,52 +522,100 @@
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Transform Order</span>
             <span class="param-name">Lights0xord</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Order of transformation operations (Scale/Rotate/Translate).</span>
+            <span class="param-description">Order of transformation operations.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Rotate Order</span>
             <span class="param-name">Lights0rord</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Rotation axis order (XYZ, XZY, etc.).</span>
+            <span class="param-description">Rotation axis order.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
             <span class="param-label">Translate</span>
             <span class="param-name">Lights0t</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Light position in world space (XYZ).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Light position in world space XYZ.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Lights0tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Lights0ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Lights0tz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
             <span class="param-label">Rotate</span>
             <span class="param-name">Lights0r</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Light rotation (XYZ degrees).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Light rotation XYZ degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Lights0rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Lights0ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Lights0rz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
             <span class="param-label">Scale</span>
             <span class="param-name">Lights0s</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Light scale for area lights (XYZ).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Light scale for area lights XYZ.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Lights0sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Lights0sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Lights0sz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Uniform Scale</span>
             <span class="param-name">Lights0scale</span>
@@ -544,16 +624,16 @@
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Bi-Directional</span>
             <span class="param-name">Lights0bidirectional</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Area lights emit from both sides of surface.</span>
+            <span class="param-description">Area and spot lights emit from both sides of surface.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Cone Angle</span>
             <span class="param-name">Lights0coneangle</span>
@@ -562,7 +642,7 @@
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Cone Delta</span>
             <span class="param-name">Lights0conedelta</span>
@@ -571,12 +651,12 @@
           </div>
         </div>
 
-        <div class="parameter-item">
+        <div class="parameter-item parameter-item-indented">
           <div class="param-header">
             <span class="param-label">Cone Rolloff</span>
             <span class="param-name">Lights0coneroll</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Spotlight intensity falloff curve (1 = linear, higher = sharper).</span>
+            <span class="param-description">Spotlight intensity falloff curve.</span>
           </div>
         </div>
 
@@ -602,25 +682,9 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Geometry</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Scene geometry to render with path tracing</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Outputs Section -->
-      <section id="outputs">
-        <h2>Outputs</h2>
-
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Output 0</span>
-            <span class="param-separator">–</span>
-            <span class="param-name">Rendered Image</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">TOP texture with path traced image (HDR or tone mapped based on settings)</span>
+            <span class="param-text">POPX_in1</span>
           </div>
         </div>
       </section>
@@ -647,7 +711,6 @@
           </ul>
         </li>
         <li><a href="#inputs">Inputs</a></li>
-        <li><a href="#outputs">Outputs</a></li>
       </ul>
     </aside>
   </div>

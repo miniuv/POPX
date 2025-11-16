@@ -1315,7 +1315,6 @@ const searchIndex = [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Orient Mesh', anchor: '#page-orient-mesh', keywords: ['orientation', 'mesh', 'surface', 'polyframe', 'normal', 'up', 'tangent', 'move along mesh', 'swirl', 'cross', 'polygon'] },
       { title: 'Page: Curl Noise', anchor: '#page-curl-noise', keywords: ['curl', 'noise', 'swirl', 'organic', 'flow', 'blend', 'harmonics'] },
-      { title: 'Page: Transform', anchor: '#page-transform', keywords: ['translate', 'rotate', 'scale', '4d', 'noise space'] },
       { title: 'Page: Blur', anchor: '#page-blur', keywords: ['blur', 'smooth', 'connectivity', 'proximity', 'iterations'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
@@ -1436,10 +1435,10 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: DLG', anchor: '#page-dlg', keywords: ['differential line growth', 'edge subdivision', 'branching', 'coral', 'brain', 'organic', 'line strips', 'curvature', 'neighbors', 'max distance', 'vertices', 'smoothing', 'filter', 'gaussian', 'initialize', 'play', 'step'] },
+      { title: 'Page: Bounds', anchor: '#page-bounds', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'wrap', 'mirror', 'boundary'] },
       { title: 'Page: Constraint Geometry', anchor: '#page-constraint-geometry', keywords: ['surface', 'projection', 'collision', 'opaque', 'display', 'geometry constraint'] },
       { title: 'Page: Constraint Volume', anchor: '#page-constraint-volume', keywords: ['volume', '3d texture', 'bounds', 'force', 'repulsion', 'blur', 'pre-shrink', 'container'] },
       { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'noise', 'displacement', 'harmonics', 'octaves', 'frequency', 'amplitude', 'fractal', 'animate', 'seed'] },
-      { title: 'Page: Bounds', anchor: '#page-bounds', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'wrap', 'mirror', 'boundary'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1488,8 +1487,7 @@ const searchIndex = [
       { title: 'Page: Material', anchor: '#page-material', keywords: ['disney brdf', 'pbr', 'base color', 'metallic', 'roughness', 'specular', 'anisotropic', 'subsurface', 'sheen', 'clearcoat', 'transmission', 'ior', 'emission', 'material override'] },
       { title: 'Page: Lights', anchor: '#page-lights', keywords: ['lighting', 'environment map', 'hdri', 'point light', 'spot light', 'area light', 'direct light', 'image based lighting', 'intensity', 'dimmer', 'cone angle', 'bidirectional'] },
       { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
+      { title: 'Inputs', anchor: '#inputs' }
     ]
   },
   {

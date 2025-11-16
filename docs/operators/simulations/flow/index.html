@@ -46,7 +46,7 @@
         </p>
 
         <p>
-          The solver supports substance injection from POPX point sources, volumetric source inputs, and various forces including buoyancy, gravity, external force fields, and optical flow.
+          The solver supports substance injection from POP point sources, volumetric source inputs, and various forces including buoyancy, gravity, external force fields, and optical flow.
           You can control fluid behavior through viscosity (thickness), vorticity (swirling motion), pressure iterations (incompressibility accuracy), and dissipation rates for both velocity and substance density.
           The simulation maintains mass conservation through a pressure projection step and supports collision boundaries and obstacles defined via 3D textures.
         </p>
@@ -54,7 +54,7 @@
         <p>
           Flow optionally generates particle systems that are advected by the fluid velocity field, creating wispy smoke trails or fire ember effects.
           Particles can spawn from density regions and inherit color from the substance field with customizable lifespans and variance.
-          The simulation outputs velocity and substance density as 3D textures suitable for volume rendering or further processing, making it ideal for smoke plumes, fire effects, atmospheric disturbances, and abstract fluid art.
+          The simulation outputs velocity, substance density, and temperature as 3D textures suitable for volume rendering or further processing, making it ideal for smoke plumes, fire effects, atmospheric disturbances, and abstract fluid art.
         </p>
       </section>
 
@@ -64,15 +64,6 @@
 
         <!-- Flow Page -->
         <h3 id="page-flow" class="page-heading">Page: Flow</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">General Settings</span>
-            <span class="param-name">Generalsettings</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for simulation control parameters.</span>
-          </div>
-        </div>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -92,55 +83,90 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Simulation Bounds</span>
-            <span class="param-name">Simulationbounds</span>
+            <span class="param-name">Simbounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Physical size of simulation volume in world units (XYZ).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Physical size of simulation volume in world units.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simulation Bounds</span>
+              <span class="param-name">Simboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Bounds</span>
+              <span class="param-name">Simboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Bounds</span>
+              <span class="param-name">Simboundsz</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Max Axis Resolution</span>
-            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-name">Maxaxisres</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum voxel resolution for longest axis (other axes scale proportionally).</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Simulation Resolution</span>
-            <span class="param-name">Simulationresolution</span>
+            <span class="param-name">Resolution</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Read-only display of actual grid resolution (XYZ voxels).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Read-only display of actual grid resolution.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Resolutionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Resolutiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Simulation Resolution</span>
+              <span class="param-name">Resolutionz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Precision</span>
             <span class="param-name">Precision</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Texture precision for simulation data (16-bit or 32-bit float).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Velocity</span>
-            <span class="param-name">Velocity</span>
+            <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-description">Header for velocity field parameters.</span>
+            <span class="param-group-description">Texture precision for simulation data.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">16-bit float</span>
+              <span class="param-name">16bit</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">32-bit float</span>
+              <span class="param-name">32bit</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Velocity Dissipation</span>
-            <span class="param-name">Velocitydissipation</span>
+            <span class="param-name">Veldissipation</span>
             <span class="param-separator">–</span>
             <span class="param-description">Rate at which velocity decays over time (0 = no damping, 1 = instant decay).</span>
           </div>
@@ -149,7 +175,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Pressure Iterations</span>
-            <span class="param-name">Pressureiterations</span>
+            <span class="param-name">Pressureiters</span>
             <span class="param-separator">–</span>
             <span class="param-description">Number of iterations for pressure solve (higher = more accurate incompressibility).</span>
           </div>
@@ -167,7 +193,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Diffusion Iterations</span>
-            <span class="param-name">Diffusioniterations</span>
+            <span class="param-name">Diffusioniters</span>
             <span class="param-separator">–</span>
             <span class="param-description">Solver iterations for viscosity diffusion (only active when viscosity > 0).</span>
           </div>
@@ -184,28 +210,35 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Substance</span>
-            <span class="param-name">Substance</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for substance density parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Substance Dissipation</span>
-            <span class="param-name">Substancedissipation</span>
+            <span class="param-name">Dissipation</span>
             <span class="param-separator">–</span>
             <span class="param-description">Rate at which substance density fades over time (higher = faster fade).</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Substance Color Dissipation</span>
-            <span class="param-name">Substancecolordissipation</span>
+            <span class="param-name">Colordissipation</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Per-channel dissipation rates for RGB color (allows colored smoke to fade unevenly).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Per-channel dissipation rates for RGB color (allows colored smoke to fade unevenly).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Substance Color Dissipation</span>
+              <span class="param-name">Colordissipationr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Substance Color Dissipation</span>
+              <span class="param-name">Colordissipationg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Substance Color Dissipation</span>
+              <span class="param-name">Colordissipationb</span>
+            </div>
           </div>
         </div>
 
@@ -213,15 +246,6 @@
 
         <!-- Inputs Page -->
         <h3 id="page-inputs" class="page-heading">Page: Inputs</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Injection</span>
-            <span class="param-name">Injection</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for point-based substance injection settings.</span>
-          </div>
-        </div>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -259,21 +283,53 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Default Color</span>
             <span class="param-name">Injectdefaultcolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">RGB color for injected substance when no color attribute present.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">RGB color for injected substance when no color attribute present.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default Color</span>
+              <span class="param-name">Injectdefaultcolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Color</span>
+              <span class="param-name">Injectdefaultcolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Color</span>
+              <span class="param-name">Injectdefaultcolorb</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Default Position</span>
             <span class="param-name">Injectdefaultposition</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Fallback injection position when no POPX input connected.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Fallback injection position when no POPX input connected.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default Position</span>
+              <span class="param-name">Injectdefaultpositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Position</span>
+              <span class="param-name">Injectdefaultpositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Default Position</span>
+              <span class="param-name">Injectdefaultpositionz</span>
+            </div>
           </div>
         </div>
 
@@ -283,15 +339,6 @@
             <span class="param-name">Injectuniformscale</span>
             <span class="param-separator">–</span>
             <span class="param-description">Radius of influence for each injection point.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Source</span>
-            <span class="param-name">Source</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for volumetric source texture settings.</span>
           </div>
         </div>
 
@@ -335,15 +382,6 @@
 
         <!-- Forces Page -->
         <h3 id="page-forces" class="page-heading">Page: Forces</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Buoyancy</span>
-            <span class="param-name">Buoyancy</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for buoyancy force parameters.</span>
-          </div>
-        </div>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -392,15 +430,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Gravity</span>
-            <span class="param-name">Gravity</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for gravity force parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Apply Gravity</span>
             <span class="param-name">Applygravity</span>
             <span class="param-separator">–</span>
@@ -408,12 +437,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Gravity</span>
             <span class="param-name">Gravityvector</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Gravity direction vector (default: 0, -1, 0).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Gravity direction vector (default: 0, -1, 0).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityvectorx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityvectory</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityvectorz</span>
+            </div>
           </div>
         </div>
 
@@ -432,15 +477,6 @@
             <span class="param-name">Surfacelevel</span>
             <span class="param-separator">–</span>
             <span class="param-description">Y-position where gravity begins to take effect.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">External Force</span>
-            <span class="param-name">Externalforce</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for custom force field parameters.</span>
           </div>
         </div>
 
@@ -465,18 +501,9 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">External Force Strength</span>
-            <span class="param-name">Externalforcestrength</span>
+            <span class="param-name">Extforcestrength</span>
             <span class="param-separator">–</span>
             <span class="param-description">Multiplier for external force magnitude.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Optical Flow</span>
-            <span class="param-name">Opticalflow</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for optical flow force parameters.</span>
           </div>
         </div>
 
@@ -485,7 +512,7 @@
             <span class="param-label">Add Optical Flow Force</span>
             <span class="param-name">Addopticalflowforce</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables force from 2D optical flow texture.</span>
+            <span class="param-description">Enables force from 3D optical flow texture.</span>
           </div>
         </div>
 
@@ -494,14 +521,14 @@
             <span class="param-label">Optical Flow TOP</span>
             <span class="param-name">Opticalflowtop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">2D texture with RG motion vectors from optical flow analysis.</span>
+            <span class="param-description">3D texture input for optical flow motion vector computation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Optical Flow Force Strength</span>
-            <span class="param-name">Opticalflowforcestrength</span>
+            <span class="param-name">Optiflowforcestrength</span>
             <span class="param-separator">–</span>
             <span class="param-description">Multiplier for optical flow force magnitude.</span>
           </div>
@@ -511,15 +538,6 @@
 
         <!-- Collisions Page -->
         <h3 id="page-collisions" class="page-heading">Page: Collisions</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Bounds</span>
-            <span class="param-name">Bounds</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for simulation boundary parameters.</span>
-          </div>
-        </div>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -545,15 +563,6 @@
             <span class="param-name">Showbounds</span>
             <span class="param-separator">–</span>
             <span class="param-description">Visualizes boundary regions in output.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Obstacle</span>
-            <span class="param-name">Obstacle</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for obstacle collision parameters.</span>
           </div>
         </div>
 
@@ -618,15 +627,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Particle Source</span>
-            <span class="param-name">Particlesource</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for particle spawning parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Spawn From Density</span>
             <span class="param-name">Spawn</span>
             <span class="param-separator">–</span>
@@ -672,15 +672,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Particle Life</span>
-            <span class="param-name">Particlelife</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for particle lifespan parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Enable Particle Life</span>
             <span class="param-name">Enableparticlelife</span>
             <span class="param-separator">–</span>
@@ -691,7 +682,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Seed</span>
-            <span class="param-name">Seedlife</span>
+            <span class="param-name">Lifeseed</span>
             <span class="param-separator">–</span>
             <span class="param-description">Random seed for lifespan variance.</span>
           </div>
@@ -717,55 +708,134 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Color</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for particle color lookup parameters.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Lookup Substance Color</span>
-            <span class="param-name">Lookupsubstancecolor</span>
+            <span class="param-name">Lookupcolor</span>
             <span class="param-separator">–</span>
             <span class="param-description">Particles inherit color from substance field at spawn position.</span>
           </div>
         </div>
 
         <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">From Low</span>
-            <span class="param-name">Fromlow</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Input range minimum for color remapping (RGBA).</span>
+          <div class="param-group">
+            <div class="param-group-header">
+              <span class="param-label">From Low</span>
+              <span class="param-name">Fromlow</span>
+              <span class="param-separator">–</span>
+              <span class="param-toggle"></span>
+              <span class="param-separator">–</span>
+              <span class="param-group-description">Input range minimum for color remapping (RGBA).</span>
+            </div>
+            <div class="param-subparams">
+              <div class="param-subparam">
+                <span class="param-label">From Low</span>
+                <span class="param-name">Fromlow1</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From Low</span>
+                <span class="param-name">Fromlow2</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From Low</span>
+                <span class="param-name">Fromlow3</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From Low</span>
+                <span class="param-name">Fromlow4</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">From High</span>
-            <span class="param-name">Fromhigh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Input range maximum for color remapping (RGBA).</span>
+          <div class="param-group">
+            <div class="param-group-header">
+              <span class="param-label">From High</span>
+              <span class="param-name">Fromhigh</span>
+              <span class="param-separator">–</span>
+              <span class="param-toggle"></span>
+              <span class="param-separator">–</span>
+              <span class="param-group-description">Input range maximum for color remapping (RGBA).</span>
+            </div>
+            <div class="param-subparams">
+              <div class="param-subparam">
+                <span class="param-label">From High</span>
+                <span class="param-name">Fromhigh1</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From High</span>
+                <span class="param-name">Fromhigh2</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From High</span>
+                <span class="param-name">Fromhigh3</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">From High</span>
+                <span class="param-name">Fromhigh4</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">To Low</span>
-            <span class="param-name">Tolow</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Output range minimum for color remapping (RGBA).</span>
+          <div class="param-group">
+            <div class="param-group-header">
+              <span class="param-label">To Low</span>
+              <span class="param-name">Tolow</span>
+              <span class="param-separator">–</span>
+              <span class="param-toggle"></span>
+              <span class="param-separator">–</span>
+              <span class="param-group-description">Output range minimum for color remapping (RGBA).</span>
+            </div>
+            <div class="param-subparams">
+              <div class="param-subparam">
+                <span class="param-label">To Low</span>
+                <span class="param-name">Tolow1</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To Low</span>
+                <span class="param-name">Tolow2</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To Low</span>
+                <span class="param-name">Tolow3</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To Low</span>
+                <span class="param-name">Tolow4</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">To High</span>
-            <span class="param-name">Tohigh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Output range maximum for color remapping (RGBA).</span>
+          <div class="param-group">
+            <div class="param-group-header">
+              <span class="param-label">To High</span>
+              <span class="param-name">Tohigh</span>
+              <span class="param-separator">–</span>
+              <span class="param-toggle"></span>
+              <span class="param-separator">–</span>
+              <span class="param-group-description">Output range maximum for color remapping (RGBA).</span>
+            </div>
+            <div class="param-subparams">
+              <div class="param-subparam">
+                <span class="param-label">To High</span>
+                <span class="param-name">Tohigh1</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To High</span>
+                <span class="param-name">Tohigh2</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To High</span>
+                <span class="param-name">Tohigh3</span>
+              </div>
+              <div class="param-subparam">
+                <span class="param-label">To High</span>
+                <span class="param-name">Tohigh4</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -791,50 +861,27 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Injection Points (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">POPX points for substance and force injection into simulation</span>
+            <span class="param-text">Injection</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Source Density (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture for continuous substance density addition</span>
+            <span class="param-text">Source</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 2</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Source Color (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture for continuous color addition</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Input 3</span>
-            <span class="param-separator">–</span>
-            <span class="param-name">Source Force (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture with RGB velocity vectors for force addition</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Input 4</span>
-            <span class="param-separator">–</span>
-            <span class="param-name">Source Temperature (Optional)</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture for continuous temperature addition</span>
+            <span class="param-text">Particle Source</span>
           </div>
         </div>
       </section>
@@ -846,30 +893,36 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Velocity</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture containing RGB velocity field vectors</span>
+            <span class="param-text">Substance</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Substance</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">3D texture with RGBA substance density and color</span>
+            <span class="param-text">Velocity</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 2</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Particles (Optional)</span>
+            <span class="param-text">Temperature</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 3</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">POP particles advected by velocity field (when Advect enabled)</span>
+            <span class="param-text">Particles</span>
           </div>
         </div>
       </section>

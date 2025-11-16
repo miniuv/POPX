@@ -40,22 +40,22 @@
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Mesh Fill</strong> is a GPU-accelerated simulation that fills mesh volumes or surfaces with particles using a density-guided algorithm.
-          Drives points to move inside mesh geometry or volumetric fields, gradually filling the space with organic growth patterns.
-          The simulation creates natural space-filling behavior by guiding particles through density fields generated from input geometry.
+          <strong>Mesh Fill</strong> is a GPU-accelerated simulation that drives particles to move through mesh volumes or surfaces using a density-guided algorithm.
+          The simulation guides particles through density fields generated from input geometry, creating organic movement patterns as particles navigate the space.
         </p>
 
         <p>
           Supports both mesh-based and volume-based inputs with automatic voxelization for mesh geometry.
-          You can control whether particles fill the entire interior volume or only the surface boundary, with adjustable radius controlling how closely particles pack together.
-          Filtering parameters allow smoothing of the density field for more uniform or organic filling patterns.
-          Optional seeding from density allows controlled spawning of new particles during simulation.
+          You can control whether particles move through the entire interior volume or along the surface boundary, with adjustable radius controlling movement constraints.
+          Filtering parameters allow smoothing of the velocity field for more uniform or organic particle motion.
+          The Seed page controls optional particle spawning from density regions when enabled.
         </p>
 
         <p>
-          Mesh Fill outputs the filled point cloud and optionally generates trail geometry showing particle movement paths.
-          The simulation includes standard playback controls (initialize, start, play) for controlling fill progression.
-          This makes Mesh Fill ideal for creating organic growth animations, volumetric filling effects, space colonization patterns, or particle-based mesh representations.
+          Mesh Fill outputs the moving point cloud and optionally generates trail geometry showing particle movement paths through the volume.
+          The trails visualize the exploration patterns as particles navigate the density field over time.
+          The simulation includes standard playback controls (initialize, start, play) for controlling the fill progression.
+          This makes Mesh Fill ideal for creating organic growth animations, volumetric exploration effects, particle flow visualizations, or animated particle-based mesh representations.
         </p>
       </section>
 
@@ -78,7 +78,7 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Switch to Volume Input</span>
-            <span class="param-name">Switchtovolumeinput</span>
+            <span class="param-name">Switchtovol</span>
             <span class="param-separator">–</span>
             <span class="param-description">Use 3D texture input instead of mesh geometry for density field.</span>
           </div>
@@ -96,18 +96,30 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Max Axis Resolution</span>
-            <span class="param-name">Maxaxisresolution</span>
+            <span class="param-name">Maxaxisres</span>
             <span class="param-separator">–</span>
             <span class="param-description">Voxel grid resolution for mesh-to-volume conversion (higher = more detail).</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Precision</span>
             <span class="param-name">Precision</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Texture precision for density field (16-bit or 32-bit float).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Texture precision for density field.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">16-bit float</span>
+              <span class="param-name">16bit</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">32-bit float</span>
+              <span class="param-name">32bit</span>
+            </div>
           </div>
         </div>
 
@@ -305,20 +317,27 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Mesh or Volume</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Mesh geometry or 3D texture volume defining fill space</span>
+            <span class="param-text">Mesh to Fill</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Input 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Initial Particles (Optional)</span>
+            <span class="param-text">Volume to Fill</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Optional starting particles to seed the fill simulation</span>
+            <span class="param-text">Seed</span>
           </div>
         </div>
       </section>
@@ -330,20 +349,63 @@
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 0</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Particles</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Filled point cloud with particles distributed through mesh volume or surface</span>
+            <span class="param-text">Trails</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 1</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-name">Trails (Optional)</span>
+            <span class="param-text">Filled Volume</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Curve geometry showing particle movement paths (when Active enabled)</span>
+            <span class="param-text">Inverted Filled Volume</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 3</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Velocity</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 4</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Volume</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 5</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Seed</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 6</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Trails</span>
           </div>
         </div>
       </section>
