@@ -52,8 +52,8 @@
         </p>
 
         <p>
-          DLG supports constraint systems to guide growth within specific regions: geometry constraints project vertices onto surfaces (creating growth confined to objects), while volume constraints use 3D textures to define allowed growth spaces with force-based repulsion.
-          Optional noise can be applied to vertex positions for additional variation, with full control over perlin noise parameters including harmonics, amplitude, and animation.
+          DLG supports constraint systems to guide growth within specific regions: geometry constraints project vertices onto surfaces (creating growth confined to objects), while volume constraints use 2D/3D textures to define allowed growth spaces with force-based repulsion.
+          Optional noise can be applied to the PointScale attribute to create more varied growth patterns, with full control over perlin noise parameters including harmonics, amplitude, and animation.
           Bounding limits allow clamping growth to specific XYZ ranges, making DLG ideal for organic decoration, procedural lace patterns, coral structures, brain-like forms, and abstract linear art.
         </p>
       </section>
@@ -439,7 +439,7 @@
             <span class="param-label">Apply Noise</span>
             <span class="param-name">Applynoise</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Adds perlin noise displacement to vertex positions.</span>
+            <span class="param-description">Applies perlin noise to the PointScale attribute to create varied growth patterns.</span>
           </div>
         </div>
 
@@ -448,7 +448,7 @@
             <span class="param-label">Seed</span>
             <span class="param-name">Seed</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for noise pattern generation.</span>
+            <span class="param-description">Numerical value that initializes the randomization.</span>
           </div>
         </div>
 
@@ -457,7 +457,7 @@
             <span class="param-label">Period</span>
             <span class="param-name">Period</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Base frequency of noise (smaller = larger features).</span>
+            <span class="param-description">Period (scale) of the noise field.</span>
           </div>
         </div>
 
@@ -466,7 +466,7 @@
             <span class="param-label">Harmonics</span>
             <span class="param-name">Harmon</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of octaves for fractal noise detail.</span>
+            <span class="param-description">The number of higher frequency components to layer on top of the base frequency. 0 harmonics give the base shape.</span>
           </div>
         </div>
 
@@ -475,7 +475,7 @@
             <span class="param-label">Harmonic Spread</span>
             <span class="param-name">Spread</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Frequency multiplier between octaves (typically 2.0).</span>
+            <span class="param-description">The factor by which the frequency of a harmonic increases relative to the previous harmonic.</span>
           </div>
         </div>
 
@@ -484,7 +484,7 @@
             <span class="param-label">Harmonic Gain</span>
             <span class="param-name">Gain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Amplitude falloff per octave (lower = smoother).</span>
+            <span class="param-description">Amplitude of the Harmonics layered on top of the base frequency.</span>
           </div>
         </div>
 
@@ -493,7 +493,7 @@
             <span class="param-label">Amplitude</span>
             <span class="param-name">Amp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Overall noise displacement magnitude.</span>
+            <span class="param-description">The noise values amplitude (a scale on the values output).</span>
           </div>
         </div>
 
@@ -502,7 +502,7 @@
             <span class="param-label">Exponent</span>
             <span class="param-name">Exp</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Power function applied to noise values for contrast control.</span>
+            <span class="param-description">Sets the exponent. The internal value is raised by the power of the exponent.</span>
           </div>
         </div>
 
@@ -548,7 +548,7 @@
             <span class="param-label">Input 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Line Growth Source</span>
+            <span class="param-text">LineStrip In</span>
           </div>
         </div>
 
@@ -580,7 +580,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Output Line</span>
+            <span class="param-text">LineStrip Out</span>
           </div>
         </div>
       </section>
