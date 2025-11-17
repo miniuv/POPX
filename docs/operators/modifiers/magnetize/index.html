@@ -45,14 +45,23 @@
         </p>
 
         <p>
-          Magnet positions can be specified either through a second input connection or via the <strong>Magnets</strong> parameter.
+          Magnet positions can be specified either through a second input connection or via the <strong>Magnets POP</strong> parameter.
           Supports three force modes: <strong>Repulse</strong> (push away), <strong>Attract</strong> (pull toward), and <strong>Spin</strong> (rotate around magnets).
         </p>
 
         <p>
           Effect intensity is controlled by the <strong>Search Radius</strong>, <strong>Effect Radius</strong>, and <strong>Force Strength</strong> parameters.
-          Additionally, individual magnet behavior can be customized using point attributes on the magnet input: <strong>ForceMode</strong>, <strong>ForceStrength</strong>, <strong>SpinDir</strong> (for spin direction), and <strong>PointScale</strong> (for effect radius).
           Optional falloff-based modulation enables spatially varying magnetic effects.
+        </p>
+
+        <p>
+          <strong>Multiple Magnet Fields:</strong> Magnets can be specified via the Magnets POP parameter or Input 1, where each point defines a separate magnet field - one point per magnet.
+          The attributes of the magnet POP are named the same as parameter tokens in the Magnetize operator, and override the parameters for each magnet.
+          Menus and toggles are represented as integers, starting at 0 for the first menu entry.
+          You need only to create a Point POP with attributes named as the Magnetize parameters, and then add a point per magnet, and set their values.
+          (An attribute <strong>radius</strong> will override the Effect Radius (Radius) parameter.)
+          Alternately you can generate points procedurally with attributes that match the Magnetize parameter names.
+          The workflow is the same as multiple strings defined in a specification DAT of the Geo Text COMP and the Text COMP.
         </p>
       </section>
 
@@ -74,8 +83,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Magnets</span>
-            <span class="param-name">Magnets</span>
+            <span class="param-label">Magnets POP</span>
+            <span class="param-name">Magnetspop</span>
             <span class="param-separator">–</span>
             <span class="param-description">Reference to a POP containing points that define magnet positions and attributes when no second input is connected.</span>
           </div>
@@ -108,31 +117,6 @@
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Force Mode</span>
-            <span class="param-name">Mode</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Determines the type of magnetic force: Repulse, Attract, or Spin. Can be overridden per-magnet using a ForceMode point attribute.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Repulse</span>
-              <span class="param-name">repulse</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Attract</span>
-              <span class="param-name">attract</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Spin</span>
-              <span class="param-name">spin</span>
-            </div>
-          </div>
-        </div>
-
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Search Radius</span>
@@ -151,12 +135,62 @@
           </div>
         </div>
 
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Force Mode</span>
+            <span class="param-name">Mode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines the type of magnetic force: Repulse, Attract, or Spin. Can be overridden per-magnet using a mode point attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Repulse</span>
+              <span class="param-name">repulse</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Attract</span>
+              <span class="param-name">attract</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spin</span>
+              <span class="param-name">spin</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Position</span>
+            <span class="param-name">Position</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Position of the magnet in 3D space. Can be overridden per-magnet using a P point attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positionz</span>
+            </div>
+          </div>
+        </div>
+
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Effect Radius</span>
             <span class="param-name">Radius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Radius of influence for each magnet. Can be overridden per-magnet using a PointScale point attribute.</span>
+            <span class="param-description">Radius of influence for each magnet. Can be overridden per-magnet using a radius point attribute.</span>
           </div>
         </div>
 
@@ -165,7 +199,7 @@
             <span class="param-label">Force Strength</span>
             <span class="param-name">Strength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Intensity of magnetic forces applied to instances. Can be overridden per-magnet using a ForceStrength point attribute.</span>
+            <span class="param-description">Intensity of magnetic forces applied to instances. Can be overridden per-magnet using a strength point attribute.</span>
           </div>
         </div>
 
@@ -174,7 +208,7 @@
             <span class="param-label">Invert Spin Direction</span>
             <span class="param-name">Spindir</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reverses the spin rotation direction. Can be controlled per-magnet using a SpinDir point attribute.</span>
+            <span class="param-description">Reverses the spin rotation direction. Can be controlled per-magnet using a spindir point attribute.</span>
           </div>
         </div>
 
