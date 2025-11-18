@@ -109,10 +109,12 @@
           </ul>
         </div>
 
-        <div class="warning-note">
-          <p>
-            <strong>⚠️ Note:</strong> Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.
-          </p>
+        <div class="note-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(255, 152, 0, 0.1); border-left: 4px solid rgba(255, 152, 0, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">ⓘ</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Note</strong></p>
+            <p style="margin: 0; color: var(--color-text);">Some POPX operators use GPU atomic operations, which may not be fully supported on macOS or integrated GPUs.</p>
+          </div>
         </div>
       </section>
 
@@ -123,7 +125,7 @@
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Open your TouchDesigner project.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Drag the <code>POPX.tox</code> file directly into your network.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Your project may freeze momentarily while the system initializes — this is normal.</li>
-          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Once loaded, the POPX container will appear at the root level of your project.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Once loaded, the POPX component will appear at the root level of your project.</li>
           <li style="margin-bottom: 10px; color: var(--color-text-muted);">Press <strong>Tab</strong> to open the OP Create Dialog — you'll now see the new POPX Operators Family available for use.</li>
         </ul>
       </section>
@@ -131,7 +133,7 @@
       <!-- Page Navigation -->
       <nav class="page-navigation">
         <a href="../getting-started/" class="nav-button prev">Getting Started</a>
-        <a href="../tutorials/" class="nav-button next">Tutorials</a>
+        <a href="../stubs-updates/" class="nav-button next">Stubs & Updates</a>
       </nav>
     </main>
 

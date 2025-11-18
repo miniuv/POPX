@@ -35,8 +35,8 @@
   --font-size-h2: clamp(18px, 3.5vw, 22px);
   --font-size-h3: clamp(16px, 3vw, 20px);
   --font-size-h4: clamp(15px, 2.5vw, 18px);
-  --font-size-body: clamp(14px, 2vw, 16px);
-  --font-size-small: clamp(12px, 1.8vw, 14px);
+  --font-size-body: clamp(15px, 2vw, 17px);
+  --font-size-small: clamp(13px, 1.8vw, 15px);
 
   --line-height: 1.6;
 
@@ -92,6 +92,31 @@
 /* Light Theme - Search Overlay Background */
 [data-theme="light"] .search-overlay {
   background: rgba(255, 255, 255, 0.75);
+}
+
+/* Light Theme - Sidebar Tree Lines */
+[data-theme="light"] .sidebar-section ul::before,
+[data-theme="light"] .sidebar-section li::before {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .sidebar-subsection::before,
+[data-theme="light"] .sidebar-subsection > h4::before {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Light Theme - Search Tree Lines */
+[data-theme="light"] .search-result-section {
+  border-left-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .search-result-section::before {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Light Theme - Search Page Separators */
+[data-theme="light"] .search-result-page {
+  border-top-color: rgba(0, 0, 0, 0.15);
 }
 
 /* ===========================
@@ -523,7 +548,6 @@ pre code {
   transition: background 0.15s ease;
   text-decoration: none;
   display: block;
-  border-left: 3px solid transparent;
 }
 
 .search-result-item:last-child {
@@ -532,7 +556,6 @@ pre code {
 
 .search-result-item:hover {
   background: var(--color-bg-panel);
-  border-left-color: var(--color-accent);
 }
 
 .search-result-title {
@@ -590,12 +613,20 @@ pre code {
   cursor: pointer;
   transition: background 0.15s ease;
   position: relative;
-  border-left: 3px solid transparent;
+  border-top: 3px solid rgba(255, 255, 255, 0.2);
+  margin-top: 24px;
+  padding-top: 24px;
+  margin-bottom: 8px;
+}
+
+.search-result-page:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 .search-result-page:hover {
   background: var(--color-bg-panel);
-  border-left-color: var(--color-accent);
 }
 
 .search-result-page-content {
@@ -647,6 +678,8 @@ pre code {
   overflow: hidden;
   transition: max-height 0.25s ease, opacity 0.25s ease;
   opacity: 1;
+  margin: 0 0 0 0;
+  padding-bottom: 8px;
 }
 
 .search-sections.collapsed {
@@ -656,14 +689,14 @@ pre code {
 
 /* Section results (nested under page) */
 .search-result-section {
-  padding: 7px 16px 7px 32px;
+  padding: 7px 16px 7px 40px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
   text-decoration: none;
   display: block;
   position: relative;
-  border-left: 2px solid var(--color-border);
-  margin-left: 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  margin-left: 20px;
 }
 
 .search-result-section::before {
@@ -671,9 +704,9 @@ pre code {
   position: absolute;
   left: 0;
   top: 50%;
-  width: 10px;
+  width: 8px;
   height: 1px;
-  background: var(--color-border);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .search-result-section:hover {
@@ -1155,6 +1188,18 @@ pre code {
 .sidebar-subsection {
   margin-bottom: 3px;
   margin-top: 3px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.sidebar-subsection::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-subsection > h4 {
@@ -1172,6 +1217,16 @@ pre code {
   justify-content: space-between;
   transition: color 0.2s ease;
   position: relative;
+}
+
+.sidebar-subsection > h4::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-subsection > h4:hover {
@@ -1284,6 +1339,17 @@ pre code {
   margin-top: 4px;
   margin-bottom: 4px;
   padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.sidebar-section ul::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Main section direct children (Guides links) */
@@ -1301,6 +1367,17 @@ pre code {
 
 .sidebar-section li {
   margin-bottom: 2px;
+  position: relative;
+}
+
+.sidebar-section li::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-section li a {
@@ -1506,12 +1583,6 @@ pre code {
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-md);
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  border-color: var(--color-border-light);
-  transform: translateY(-2px);
 }
 
 .card h3 {
@@ -1566,14 +1637,17 @@ pre code {
 
 /* Badge */
 .badge {
-  display: inline-block;
-  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 600;
   background-color: var(--color-bg-elevated);
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
+  line-height: 1;
 }
 
 .badge-generator { background-color: rgba(156, 39, 176, 0.2); color: var(--color-generator); }
@@ -1619,10 +1693,6 @@ pre code {
 
 .parameter-table tr:last-child td {
   border-bottom: none;
-}
-
-.parameter-table tr:hover {
-  background-color: var(--color-bg-elevated);
 }
 
 /* Parameter Page Section Container */

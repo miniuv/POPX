@@ -940,6 +940,19 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Stubs & Updates',
+    path: 'docs/guides/stubs-updates/',
+    type: 'Guide',
+    category: 'Guides',
+    sections: [
+      { title: 'What are Stubs?', anchor: '#what-are-stubs', keywords: ['stub', 'share', 'project', 'lightweight', 'placeholder'] },
+      { title: 'Creating Stubs', anchor: '#creating-stubs', keywords: ['create', 'make', 'generate', 'stub'] },
+      { title: 'Replacing Stubs', anchor: '#replacing-stubs', keywords: ['replace', 'restore', 'install'] },
+      { title: 'Keeping Operators Updated', anchor: '#keeping-operators-updated', keywords: ['update', 'upgrade', 'version', 'latest'] },
+      { title: 'Best Practices', anchor: '#best-practices', keywords: ['tips', 'workflow', 'sharing', 'backup'] }
+    ]
+  },
+  {
     title: 'Tutorials',
     path: 'docs/guides/tutorials/',
     type: 'Guide',

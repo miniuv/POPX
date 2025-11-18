@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stubs & Updates | POPX</title>
+  <meta name="description" content="Guide to using POPX stubs for project sharing and keeping operators updated.">
+  <link rel="icon" type="image/png" href="../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Stubs & Updates</h1>
+
+      <section>
+        <h2 id="what-are-stubs">What are Stubs?</h2>
+        <p>
+          Stubs are lightweight versions of POPX operators that remove all internal component data while preserving the operator's connections and parameter values. This makes them ideal for sharing projects with collaborators who may not have POPX installed.
+        </p>
+        <p>
+          When you create stubs, the internal TouchDesigner networks inside each POPX operator are deleted, leaving only the component shell with its parameters and I/O connections intact. This significantly reduces project file size and allows others to open your project without requiring a POPX installation.
+        </p>
+
+        <div class="note-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(52, 199, 89, 0.1); border-left: 4px solid rgba(52, 199, 89, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">ⓘ</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Note</strong></p>
+            <p style="margin: 0; color: var(--color-text);">Stubbed operators will not function until they are replaced with full POPX operators. They serve purely as placeholders to preserve your network structure.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="creating-stubs">Creating Stubs</h2>
+        <p>
+          To create stubs for your POPX operators, follow these steps:
+        </p>
+
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Select the main <code>POPX</code> component.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Navigate to the <strong>Stubs</strong> parameter page.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Click the <strong>Create Stubs</strong> button.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Confirm the action in the dialog that appears.</li>
+        </ul>
+
+        <div class="warning-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(255, 59, 48, 0.1); border-left: 4px solid rgba(255, 59, 48, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">⚠</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Caution</strong></p>
+            <p style="margin: 0; color: var(--color-text);">Creating stubs will permanently delete the internal networks of all POPX operators. Make sure you have a backup of your project before proceeding. This action cannot be undone.</p>
+          </div>
+        </div>
+
+        <p>
+          Once stubs are created, your project file will be significantly smaller and can be shared with others. The stubbed operators will display their parameter interface but will not process any data.
+        </p>
+      </section>
+
+      <section>
+        <h2 id="replacing-stubs">Replacing Stubs</h2>
+        <p>
+          When you receive a project with stubbed POPX operators, you'll need to replace them with full operators to restore functionality. This requires having POPX installed.
+        </p>
+
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Select the main <code>POPX</code> component.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Navigate to the <strong>Stubs</strong> parameter page.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Click the <strong>Replace Stubs</strong> button.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Confirm the action in the dialog that appears.</li>
+        </ul>
+
+        <p>
+          The stub replacement process will scan your project for all stubbed POPX operators and replace them with fully functional versions, restoring all internal networks while preserving your parameter settings and connections.
+        </p>
+
+        <div class="note-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(52, 199, 89, 0.1); border-left: 4px solid rgba(52, 199, 89, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">ⓘ</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Note</strong></p>
+            <p style="margin: 0; color: var(--color-text);">You must have POPX installed to replace stubs. The replacement process will use the version of POPX currently installed on your system.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="keeping-operators-updated">Keeping Operators Updated</h2>
+        <p>
+          POPX includes an update system that allows you to refresh all operators in your project to the latest installed version. This is useful when you've installed a new release of POPX and want to update existing projects.
+        </p>
+
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Select the main <code>POPX</code> component.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Navigate to the <strong>POPX</strong> parameter page.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Click the <strong>Update All</strong> button.</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Confirm the action in the dialog that appears.</li>
+        </ul>
+
+        <div class="warning-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(255, 59, 48, 0.1); border-left: 4px solid rgba(255, 59, 48, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">⚠</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Caution</strong></p>
+            <p style="margin: 0; color: var(--color-text);">Updating operators will replace their internal networks with the latest version. While parameter values are preserved, any custom modifications inside the operators will be lost. Save your project before updating.</p>
+          </div>
+        </div>
+
+        <p>
+          The update process will replace all POPX operators in the selected container with fresh copies from your current installation. This ensures you benefit from the latest bug fixes, performance improvements, and new features.
+        </p>
+
+        <div class="note-callout" style="margin: var(--spacing-lg) 0; padding: 16px 20px; background: rgba(52, 199, 89, 0.1); border-left: 4px solid rgba(52, 199, 89, 0.6); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="font-size: 24px; line-height: 1; flex-shrink: 0;">ⓘ</span>
+          <div>
+            <p style="margin: 0 0 4px 0; color: var(--color-text);"><strong>Tip</strong></p>
+            <p style="margin: 0; color: var(--color-text);">After major POPX updates, it's recommended to update all operators in your active projects to take advantage of improvements and ensure compatibility.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="best-practices">Best Practices</h2>
+
+        <h3 style="font-size: 18px; margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm);">For Project Sharing</h3>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Always create a backup before creating stubs</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Document which POPX version was used in your project</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Include a note to collaborators that they'll need to replace stubs with POPX installed</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Keep an unstubbed version for your own continued development</li>
+        </ul>
+
+        <h3 style="font-size: 18px; margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm);">For Version Updates</h3>
+        <ul style="line-height: 1.8; margin-left: 32px; padding-left: 0; list-style-type: disc; color: var(--color-accent);">
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Read the release notes before updating to understand changes</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Test the update on a copy of your project first</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Update all operators at once to avoid version mixing</li>
+          <li style="margin-bottom: 10px; color: var(--color-text-muted);">Check for any parameter changes or deprecated features after updating</li>
+        </ul>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../installation/" class="nav-button prev">Installation</a>
+        <a href="../tutorials/" class="nav-button next">Tutorials</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>On this page</h4>
+      <ul>
+        <li><a href="#what-are-stubs">What are Stubs?</a></li>
+        <li><a href="#creating-stubs">Creating Stubs</a></li>
+        <li><a href="#replacing-stubs">Replacing Stubs</a></li>
+        <li><a href="#keeping-operators-updated">Keeping Operators Updated</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../assets/js/component-loader.js"></script>
+  <script src="../../../assets/js/script.js"></script>
+</body>
+</html>
