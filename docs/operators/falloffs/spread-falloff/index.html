@@ -46,6 +46,14 @@
         <p>
           This operator is very similar to the Infection Falloff, but unlike Infection, it is not a simulation. The spread behavior is directly controlled by the <strong>Spread</strong> parameter. You can choose between radius or connectivity methods like the Infection Falloff.
         </p>
+
+        <p>
+          <strong>Multiple Seed Fields:</strong> Seeds can be specified via the Seed POP parameter or Input 1, where each point defines a separate seed field - one point per seed.
+          The attributes of the seed POP are named the same as parameter tokens in the Spread Falloff operator, and override the parameters for each seed.
+          You need only to create a Point POP with attributes named as the Spread Falloff parameters, and then add a point per seed, and set their values.
+          (An attribute <strong>P</strong> will override the Position parameter, and an attribute <strong>radius</strong> will override the Radius parameter.)
+          Alternately you can generate points procedurally with attributes that match the Spread Falloff parameter names.
+        </p>
       </section>
 
       <!-- Parameters Section -->
@@ -162,6 +170,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Enable Dynamic Seed</span>
+            <span class="param-name">Enabledynamicseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allow seed points to change dynamically during simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Threshold</span>
             <span class="param-name">Seedthreshold</span>
             <span class="param-separator">–</span>
@@ -189,28 +206,44 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Specification POP</span>
-            <span class="param-name">Specpop</span>
+            <span class="param-label">Seed POP</span>
+            <span class="param-name">Seedpop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">A POP containing points to use as seeds.</span>
+            <span class="param-description">Reference to a POP containing points to use as seeds when no second input is connected.</span>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Center</span>
-            <span class="param-name">Center</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Position</span>
+            <span class="param-name">Position</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Center position of the seed selection region.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Center position of the seed selection region. Can be overridden per-seed using a P point attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Positionz</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Radius</span>
-            <span class="param-name">Rad</span>
+            <span class="param-name">Radius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Size of the seed selection region in each axis.</span>
+            <span class="param-description">Size of the seed selection region. Can be overridden per-seed using a radius point attribute.</span>
           </div>
         </div>
 
@@ -219,7 +252,7 @@
             <span class="param-label">Transition Range</span>
             <span class="param-name">Transitionrange</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Determines a transition range for seed regions.</span>
+            <span class="param-description">Determines a transition range for seed fields. Can be overridden per-seed using a transitionrange point attribute.</span>
           </div>
         </div>
 
@@ -228,7 +261,7 @@
             <span class="param-label">Transition Align</span>
             <span class="param-name">Transitionalign</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Determines a transition offset for seed regions.</span>
+            <span class="param-description">Determines a transition offset for seed fields. Can be overridden per-seed using a transitionalign point attribute.</span>
           </div>
         </div>
 
@@ -239,7 +272,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Curve type for seed region transition falloff.</span>
+            <span class="param-group-description">Determines a transition function for seed fields. Can be overridden per-seed using a transitiontype point attribute.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
