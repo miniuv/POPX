@@ -1216,6 +1216,19 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Attribute To Index',
+    path: 'docs/operators/tools/attribute-to-index/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Index', anchor: '#page-index', keywords: ['index', 'remap', 'instancer', 'variation', 'discrete', 'falloff', 'steps', 'integer', 'mops_index'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Delete',
     path: 'docs/operators/tools/delete/',
     type: 'Operator',
@@ -1254,19 +1267,6 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Instances', anchor: '#page-instances', keywords: ['render', 'material', 'instance', 'index', 'sequence', 'geometry comp', 'variation', 'per-instance'] },
-      { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Index From Attribute',
-    path: 'docs/operators/tools/index-from-attribute/',
-    type: 'Operator',
-    category: 'Tools',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Index', anchor: '#page-index', keywords: ['index', 'remap', 'instancer', 'variation', 'discrete', 'falloff', 'steps', 'integer', 'mops_index'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1527,6 +1527,21 @@ const searchIndex = [
   },
   // Falloffs
   {
+    title: 'Attribute Falloff',
+    path: 'docs/operators/falloffs/attribute-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Attribute', anchor: '#page-attribute', keywords: ['group', 'input', 'attribute', 'point', 'convert'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'operation', 'blend', 'attribute', 'preview', 'ramp'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Combine Falloff',
     path: 'docs/operators/falloffs/combine-falloff/',
     type: 'Operator',
@@ -1550,21 +1565,6 @@ const searchIndex = [
       { title: 'Page: Curve', anchor: '#page-curve', keywords: ['distance', 'curve', 'position', 'parametric', 'u', 'closest point'] },
       { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['preview', 'ramp', 'heatmap', 'blackbody', 'infrared'] },
       { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics', 'amplitude', 'frequency'] },
-      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
-      { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Falloff From Attribute',
-    path: 'docs/operators/falloffs/falloff-from-attribute/',
-    type: 'Operator',
-    category: 'Falloffs',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Attribute', anchor: '#page-attribute', keywords: ['group', 'input', 'attribute', 'point', 'convert'] },
-      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'operation', 'blend', 'attribute', 'preview', 'ramp'] },
       { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
