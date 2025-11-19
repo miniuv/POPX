@@ -1242,8 +1242,8 @@ const searchIndex = [
     ]
   },
   {
-    title: 'Constraint',
-    path: 'docs/operators/tools/constraint/',
+    title: 'Constraints',
+    path: 'docs/operators/tools/constraints/',
     type: 'Operator',
     category: 'Tools',
     sections: [
