@@ -1242,6 +1242,20 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Constraint Property',
+    path: 'docs/operators/tools/constraint-property/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Geometry', anchor: '#page-geometry', keywords: ['transform', 'translate', 'rotate', 'scale', 'pivot', 'recompute', 'rest length'] },
+      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stiffness', 'damping', 'rest scale', 'plasticity', 'threshold', 'rate', 'hardening', 'modify', 'set', 'scale', 'group'] },
+      { title: 'Page: Map', anchor: '#page-map', keywords: ['attribute', 'map', 'stiffness', 'damping', 'rest scale', 'plasticity', 'spatial', 'varying'] },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Constraints',
     path: 'docs/operators/tools/constraints/',
     type: 'Operator',
@@ -1252,20 +1266,6 @@ const searchIndex = [
       { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stretch', 'bend', 'stiffness', 'damping', 'plasticity', 'hardening', 'rest', 'length', 'angle'] },
       { title: 'Page: Search', anchor: '#page-search', keywords: ['struts', 'attach', 'glue', 'jitter', 'distance', 'neighbors'] },
       { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
-    title: 'Constraint Property',
-    path: 'docs/operators/tools/constraint-property/',
-    type: 'Operator',
-    category: 'Tools',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Geometry', anchor: '#page-geometry', keywords: ['transform', 'translate', 'rotate', 'scale', 'pivot', 'recompute', 'rest length'] },
-      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stiffness', 'damping', 'rest scale', 'plasticity', 'threshold', 'rate', 'hardening', 'modify', 'set', 'scale', 'group'] },
-      { title: 'Page: Map', anchor: '#page-map', keywords: ['attribute', 'map', 'stiffness', 'damping', 'rest scale', 'plasticity', 'spatial', 'varying'] },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
