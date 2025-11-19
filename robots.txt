@@ -1,0 +1,9 @@
+# robots.txt for POPX Documentation
+User-agent: *
+Allow: /
+
+# Disallow backup files
+Disallow: /*.backup.html$
+
+# Sitemap location
+Sitemap: https://popx.popsextension.com/sitemap.xml
