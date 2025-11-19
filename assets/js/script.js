@@ -1257,8 +1257,8 @@ const searchIndex = [
     ]
   },
   {
-    title: 'Constraint Modify',
-    path: 'docs/operators/tools/constraint-modify/',
+    title: 'Constraint Property',
+    path: 'docs/operators/tools/constraint-property/',
     type: 'Operator',
     category: 'Tools',
     sections: [
