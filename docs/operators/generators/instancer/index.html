@@ -255,16 +255,116 @@
             <span class="param-label">In POP(s)</span>
             <span class="param-name">Instances0pop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Input POP for the current input.</span>
+            <span class="param-description">Input POP for the current instance.</span>
+          </div>
+        </div>
+
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">Instances0localt</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Local translation offset for this instance.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Instances0localtx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Instances0localty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Instances0localtz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">Instances0localr</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Local rotation offset for this instance.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Instances0localrx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Instances0localry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Instances0localrz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Instances0locals</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Local scale offset for this instance.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Instances0localsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Instances0localsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Instances0localsz</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item parameter-item-indented">
           <div class="param-header">
-            <span class="param-label">Transform</span>
-            <span class="param-name">Instances0transform</span>
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Instances0localscale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Opens the local transform parameters for this instance.</span>
+            <span class="param-description">Local uniform scale multiplier for this instance.</span>
+          </div>
+        </div>
+
+        <div class="param-group parameter-item-indented">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">Instances0localp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Local pivot point for this instance's transformations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Instances0localpx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Instances0localpy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Instances0localpz</span>
+            </div>
           </div>
         </div>
 
@@ -273,7 +373,7 @@
             <span class="param-label">Probability</span>
             <span class="param-name">Instances0probability</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Probability weight for selecting this instance geometry.</span>
+            <span class="param-description">Probability weight for selecting this instance when Indexing Mode is set to Random. Higher values increase selection likelihood.</span>
           </div>
         </div>
 
@@ -282,7 +382,7 @@
             <span class="param-label">Center Instance</span>
             <span class="param-name">Instances0centerinstance</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Centers this instance in world space before instancing.</span>
+            <span class="param-description">Centers this specific instance in world space before instancing, aligning its origin to the global scene center.</span>
           </div>
         </div>
 
@@ -291,7 +391,7 @@
             <span class="param-label">Unity Scale</span>
             <span class="param-name">Instances0unityscale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Normalizes the scale of this instance to a uniform size.</span>
+            <span class="param-description">Normalizes the scale of this specific instance to a uniform size, maintaining consistent proportions.</span>
           </div>
         </div>
 
