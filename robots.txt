@@ -6,4 +6,4 @@ Allow: /
 Disallow: /*.backup.html$
 
 # Sitemap location
-Sitemap: https://popx.popsextension.com/sitemap.xml
+Sitemap: https://popsextension.com/sitemap.xml
