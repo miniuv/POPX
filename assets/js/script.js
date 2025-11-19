@@ -1242,6 +1242,35 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Constraint',
+    path: 'docs/operators/tools/constraint/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Geometry', anchor: '#page-geometry', keywords: ['mass', 'thickness', 'drag', 'pin', 'partition', 'pieces', 'visualize'] },
+      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stretch', 'bend', 'stiffness', 'damping', 'plasticity', 'hardening', 'rest', 'length', 'angle'] },
+      { title: 'Page: Search', anchor: '#page-search', keywords: ['struts', 'attach', 'glue', 'jitter', 'distance', 'neighbors'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Constraint Modify',
+    path: 'docs/operators/tools/constraint-modify/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Geometry', anchor: '#page-geometry', keywords: ['transform', 'translate', 'rotate', 'scale', 'pivot', 'recompute', 'rest length'] },
+      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stiffness', 'damping', 'rest scale', 'plasticity', 'threshold', 'rate', 'hardening', 'modify', 'set', 'scale', 'group'] },
+      { title: 'Page: Map', anchor: '#page-map', keywords: ['attribute', 'map', 'stiffness', 'damping', 'rest scale', 'plasticity', 'spatial', 'varying'] },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Delete',
     path: 'docs/operators/tools/delete/',
     type: 'Operator',
@@ -1518,6 +1547,23 @@ const searchIndex = [
       { title: 'Page: Physarum', anchor: '#page-physarum', keywords: ['slime mold', 'physarum polycephalum', 'agents', 'particles', 'sensors', 'trails', 'pheromone', 'network', 'steering', 'sense', 'rotation', 'move', 'diffuse', 'decay', 'blur', '2d', '3d', 'emergent', 'organic', 'veins', 'mycelium', 'deposit', 'bounds type', 'resolution', 'sensor distance', 'sensor angle', 'move distance', 'rotation angle', 'blur passes'] },
       { title: 'Page: Constraint Volume', anchor: '#page-constraint-volume', keywords: ['volume', '3d texture', 'bounds', 'force', 'repulsion', 'constraint', 'pre-shrink', 'filter size'] },
       { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Soft Body',
+    path: 'docs/operators/simulations/soft-body/',
+    type: 'Operator',
+    category: 'Simulations',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Solver', anchor: '#page-solver', keywords: ['position based dynamics', 'pbd', 'simulation', 'time scale', 'substeps', 'iterations', 'solver', 'constraints', 'initialize', 'play', 'reset', 'step'] },
+      { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['ground', 'bounding box', 'collision geometry', 'self collision', 'neighbors', 'distance', 'connected', 'thickness', 'smoothing', 'signed distance field', 'sdf', 'voxelize', 'resolution'] },
+      { title: 'Page: Forces', anchor: '#page-forces', keywords: ['gravity', 'velocity damping', 'friction', 'static threshold', 'dynamic scale', 'wind', 'direction', 'strength', 'local forces', 'radial', 'planar', 'axial', 'spiral', 'external forces', 'grabber', 'grab points', 'radius', 'stiffness'] },
+      { title: 'Page: Advanced', anchor: '#page-advanced', keywords: ['integration order', 'first order', 'second order', 'max acceleration', 'velocity', 'position', 'stability', 'accuracy'] },
+      { title: 'Page: Post Process', anchor: '#page-post-process', keywords: ['smoothing', 'laplacian', 'iterations', 'post process', 'mesh quality'] },
+      { title: 'Page: Visualize', anchor: '#page-visualize', keywords: ['display', 'collision geometry', 'constraints', 'color', 'thickness', 'stiffness', 'damping', 'map', 'attribute', 'visualization', 'debug'] },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]

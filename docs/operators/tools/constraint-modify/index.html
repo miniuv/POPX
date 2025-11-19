@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constraint Modify | POPX</title>
+  <meta name="description" content="Modify properties of constraints after generation. Adjust stiffness, rest length, damping, and other parameters using geometry attributes.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Constraint Modify</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Constraint Modify</strong> operator modifies the properties of constraints after they are generated. It allows you to adjust stiffness, rest length, damping, and other constraint parameters dynamically. The operator can read values from geometry attributes to modulate these properties, enabling attribute-driven control over constraint behavior.
+        </p>
+
+        <p>
+          The Geometry page allows transforming the geometry which affects the constraints by recomputing properties like rest length. This is useful for fine-tuning constraint simulations by editing constraint attributes post-generation. You can selectively modify constraints based on groups, apply scaling factors, or use attribute data to create spatially-varying constraint properties.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Geometry Parameters Page -->
+        <h3 id="page-geometry" class="page-heading">Page: Geometry</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the overall transform order for the transformations.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale Rotate Translate</span>
+              <span class="param-name">srt</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale Translate Rotate</span>
+              <span class="param-name">str</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Scale Translate</span>
+              <span class="param-name">rst</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Translate Scale</span>
+              <span class="param-name">rts</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Scale Rotate</span>
+              <span class="param-name">tsr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Rotate Scale</span>
+              <span class="param-name">trs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the order of the rotations within the overall transform order.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rx Ry Rz</span>
+              <span class="param-name">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rx Rz Ry</span>
+              <span class="param-name">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rx Rz</span>
+              <span class="param-name">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rz Rx</span>
+              <span class="param-name">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Rx Ry</span>
+              <span class="param-name">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Ry Rx</span>
+              <span class="param-name">zyx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translate the points in the three axes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotate the points around the corresponding X, Y and Z axes. Angles are given in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for each axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">The pivot point for the transform rotates and scales.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform scale multiplier applied to all axes.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraints Page -->
+        <h3 id="page-constraints" class="page-heading">Page: Constraints</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Group</span>
+            <span class="param-name">Constraintgroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive group containing constraints to modify. Leave empty to modify all constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enablestiff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of stiffness values.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Stiffness Scale</span>
+            <span class="param-name">Stiffscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for stiffness (powers of 10). Higher values create more rigid constraints.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">1e+10</span>
+              <span class="param-name">1e+10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+9</span>
+              <span class="param-name">1e+9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+8</span>
+              <span class="param-name">1e+8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+7</span>
+              <span class="param-name">1e+7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000000</span>
+              <span class="param-name">1000000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100000</span>
+              <span class="param-name">100000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10000</span>
+              <span class="param-name">10000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000</span>
+              <span class="param-name">1000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100</span>
+              <span class="param-name">100</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10</span>
+              <span class="param-name">10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1</span>
+              <span class="param-name">1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.1</span>
+              <span class="param-name">0.1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.01</span>
+              <span class="param-name">0.01</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.001</span>
+              <span class="param-name">0.001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.0001</span>
+              <span class="param-name">0.0001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.00001</span>
+              <span class="param-name">0.00001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.000001</span>
+              <span class="param-name">0.000001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-7</span>
+              <span class="param-name">1e-7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-8</span>
+              <span class="param-name">1e-8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-9</span>
+              <span class="param-name">1e-9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-10</span>
+              <span class="param-name">1e-10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Stiffness</span>
+            <span class="param-name">Stiffness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for stiffness value.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Stiffop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the stiffness modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enabledampratio</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of damping ratio values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Damping Ratio</span>
+            <span class="param-name">Dampingratio</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Damping ratio value (0-1). Higher values reduce oscillation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Dampratioop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the damping ratio modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rest Length Scale</span>
+            <span class="param-name">Restlengthscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Modify constraint rest length scale values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enablerestscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of rest length scale values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rest Length Scale</span>
+            <span class="param-name">Restscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for rest length. Values above 1.0 create pre-stretched constraints.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Restscaleop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the rest length scale modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplasticthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of plastic threshold values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plastic Threshold</span>
+            <span class="param-name">Plasticthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strain threshold before plastic deformation begins.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plasticthresholdop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the plastic threshold modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplasticrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of plastic rate values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plastic Rate</span>
+            <span class="param-name">Plasticrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rate of plastic deformation per frame once threshold is exceeded.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plasticrateop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the plastic rate modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplastichardening</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable modification of plastic hardening values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plastic Hardening</span>
+            <span class="param-name">Plastichardening</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Increase in stiffness as plastic deformation accumulates.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plastichardeningop</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to apply the plastic hardening modification.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Map Page -->
+        <h3 id="page-map" class="page-heading">Page: Map</h3>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enablestiffmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based stiffness mapping.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Stiffness Scale</span>
+            <span class="param-name">Stiffscalemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for attribute-driven stiffness (powers of 10).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">1e+10</span>
+              <span class="param-name">1e+10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+9</span>
+              <span class="param-name">1e+9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+8</span>
+              <span class="param-name">1e+8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+7</span>
+              <span class="param-name">1e+7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000000</span>
+              <span class="param-name">1000000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100000</span>
+              <span class="param-name">100000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10000</span>
+              <span class="param-name">10000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000</span>
+              <span class="param-name">1000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100</span>
+              <span class="param-name">100</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10</span>
+              <span class="param-name">10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1</span>
+              <span class="param-name">1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.1</span>
+              <span class="param-name">0.1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.01</span>
+              <span class="param-name">0.01</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.001</span>
+              <span class="param-name">0.001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.0001</span>
+              <span class="param-name">0.0001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.00001</span>
+              <span class="param-name">0.00001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.000001</span>
+              <span class="param-name">0.000001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-7</span>
+              <span class="param-name">1e-7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-8</span>
+              <span class="param-name">1e-8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-9</span>
+              <span class="param-name">1e-9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-10</span>
+              <span class="param-name">1e-10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Stiffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify stiffness with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Stiffopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify stiffness with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enabledampratiomap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based damping ratio mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Dampratioattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify damping ratio with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Dampratioopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify damping ratio with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enablerestscalemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based rest length scale mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Restscaleattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify rest length scale with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Restscaleopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify rest length scale with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplasticthresholdmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based plastic threshold mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Plasticthresholdattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify plastic threshold with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plasticthresholdopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify plastic threshold with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplasticratemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based plastic rate mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Plasticrateattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify plastic rate with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plasticrateopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify plastic rate with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable</span>
+            <span class="param-name">Enableplastichardeningmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable attribute-based plastic hardening mapping.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attribute</span>
+            <span class="param-name">Plastichardeningattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Primitive attribute to modify plastic hardening with.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Operation</span>
+            <span class="param-name">Plastichardeningopmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to modify plastic hardening with the attribute values.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Set</span>
+              <span class="param-name">set</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">scale</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../constraint/" class="nav-button prev">Constraint</a>
+        <a href="../delete/" class="nav-button next">Delete</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-geometry">Page: Geometry</a></li>
+            <li><a href="#page-constraints">Page: Constraints</a></li>
+            <li><a href="#page-map">Page: Map</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

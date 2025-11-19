@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft Body | POPX</title>
+  <meta name="description" content="Soft Body simulation operator for constraint-based soft body dynamics in POPX.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      document.body.style.opacity = '1';
+    } else {
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+
+  <!-- Component containers - loaded dynamically -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <div id="mobile-menu-container"></div>
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Soft Body</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Soft Body</strong> operator provides a constraint-based soft body dynamics simulation system. It uses Extended Position Based Dynamics (XPBD) to simulate deformable objects with realistic behavior including stretching, bending, and collision response. The solver supports pressure constraints for volume preservation, various collision types, and external forces.
+        </p>
+        <p>
+          This operator is ideal for simulating cloth, soft materials, and deformable objects in real-time or offline scenarios. It offers extensive control over simulation parameters, collision detection, forces, and visualization options for constraint debugging and analysis.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Solver Page -->
+        <h3 id="page-solver" class="page-heading">Page: Solver</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Geometry Update POP</span>
+            <span class="param-name">Targetupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">POP operator providing target geometry updates for the simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Scale</span>
+            <span class="param-name">Timescale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global time scale multiplier for the simulation speed.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Read-only display of effective timestep, equal to 1/FPS of TouchDesigner.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Constraints per Point</span>
+            <span class="param-name">Maxconstperpoint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of constraints that can be attached to a single point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Pressure Constraints</span>
+            <span class="param-name">Pressureconst</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable volume-preserving pressure constraints for closed meshes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Substeps</span>
+            <span class="param-name">Substeps</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of simulation substeps per frame for improved stability.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint Iterations</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of constraint solver iterations. Higher values improve accuracy but increase computation time.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to initialize or reset the simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to start the simulation from its initial state.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle to play or pause the simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to advance the simulation by one frame when paused.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Collisions Page -->
+        <h3 id="page-collisions" class="page-heading">Page: Collisions</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Collisions</span>
+            <span class="param-name">Enablecollisions</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Master toggle for all collision detection and response.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ground Collision</span>
+            <span class="param-name">Enablegroundcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable collision with an infinite ground plane.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Ground Position</span>
+            <span class="param-name">Groundposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Position of the ground plane in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositionz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Ground</span>
+            <span class="param-name">Displayground</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the ground plane in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bounding Box Collision</span>
+            <span class="param-name">Enablebboxcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable collision with a bounding box volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bounding Box</span>
+            <span class="param-name">Bbox</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">A reference to a POP defining the bounding box collision bounds.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Bounding Box</span>
+            <span class="param-name">Displaybbox</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the bounding box in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Geometry Collision</span>
+            <span class="param-name">Enablegeocollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable collision with external geometry from the collision geometry input (Input 2).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Collider</span>
+            <span class="param-name">Displaycollider</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the collision geometry in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Self Collision</span>
+            <span class="param-name">Enableselfcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable collision detection between different parts of the same soft body as well as between different geometries.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Self Collision Passes</span>
+            <span class="param-name">Selfcollisionpasses</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of self-collision detection passes per substep.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Normal-Based Correction</span>
+            <span class="param-name">Normalcorrection</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use surface normals to improve collision response accuracy.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Neighbors Type</span>
+            <span class="param-name">Nebrtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining neighbor points for self-collision.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">By Distance</span>
+              <span class="param-name">distance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Connected</span>
+              <span class="param-name">connected</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of neighbors to consider for self-collision per point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors Distance</span>
+            <span class="param-name">Maxdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance for neighbor search when using distance-based neighbors.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Distribution</span>
+            <span class="param-name">Distribution</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Distribution method for neighbor selection.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default</span>
+              <span class="param-name">default</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Unique</span>
+              <span class="param-name">unique</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Closest</span>
+              <span class="param-name">closest</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Forces Page - Part 1: Gravity & Velocity -->
+        <h3 id="page-forces" class="page-heading">Page: Forces</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Gravity</span>
+            <span class="param-name">Gravity</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Gravity force vector applied to all points.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gravity</span>
+              <span class="param-name">Gravityz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Gravity Multiplier</span>
+            <span class="param-name">Gravitymultiplier</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for the gravity force.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Velocity Damping</span>
+            <span class="param-name">Velocitydamping</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global velocity damping to reduce motion over time. Range 0-1.</span>
+          </div>
+        </div>
+
+        <!-- Friction Section -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Static Threshold</span>
+            <span class="param-name">Staticthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Velocity threshold below which static friction is applied.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Dynamic Scale</span>
+            <span class="param-name">Dynamicscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for dynamic friction forces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable External</span>
+            <span class="param-name">Enableexternal</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable friction with external collision geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Self</span>
+            <span class="param-name">Enableself</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable friction for self-collisions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ground Static Scale</span>
+            <span class="param-name">Groundstaticscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Static friction scale for ground collisions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ground Dynamic Scale</span>
+            <span class="param-name">Grounddynamicscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Dynamic friction scale for ground collisions.</span>
+          </div>
+        </div>
+
+        <!-- Wind Section -->
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Wind Speed</span>
+            <span class="param-name">Windspeed</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Wind velocity vector.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Wind Speed</span>
+              <span class="param-name">Windspeedx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Wind Speed</span>
+              <span class="param-name">Windspeedy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Wind Speed</span>
+              <span class="param-name">Windspeedz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Wind Speed Multiplier</span>
+            <span class="param-name">Windspeedmult</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for the wind force strength.</span>
+          </div>
+        </div>
+
+        <!-- Local Force Section - Continuing in next part due to size -->
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specification POP</span>
+            <span class="param-name">Specpop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP where each point is a specification defining a separate force.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Position</span>
+            <span class="param-name">Pos</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Forces center position.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Posx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Posy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Posz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Direction</span>
+            <span class="param-name">Direction</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines the radial force main direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Direction</span>
+              <span class="param-name">Directionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Direction</span>
+              <span class="param-name">Directiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Direction</span>
+              <span class="param-name">Directionz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Falloff Parameters - will need to be dynamically populated -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Falloffradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The radius of the falloff.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plateau</span>
+            <span class="param-name">Falloffplateau</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The plateau of the falloff.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Steepness</span>
+            <span class="param-name">Falloffsteepness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the steepness of the S-Curve falloff.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bias</span>
+            <span class="param-name">Falloffbias</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">In the S Curve falloff, this biases the curve to fall off closer to its inner limit or its outer limit.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Falloffexponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sets the exponent on the distance when enabling falloff by inverse distance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Limit Near-Range</span>
+            <span class="param-name">Fallofflimitrange</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The near-range limit of the falloff.</span>
+          </div>
+        </div>
+
+        <!-- Radial Force -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Radial</span>
+            <span class="param-name">Radial</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable the radial force.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Radial Strength</span>
+            <span class="param-name">Radialstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Radial force magnitude.</span>
+          </div>
+        </div>
+
+        <!-- Planar Force -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Planar</span>
+            <span class="param-name">Planar</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable the planar force.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Planar Exponent</span>
+            <span class="param-name">Planarexponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Planar force distance exponent.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Planar Strength</span>
+            <span class="param-name">Planarstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Planar force factor.</span>
+          </div>
+        </div>
+
+        <!-- Axial Force -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Axial</span>
+            <span class="param-name">Axial</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable the axial force.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Axis Rotation</span>
+            <span class="param-name">Axialr</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">3D rotation for the axial force direction. The base axis is the Direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Axis Rotation</span>
+              <span class="param-name">Axialrx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Axis Rotation</span>
+              <span class="param-name">Axialry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Axis Rotation</span>
+              <span class="param-name">Axialrz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Axial Strength</span>
+            <span class="param-name">Axialstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">The strength of the force along the Direction axis.</span>
+          </div>
+        </div>
+
+        <!-- Spiral Force -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Spiral</span>
+            <span class="param-name">Spiral</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable the spiral force.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Spiral Rotation</span>
+            <span class="param-name">Spiralr</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">3D rotation for the spiral force axis. The base axis is the Direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Spiral Rotation</span>
+              <span class="param-name">Spiralrx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spiral Rotation</span>
+              <span class="param-name">Spiralry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spiral Rotation</span>
+              <span class="param-name">Spiralrz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Spiral Strength</span>
+            <span class="param-name">Spiralstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Spiral force magnitude.</span>
+          </div>
+        </div>
+
+        <!-- External Force -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Extranal Force POP</span>
+            <span class="param-name">Extranalforcepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">A reference to a POP containing the external force field data.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Force Attribute</span>
+            <span class="param-name">Forceattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute containing force vectors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Strength</span>
+            <span class="param-name">Extforcestrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for external force strength.</span>
+          </div>
+        </div>
+
+        <!-- Grabber -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Grabber</span>
+            <span class="param-name">Enablegrabber</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable interactive grabber tool for manipulating points.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Position</span>
+            <span class="param-name">Grabposition</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Position of the grabber in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Grabpositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Grabpositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Position</span>
+              <span class="param-name">Grabpositionz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Grabradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Radius of the grabber influence sphere.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Grabradiusx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Grabradiusy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Grabradiusz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Grab</span>
+            <span class="param-name">Grab</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Momentary button to activate grabbing.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Grabber</span>
+            <span class="param-name">Displaygrabber</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize the grabber sphere in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Grabbed Points</span>
+            <span class="param-name">Visgrabbedpoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Highlight points currently affected by the grabber.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Advanced Page -->
+        <h3 id="page-advanced" class="page-heading">Page: Advanced</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Integration Order</span>
+            <span class="param-name">Integrationorder</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Order of numerical integration for position updates.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">First Order</span>
+              <span class="param-name">first</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Second Order</span>
+              <span class="param-name">sec</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Max Acceleration</span>
+            <span class="param-name">Enablemaxacc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable maximum acceleration limiting to prevent instability.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Acceleration</span>
+            <span class="param-name">Maxacceleration</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum allowed acceleration magnitude.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Limit Acceleration in Velocity Update</span>
+            <span class="param-name">Limitaccel</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply acceleration limiting during velocity update step.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Fallback to First Order Integration on Collision</span>
+            <span class="param-name">Fallbackcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use first order integration when collisions are detected for improved stability.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Post Process Page -->
+        <h3 id="page-post-process" class="page-heading">Page: Post Process</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Post Smooth Positions</span>
+            <span class="param-name">Postsmoothp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply position smoothing after simulation step.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Post Line Smooth</span>
+            <span class="param-name">Postlinesmooth</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Apply line smoothing to line strip geometry.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Visualize Page -->
+        <h3 id="page-visualize" class="page-heading">Page: Visualize</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Simulated Geometry</span>
+            <span class="param-name">Simulatedgeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display the simulated geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Collisions</span>
+            <span class="param-name">Viscollisions</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize collision detection points.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Collisionscolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for collision visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Collisionscolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Collisionscolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Collisionscolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Self Collision</span>
+            <span class="param-name">Visselfcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize self-collision detection points.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Selfcollisioncolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for self-collision visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Selfcollisioncolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Selfcollisioncolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Selfcollisioncolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thickness</span>
+            <span class="param-name">Visthickness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize point thickness values.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Thicknesscolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for thickness visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Thicknesscolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Thicknesscolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Thicknesscolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Constraints Visualization -->
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Distance Along Edges</span>
+            <span class="param-name">Distancealongedges</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize distance constraints along mesh edges.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Distalongedgescolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for edge distance constraint visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Distalongedgescolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Distalongedgescolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Distalongedgescolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bend Across Triangles</span>
+            <span class="param-name">Bendacrosstriangles</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize bending constraints across triangle edges.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Bendacrosstricolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for bend constraint visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Bendacrosstricolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Bendacrosstricolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Bendacrosstricolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Struts</span>
+            <span class="param-name">Struts</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize strut constraints.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Strutscolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for strut constraint visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Strutscolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Strutscolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Strutscolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Attach to Geometry</span>
+            <span class="param-name">Attachtogeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize attachment constraints to collision geometry.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Attachtogeocolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for attachment constraint visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Attachtogeocolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Attachtogeo colorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Attachtogeocolor b</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pinned</span>
+            <span class="param-name">Pinned</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualize pinned points.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Color</span>
+            <span class="param-name">Pinnedcolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for pinned point visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Pinnedcolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Pinnedcolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Pinnedcolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Visualization -->
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Property</span>
+            <span class="param-name">Property</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Constraint property to visualize with color mapping.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Stretch Stress</span>
+              <span class="param-name">stretchstress</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bend Stress</span>
+              <span class="param-name">bendstress</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Stretch Distance</span>
+              <span class="param-name">stretchdistance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Stretch Ratio</span>
+              <span class="param-name">stretchratio</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bend Angle</span>
+              <span class="param-name">bendangle</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Stretch Plastic Flow</span>
+              <span class="param-name">stretchplasticflow</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bend Plastic Flow</span>
+              <span class="param-name">bendplasticflow</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Volume Stress</span>
+              <span class="param-name">volumestress</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Volume Distance</span>
+              <span class="param-name">volumedistance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Volume Ratio</span>
+              <span class="param-name">volumeratio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Property</span>
+            <span class="param-name">Displayproperty</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Show the selected property visualization on constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Value</span>
+            <span class="param-name">Maxvalue</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum value for property color mapping range.</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 3</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Target Geometry Update</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../physarum/" class="nav-button prev">Physarum</a>
+        <a href="../sph/" class="nav-button next">SPH</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-solver">Solver</a></li>
+            <li><a href="#page-collisions">Collisions</a></li>
+            <li><a href="#page-forces">Forces</a></li>
+            <li><a href="#page-advanced">Advanced</a></li>
+            <li><a href="#page-post-process">Post Process</a></li>
+            <li><a href="#page-visualize">Visualize</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

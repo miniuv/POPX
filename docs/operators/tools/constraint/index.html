@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constraint | POPX</title>
+  <meta name="description" content="Generate constraint data for soft body simulations with distance, bend, strut, pressure, cloth, and glue constraints.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Constraint</h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          The <strong>Constraint</strong> operator generates the constraint data required by the Soft Body Simulation operator. It prepares the relationships between points including distance, stiffness, rest length, damping, and other physical properties that the soft body solver uses to simulate realistic deformation and behavior.
+        </p>
+
+        <p>
+          This operator creates various types of constraints that define how geometry should behave during soft body simulation. You can configure stretch (distance along edges), bend (across triangles), struts (internal support), pressure (volume preservation), cloth (combined stretch and bend), string (one-dimensional constraints), attach to geometry, glue (proximity-based), and pin to target constraints. Each constraint type includes controls for stiffness, damping ratio, rest length/angle scaling, and optional plasticity for permanent deformation.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Geometry Page -->
+        <h3 id="page-geometry" class="page-heading">Page: Geometry</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Geometry</span>
+            <span class="param-name">Visualizegeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display the input geometry in the viewport for debugging.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Group Type</span>
+            <span class="param-name">Geogrouptype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specify whether to use point or primitive groups for geometry selection.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Geogroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the group to process. Leave empty to process all geometry.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Mass</span>
+            <span class="param-name">Mass</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to calculate point mass.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Unchanged</span>
+              <span class="param-name">unchanged</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Set Uniform</span>
+              <span class="param-name">setuniform</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Calculate Uniform</span>
+              <span class="param-name">calcuniform</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Calculate Varying</span>
+              <span class="param-name">calcvarying</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Set Mass</span>
+            <span class="param-name">Setmass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform mass value per point when Mass is set to Set Uniform.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Density</span>
+            <span class="param-name">Density</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Material density used when calculating mass from geometry volume or surface area.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Mass</span>
+            <span class="param-name">Visualizemass</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display point mass values as color visualization for debugging.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Thickness</span>
+            <span class="param-name">Thickness</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">How to calculate thickness.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Unchanged</span>
+              <span class="param-name">unchanged</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Set Uniform</span>
+              <span class="param-name">setuniform</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Calculate Uniform</span>
+              <span class="param-name">calcuniform</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Calculate Varying</span>
+              <span class="param-name">calcvarying</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Set Thickness</span>
+            <span class="param-name">Setthickness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform thickness value when Thickness is set to Set Uniform.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Edge Length Scale</span>
+            <span class="param-name">Edgelengthscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for edge lengths when calculating varying thickness.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Thickness</span>
+            <span class="param-name">Visualizethickness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display thickness values as color visualization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normal Drag</span>
+            <span class="param-name">Normaldrag</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Drag coefficient perpendicular to the surface. Higher values slow motion normal to the surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Tangent Drag</span>
+            <span class="param-name">Tangentdrag</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Drag coefficient along the surface. Controls sliding friction.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Group Type</span>
+            <span class="param-name">Pinanimategrouptype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specify whether to use point or primitive groups for pinned points.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Pinanimategroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Group name of points to pin to their animated positions.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Pinned Point</span>
+            <span class="param-name">Visualizepinnedpoint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Highlight pinned points in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Partition</span>
+            <span class="param-name">Enablepartition</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable partitioning geometry into separate pieces for independent constraints.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Partition Method</span>
+            <span class="param-name">Partitionmethod</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for dividing geometry into separate pieces.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">From Connectivity</span>
+              <span class="param-name">connectivity</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">From Attribute</span>
+              <span class="param-name">pieceatt</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Number of Pieces Detected</span>
+            <span class="param-name">Numpieces</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Read-only display of how many pieces were detected.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Points per Piece</span>
+            <span class="param-name">Minpointsperpiece</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum number of points required for a piece to be valid when using connectivity partitioning.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Search Passes</span>
+            <span class="param-name">Searchpasses</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of connectivity search passes for finding connected components.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attribute Class</span>
+            <span class="param-name">Attrclass</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Attribute class when using From Attribute method.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Vertex</span>
+              <span class="param-name">vertex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Piece Attribute</span>
+            <span class="param-name">Pieceattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the attribute containing piece IDs.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Pieces</span>
+            <span class="param-name">Visualizepieces</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display each piece with a unique color.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualization Seed</span>
+            <span class="param-name">Visualizationseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for piece color generation.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Constraints Page -->
+        <h3 id="page-constraints" class="page-heading">Page: Constraints</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Save File To</span>
+            <span class="param-name">Filesave</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">File path to save the generated constraint geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Save Geometry</span>
+            <span class="param-name">Savegeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to save the current constraint geometry to the specified file.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Geometry File</span>
+            <span class="param-name">Geofile</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">File path to load pre-generated constraint geometry from.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Load Geometry</span>
+            <span class="param-name">Loadgeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to load constraint geometry from the specified file.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Constraint Type</span>
+            <span class="param-name">Constrainttype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Type of constraint to generate.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Distance Along Edges</span>
+              <span class="param-name">distalongedges</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bend Across Triangles</span>
+              <span class="param-name">bendacrosstri</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Struts</span>
+              <span class="param-name">struts</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pressure</span>
+              <span class="param-name">pressure</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Cloth</span>
+              <span class="param-name">cloth</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">String</span>
+              <span class="param-name">string</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Attach to Geometry</span>
+              <span class="param-name">attachtogeo</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Glue</span>
+              <span class="param-name">glue</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pin to Target</span>
+              <span class="param-name">pintotarget</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Constraints</span>
+            <span class="param-name">Visualizeconstraints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display constraint connections as lines in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Constraints Color</span>
+            <span class="param-name">Constraintscolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color for visualizing constraints. Enabled only when Constraint Type is not set to None.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Constraints Color</span>
+              <span class="param-name">Constraintscolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Constraints Color</span>
+              <span class="param-name">Constraintscolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Constraints Color</span>
+              <span class="param-name">Constraintscolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Stiffness Scale</span>
+            <span class="param-name">Stretchstiffscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for stiffness (powers of 10). Higher values create more rigid constraints.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">1e+10</span>
+              <span class="param-name">1e+10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+9</span>
+              <span class="param-name">1e+9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+8</span>
+              <span class="param-name">1e+8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+7</span>
+              <span class="param-name">1e+7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000000</span>
+              <span class="param-name">1000000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100000</span>
+              <span class="param-name">100000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10000</span>
+              <span class="param-name">10000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000</span>
+              <span class="param-name">1000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100</span>
+              <span class="param-name">100</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10</span>
+              <span class="param-name">10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1</span>
+              <span class="param-name">1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.1</span>
+              <span class="param-name">0.1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.01</span>
+              <span class="param-name">0.01</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.001</span>
+              <span class="param-name">0.001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.0001</span>
+              <span class="param-name">0.0001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.00001</span>
+              <span class="param-name">0.00001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.000001</span>
+              <span class="param-name">0.000001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-7</span>
+              <span class="param-name">1e-7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-8</span>
+              <span class="param-name">1e-8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-9</span>
+              <span class="param-name">1e-9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-10</span>
+              <span class="param-name">1e-10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Stiffness</span>
+            <span class="param-name">Stretchstiff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for stretch stiffness.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Damping Ratio</span>
+            <span class="param-name">Stretchdampratio</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Damping ratio (0-1) for stretch constraints. Higher values reduce oscillation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rest Length Scale</span>
+            <span class="param-name">Stretchrestscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for the rest length. Values above 1.0 create pre-stretched constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Plasticity</span>
+            <span class="param-name">Stretchplasticity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allow permanent deformation of stretch constraints when threshold is exceeded.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Threshold</span>
+            <span class="param-name">Stretchthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strain threshold before plastic deformation begins.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rate</span>
+            <span class="param-name">Stretchrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rate of plastic deformation per frame once threshold is exceeded.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ratio of Current Rest Length</span>
+            <span class="param-name">Stretchratiorestlen</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, rate is relative to current rest length instead of absolute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Hardening</span>
+            <span class="param-name">Stretchhardening</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Increase in stiffness as plastic deformation accumulates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Output Group</span>
+            <span class="param-name">Stretchenablegroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Create a primitive group containing stretch constraints on the constraint geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Group</span>
+            <span class="param-name">Stretchgroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the group to store stretch constraints.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Stiffness Scale</span>
+            <span class="param-name">Bendstiffscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale factor for stiffness (powers of 10). Higher values create more rigid constraints.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">1e+10</span>
+              <span class="param-name">1e+10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+9</span>
+              <span class="param-name">1e+9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+8</span>
+              <span class="param-name">1e+8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e+7</span>
+              <span class="param-name">1e+7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000000</span>
+              <span class="param-name">1000000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100000</span>
+              <span class="param-name">100000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10000</span>
+              <span class="param-name">10000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1000</span>
+              <span class="param-name">1000</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">100</span>
+              <span class="param-name">100</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">10</span>
+              <span class="param-name">10</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1</span>
+              <span class="param-name">1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.1</span>
+              <span class="param-name">0.1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.01</span>
+              <span class="param-name">0.01</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.001</span>
+              <span class="param-name">0.001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.0001</span>
+              <span class="param-name">0.0001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.00001</span>
+              <span class="param-name">0.00001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">0.000001</span>
+              <span class="param-name">0.000001</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-7</span>
+              <span class="param-name">1e-7</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-8</span>
+              <span class="param-name">1e-8</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-9</span>
+              <span class="param-name">1e-9</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">1e-10</span>
+              <span class="param-name">1e-10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Stiffness</span>
+            <span class="param-name">Bendstiff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for bend stiffness.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Damping Ratio</span>
+            <span class="param-name">Benddampratio</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Damping ratio (0-1) for bend constraints. Higher values reduce oscillation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rest Angle Scale</span>
+            <span class="param-name">Bendrestscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for the rest angle. Values above 1.0 create pre-bent constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Plasticity</span>
+            <span class="param-name">Bendplasticity</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Allow permanent deformation of bend constraints when threshold is exceeded.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Threshold</span>
+            <span class="param-name">Bendthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Angular strain threshold before plastic deformation begins.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Rate</span>
+            <span class="param-name">Bendrate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rate of plastic deformation per frame once threshold is exceeded.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ratio of Current Rest Length</span>
+            <span class="param-name">Bendratiorestlen</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, rate is relative to current rest angle instead of absolute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Hardening</span>
+            <span class="param-name">Bendhardening</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Increase in stiffness as plastic deformation accumulates.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bend Output Group</span>
+            <span class="param-name">Bendenablegroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Create a primitive group containing bend constraints on the constraint geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Group</span>
+            <span class="param-name">Bendgroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the group to store bend constraints.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Group Type</span>
+            <span class="param-name">Pingrouptype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Type of group for pin constraints: Point or Primitive.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Pingroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Group name for points/primitives to pin to target positions.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Search Page -->
+        <h3 id="page-search" class="page-heading">Page: Search</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Constraint per Point</span>
+            <span class="param-name">Constperpoint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of strut constraints to create per point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Jitter</span>
+            <span class="param-name">Strutsjitter</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random variation in strut search direction.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Any Hit</span>
+            <span class="param-name">Anyhit</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Use first hit instead of closest hit for strut connections.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Detach Point Chance</span>
+            <span class="param-name">Detach</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Probability (0-1) of randomly excluding points from strut creation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Strutsseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for strut generation and jitter.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Jitter Seed</span>
+            <span class="param-name">Attachseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for attach position jitter.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Jitter Amplitude</span>
+            <span class="param-name">Attachamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum distance for random attachment position offset.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Jitter Exponent</span>
+            <span class="param-name">Attachexp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Exponent for jitter distribution. Values above 1.0 bias toward smaller offsets.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Distance</span>
+            <span class="param-name">Mindist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Minimum search distance for glue constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Distance</span>
+            <span class="param-name">Maxdist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum search distance for glue constraints.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Constraints per Point</span>
+            <span class="param-name">Maxlinesperpoint</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of glue constraints to create per point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Distribution</span>
+            <span class="param-name">Uniformdist</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Distribute glue constraints evenly around each point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Temp Neighbors</span>
+            <span class="param-name">Maxtempneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of temporary neighbors to consider during glue constraint search.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Constraints</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Collision Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../attribute-to-index/" class="nav-button prev">Attribute To Index</a>
+        <a href="../constraint-modify/" class="nav-button next">Constraint Modify</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-geometry">Page: Geometry</a></li>
+            <li><a href="#page-constraints">Page: Constraints</a></li>
+            <li><a href="#page-search">Page: Search</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>
