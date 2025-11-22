@@ -252,93 +252,102 @@
             <span class="param-label">Inject</span>
             <span class="param-name">Inject</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables injection from POPX points connected to input.</span>
+            <span class="param-description">Enables injection of substance into the simulation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Substance Gain</span>
-            <span class="param-name">Injectsubstancegain</span>
+            <span class="param-label">Injection POP</span>
+            <span class="param-name">Injectionpop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for injected substance density amount.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Force Strength</span>
-            <span class="param-name">Injectforcestrength</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Strength of velocity impulse from injection points.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Temperature</span>
-            <span class="param-name">Injectuniformtemp</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Temperature value for injected substance (affects buoyancy).</span>
+            <span class="param-description">Reference to a POP containing points to use as injection points when no first input is connected.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Default Color</span>
-            <span class="param-name">Injectdefaultcolor</span>
+            <span class="param-label">Inject Position</span>
+            <span class="param-name">Injectpos</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">RGB color for injected substance when no color attribute present.</span>
+            <span class="param-group-description">Default injection position when no input POP connected and no P attribute present.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Default Color</span>
-              <span class="param-name">Injectdefaultcolorr</span>
+              <span class="param-label">Inject Position</span>
+              <span class="param-name">Injectposx</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Default Color</span>
-              <span class="param-name">Injectdefaultcolorg</span>
+              <span class="param-label">Inject Position</span>
+              <span class="param-name">Injectposy</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Default Color</span>
-              <span class="param-name">Injectdefaultcolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Default Position</span>
-            <span class="param-name">Injectdefaultposition</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Fallback injection position when no POPX input connected.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Default Position</span>
-              <span class="param-name">Injectdefaultpositionx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Default Position</span>
-              <span class="param-name">Injectdefaultpositiony</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Default Position</span>
-              <span class="param-name">Injectdefaultpositionz</span>
+              <span class="param-label">Inject Position</span>
+              <span class="param-name">Injectposz</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Uniform Scale</span>
-            <span class="param-name">Injectuniformscale</span>
+            <span class="param-label">Inject Scale</span>
+            <span class="param-name">Injectscale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Radius of influence for each injection point.</span>
+            <span class="param-description">Scale multiplier for injection area. Uses 'scale' attribute if present in injection POP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inject Gain</span>
+            <span class="param-name">Injectgain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of substance added per injection point. Uses 'gain' attribute if present in injection POP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inject Strength</span>
+            <span class="param-name">Injectstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of force applied at injection points. Uses 'strength' attribute if present in injection POP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inject Temperature</span>
+            <span class="param-name">Injecttemp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Temperature value for injected substance. Uses 'temperature' attribute if present in injection POP.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Inject Color</span>
+            <span class="param-name">Injectcolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color of injected substance. Uses 'Cd' attribute if present in injection POP.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Inject Color</span>
+              <span class="param-name">Injectcolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inject Color</span>
+              <span class="param-name">Injectcolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inject Color</span>
+              <span class="param-name">Injectcolorb</span>
+            </div>
           </div>
         </div>
 
@@ -347,34 +356,34 @@
             <span class="param-label">Add Source</span>
             <span class="param-name">Addsource</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables continuous addition from source textures.</span>
+            <span class="param-description">Enables continuous source emission into simulation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Substance Gain</span>
-            <span class="param-name">Sourcesubstancegain</span>
+            <span class="param-name">Substancegain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for source substance density contribution.</span>
+            <span class="param-description">Multiplier for substance density from 3D texture source. Enabled when Add Source is on.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Force Strength</span>
-            <span class="param-name">Sourceforcestrength</span>
+            <span class="param-name">Forcestrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Strength of velocity added from source force texture.</span>
+            <span class="param-description">Multiplier for force computed internally from change in density. Enabled when Add Source is on.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Temperature Gain</span>
-            <span class="param-name">Sourcetemperaturegain</span>
+            <span class="param-name">Temperaturegain</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for temperature addition from source.</span>
+            <span class="param-description">Multiplier for temperature from alpha channel of 3D texture source. Enabled when Add Source is on.</span>
           </div>
         </div>
 
