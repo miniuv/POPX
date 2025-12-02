@@ -1,0 +1,72 @@
+# TouchDesigner Python Script - Set Constraints Parameter Help Text
+
+op_name = target
+
+# Page: Geometry
+op_name.par.Visualizegeometry.help = "Display the input geometry in the viewport for debugging."
+op_name.par.Geogroup.help = "Name of the group to process. Leave empty to process all geometry."
+op_name.par.Setmass.help = "Uniform mass value per point when Mass is set to Set Uniform."
+op_name.par.Density.help = "Material density used when calculating mass from geometry volume or surface."
+op_name.par.Visualizemass.help = "Display point mass values as color visualization for debugging."
+op_name.par.Setthickness.help = "Uniform thickness value when Thickness is set to Set Uniform."
+op_name.par.Edgelengthscale.help = "Multiplier for edge lengths when calculating varying thickness."
+op_name.par.Visualizethickness.help = "Display thickness values as color visualization."
+op_name.par.Normaldrag.help = "Drag coefficient perpendicular to the surface."
+op_name.par.Tangentdrag.help = "Drag coefficient along the surface. Controls sliding friction."
+op_name.par.Pinanimategroup.help = "Group name of points to pin to their animated positions."
+op_name.par.Visualizepinnedpoint.help = "Highlight pinned points in the viewport."
+op_name.par.Enablepartition.help = "Enable partitioning geometry into separate pieces for independent constraints."
+op_name.par.Numpieces.help = "Read-only display of how many pieces were detected."
+op_name.par.Minpointsperpiece.help = "Minimum number of points required for a piece to be valid when using."
+op_name.par.Searchpasses.help = "Number of connectivity search passes for finding connected components."
+op_name.par.Pieceattr.help = "Name of the attribute containing piece IDs."
+op_name.par.Visualizepieces.help = "Display each piece with a unique color."
+op_name.par.Visualizationseed.help = "Random seed for piece color generation."
+
+# Page: Constraints
+op_name.par.Filesave.help = "File path to save the generated constraint geometry."
+op_name.par.Savegeometry.help = "Pulse to save the current constraint geometry to the specified file."
+op_name.par.Geofile.help = "File path to load pre-generated constraint geometry from."
+op_name.par.Loadgeometry.help = "Pulse to load constraint geometry from the specified file."
+op_name.par.Visualizeconstraints.help = "Display constraint connections as lines in the viewport."
+op_name.par.Stretchstiff.help = "Multiplier for stretch stiffness."
+op_name.par.Stretchdampratio.help = "Damping ratio (0-1) for stretch constraints. Higher values reduce oscillation."
+op_name.par.Stretchrestscale.help = "Multiplier for the rest length."
+op_name.par.Stretchplasticity.help = "Allow permanent deformation of stretch constraints when threshold is exceeded."
+op_name.par.Stretchthreshold.help = "Strain threshold before plastic deformation begins."
+op_name.par.Stretchrate.help = "Rate of plastic deformation per frame once threshold is exceeded."
+op_name.par.Stretchratiorestlen.help = "When enabled, rate is relative to current rest length instead of absolute."
+op_name.par.Stretchhardening.help = "Increase in stiffness as plastic deformation accumulates."
+op_name.par.Stretchenablegroup.help = "Create a primitive group containing stretch constraints on the constraint."
+op_name.par.Stretchgroup.help = "Name of the group to store stretch constraints."
+op_name.par.Bendstiff.help = "Multiplier for bend stiffness."
+op_name.par.Benddampratio.help = "Damping ratio (0-1) for bend constraints. Higher values reduce oscillation."
+op_name.par.Bendrestscale.help = "Multiplier for the rest angle. Values above 1.0 create pre-bent constraints."
+op_name.par.Bendplasticity.help = "Allow permanent deformation of bend constraints when threshold is exceeded."
+op_name.par.Bendthreshold.help = "Angular strain threshold before plastic deformation begins."
+op_name.par.Bendrate.help = "Rate of plastic deformation per frame once threshold is exceeded."
+op_name.par.Bendratiorestlen.help = "When enabled, rate is relative to current rest angle instead of absolute."
+op_name.par.Bendhardening.help = "Increase in stiffness as plastic deformation accumulates."
+op_name.par.Bendenablegroup.help = "Create a primitive group containing bend constraints on the constraint geometry."
+op_name.par.Bendgroup.help = "Name of the group to store bend constraints."
+op_name.par.Pingroup.help = "Group name for points/primitives to pin to target positions."
+
+# Page: Search
+op_name.par.Constperpoint.help = "Number of strut constraints to create per point."
+op_name.par.Strutsjitter.help = "Random variation in strut search direction."
+op_name.par.Anyhit.help = "Use first hit instead of closest hit for strut connections."
+op_name.par.Detach.help = "Probability (0-1) of randomly excluding points from strut creation."
+op_name.par.Strutsseed.help = "Random seed for strut generation and jitter."
+op_name.par.Attachseed.help = "Random seed for attach position jitter."
+op_name.par.Attachamp.help = "Maximum distance for random attachment position offset."
+op_name.par.Attachexp.help = "Exponent for jitter distribution. Values above 1.0 bias toward smaller offsets."
+op_name.par.Mindist.help = "Minimum search distance for glue constraints."
+op_name.par.Maxdist.help = "Maximum search distance for glue constraints."
+op_name.par.Maxlinesperpoint.help = "Maximum number of glue constraints to create per point."
+op_name.par.Uniformdist.help = "Distribute glue constraints evenly around each point."
+op_name.par.Maxtempneighbors.help = "Maximum number of temporary neighbors to consider during glue constraint search."
+
+# Page: Common
+op_name.par.Freeextragpumem.help = "Free memory that has accumulated when output memory has grown and shrunk."
+
+print("Constraints parameter help text updated successfully!")

@@ -935,8 +935,10 @@ const searchIndex = [
     category: 'Guides',
     sections: [
       { title: 'Download POPX', anchor: '#download' },
+      { title: 'POPX Tiers', anchor: '#tiers', keywords: ['starter', 'solver', 'pro', 'pricing', 'subscription', 'patreon', 'tier'] },
       { title: 'System Requirements', anchor: '#requirements' },
-      { title: 'Installation Steps', anchor: '#installation' }
+      { title: 'Installation Steps', anchor: '#installation' },
+      { title: 'Parameter Help', anchor: '#parameter-help' }
     ]
   },
   {
@@ -959,6 +961,16 @@ const searchIndex = [
     category: 'Guides',
     sections: []
   },
+  {
+    title: 'Release Notes',
+    path: 'docs/release-notes/',
+    type: 'Guide',
+    category: 'Guides',
+    sections: [
+      { title: 'Version 1.0.1', anchor: '#v1-0-1' },
+      { title: 'Version 1.0.0', anchor: '#v1-0-0' }
+    ]
+  },
   // Contact
   {
     title: 'Contact Us',
@@ -980,6 +992,18 @@ const searchIndex = [
       { title: 'Patreon', anchor: '#patreon' },
       { title: 'Discord Community', anchor: '#discord' },
       { title: 'Community Guidelines', anchor: '#community-guidelines' }
+    ]
+  },
+  // Legal
+  {
+    title: 'Terms & Privacy',
+    path: 'docs/legal/',
+    type: 'Legal',
+    category: 'Legal',
+    sections: [
+      { title: 'Terms of Service', anchor: '#terms' },
+      { title: 'Privacy Policy', anchor: '#privacy' },
+      { title: 'Copyright Notice', anchor: '#copyright' }
     ]
   },
   // Operators - Generators
@@ -1265,6 +1289,19 @@ const searchIndex = [
       { title: 'Page: Geometry', anchor: '#page-geometry', keywords: ['mass', 'thickness', 'drag', 'pin', 'partition', 'pieces', 'visualize'] },
       { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['stretch', 'bend', 'stiffness', 'damping', 'plasticity', 'hardening', 'rest', 'length', 'angle'] },
       { title: 'Page: Search', anchor: '#page-search', keywords: ['struts', 'attach', 'glue', 'jitter', 'distance', 'neighbors'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Constraints Config',
+    path: 'docs/operators/tools/constraints-config/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Config', anchor: '#page-config', keywords: ['soft body', 'solver', 'constraints', 'configuration', 'pre-processing'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }

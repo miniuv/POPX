@@ -36,16 +36,216 @@
     <main class="main-content">
       <h1>Release Notes</h1>
 
-      <section>
-        <p>
-          Release notes and version history will be documented here.
-        </p>
+      <section id="v1-0-1" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+        <div style="margin-bottom: 8px;">
+          <h2 style="margin: 0; font-size: 20px;">Version <span style="background: var(--color-accent); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 700;">1.0.1</span></h2>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">DOCUMENTATION</h3>
+          <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+            <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+              <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+              Created comprehensive parameter help descriptions for all POPX operators.
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">NEW FEATURES</h3>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">General</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added keyboard shortcuts for <strong style="color: var(--color-text);">Bypass</strong> (<code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 3px; font-size: 12px;">Ctrl+Shift+B</code>) and <strong style="color: var(--color-text);">Render Primitives</strong> (<code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 3px; font-size: 12px;">Ctrl+Shift+R</code>) parameters for all operators.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Bypassed operators now display with a darker color to indicate their bypassed state.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added keyboard shortcut for <strong style="color: var(--color-text);">Falloff Preview</strong> (<code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 3px; font-size: 12px;">Ctrl+Shift+F</code>) to quickly toggle falloff visualization.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Magnetize</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Affect Position</strong> toggle with <strong style="color: var(--color-text);">Move Weight</strong> parameter to control position movement based on magnetic forces.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Implemented inverse distance weighting and added <strong style="color: var(--color-text);">Exponent</strong> parameter for advanced force falloff control.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Output Weight Attribute</strong> toggle to output magnetic influence strength per instance.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Flow</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Injection POP</strong> parameter for referencing external POP sources.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Reorganized Inputs page with new injection parameters: Inject Position, Inject Scale, Inject Gain, Inject Strength, Inject Temperature, and Inject Color.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Soft Body</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Enable Local Force</strong> toggle to apply local force to the soft body.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Collision Thickness</strong> parameter for more precise collision detection with external geometry.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Transition Range</strong>, <strong style="color: var(--color-text);">Transition Align</strong>, and <strong style="color: var(--color-text);">Transition Type</strong> parameters for grabber falloff control.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Max Constraints per Point</strong> parameter (now handled by Constraints Config).
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Constraints Config</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added new <strong style="color: var(--color-text);">Constraints Config</strong> operator to configure constraints on the simulated geometry outside of the Soft Body solver, requiring a reference to the Soft Body operator.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">DLA</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Target Seed Update POP</strong> parameter for feedback loop seed point re-injection.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Internal Noise</strong> toggle for randomized particle diffusion.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Seed Out</strong> output to enable feeding results back to the simulation.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Attach Strength</strong> parameter to control attachment force strength.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Noise Amplitude</strong> parameter for controlling internal noise strength.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Resolution Multiplier</strong> parameter for final polygonization.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Unique Points</strong> parameter to generate unique vertices per triangle.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Normals Method</strong> menu for computing point normals.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Step Multiplier</strong> parameter for gradient step size when computing normals.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Fraction of Max Allocation</strong> parameter for mesh generation memory allocation.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Time Step</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Shared Points</strong> and <strong style="color: var(--color-text);">Alt</strong> parameters, replaced by Unique Points.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Visualize Frame</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Bypass</strong> toggle for the Visualize Frame operator.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Path Tracer</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Ray Offset</strong> parameter to control ray origin offset distance for preventing self-intersection artifacts.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 0;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Material</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Group</strong> parameter to apply material only to specified groups.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="v1-0-0" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+        <div style="margin-bottom: 12px;">
+          <h2 style="margin: 0; margin-bottom: 4px; font-size: 20px;">Version <span style="background: var(--color-accent); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 700;">1.0.0</span> (Alpha)</h2>
+          <p style="margin: 0; font-size: 13px; color: var(--color-accent); font-weight: 600;">November 22, 2025</p>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">INITIAL ALPHA RELEASE</h3>
+          <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+            <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+              <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+              First alpha release of POPX - TouchDesigner POPs extension.
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
 
     <!-- Table of Contents -->
     <aside class="toc">
+      <h4>Contents</h4>
       <ul>
+        <li><a href="#v1-0-1">Version 1.0.1</a></li>
+        <li><a href="#v1-0-0">Version 1.0.0</a></li>
       </ul>
     </aside>
   </div>
