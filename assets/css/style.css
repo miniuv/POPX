@@ -1656,6 +1656,44 @@ pre code {
 .badge-tool { background-color: rgba(33, 150, 243, 0.2); color: var(--color-tool); }
 .badge-simulation { background-color: rgba(229, 57, 53, 0.2); color: var(--color-simulation); }
 
+/* Tier Badges */
+.tier-badges {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tier-badge-core {
+  background-color: rgba(52, 199, 89, 0.15);
+  color: #34C759;
+  border: 1px solid rgba(52, 199, 89, 0.3);
+}
+
+.tier-badge-lab {
+  background-color: rgba(255, 204, 0, 0.15);
+  color: #FFCC00;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.tier-badge-pro {
+  background-color: rgba(255, 59, 48, 0.15);
+  color: #FF3B30;
+  border: 1px solid rgba(255, 59, 48, 0.3);
+}
+
 /* Parameter Tables */
 .parameter-table {
   width: 100%;

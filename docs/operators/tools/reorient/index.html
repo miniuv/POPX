@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Reorient</h1>
+      <h1>Reorient <span class="tier-badges"><span class="tier-badge tier-badge-core">Core</span><span class="tier-badge tier-badge-pro">Pro</span></span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -112,12 +112,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Distribution</span>
             <span class="param-name">Distribution</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Method for selecting neighbor points (e.g., Closest, Weighted, etc.).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for selecting neighbor points when using reference geometry.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default</span>
+              <span class="param-name">default</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Unique</span>
+              <span class="param-name">unique</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Closest</span>
+              <span class="param-name">closest</span>
+            </div>
           </div>
         </div>
 
