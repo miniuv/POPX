@@ -2428,14 +2428,15 @@ section > p {
 
   /* Button adjustments */
   .btn {
-    width: 100%;
+    width: auto;
     text-align: center;
     margin-bottom: var(--spacing-xs);
   }
 
   .button-group {
-    flex-direction: column;
-    gap: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   /* Card mobile adjustments */
