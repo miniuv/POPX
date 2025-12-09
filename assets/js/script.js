@@ -934,8 +934,7 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
-      { title: 'Download POPX', anchor: '#download' },
-      { title: 'POPX Tiers', anchor: '#tiers', keywords: ['starter', 'solver', 'pro', 'pricing', 'subscription', 'patreon', 'tier'] },
+      { title: 'Download POPX', anchor: '#download', keywords: ['patreon', 'subscription', 'advanced tier'] },
       { title: 'System Requirements', anchor: '#requirements' },
       { title: 'Installation Steps', anchor: '#installation' },
       { title: 'Parameter Help', anchor: '#parameter-help' }
