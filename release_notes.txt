@@ -1,7 +1,7 @@
 POPX Release Notes
 ==================
 
-Version 1.1.0 - December 18, 2025
+Version 1.1.0 - Future Release
 ---------------------------------
 
 NEW OPERATORS
