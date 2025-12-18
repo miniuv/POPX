@@ -1,6 +1,59 @@
 POPX Release Notes
 ==================
 
+Version 1.1.0 - December 18, 2025
+---------------------------------
+
+NEW OPERATORS
+
+Advect:
+  • New modifier for moving instances along vector fields
+  • Supports reading advection vectors from point attributes or reference geometry
+  • Includes Rotate To parameter for automatic orientation alignment during advection
+
+Measure:
+  • New tool for computing geometric properties on geometry
+  • Supports density, surface variation, mean curvature, curvedness, and gradient measurements
+  • Includes visualization preview with customizable color ramps
+
+NEW FEATURES
+
+Path Tracer:
+  • Added Pivot parameter to lights for transformation control
+
+Voxelize:
+  • Added Point Scale parameter for point cloud voxelization
+
+Soft Body:
+  • Added Strength parameter for grabber force control
+  • Removed Local Force and External Force parameters — forces can now be injected by chaining POPs (like Force Radial POP) from the Target Geometry Update output and referencing the end of the chain in the Target Geometry Update POP parameter
+
+Mesh Fill:
+  • Added Ray Direction Mode and Ray Direction parameters for voxelization control
+  • Added new Lookup page for sampling textures onto input geometry
+  • Added Mesh output (Output 7) for Lookup sampling
+
+SPH:
+  • Added Container Type menu with support for SDF and T3D input modes
+  • Added Container SDF / T3D, Lower Bounds, and Upper Bounds parameters for 3D texture container collision
+
+Noise Modifier:
+  • Added Output Noise Attribute and Noise Attribute Name parameters for outputting noise values as point attributes
+  • Added Rotation Mode menu with Additive and Directional options
+
+Magnetize:
+  • Added Solver Mode menu with Simple and Advect options
+  • Added Initial Position POP parameter for Simple solver mode
+  • Added Spin Direction XYZ vector parameter (replaced toggle)
+  • Added Containment parameter for field bounds control
+  • Added Output Force Attribute toggle to output magnetic force vectors
+
+BUG FIXES
+
+Convert:
+  • Fixed pieces detection bug
+
+
 Version 1.0.2 - December 9, 2025
 ---------------------------------
 

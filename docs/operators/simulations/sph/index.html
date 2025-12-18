@@ -263,12 +263,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Ground Position</span>
             <span class="param-name">Groundposition</span>
             <span class="param-separator">–</span>
-            <span class="param-description">XYZ position of ground plane.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">XYZ position of ground plane.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositionx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositiony</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ground Position</span>
+              <span class="param-name">Groundpositionz</span>
+            </div>
           </div>
         </div>
 
@@ -378,15 +394,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Opaque Geometry</span>
-            <span class="param-name">Opaque</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Treats collision geometry as solid.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Display Collision Geometry</span>
             <span class="param-name">Displaycollisiongeo</span>
             <span class="param-separator">–</span>
@@ -400,6 +407,31 @@
             <span class="param-name">Enablecontainergeo</span>
             <span class="param-separator">–</span>
             <span class="param-description">Enables volumetric container collision using voxelized geometry.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Container Type</span>
+            <span class="param-name">Containertype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Source type for container collision volume.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">POP Geometry</span>
+              <span class="param-name">pop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">SDF</span>
+              <span class="param-name">sdf</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">T3D</span>
+              <span class="param-name">t3d</span>
+            </div>
           </div>
         </div>
 
@@ -421,21 +453,117 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Ray Direction Mode</span>
             <span class="param-name">Raydirmode</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Method for determining ray direction when voxelizing container geometry.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining ray direction when voxelizing container geometry.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">constant</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inside Sphere</span>
+              <span class="param-name">insidesphere</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Ray Direction</span>
+            <span class="param-name">Raydir</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Constant ray direction vector when Ray Direction Mode is set to Constant.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydiry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirz</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ray Direction</span>
-            <span class="param-name">Raydir</span>
+            <span class="param-label">Display Container Geometry</span>
+            <span class="param-name">Displaycontainergeo</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Constant ray direction vector when Ray Direction Mode is set to Constant.</span>
+            <span class="param-description">Visualizes container geometry in output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Container SDF / T3D</span>
+            <span class="param-name">Containertop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a 3D texture containing SDF or T3D volume for container collision.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Toplowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum XYZ coordinates of the SDF/T3D volume bounds.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Toplowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Toplowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Toplowerboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Topupperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum XYZ coordinates of the SDF/T3D volume bounds.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Topupperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Topupperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Topupperboundsz</span>
+            </div>
           </div>
         </div>
 
@@ -463,15 +591,6 @@
             <span class="param-name">Size</span>
             <span class="param-separator">–</span>
             <span class="param-description">Blur kernel size for smoothing container voxel field.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Display Container Geometry</span>
-            <span class="param-name">Displaycontainergeo</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualizes container geometry in output.</span>
           </div>
         </div>
 

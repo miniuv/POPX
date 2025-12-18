@@ -966,6 +966,8 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
+      { title: 'Version 1.1.0', anchor: '#v1-1-0' },
+      { title: 'Version 1.0.2', anchor: '#v1-0-2' },
       { title: 'Version 1.0.1', anchor: '#v1-0-1' },
       { title: 'Version 1.0.0', anchor: '#v1-0-0' }
     ]
@@ -1115,6 +1117,19 @@ const searchIndex = [
       { title: 'Page: Aim', anchor: '#page-aim' },
       { title: 'Page: Up', anchor: '#page-up' },
       { title: 'Page: Orientation', anchor: '#page-orientation' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Advect',
+    path: 'docs/operators/modifiers/advect/',
+    type: 'Operator',
+    category: 'Modifiers',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Advect', anchor: '#page-advect', keywords: ['vector field', 'velocity', 'flow', 'advection', 'movement', 'fluid'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1358,6 +1373,20 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Material', anchor: '#page-material', keywords: ['material', 'disney brdf', 'pbr', 'path tracer', 'base color', 'metallic', 'roughness', 'specular', 'anisotropic', 'subsurface', 'sheen', 'clearcoat', 'transmission', 'ior', 'emission', 'primitive attributes', 'per-primitive', 'material override'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Measure',
+    path: 'docs/operators/tools/measure/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Measure', anchor: '#page-measure', keywords: ['density', 'curvature', 'surface variation', 'curvedness', 'gradient', 'neighbors', 'smoothing', 'geometric', 'analysis'] },
+      { title: 'Page: Preview Measure', anchor: '#page-preview-measure', keywords: ['heatmap', 'visualization', 'color ramp', 'preview'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }

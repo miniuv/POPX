@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reorient | POPX</title>
-  <meta name="description" content="Replace local orientation frames of packed primitives using point attributes or reference geometry without modifying underlying transforms.">
+  <title>Advect | POPX</title>
+  <meta name="description" content="Advect operator for moving instances along vector fields from point attributes or reference geometry.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,26 +34,18 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Reorient</h1>
+      <h1>Advect</h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Reorient</strong> creates a quaternion point attribute, <code>popxOrient</code>, that acts as a replacement for a POPX Geometry instance's existing local orientation frame without modifying the underlying transforms at all.
-          In plainer terms, this resets the rotation axes of the POPX Geometry instances without visibly moving anything, providing more accurate orientation for subsequent transformations.
+          The <strong>Advect</strong> operator moves instances along vector fields.
+          It reads velocity or direction data from point attributes or reference geometry and applies continuous movement based on the sampled vectors.
         </p>
 
         <p>
-          The operator is particularly useful after using operations like Explode, where you want pieces to move outward along their local axes rather than in a uniform direction.
-          Normally when you convert or explode geometry, the local orientations of each POPX Geometry instance are left at default, causing all pieces to move in the same direction when transformed.
-          Reorient solves this by transferring orientation from reference geometry or point attributes to your POPX Geometry instances.
-        </p>
-
-        <p>
-          You can source orientation data from point attributes (quaternion, two vectors, or matrix) or from reference geometry using proximity-based neighbor matching.
-          When using reference geometry, the operator finds the closest points on the reference mesh and transfers their orientation to your instances.
-          This makes it easy to reorient exploded pieces based on the original mesh surface normals, or to apply custom orientation patterns from template geometry.
+          The operator includes options for rotation alignment, allowing instances to automatically orient themselves in the direction of motion.
         </p>
       </section>
 
@@ -61,8 +53,8 @@
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Reorient Page -->
-        <h3 id="page-reorient" class="page-heading">Page: Reorient</h3>
+        <!-- Advect Page -->
+        <h3 class="page-heading" id="page-advect">Page: Advect</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -73,14 +65,32 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Do Falloff</span>
+            <span class="param-name">Dofalloff</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables falloff-based advection intensity control.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Falloff Attribute</span>
+            <span class="param-name">Falloffattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Specifies which attribute to use for falloff values that attenuate advection strength.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Orient Source</span>
-            <span class="param-name">Orientsource</span>
+            <span class="param-label">Advect Source</span>
+            <span class="param-name">Advectsource</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Determines whether to read orientation from point attributes or reference geometry.</span>
+            <span class="param-group-description">Determines whether to read advection vectors from point attributes or reference geometry.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -96,10 +106,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Reference Geometry</span>
-            <span class="param-name">Referencegeo</span>
+            <span class="param-label">Advect Attribute</span>
+            <span class="param-name">Advectattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP geometry to use as reference for transferring orientation. Used when Input 1 is not connected.</span>
+            <span class="param-description">Name of the vector attribute to use for advection direction and speed.</span>
           </div>
         </div>
 
@@ -109,6 +119,27 @@
             <span class="param-name">Maxdistance</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum distance to search for nearest neighbor points on reference geometry.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lookup Mode</span>
+            <span class="param-name">Lookupmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines how advection vectors are sampled from reference geometry.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Closest Point</span>
+              <span class="param-name">closest</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Average</span>
+              <span class="param-name">avg</span>
+            </div>
           </div>
         </div>
 
@@ -137,71 +168,37 @@
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Attribute Type</span>
-            <span class="param-name">Attrtype</span>
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Points for Average</span>
+            <span class="param-name">Maxptsavg</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Type of orientation data to read from point attributes.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Quaternion</span>
-              <span class="param-name">quat</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Two Vectors</span>
-              <span class="param-name">vectors</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Matrix</span>
-              <span class="param-name">matrix</span>
-            </div>
+            <span class="param-description">Maximum number of points to include when averaging vectors in Average lookup mode.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Quaternion Attribute</span>
-            <span class="param-name">Quatattr</span>
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the quaternion attribute to read when Attribute Type is Quaternion.</span>
+            <span class="param-description">Controls the integration step size for advection movement. Higher values result in faster movement.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normal Attribute</span>
-            <span class="param-name">Normalattr</span>
+            <span class="param-label">Rotate to Vector (Forward Direction)</span>
+            <span class="param-name">Rotateto</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the normal vector attribute when Attribute Type is Two Vectors.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Up Attribute</span>
-            <span class="param-name">Upattr</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Name of the up vector attribute when Attribute Type is Two Vectors.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Matrix Attribute</span>
-            <span class="param-name">Matrixattr</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Name of the matrix attribute to read when Attribute Type is Matrix.</span>
+            <span class="param-description">Enables automatic rotation of instances to align with the advection vector direction.</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Common Page -->
-        <h3 id="page-common" class="page-heading">Page: Common</h3>
+        <!-- Common Parameters -->
+        <h3 class="page-heading" id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -279,8 +276,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../preview-falloff/" class="nav-button prev">Preview Falloff</a>
-        <a href="../unpack/" class="nav-button next">Unpack</a>
+        <a href="../../falloffs/texture-falloff/" class="nav-button prev">Texture Falloff</a>
+        <a href="../aim/" class="nav-button next">Aim</a>
       </nav>
     </main>
 
@@ -289,10 +286,9 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li>
-          <a href="#parameters">Parameters</a>
+        <li><a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-reorient">Page: Reorient</a></li>
+            <li><a href="#page-advect">Page: Advect</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

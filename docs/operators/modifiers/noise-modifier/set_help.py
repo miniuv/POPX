@@ -15,6 +15,8 @@ op_name.par.Period.help = "Period (scale) of the noise field."
 op_name.par.Harmon.help = "The number of higher frequency components to layer on top of the base frequency."
 op_name.par.Spread.help = "The factor by which the frequency of a harmonic increases relative to the."
 op_name.par.Gain.help = "Amplitude of the Harmonics layered on top of the base frequency."
+op_name.par.Outputnoiseattr.help = "Outputs the computed noise values as a point attribute."
+op_name.par.Noiseattr.help = "Name of the attribute to store noise values when Output Noise Attribute is enabled."
 
 # Page: Transform
 op_name.par.T4d.help = "Translates the instances through the 4th noise dimension."
@@ -23,6 +25,7 @@ op_name.par.T4d.help = "Translates the instances through the 4th noise dimension
 op_name.par.Affectposition.help = "Enables noise-based position displacement."
 op_name.par.Positionamount.help = "Controls the intensity of position displacement."
 op_name.par.Affectrotation.help = "Enables noise-based rotation changes."
+op_name.par.Rotationmode.help = "Determines how noise affects rotation in Simple mode."
 op_name.par.Rotationamount.help = "Controls the intensity of rotation changes."
 op_name.par.Aimweight.help = "Defines how fast instances rotate toward their direction of motion."
 op_name.par.Affectscale.help = "Enables noise-based scale changes."

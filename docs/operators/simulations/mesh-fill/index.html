@@ -104,6 +104,52 @@
 
         <div class="param-group">
           <div class="param-group-header">
+            <span class="param-label">Ray Direction Mode</span>
+            <span class="param-name">Raydirmode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining ray directions when voxelizing meshes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">constant</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inside Sphere</span>
+              <span class="param-name">insidesphere</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Ray Direction</span>
+            <span class="param-name">Raydir</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Direction vector for ray casting when Ray Direction Mode is set to Constant.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydiry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Precision</span>
             <span class="param-name">Precision</span>
             <span class="param-separator">–</span>
@@ -288,6 +334,171 @@
 
         <hr class="section-divider">
 
+        <!-- Lookup Page -->
+        <h3 id="page-lookup" class="page-heading">Page: Lookup</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lookup Trails</span>
+            <span class="param-name">Lookuptrails</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Samples the trails texture onto input geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Blur</span>
+            <span class="param-name">Applyblurtrails</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies blur filtering to the trails texture before sampling.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrinktrials</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resolution reduction before applying blur for trails texture.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Sizetrials</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for trails texture smoothing.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lookup Filled Volume</span>
+            <span class="param-name">Lookupfilledvol</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Samples the filled volume texture onto input geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Inverted</span>
+            <span class="param-name">Outputinverted</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Also outputs the inverted filled volume texture.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Apply Blur</span>
+            <span class="param-name">Applyblurvol</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Applies blur filtering to the filled volume texture before sampling.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pre-Shrink</span>
+            <span class="param-name">Preshrinkvol</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resolution reduction before applying blur for filled volume texture.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Sizevol</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for filled volume texture smoothing.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lookup Offset</span>
+            <span class="param-name">Lookupoffset</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Offset applied to lookup coordinates when sampling textures.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lookup Offset</span>
+              <span class="param-name">Lookupoffsetx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Offset</span>
+              <span class="param-name">Lookupoffsety</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Offset</span>
+              <span class="param-name">Lookupoffsetz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lookup Scale</span>
+            <span class="param-name">Lookupscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale applied to lookup coordinates when sampling textures.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lookup Scale</span>
+              <span class="param-name">Lookupscalex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Scale</span>
+              <span class="param-name">Lookupscaley</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lookup Scale</span>
+              <span class="param-name">Lookupscalez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Debug</span>
+            <span class="param-name">Debug</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects which texture to visualize for debugging.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Trails</span>
+              <span class="param-name">trails</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Filled Volume</span>
+              <span class="param-name">filled</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Inverted Filled Volume</span>
+              <span class="param-name">inverted</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
         <!-- Common Page -->
         <h3 id="page-common" class="page-heading">Page: Common</h3>
 
@@ -399,6 +610,15 @@
             <span class="param-text">Trails</span>
           </div>
         </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 7</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Mesh</span>
+          </div>
+        </div>
       </section>
 
       <!-- Page Navigation -->
@@ -419,6 +639,7 @@
             <li><a href="#page-mesh-fill">Page: Mesh Fill</a></li>
             <li><a href="#page-seed">Page: Seed</a></li>
             <li><a href="#page-trails">Page: Trails</a></li>
+            <li><a href="#page-lookup">Page: Lookup</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

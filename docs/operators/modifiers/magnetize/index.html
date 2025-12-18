@@ -81,6 +81,27 @@
           </div>
         </div>
 
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Solver Mode</span>
+            <span class="param-name">Solvermode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Determines the computation mode for magnetic forces.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simple</span>
+              <span class="param-name">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Advect</span>
+              <span class="param-name">advect</span>
+            </div>
+          </div>
+        </div>
+
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Magnets POP</span>
@@ -114,6 +135,15 @@
             <span class="param-name">Falloffattr</span>
             <span class="param-separator">–</span>
             <span class="param-description">Specifies which attribute to use for falloff values that modulate magnetic force strength.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initial Position POP</span>
+            <span class="param-name">Initialpositionpop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP containing initial positions for Simple solver mode.</span>
           </div>
         </div>
 
@@ -205,10 +235,62 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Invert Spin Direction</span>
+            <span class="param-label">Exponent</span>
+            <span class="param-name">Exponent</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the falloff curve of magnetic force with distance. Can be overridden per-magnet using an exponent point attribute.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Spin Direction</span>
             <span class="param-name">Spindir</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reverses the spin rotation direction. Can be controlled per-magnet using a spindir point attribute.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Spin rotation direction vector. Can be controlled per-magnet using a spindir point attribute.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Spin Direction</span>
+              <span class="param-name">Spindirx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spin Direction</span>
+              <span class="param-name">Spindiry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spin Direction</span>
+              <span class="param-name">Spindirz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Containment</span>
+            <span class="param-name">Contain</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls how strongly instances are kept within the magnetic field bounds. Can be overridden per-magnet using a contain point attribute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Affect Position</span>
+            <span class="param-name">Affectpos</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables position changes based on magnetic forces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Move Weight</span>
+            <span class="param-name">Moveweight</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the intensity of position movement when Affect Position is enabled.</span>
           </div>
         </div>
 
@@ -227,6 +309,24 @@
             <span class="param-name">Aimweight</span>
             <span class="param-separator">–</span>
             <span class="param-description">Controls how quickly instances rotate toward their direction of motion when Affect Rotation is enabled.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Force Attribute</span>
+            <span class="param-name">Outputforceattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs a force attribute showing the magnetic force vector applied to each instance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Weight Attribute</span>
+            <span class="param-name">Outputweightattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs a weight attribute showing the strength of magnetic influence on each instance.</span>
           </div>
         </div>
 

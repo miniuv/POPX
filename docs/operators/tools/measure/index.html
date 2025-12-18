@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reorient | POPX</title>
-  <meta name="description" content="Replace local orientation frames of packed primitives using point attributes or reference geometry without modifying underlying transforms.">
+  <title>Measure | POPX</title>
+  <meta name="description" content="Measure operator for computing geometric properties like density, curvature, and surface variation on point clouds.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,26 +34,13 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Reorient</h1>
+      <h1>Measure</h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Reorient</strong> creates a quaternion point attribute, <code>popxOrient</code>, that acts as a replacement for a POPX Geometry instance's existing local orientation frame without modifying the underlying transforms at all.
-          In plainer terms, this resets the rotation axes of the POPX Geometry instances without visibly moving anything, providing more accurate orientation for subsequent transformations.
-        </p>
-
-        <p>
-          The operator is particularly useful after using operations like Explode, where you want pieces to move outward along their local axes rather than in a uniform direction.
-          Normally when you convert or explode geometry, the local orientations of each POPX Geometry instance are left at default, causing all pieces to move in the same direction when transformed.
-          Reorient solves this by transferring orientation from reference geometry or point attributes to your POPX Geometry instances.
-        </p>
-
-        <p>
-          You can source orientation data from point attributes (quaternion, two vectors, or matrix) or from reference geometry using proximity-based neighbor matching.
-          When using reference geometry, the operator finds the closest points on the reference mesh and transfers their orientation to your instances.
-          This makes it easy to reorient exploded pieces based on the original mesh surface normals, or to apply custom orientation patterns from template geometry.
+          The <strong>Measure</strong> operator computes geometric properties on geometry including density, surface variation, mean curvature, curvedness, and gradient values. Results are output as point attributes for use in downstream operations.
         </p>
       </section>
 
@@ -61,8 +48,8 @@
       <section id="parameters">
         <h2>Parameters</h2>
 
-        <!-- Reorient Page -->
-        <h3 id="page-reorient" class="page-heading">Page: Reorient</h3>
+        <!-- Measure Page -->
+        <h3 class="page-heading" id="page-measure">Page: Measure</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -75,40 +62,82 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Orient Source</span>
-            <span class="param-name">Orientsource</span>
+            <span class="param-label">Measure</span>
+            <span class="param-name">Measure</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Determines whether to read orientation from point attributes or reference geometry.</span>
+            <span class="param-group-description">The type of geometric measurement to compute.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Point Attribute</span>
-              <span class="param-name">ptattr</span>
+              <span class="param-label">Density</span>
+              <span class="param-name">density</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Reference Geometry</span>
-              <span class="param-name">refgeo</span>
+              <span class="param-label">Surface Variation</span>
+              <span class="param-name">surfacevar</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Mean Curvature</span>
+              <span class="param-name">meancurv</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Curvedness</span>
+              <span class="param-name">curvedness</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Gradient</span>
+              <span class="param-name">gradient</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Reference Geometry</span>
-            <span class="param-name">Referencegeo</span>
+            <span class="param-label">Scalar Attribute</span>
+            <span class="param-name">Scalarattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">POP geometry to use as reference for transferring orientation. Used when Input 1 is not connected.</span>
+            <span class="param-description">The scalar attribute to compute gradient from when Measure is set to Gradient.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Search Distance</span>
+            <span class="param-label">Use Existing Neighbors Attributes</span>
+            <span class="param-name">Usenebrsattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, uses pre-computed neighbor attributes instead of computing them.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Neighbors Type</span>
+            <span class="param-name">Nebrtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for finding neighboring points.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">By Distance</span>
+              <span class="param-name">distance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Connected</span>
+              <span class="param-name">connected</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors Distance</span>
             <span class="param-name">Maxdistance</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum distance to search for nearest neighbor points on reference geometry.</span>
+            <span class="param-description">Maximum distance to search for neighboring points.</span>
           </div>
         </div>
 
@@ -119,7 +148,7 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Method for selecting neighbor points when using reference geometry.</span>
+            <span class="param-group-description">Method for distributing neighbor point selection.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
@@ -137,71 +166,116 @@
           </div>
         </div>
 
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Attribute Type</span>
-            <span class="param-name">Attrtype</span>
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Num Hash Buckets</span>
+            <span class="param-name">Numhashbuckets</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Type of orientation data to read from point attributes.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Quaternion</span>
-              <span class="param-name">quat</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Two Vectors</span>
-              <span class="param-name">vectors</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Matrix</span>
-              <span class="param-name">matrix</span>
-            </div>
+            <span class="param-description">Number of hash buckets for spatial acceleration structure.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Quaternion Attribute</span>
-            <span class="param-name">Quatattr</span>
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the quaternion attribute to read when Attribute Type is Quaternion.</span>
+            <span class="param-description">Maximum number of neighbors to consider for each point.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normal Attribute</span>
-            <span class="param-name">Normalattr</span>
+            <span class="param-label">Smoothing Radius</span>
+            <span class="param-name">Smoothingradius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the normal vector attribute when Attribute Type is Two Vectors.</span>
+            <span class="param-description">Radius used for smoothing the measured values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Up Attribute</span>
-            <span class="param-name">Upattr</span>
+            <span class="param-label">Output Measure Attribute</span>
+            <span class="param-name">Outputmeasureattr</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the up vector attribute when Attribute Type is Two Vectors.</span>
+            <span class="param-description">Name of the output attribute to store the measured values.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Matrix Attribute</span>
-            <span class="param-name">Matrixattr</span>
+            <span class="param-label">Output Neighbors Attributes</span>
+            <span class="param-name">Outputneighborsattrs</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Name of the matrix attribute to read when Attribute Type is Matrix.</span>
+            <span class="param-description">When enabled, outputs neighbor attributes for reuse by subsequent Measure operators.</span>
           </div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- Common Page -->
-        <h3 id="page-common" class="page-heading">Page: Common</h3>
+        <!-- Preview Measure Page -->
+        <h3 class="page-heading" id="page-preview-measure">Page: Preview Measure</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Preview Measure</span>
+            <span class="param-name">Previewmeasure</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">When enabled, visualizes the measured values using a color ramp.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Measure Ramp</span>
+            <span class="param-name">Measureramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color ramp preset used for visualizing measured values when Preview Measure is enabled.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Heatmap</span>
+              <span class="param-name">heatmap</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Blackbody</span>
+              <span class="param-name">blackbody</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Infrared</span>
+              <span class="param-name">infrared</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Custom Ramp</span>
+            <span class="param-name">Opencustumramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Opens the custom color ramp editor for defining a custom measure visualization.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reset Custom Ramp</span>
+            <span class="param-name">Resetcustomramp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resets the custom color ramp to its default state.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Parameters -->
+        <h3 class="page-heading" id="page-common">Page: Common</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -252,15 +326,6 @@
             <span class="param-text">POPX/POP Geometry</span>
           </div>
         </div>
-
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Input 1</span>
-            <span class="param-name">POP</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Reference Geometry</span>
-          </div>
-        </div>
       </section>
 
       <!-- Outputs Section -->
@@ -279,8 +344,8 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../preview-falloff/" class="nav-button prev">Preview Falloff</a>
-        <a href="../unpack/" class="nav-button next">Unpack</a>
+        <a href="../material/" class="nav-button prev">Material</a>
+        <a href="../merge/" class="nav-button next">Merge</a>
       </nav>
     </main>
 
@@ -289,10 +354,10 @@
       <h4>Contents</h4>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li>
-          <a href="#parameters">Parameters</a>
+        <li><a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-reorient">Page: Reorient</a></li>
+            <li><a href="#page-measure">Page: Measure</a></li>
+            <li><a href="#page-preview-measure">Page: Preview Measure</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>
