@@ -1230,8 +1230,7 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Relax', anchor: '#page-relax' },
-      { title: 'Page: Constraint Geometry', anchor: '#page-constraint-geometry' },
-      { title: 'Page: Constraint Volume', anchor: '#page-constraint-volume' },
+      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['geometry', 'volume', 'surface', 'projection', 'collision', '3d texture', 'bounds', 'force', 'repulsion', 'pre-shrink', 'filter size'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1547,9 +1546,7 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: DLG', anchor: '#page-dlg', keywords: ['differential line growth', 'edge subdivision', 'branching', 'coral', 'brain', 'organic', 'line strips', 'curvature', 'neighbors', 'max distance', 'vertices', 'smoothing', 'filter', 'gaussian', 'initialize', 'play', 'step'] },
-      { title: 'Page: Bounds', anchor: '#page-bounds', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'wrap', 'mirror', 'boundary'] },
-      { title: 'Page: Constraint Geometry', anchor: '#page-constraint-geometry', keywords: ['surface', 'projection', 'collision', 'opaque', 'display', 'geometry constraint'] },
-      { title: 'Page: Constraint Volume', anchor: '#page-constraint-volume', keywords: ['volume', '3d texture', 'bounds', 'force', 'repulsion', 'blur', 'pre-shrink', 'container'] },
+      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'loop', 'zig zag', 'boundary', 'bounds', 'geometry', 'volume', 'surface', 'projection', 'collision', '3d texture', 'force', 'repulsion', 'pre-shrink'] },
       { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'noise', 'displacement', 'harmonics', 'octaves', 'frequency', 'amplitude', 'fractal', 'animate', 'seed'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },

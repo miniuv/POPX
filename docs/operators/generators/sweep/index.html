@@ -141,10 +141,28 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Twist Per Curve</span>
+            <span class="param-label">Twist per Curve</span>
             <span class="param-name">Twistpercurve</span>
             <span class="param-separator">–</span>
             <span class="param-description">When enabled with an external TOP, maps the texture to each curve individually for per-curve twist variation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Twist by Attribute</span>
+            <span class="param-name">Twistbyattribute</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables twist control via a point attribute instead of the ramp or TOP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Twist Attribute</span>
+            <span class="param-name">Twistattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the point attribute to use for twist values when Twist by Attribute is enabled.</span>
           </div>
         </div>
 
@@ -183,7 +201,7 @@
             <span class="param-label">Width</span>
             <span class="param-name">Width</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Width of the swept surface.</span>
+            <span class="param-description">Width of the swept surface. Can be overridden by a LineWidth point attribute.</span>
           </div>
         </div>
 
@@ -313,8 +331,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP Scale</span>
-            <span class="param-name">Ramptopscale</span>
+            <span class="param-label">Scale TOP</span>
+            <span class="param-name">Scaletop</span>
             <span class="param-separator">–</span>
             <span class="param-description">Reference to an external Ramp TOP for scale control. When specified, overrides the internal ramp editor.</span>
           </div>
@@ -326,6 +344,24 @@
             <span class="param-name">Scalepercurve</span>
             <span class="param-separator">–</span>
             <span class="param-description">When enabled with an external TOP, maps the texture to each curve individually for per-curve scale variation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale by Attribute</span>
+            <span class="param-name">Scalebyattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables scale control via a point attribute instead of the ramp or TOP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Scale Attribute</span>
+            <span class="param-name">Scaleattr</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Name of the point attribute to use for scale values when Scale by Attribute is enabled.</span>
           </div>
         </div>
 
@@ -358,8 +394,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ramp TOP Color</span>
-            <span class="param-name">Ramptopcolor</span>
+            <span class="param-label">Color TOP</span>
+            <span class="param-name">Colortop</span>
             <span class="param-separator">–</span>
             <span class="param-description">Reference to an external Ramp TOP for color control. When specified, overrides the internal ramp editor.</span>
           </div>

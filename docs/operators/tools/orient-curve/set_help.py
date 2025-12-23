@@ -11,6 +11,8 @@ op_name.par.Opentwistramp.help = "Opens the twist ramp editor."
 op_name.par.Resettwistramp.help = "Resets the twist ramp to default."
 op_name.par.Twisttop.help = "Reference to an external TOP for twist control."
 op_name.par.Twistpercurve.help = "When enabled with an external TOP, maps the texture to each curve individually."
+op_name.par.Twistbyattribute.help = "Enables twist control via a point attribute instead of the ramp or TOP."
+op_name.par.Twistattr.help = "Name of the point attribute to use for twist values when Twist by Attribute is enabled."
 
 # Page: Common
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."

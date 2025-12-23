@@ -1,7 +1,7 @@
 POPX Release Notes
 ==================
 
-Version 1.1.0 - Future Release
+Version 1.1.0 - December 23, 2025
 ---------------------------------
 
 NEW OPERATORS
@@ -43,10 +43,23 @@ Noise Modifier:
 
 Magnetize:
   • Added Solver Mode menu with Simple and Advect options
-  • Added Initial Position POP parameter for Simple solver mode
+  • Added Initial POP parameter for Simple solver mode
   • Added Spin Direction XYZ vector parameter (replaced toggle)
   • Added Containment parameter for field bounds control
   • Added Output Force Attribute toggle to output magnetic force vectors
+
+Orient Curve:
+  • Added Twist by Attribute toggle for attribute-based twist control
+  • Added Twist Attribute parameter for selecting the twist attribute
+
+Sweep:
+  • Added Twist by Attribute and Twist Attribute parameters for attribute-based twist control
+  • Added Scale by Attribute and Scale Attribute parameters for attribute-based scale control
+  • Width parameter can now be overridden by a LineWidth point attribute
+
+Move Along Curve:
+  • Added Twist by Attribute toggle for attribute-based twist control
+  • Added Twist Attribute parameter for selecting the twist attribute
 
 BUG FIXES
 

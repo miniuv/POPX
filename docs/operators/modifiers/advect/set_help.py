@@ -14,6 +14,12 @@ op_name.par.Lookupmode.help = "Determines how advection vectors are sampled from
 op_name.par.Maxptsavg.help = "Maximum number of points to include when averaging vectors in Average lookup mode."
 op_name.par.Timestep.help = "Controls the integration step size for advection movement."
 op_name.par.Rotateto.help = "Enables automatic rotation of instances to align with the advection vector direction."
+op_name.par.Feedbackpop.help = "Reference to the feedback POP that drives the advection simulation."
+op_name.par.Passthroughattrs.help = "Attributes to pass through from the initial POP connected to the feedback POP."
+op_name.par.Enablelife.help = "Enables lifespan-based particle death when using feedback loop advection."
+op_name.par.Lifeseed.help = "Numerical value that initializes the randomization for life variance."
+op_name.par.Lifespan.help = "Base duration in seconds that particles exist before being removed."
+op_name.par.Lifevariance.help = "Random variation added to the life span for each particle."
 
 # Page: Common
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."
