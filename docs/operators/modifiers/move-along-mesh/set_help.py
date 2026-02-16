@@ -3,7 +3,7 @@
 op_name = target
 
 # Page: Move Along Mesh
-op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause."
+op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
 op_name.par.Mesh.help = "Reference to a POP for the mesh to attach instances to when no second input is."
 op_name.par.Displaymesh.help = "Visualizes the mesh in the viewport."
 op_name.par.Initializepulse.help = "Resets the simulation state to initial conditions."
@@ -46,6 +46,7 @@ op_name.par.Relaxstrength.help = "Intensity of the relaxation force."
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."
 op_name.par.Freeextragpumem.help = "Free memory that has accumulated when output memory has grown and shrunk."
 op_name.par.Renderprimitives.help = "Toggles rendering of POPX Geometry or shows it as point instances only."
+op_name.par.Converttoptprim.help = "Converts points to primitive points when Render Primitives is toggled off."
 op_name.par.Srtrst.help = "Sets the transform order when using POPX Geometry as built-in TouchDesigner."
 
 print("Move-Along-Mesh parameter help text updated successfully!")

@@ -1,6 +1,124 @@
 POPX Release Notes
 ==================
 
+Version 1.2.0 - Future Release
+-------------------------------
+
+PERFORMANCE
+
+General:
+  • Improved CPU and GPU loads across all POPX operators
+
+NEW OPERATORS
+
+Light:
+  • New tool for defining light sources used by the Path Tracer's direct lighting system
+  • Supports Point Light, Spot Light, Area Light, and Volumetric Light types
+  • Includes cone angle and falloff controls for spot and volumetric lights
+  • Supports distance attenuation with configurable start, end, and rolloff
+  • Supports texture map projection from the light source
+
+SBPP (Soft Body Post Process):
+  • New tool for post-processing soft body simulation output
+  • Provides mesh smoothing with configurable blur iterations, neighbor count, and blend strength
+  • Includes subdivision with depth control, crease weight, and simple coefficients option
+
+SSFR (Screen Space Fluid Renderer):
+  • New tool for rendering particle simulations as realistic fluid surfaces
+  • Supports Refractive material mode with IOR, extinction color, absorption, and refraction controls
+  • Supports PBR material mode with base color, specular, metallic, roughness, and ambient occlusion
+  • Includes bilateral blur for depth buffer smoothing
+  • Features procedural surface detail, environment map reflections, and tone mapping
+
+NEW FEATURES
+
+Convert:
+  • Added Input Point Count parameter
+  • Added Number of Pieces Detected parameter
+  • Renamed Number of Pieces Detected to Number of Pieces to Allocate
+  • Renamed Min Points per Piece to Minimum Points per Piece
+
+DLG:
+  • Added Distribution parameter for neighbor search query method
+  • Added Num Hash Buckets parameter for spatial neighbor lookups
+  • Changed Line Strips to menu with Close and Open options
+  • Replaced Constraints page with new Collisions architecture supporting multiple collision geometry types, transform controls, and display options
+  • Added Mass parameter for per-vertex mass controlling resistance to growth forces
+  • Removed Use Curvature parameter
+  • Added Type menu to Noise page with Perlin and Simplex algorithm options (2D/3D/4D)
+  • Noise now replaces the Mass attribute instead of PointScale
+
+Explode:
+  • Renamed Number of Clusters to Number of Clusters to Allocate
+
+Flow:
+  • Added Time Scale parameter for simulation speed control
+  • Added Solver Mode parameter with Simple and Advect options to Advect page
+  • Added Density Resolution Scale, Channel Mask, and Match Bounds To T3D parameters to Advect page
+
+All Falloffs (except Combine Falloff):
+  • Added Enable Remap parameter to Remap page
+
+All Operators:
+  • Added Convert to Point Primitives parameter to Common page
+
+Relax:
+  • Replaced Constraints page with new Collisions architecture supporting multiple collision geometry types, transform controls, and display options
+
+Soft Body:
+  • Added Time Scale parameter for simulation speed control
+  • Removed Enable Pressure Constraints parameter
+  • Restructured Collisions page with new architecture supporting multiple collision geometry types, transform controls, and display options
+
+Constraints:
+  • Added Lock Input and Reload parameters to Geometry page
+  • Added Target Geometry section with Group Type, Group, Path, and Visualize parameters
+  • Removed Pin Animate section from Geometry page
+  • Added Constraint Type menu with 10 constraint types
+  • Added Constraints Color parameter for constraint visualization
+  • Added Stiffness Scale menus for Stretch and Bend constraints
+  • Replaced Pin Group section with Pin to Animation section (Pin Points, Pin Type, Match Animation, Visualize Pinned)
+
+Constraints Config:
+  • Removed Constraints Config operator — constraints are now configured inside POPX Constraints
+
+Path Tracer:
+  • Moved from Simulations to Tools category
+  • Renamed Path Tracing page to Path Tracer
+  • Added Voxel Tracer with Enable Hybrid Tracing parameter for combined volumetric and geometry path tracing
+  • Added Project On Geometry, Show Focal Plane, and Focal Plane Size parameters
+  • Added Post page with tone mapping (Enable Tone Map, Exposure, Gamma) and SVGF denoiser for real-time noise reduction
+  • Replaced individual light parameters with POPX Light tool reference via Light Comp parameter
+
+Mesh Fill:
+  • Added Display Bounds parameter for visualizing voxelization volume
+  • Added Lower Bounds, Upper Bounds, Margin, and Get Bounds parameters for custom voxelization bounds
+  • Changed Ray Direction Mode options from Constant/Inside Sphere to Axis Aligned/Custom Direction
+  • Changed Precision menu option names from 16bit/32bit to 16-bit float/32-bit float
+  • Added Continuous Simulation, Retention, and Stop Threshold parameters
+
+Voxelize:
+  • Added Output Volume, Output Surface, Surface Threshold, Output SDF, and Smoothness parameters
+  • Removed blur filtering parameters (Enable Blur, Type, Extend, Pre-Shrink, Filter Size)
+  • Changed Ray Direction Mode options from Constant/Inside Sphere to Axis Aligned/Custom Direction
+
+Material:
+  • Added Attribute Class menu for selecting point or primitive attribute output
+  • Replaced Specular Tint with Specular Color RGB parameter and Sheen Tint with Sheen Color RGB parameter
+  • Added Dispersion parameter for chromatic dispersion on refractive materials
+
+Particle (renamed from SPH):
+  • Renamed SPH to Particle
+  • Added Solver Mode menu with Simple and Advect options
+  • Added Material Mode menu with Fluids-SPH, Fluids-PBF, and Grains options
+  • Added Pressure Multiplier and Near Pressure Multiplier parameters
+  • Removed Num Particles parameter
+  • Added Bounding Box Margin parameter
+  • Replaced Collisions page with new architecture supporting multiple collision geometry types, transform controls, and display options
+  • Added Collision Damping parameter to Forces page
+
+
+
 Version 1.1.0 - December 23, 2025
 ---------------------------------
 
@@ -119,11 +237,6 @@ Soft Body:
   • Added Transition Range, Transition Align, and Transition Type parameters
     for grabber falloff control
   • Removed Max Constraints per Point parameter (now handled by Constraints Config)
-
-Constraints Config:
-  • Added new Constraints Config operator to configure constraints on the
-    simulated geometry outside of the Soft Body solver, requiring a reference
-    to the Soft Body operator
 
 DLA:
   • Added Target Seed Update POP parameter for feedback loop seed point

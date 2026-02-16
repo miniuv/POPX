@@ -3,13 +3,20 @@
 op_name = target
 
 # Page: Voxelize
+op_name.par.Voxelizemode.help = "Determines whether to voxelize mesh geometry or point cloud data."
 op_name.par.Maxaxisresolution.help = "Maximum resolution along the longest axis of the voxel grid."
 op_name.par.Lowerboundsx.help = "Minimum XYZ coordinates of the voxelization volume."
 op_name.par.Upperboundsx.help = "Maximum XYZ coordinates of the voxelization volume."
 op_name.par.Margin.help = "Additional padding around the geometry bounds."
 op_name.par.Getbounds.help = "Automatically calculate bounds from input geometry."
 op_name.par.Displaybounds.help = "Visualize the voxelization volume bounds as a bounding box."
-op_name.par.Raydirx.help = "Direction vector for ray casting when Ray Direction Mode is set to Constant."
+op_name.par.Outputvolume.help = "Outputs the volume representation of the voxelized geometry."
+op_name.par.Outputsurface.help = "Outputs the surface shell of the voxelized geometry."
+op_name.par.Surfacethreshold.help = "Density threshold for extracting the surface shell from the volume."
+op_name.par.Outputsdf.help = "Outputs a signed distance field representation of the voxelized geometry."
+op_name.par.Smoothness.help = "Smoothing amount applied to the voxelized result."
+op_name.par.Raydirmode.help = "Method for determining ray directions when voxelizing meshes."
+op_name.par.Raydirx.help = "Direction vector for ray casting when Ray Direction Mode is set to Custom Direction."
 op_name.par.Pointscale.help = "Scale multiplier for point size when voxelizing point clouds."
 op_name.par.Enablemaxpointcount.help = "Limits the number of points processed when voxelizing point clouds."
 op_name.par.Maxpointcount.help = "Maximum number of points to process for point cloud voxelization."
@@ -18,9 +25,6 @@ op_name.par.Colorr.help = "RGB color applied to voxels."
 op_name.par.Densityscale.help = "Multiplier for voxel density values."
 op_name.par.Bgcolorr.help = "RGB color for empty voxel regions."
 op_name.par.Bgalpha.help = "Alpha value for empty voxel regions."
-op_name.par.Enableblur.help = "Applies blur filtering to smooth the voxelized volume."
-op_name.par.Preshrink.help = "Resolution reduction before applying blur for performance optimization."
-op_name.par.Size.help = "Size of the blur filter kernel."
 
 # Page: Common
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."

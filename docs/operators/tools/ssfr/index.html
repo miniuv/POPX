@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSFR | POPX</title>
+  <meta name="description" content="Screen space fluid rendering tool for converting particle simulations into realistic fluid surfaces with refractive and PBR material modes.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>SSFR <span class="operator-version">v1.2.0</span></h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>SSFR</strong> (Screen Space Fluid Renderer) is a rendering tool that converts particle simulations into realistic fluid surfaces.
+          It reconstructs a smooth fluid surface from point data using screen-space techniques and renders it with configurable material properties.
+        </p>
+
+        <p>
+          The operator supports two material modes: <strong>Refractive</strong> for transparent fluid with index of refraction, extinction color, and absorption controls,
+          and <strong>PBR</strong> for physically based rendering with base color, specular, metallic, and roughness properties.
+          Additional features include bilateral blur for depth smoothing, procedural surface detail, environment map reflections, and tone mapping.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- SSFR Page -->
+        <h3 id="page-ssfr" class="page-heading">Page: SSFR</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render TOP</span>
+            <span class="param-name">Rendertop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to the Render TOP where the fluid rendering output is displayed.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Resolution Scale</span>
+            <span class="param-name">Resolutionscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for the rendering resolution relative to the Render TOP.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Passes</span>
+            <span class="param-name">Passes</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of bilateral blur passes to smooth the depth buffer.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Filter Radius</span>
+            <span class="param-name">Filterradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Radius of the bilateral blur filter in pixels.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Depth Threshold</span>
+            <span class="param-name">Depththreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum depth difference allowed during bilateral blur to preserve fluid edges.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Material Type</span>
+            <span class="param-name">Materialtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rendering material mode for the fluid surface.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Refractive</span>
+              <span class="param-name">refractive</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">PBR</span>
+              <span class="param-name">pbr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thickness Scale</span>
+            <span class="param-name">Thicknessscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for fluid thickness affecting absorption and refraction calculations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">IOR</span>
+            <span class="param-name">Ior</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Index of refraction for the fluid surface.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Extinction Color</span>
+            <span class="param-name">Extinction</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color absorbed by the fluid over distance, controlling the tint of thick regions.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Extinction Color</span>
+              <span class="param-name">Extinctionr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Extinction Color</span>
+              <span class="param-name">Extinctiong</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Extinction Color</span>
+              <span class="param-name">Extinctionb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Absorption Scale</span>
+            <span class="param-name">Absorptionscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Multiplier for the absorption effect based on fluid thickness.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Refraction Scale</span>
+            <span class="param-name">Refractionscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of the refraction distortion through the fluid surface.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Base Color</span>
+            <span class="param-name">Basecolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Base color of the fluid surface in PBR mode.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Base Color</span>
+              <span class="param-name">Basecolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Level</span>
+            <span class="param-name">Specularlevel</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Intensity of specular reflections on the fluid surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Metallic</span>
+            <span class="param-name">Metallic</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Metallic appearance of the fluid surface. Higher values create more reflective, metal-like surfaces.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Roughness</span>
+            <span class="param-name">Roughness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Surface roughness of the fluid. Lower values create sharper reflections.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Ambient Occlusion</span>
+            <span class="param-name">Ambientocclusion</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Strength of ambient occlusion darkening in fluid crevices.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Emit</span>
+            <span class="param-name">Emit</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Emissive color added to the fluid surface.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Emit</span>
+              <span class="param-name">Emitr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Emit</span>
+              <span class="param-name">Emitg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Emit</span>
+              <span class="param-name">Emitb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Constant</span>
+            <span class="param-name">Constant</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Constant color added to the final rendering output.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">Constantr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">Constantg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Constant</span>
+              <span class="param-name">Constantb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Surface Detail</span>
+            <span class="param-name">Enablesurfacedetail</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable procedural surface detail on the fluid.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Detail Resolution</span>
+            <span class="param-name">Detailresolution</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Resolution of the surface detail noise texture.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Detail Period</span>
+            <span class="param-name">Detailperiod</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Spatial frequency of the surface detail pattern.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Detail Strength</span>
+            <span class="param-name">Detailstrength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Intensity of the surface detail displacement.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Environment Map</span>
+            <span class="param-name">Envmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a TOP used as the environment map for reflections.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render Environment</span>
+            <span class="param-name">Renderenvmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Render the environment map as a background behind the fluid.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Tone Map</span>
+            <span class="param-name">Enabletonemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable tone mapping on the rendered output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Gamma</span>
+            <span class="param-name">Gamma</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Gamma correction value for the tone mapped output.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Exposure</span>
+            <span class="param-name">Exposure</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Exposure adjustment for the tone mapped output.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Particles In</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../sbpp/" class="nav-button prev">SBPP</a>
+        <a href="../unpack/" class="nav-button next">Unpack</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-ssfr">Page: SSFR</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

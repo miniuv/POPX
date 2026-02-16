@@ -36,6 +36,415 @@
     <main class="main-content">
       <h1>Release Notes</h1>
 
+      <section id="v1-2-0" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+        <div style="margin-bottom: 12px;">
+          <h2 style="margin: 0; margin-bottom: 4px; font-size: 20px;">Version <span style="background: var(--color-accent); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 700;">1.2.0</span></h2>
+          <p style="margin: 0; font-size: 13px; color: var(--color-accent); font-weight: 600;">Future Release</p>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">PERFORMANCE</h3>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">General</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Improved CPU and GPU loads across all POPX operators.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">NEW OPERATORS</h3>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Light</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                New tool for defining light sources used by the Path Tracer's direct lighting system.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports <strong style="color: var(--color-text);">Point Light</strong>, <strong style="color: var(--color-text);">Spot Light</strong>, <strong style="color: var(--color-text);">Area Light</strong>, and <strong style="color: var(--color-text);">Volumetric Light</strong> types.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Includes cone angle and falloff controls for spot and volumetric lights.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports distance attenuation with configurable start, end, and rolloff.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports texture map projection from the light source.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">SBPP (Soft Body Post Process)</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                New tool for post-processing soft body simulation output.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Provides mesh smoothing with configurable blur iterations, neighbor count, and blend strength.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Includes subdivision with depth control, crease weight, and simple coefficients option.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">SSFR (Screen Space Fluid Renderer)</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                New tool for rendering particle simulations as realistic fluid surfaces.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports <strong style="color: var(--color-text);">Refractive</strong> material mode with IOR, extinction color, absorption, and refraction controls.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports <strong style="color: var(--color-text);">PBR</strong> material mode with base color, specular, metallic, roughness, and ambient occlusion.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Includes bilateral blur for depth buffer smoothing.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Features procedural surface detail, environment map reflections, and tone mapping.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">NEW FEATURES</h3>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Convert</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Input Point Count</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Number of Pieces Detected</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Number of Pieces Detected</strong> to <strong style="color: var(--color-text);">Number of Pieces to Allocate</strong>.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Min Points per Piece</strong> to <strong style="color: var(--color-text);">Minimum Points per Piece</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">DLG</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Distribution</strong> parameter for neighbor search query method.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Num Hash Buckets</strong> parameter for spatial neighbor lookups.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Changed <strong style="color: var(--color-text);">Line Strips</strong> to menu with Close and Open options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced <strong style="color: var(--color-text);">Constraints</strong> page with new <strong style="color: var(--color-text);">Collisions</strong> architecture supporting multiple collision geometry types, transform controls, and display options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Mass</strong> parameter for per-vertex mass controlling resistance to growth forces.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Use Curvature</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Type</strong> menu to Noise page with Perlin and Simplex algorithm options (2D/3D/4D).
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Noise now replaces the <strong style="color: var(--color-text);">Mass</strong> attribute instead of PointScale.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Explode</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Number of Clusters</strong> to <strong style="color: var(--color-text);">Number of Clusters to Allocate</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Flow</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Time Scale</strong> parameter for simulation speed control.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Solver Mode</strong> parameter with Simple and Advect options to Advect page.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Density Resolution Scale</strong>, <strong style="color: var(--color-text);">Channel Mask</strong>, and <strong style="color: var(--color-text);">Match Bounds To T3D</strong> parameters to Advect page.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">All Falloffs (except Combine Falloff)</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Enable Remap</strong> parameter to Remap page.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">All Operators</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Convert to Point Primitives</strong> parameter to Common page.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Relax</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced <strong style="color: var(--color-text);">Constraints</strong> page with new <strong style="color: var(--color-text);">Collisions</strong> architecture supporting multiple collision geometry types, transform controls, and display options.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Soft Body</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Time Scale</strong> parameter for simulation speed control.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Enable Pressure Constraints</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Restructured <strong style="color: var(--color-text);">Collisions</strong> page with new architecture supporting multiple collision geometry types, transform controls, and display options.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Constraints</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Lock Input</strong> and <strong style="color: var(--color-text);">Reload</strong> parameters to Geometry page.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Target Geometry</strong> section with Group Type, Group, Path, and Visualize parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Pin Animate</strong> section from Geometry page.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Constraint Type</strong> menu with 10 constraint types (Distance Along Edges, Bend Across Triangles, Struts, Pressure, Cloth, String, Attach to Geometry, Glue, Pin to Target).
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Constraints Color</strong> parameter for constraint visualization.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Stiffness Scale</strong> menus for Stretch and Bend constraints.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced <strong style="color: var(--color-text);">Pin Group</strong> section with <strong style="color: var(--color-text);">Pin to Animation</strong> section (Pin Points, Pin Type, Match Animation, Visualize Pinned).
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Constraints Config</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Constraints Config</strong> operator — constraints are now configured inside POPX Constraints.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Path Tracer</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Moved from Simulations to Tools category.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Path Tracing</strong> page to <strong style="color: var(--color-text);">Path Tracer</strong>.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Voxel Tracer with <strong style="color: var(--color-text);">Enable Hybrid Tracing</strong> parameter for combined volumetric and geometry path tracing.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Project On Geometry</strong>, <strong style="color: var(--color-text);">Show Focal Plane</strong>, and <strong style="color: var(--color-text);">Focal Plane Size</strong> parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Post</strong> page with tone mapping (<strong style="color: var(--color-text);">Enable Tone Map</strong>, <strong style="color: var(--color-text);">Exposure</strong>, <strong style="color: var(--color-text);">Gamma</strong>) and SVGF denoiser for real-time noise reduction.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced individual light parameters with POPX Light tool reference via <strong style="color: var(--color-text);">Light Comp</strong> parameter.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Mesh Fill</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Display Bounds</strong> parameter for visualizing voxelization volume.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Lower Bounds</strong>, <strong style="color: var(--color-text);">Upper Bounds</strong>, <strong style="color: var(--color-text);">Margin</strong>, and <strong style="color: var(--color-text);">Get Bounds</strong> parameters for custom voxelization bounds.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Changed <strong style="color: var(--color-text);">Ray Direction Mode</strong> options from Constant/Inside Sphere to Axis Aligned/Custom Direction.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Changed <strong style="color: var(--color-text);">Precision</strong> menu option names from 16bit/32bit to 16-bit float/32-bit float.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Continuous Simulation</strong>, <strong style="color: var(--color-text);">Retention</strong>, and <strong style="color: var(--color-text);">Stop Threshold</strong> parameters.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Voxelize</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Output Volume</strong>, <strong style="color: var(--color-text);">Output Surface</strong>, <strong style="color: var(--color-text);">Surface Threshold</strong>, <strong style="color: var(--color-text);">Output SDF</strong>, and <strong style="color: var(--color-text);">Smoothness</strong> parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed blur filtering parameters (<strong style="color: var(--color-text);">Enable Blur</strong>, <strong style="color: var(--color-text);">Type</strong>, <strong style="color: var(--color-text);">Extend</strong>, <strong style="color: var(--color-text);">Pre-Shrink</strong>, <strong style="color: var(--color-text);">Filter Size</strong>).
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Changed <strong style="color: var(--color-text);">Ray Direction Mode</strong> options from Constant/Inside Sphere to Axis Aligned/Custom Direction.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Material</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Attribute Class</strong> menu for selecting point or primitive attribute output.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced <strong style="color: var(--color-text);">Specular Tint</strong> with <strong style="color: var(--color-text);">Specular Color</strong> RGB parameter and <strong style="color: var(--color-text);">Sheen Tint</strong> with <strong style="color: var(--color-text);">Sheen Color</strong> RGB parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Dispersion</strong> parameter for chromatic dispersion on refractive materials.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Particle (renamed from SPH)</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">SPH</strong> to <strong style="color: var(--color-text);">Particle</strong>.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Solver Mode</strong> menu with Simple and Advect options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Material Mode</strong> menu with Fluids-SPH, Fluids-PBF, and Grains options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Pressure Multiplier</strong> and <strong style="color: var(--color-text);">Near Pressure Multiplier</strong> parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed <strong style="color: var(--color-text);">Num Particles</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Bounding Box Margin</strong> parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Replaced <strong style="color: var(--color-text);">Collisions</strong> page with new architecture supporting multiple collision geometry types, transform controls, and display options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Collision Damping</strong> parameter to Forces page.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section id="v1-1-0" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
         <div style="margin-bottom: 12px;">
           <h2 style="margin: 0; margin-bottom: 4px; font-size: 20px;">Version <span style="background: var(--color-accent); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 700;">1.1.0</span></h2>
@@ -388,16 +797,6 @@
           </div>
 
           <div style="margin-bottom: 16px;">
-            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Constraints Config</h4>
-            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
-              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
-                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
-                Added new <strong style="color: var(--color-text);">Constraints Config</strong> operator to configure constraints on the simulated geometry outside of the Soft Body solver, requiring a reference to the Soft Body operator.
-              </li>
-            </ul>
-          </div>
-
-          <div style="margin-bottom: 16px;">
             <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">DLA</h4>
             <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
               <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
@@ -505,6 +904,7 @@
     <aside class="toc">
       <h4>Contents</h4>
       <ul>
+        <li><a href="#v1-2-0">Version 1.2.0</a></li>
         <li><a href="#v1-1-0">Version 1.1.0</a></li>
         <li><a href="#v1-0-2">Version 1.0.2</a></li>
         <li><a href="#v1-0-1">Version 1.0.1</a></li>

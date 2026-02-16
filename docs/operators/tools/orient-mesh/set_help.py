@@ -3,7 +3,7 @@
 op_name = target
 
 # Page: Orient Mesh
-op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause."
+op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
 op_name.par.Visualizeupvector.help = "When enabled, displays the up vector as yellow lines for debugging orientation."
 op_name.par.Lengthscale.help = "Controls the length of the visualized up vector lines."
 op_name.par.Colorr.help = "Color of the visualized up vector lines."

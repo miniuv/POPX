@@ -2,11 +2,10 @@
 
 op_name = target
 
-# Page: Solver
+# Page: Soft Body
 op_name.par.Targetupdatepop.help = "POP operator providing target geometry updates for the simulation."
 op_name.par.Timescale.help = "Global time scale multiplier for the simulation speed."
 op_name.par.Timestep.help = "Read-only display of effective timestep, equal to 1/FPS of TouchDesigner."
-op_name.par.Pressureconst.help = "Enable volume-preserving pressure constraints for closed meshes."
 op_name.par.Substeps.help = "Number of simulation substeps per frame for improved stability."
 op_name.par.Iterations.help = "Number of constraint solver iterations."
 op_name.par.Initializepulse.help = "Pulse to initialize or reset the simulation."
@@ -15,19 +14,40 @@ op_name.par.Play.help = "Toggle to play or pause the simulation."
 op_name.par.Steppulse.help = "Pulse to advance the simulation by one frame when paused."
 
 # Page: Collisions
-op_name.par.Enablecollisions.help = "Master toggle for all collision detection and response."
 op_name.par.Enablegroundcollision.help = "Enable collision with an infinite ground plane."
+op_name.par.Groundpositionx.help = "Position of the ground plane in world space."
+op_name.par.Groundmargin.help = "Collision margin distance from the ground plane surface."
 op_name.par.Displayground.help = "Visualize the ground plane in the viewport."
 op_name.par.Enablebboxcollision.help = "Enable collision with a bounding box volume."
 op_name.par.Bbox.help = "A reference to a POP defining the bounding box collision bounds."
+op_name.par.Bboxmargin.help = "Collision margin distance from the bounding box surface."
 op_name.par.Displaybbox.help = "Visualize the bounding box in the viewport."
-op_name.par.Enablegeocollision.help = "Enable collision with external geometry from the collision geometry input."
-op_name.par.Displaycollider.help = "Visualize the collision geometry in the viewport."
-op_name.par.Enableselfcollision.help = "Enable collision detection between different parts of the same soft body as."
-op_name.par.Selfcollisionpasses.help = "Number of self-collision detection passes per substep."
-op_name.par.Normalcorrection.help = "Use surface normals to improve collision response accuracy."
-op_name.par.Maxneighbors.help = "Maximum number of neighbors to consider for self-collision per point."
+op_name.par.Collisiontype.help = "Selects the collision geometry type for constraining instance movement."
+op_name.par.Collisiondamping.help = "Amount of velocity dampening applied when instances collide with the collision geometry."
+op_name.par.Solid.help = "Treats the collision geometry as a solid volume, preventing instances from passing through."
+op_name.par.Project.help = "Projects instances onto the surface of the collision geometry."
+op_name.par.Collisionpop.help = "Reference to a POP containing the collision geometry when using POP collision type."
+op_name.par.Collisionoffset.help = "Offset distance from the collision surface to prevent z-fighting artifacts."
+op_name.par.Sizex.help = "Size of the box collision geometry."
+op_name.par.Radiusx.help = "Radius of the collision geometry per axis."
+op_name.par.Cornerradius.help = "Radius of rounded corners on the box collision geometry."
+op_name.par.Collisontop.help = "Reference to a TOP texture used as the collision field for SDF and texture collision types."
+op_name.par.Usecustombounds.help = "Enables custom bounding box for the collision texture instead of using the texture's native bounds."
+op_name.par.Lowerboundsx.help = "Lower bounds of the collision volume in world space."
+op_name.par.Upperboundsx.help = "Upper bounds of the collision volume in world space."
+op_name.par.Xord.help = "Sets the order of scale, rotate, and translate operations for the collision geometry transform."
+op_name.par.Rord.help = "Sets the order of rotation operations for the collision geometry transform."
+op_name.par.Tx.help = "Translation of the collision geometry in world space."
+op_name.par.Rx.help = "Rotation of the collision geometry in degrees."
+op_name.par.Sx.help = "Scale of the collision geometry per axis."
+op_name.par.Px.help = "Pivot point for the collision geometry transform."
+op_name.par.Scale.help = "Uniform scale factor applied to the collision geometry."
+op_name.par.Displaygeo.help = "Shows the collision geometry in the viewport for visualization."
+op_name.par.Displaycolorr.help = "Display color for the collision geometry visualization."
+op_name.par.Enableselfcollision.help = "Enable collision detection between different parts of the same soft body as well as between different geometries."
 op_name.par.Maxdistance.help = "Maximum distance for neighbor search when using distance-based neighbors."
+op_name.par.Distribution.help = "Distribution method for neighbor selection."
+op_name.par.Maxneighbors.help = "Maximum number of neighbors to consider for self-collision per point."
 
 # Page: Forces
 op_name.par.Gravitymultiplier.help = "Multiplier for the gravity force."
@@ -54,21 +74,5 @@ op_name.par.Enablemaxacc.help = "Enable maximum acceleration limiting to prevent
 op_name.par.Maxacceleration.help = "Maximum allowed acceleration magnitude."
 op_name.par.Limitaccel.help = "Apply acceleration limiting during velocity update step."
 op_name.par.Fallbackcollision.help = "Use first order integration when collisions are detected for improved stability."
-
-# Page: Post Process
-op_name.par.Postsmoothp.help = "Apply position smoothing after simulation step."
-
-# Page: Visualize
-op_name.par.Simulatedgeometry.help = "Display the simulated geometry."
-op_name.par.Viscollisions.help = "Visualize collision detection points."
-op_name.par.Visselfcollision.help = "Visualize self-collision detection points."
-op_name.par.Visthickness.help = "Visualize point thickness values."
-op_name.par.Distancealongedges.help = "Visualize distance constraints along mesh edges."
-op_name.par.Bendacrosstriangles.help = "Visualize bending constraints across triangle edges."
-op_name.par.Struts.help = "Visualize strut constraints."
-op_name.par.Attachtogeometry.help = "Visualize attachment constraints to collision geometry."
-op_name.par.Pinned.help = "Visualize pinned points."
-op_name.par.Displayproperty.help = "Show the selected property visualization on constraints."
-op_name.par.Maxvalue.help = "Maximum value for property color mapping range."
 
 print("Soft-Body parameter help text updated successfully!")

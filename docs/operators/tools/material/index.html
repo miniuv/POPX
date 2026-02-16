@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,20 +34,20 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Material</h1>
+      <h1>Material <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
           <strong>Material</strong> is a utility operator that applies Disney BRDF material attributes to geometry for use with the Path Tracer operator.
-          This operator writes material properties as point attributes, allowing you to create custom per-point materials instead of using the Path Tracer's built-in global material.
-          The Material operator provides the same comprehensive Disney principled BRDF parameters as the Path Tracer, including base color, metallic/roughness workflow, specular properties, subsurface scattering, sheen, clearcoat, transmission, and emission.
+          This operator writes material properties as point or primitive attributes, allowing you to create custom per-element materials instead of using the Path Tracer's built-in global material.
+          The Material operator provides the same comprehensive Disney principled BRDF parameters as the Path Tracer, including base color, metallic/roughness workflow, specular color, subsurface scattering, sheen color, clearcoat, transmission, dispersion, and emission.
         </p>
 
         <p>
           By using the Material operator, you can assign different material properties to different parts of your geometry, enabling multi-material scenes for path traced rendering.
-          The operator supports material override control, allowing you to choose whether to replace existing material attributes or preserve them.
+          The operator supports attribute class selection (point or primitive), group filtering, and material override control, allowing you to choose whether to replace existing material attributes or preserve them.
           All material parameters follow the Disney BRDF standard, ensuring physically accurate rendering with intuitive artist-friendly controls.
         </p>
       </section>
@@ -58,6 +58,36 @@
 
         <!-- Material Page -->
         <h3 id="page-material" class="page-heading">Page: Material</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Attribute Class</span>
+            <span class="param-name">Attrclass</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects which attribute class the material properties are applied to.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Group</span>
+            <span class="param-name">Group</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified.</span>
+          </div>
+        </div>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -90,10 +120,6 @@
               <span class="param-label">Base Color</span>
               <span class="param-name">Basecolorb</span>
             </div>
-            <div class="param-subparam">
-              <span class="param-label">Base Color</span>
-              <span class="param-name">Basecolora</span>
-            </div>
           </div>
         </div>
 
@@ -124,12 +150,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specular Tint</span>
-            <span class="param-name">Speculartint</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Specular Color</span>
+            <span class="param-name">Specularcolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Tint specular reflection with base color.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Tint specular reflection with color.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Specular Color</span>
+              <span class="param-name">Specularcolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Specular Color</span>
+              <span class="param-name">Specularcolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Specular Color</span>
+              <span class="param-name">Specularcolorb</span>
+            </div>
           </div>
         </div>
 
@@ -169,12 +211,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen Tint</span>
-            <span class="param-name">Sheentint</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Sheen Color</span>
+            <span class="param-name">Sheencolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Tint sheen with base color.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Tint sheen reflection with color.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Sheen Color</span>
+              <span class="param-name">Sheencolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sheen Color</span>
+              <span class="param-name">Sheencolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sheen Color</span>
+              <span class="param-name">Sheencolorb</span>
+            </div>
           </div>
         </div>
 
@@ -214,6 +272,15 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Dispersion</span>
+            <span class="param-name">Dispersion</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Chromatic dispersion amount for refractive materials.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Emission</span>
@@ -235,10 +302,6 @@
             <div class="param-subparam">
               <span class="param-label">Emission</span>
               <span class="param-name">Emissionb</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissiona</span>
             </div>
           </div>
         </div>
@@ -288,7 +351,7 @@
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
-        <a href="../geometry/" class="nav-button prev">Geometry</a>
+        <a href="../light/" class="nav-button prev">Light</a>
         <a href="../measure/" class="nav-button next">Measure</a>
       </nav>
     </main>

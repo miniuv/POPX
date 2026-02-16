@@ -4,7 +4,8 @@ op_name = target
 
 # Page: Flow
 op_name.par.Reset.help = "Pulse to clear simulation and reset to initial state."
-op_name.par.Timestep.help = "Simulation speed multiplier per frame (higher = faster evolution)."
+op_name.par.Timescale.help = "Simulation speed multiplier per frame (higher = faster evolution)."
+op_name.par.Timestep.help = "Read-only display of effective timestep, equal to 1/FPS of TouchDesigner."
 op_name.par.Maxaxisres.help = "Maximum voxel resolution for longest axis (other axes scale proportionally)."
 op_name.par.Veldissipation.help = "Rate at which velocity decays over time (0 = no damping, 1 = instant decay)."
 op_name.par.Pressureiters.help = "Number of iterations for pressure solve (higher = more accurate."
@@ -42,7 +43,6 @@ op_name.par.Opticalflowtop.help = "3D texture input for optical flow motion vect
 op_name.par.Optiflowforcestrength.help = "Multiplier for optical flow force magnitude."
 
 # Page: Collisions
-op_name.par.Enablebounds.help = "Enables collision boundaries at simulation volume edges."
 op_name.par.Boundstop.help = "Optional 3D texture defining custom boundary regions."
 op_name.par.Showbounds.help = "Visualizes boundary regions in output."
 op_name.par.Obstacletop.help = "3D texture defining solid obstacle regions (white = solid)."
@@ -51,18 +51,26 @@ op_name.par.Obstacleopacity.help = "Opacity multiplier for rendered obstacles."
 
 # Page: Advect
 op_name.par.Advect.help = "Enables particle system advection by fluid velocity field."
+op_name.par.Solvermode.help = "Switches between Simple and Advect modes."
 op_name.par.Particlesupdatepop.help = "Reference to a POP node downstream in the network."
 op_name.par.Advectionstep.help = "Multiplier for particle advection speed."
 op_name.par.Spawn.help = "Spawns particles in regions with substance density above threshold."
 op_name.par.Numparticles.help = "Maximum particles spawned."
+op_name.par.Densityscale.help = "Fraction of simulation resolution used for the density field when spawning particles (lower = faster, less precise)."
 op_name.par.Threshold.help = "Minimum substance density required for particle spawning."
 op_name.par.Seed.help = "Random seed for particle spawn positions."
 op_name.par.Maxattempts.help = "Maximum spawn attempts per frame before giving up."
 op_name.par.Enableparticlelife.help = "Enables finite particle lifespans with automatic death."
-op_name.par.Lifeseed.help = "Random seed for lifespan variance."
 op_name.par.Lifespan.help = "Base lifespan in seconds before particle dies."
 op_name.par.Lifevariance.help = "Random variation added to base lifespan."
+op_name.par.Lifeseed.help = "Random seed for lifespan variance."
 op_name.par.Lookupcolor.help = "Particles inherit color from substance field at spawn position."
+op_name.par.Channelmask1.help = "Selects which RGBA channels are sampled when looking up substance color."
+op_name.par.Fromlow1.help = "Input range minimum for color remapping (RGBA)."
+op_name.par.Fromhigh1.help = "Input range maximum for color remapping (RGBA)."
+op_name.par.Tolow1.help = "Output range minimum for color remapping (RGBA)."
+op_name.par.Tohigh1.help = "Output range maximum for color remapping (RGBA)."
+op_name.par.Matchtot3d.help = "Matches particle advection bounds to the 3D texture input dimensions."
 
 # Page: Common
 op_name.par.Freeextragpumem.help = "Free memory that has accumulated when output memory has grown and shrunk."

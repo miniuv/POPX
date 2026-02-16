@@ -3,7 +3,9 @@
 op_name = target
 
 # Page: Define Pieces
-op_name.par.Numberofclusters.help = "Specifies the number of clusters to create."
+op_name.par.Partitionmethod.help = "Determines how geometry is partitioned into instances."
+op_name.par.Scattermethod.help = "Defines how scatter points are distributed for clustering."
+op_name.par.Numberofclusters.help = "Maximum number of clusters to allocate memory for."
 op_name.par.Clustersseed.help = "Random seed value for cluster generation."
 op_name.par.Maxdistance.help = "Maximum distance threshold for clustering."
 op_name.par.Visualizepieces.help = "Enables color visualization of pieces."
@@ -15,6 +17,7 @@ op_name.par.Maxprimsperpoint.help = "Maximum number of primitives a point can be
 op_name.par.Angle.help = "Threshold angle between faces above which shared edge vertices don't share."
 op_name.par.Computesourceorient.help = "Computes orientation based on the input geometry."
 op_name.par.Usecustomupvector.help = "Enables custom up vector specification."
+op_name.par.Customupvectorx.help = "Custom up vector direction."
 op_name.par.Invertn.help = "Inverts the normal vector direction."
 op_name.par.Invertup.help = "Inverts the up vector direction."
 

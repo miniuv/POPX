@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Voxelize</h1>
+      <h1>Voxelize <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -52,7 +52,7 @@
 
         <p>
           The voxelization process offers extensive control over resolution, bounds, colors, and density. You can define custom spatial bounds, adjust the maximum axis resolution, and control how colors are applied to the volume.
-          Optional blur filtering can smooth the resulting volume, and background colors can be set for empty voxel regions.
+          Multiple output modes are available including volume, surface shell, and signed distance field representations, with adjustable smoothness and background colors for empty voxel regions.
         </p>
       </section>
 
@@ -93,21 +93,53 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Lower Bounds</span>
             <span class="param-name">Lowerbounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Minimum XYZ coordinates of the voxelization volume.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum XYZ coordinates of the voxelization volume.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsz</span>
+            </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Upper Bounds</span>
             <span class="param-name">Upperbounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum XYZ coordinates of the voxelization volume.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum XYZ coordinates of the voxelization volume.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsz</span>
+            </div>
           </div>
         </div>
 
@@ -138,6 +170,51 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Volume</span>
+            <span class="param-name">Outputvolume</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs the volume representation of the voxelized geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output Surface</span>
+            <span class="param-name">Outputsurface</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs the surface shell of the voxelized geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Surface Threshold</span>
+            <span class="param-name">Surfacethreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Density threshold for extracting the surface shell from the volume.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Output SDF</span>
+            <span class="param-name">Outputsdf</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Outputs a signed distance field representation of the voxelized geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Smoothness</span>
+            <span class="param-name">Smoothness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Smoothing amount applied to the voxelized result.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Ray Direction Mode</span>
@@ -149,22 +226,38 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Constant</span>
-              <span class="param-name">constant</span>
+              <span class="param-label">Axis Aligned</span>
+              <span class="param-name">axis</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Inside Sphere</span>
-              <span class="param-name">insidesphere</span>
+              <span class="param-label">Custom Direction</span>
+              <span class="param-name">custom</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Ray Direction</span>
             <span class="param-name">Raydir</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Direction vector for ray casting when Ray Direction Mode is set to Constant.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Direction vector for ray casting when Ray Direction Mode is set to Custom Direction.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydiry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ray Direction</span>
+              <span class="param-name">Raydirz</span>
+            </div>
           </div>
         </div>
 
@@ -204,12 +297,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Color</span>
             <span class="param-name">Color</span>
             <span class="param-separator">–</span>
-            <span class="param-description">RGB color applied to voxels.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">RGB color applied to voxels.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Color</span>
+              <span class="param-name">Colorb</span>
+            </div>
           </div>
         </div>
 
@@ -222,12 +331,28 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Background Color</span>
             <span class="param-name">Bgcolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">RGB color for empty voxel regions.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">RGB color for empty voxel regions.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Background Color</span>
+              <span class="param-name">Bgcolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Background Color</span>
+              <span class="param-name">Bgcolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Background Color</span>
+              <span class="param-name">Bgcolorb</span>
+            </div>
           </div>
         </div>
 
@@ -237,99 +362,6 @@
             <span class="param-name">Bgalpha</span>
             <span class="param-separator">–</span>
             <span class="param-description">Alpha value for empty voxel regions.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Blur</span>
-            <span class="param-name">Enableblur</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Applies blur filtering to smooth the voxelized volume.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Type</span>
-            <span class="param-name">Type</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Blur filter type.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Catmull-Rom</span>
-              <span class="param-name">catmull</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Gaussian</span>
-              <span class="param-name">gaussian</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Box</span>
-              <span class="param-name">box</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bartlette</span>
-              <span class="param-name">bartlette</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Sinc</span>
-              <span class="param-name">sinc</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Hanning</span>
-              <span class="param-name">hanning</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Blackman</span>
-              <span class="param-name">blackman</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Extend</span>
-            <span class="param-name">Extend</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Edge extension mode for blur filtering.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Hold</span>
-              <span class="param-name">hold</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Repeat</span>
-              <span class="param-name">repeat</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Mirror</span>
-              <span class="param-name">mirror</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Pre-Shrink</span>
-            <span class="param-name">Preshrink</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Resolution reduction before applying blur for performance optimization.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Filter Size</span>
-            <span class="param-name">Size</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Size of the blur filter kernel.</span>
           </div>
         </div>
 
@@ -380,13 +412,31 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">TOP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Voxel Volume</span>
+            <span class="param-text">Volume</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 1</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Surface</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 2</span>
+            <span class="param-name">TOP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">SDF</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 3</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
             <span class="param-text">Hit Attributes</span>

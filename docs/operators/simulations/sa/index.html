@@ -1,0 +1,457 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SA | POPX</title>
+  <meta name="description" content="GPU-accelerated Strange Attractor simulation for generating chaotic dynamical systems including Lorenz, Aizawa, Thomas, and custom attractors.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>SA <span class="operator-version">v1.2.0</span></h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>SA (Strange Attractors)</strong> simulates chaotic dynamical systems based on mathematical strange attractors.
+          Strange attractors are sets of states toward which a dynamical system tends to evolve, exhibiting chaotic behavior where small differences in initial conditions lead to vastly different trajectories.
+          This operator provides a collection of famous attractors including Lorenz, Aizawa, Thomas, Halvorsen, and more, each producing unique flowing, spiraling, or butterfly-like patterns.
+        </p>
+
+        <p>
+          The simulation supports two solver modes: Simple mode computes the velocity vector from the attractor equations and stores it in the PartVel attribute.
+          Advect mode extends this by also updating particle positions over time, with full simulation controls including initialization, playback, and stepping.
+          You can also define custom attractors using a DAT reference for complete control over the differential equations.
+        </p>
+
+        <p>
+          SA includes boundary controls for limiting particle positions with options for clamping, looping, or zig-zag behavior on each axis.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- SA Page -->
+        <h3 id="page-sa" class="page-heading">Page: SA</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Solver Mode</span>
+            <span class="param-name">Solvermode</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Simple and Advect modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simple</span>
+              <span class="param-name">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Advect</span>
+              <span class="param-name">advect</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Points Update POP</span>
+            <span class="param-name">Pointsupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP node downstream in the network when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Strange Attractor</span>
+            <span class="param-name">Strangeattractor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the type of strange attractor to simulate.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lorenz</span>
+              <span class="param-name">lorenz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Aizawa</span>
+              <span class="param-name">aizawa</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Thomas</span>
+              <span class="param-name">thomas</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Halvorsen</span>
+              <span class="param-name">halvorsen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Dadras</span>
+              <span class="param-name">dadras</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Chen</span>
+              <span class="param-name">chen</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rossler</span>
+              <span class="param-name">rossler</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sprott</span>
+              <span class="param-name">sprott</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Four-Wing</span>
+              <span class="param-name">fourwing</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Nose-Hoover</span>
+              <span class="param-name">nosehoover</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom</span>
+              <span class="param-name">custom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Custom SA</span>
+            <span class="param-name">Customsa</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a DAT containing custom attractor equations. Enabled when Strange Attractor is set to Custom.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Generate Script DAT</span>
+            <span class="param-name">Generatedat</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to generate a template script DAT for defining custom attractors. Enabled when Strange Attractor is set to Custom.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uA</span>
+            <span class="param-name">Ua</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient A in attractor equations.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uB</span>
+            <span class="param-name">Ub</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient B in attractor equations. Enabled for Lorenz, Aizawa, Halvorsen, Dadras, Chen, Rossler, Sprott, Four-Wing, and Custom attractors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uC</span>
+            <span class="param-name">Uc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient C in attractor equations. Enabled for Lorenz, Aizawa, Dadras, Chen, Rossler, Four-Wing, and Custom attractors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uD</span>
+            <span class="param-name">Ud</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient D in attractor equations. Enabled for Aizawa, Dadras, and Custom attractors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uE</span>
+            <span class="param-name">Ue</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient E in attractor equations. Enabled for Aizawa, Dadras, and Custom attractors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">uF</span>
+            <span class="param-name">Uf</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for coefficient F in attractor equations. Enabled for Aizawa and Custom attractors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Scale</span>
+            <span class="param-name">Timescale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Global time multiplier for simulation speed.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Initialize</span>
+            <span class="param-name">Initializepulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to reset simulation and spawn initial particles. Enabled when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start</span>
+            <span class="param-name">Startpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to begin simulation from initialized state. Enabled when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Play</span>
+            <span class="param-name">Play</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Toggle continuous simulation playback. Enabled when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Step</span>
+            <span class="param-name">Steppulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Pulse to advance simulation by one frame while paused. Enabled when Solver Mode is set to Advect.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Bounds Page -->
+        <h3 id="page-bounds" class="page-heading">Page: Bounds</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Limit Type Minimum</span>
+            <span class="param-name">Mintype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Behavior when particles reach minimum bounds on each axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Off</span>
+              <span class="param-name">off</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clamp</span>
+              <span class="param-name">clamp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Loop</span>
+              <span class="param-name">loop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Zig Zag</span>
+              <span class="param-name">zigzag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Limit Type Maximum</span>
+            <span class="param-name">Maxtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Behavior when particles reach maximum bounds on each axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Off</span>
+              <span class="param-name">off</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clamp</span>
+              <span class="param-name">clamp</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Loop</span>
+              <span class="param-name">loop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Zig Zag</span>
+              <span class="param-name">zigzag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Minimum Value</span>
+            <span class="param-name">Min</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Lower bound for XYZ position limits.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Minimum Value</span>
+              <span class="param-name">Minx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Minimum Value</span>
+              <span class="param-name">Miny</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Minimum Value</span>
+              <span class="param-name">Minz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Maximum Value</span>
+            <span class="param-name">Max</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Upper bound for XYZ position limits.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Maximum Value</span>
+              <span class="param-name">Maxx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Maximum Value</span>
+              <span class="param-name">Maxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Maximum Value</span>
+              <span class="param-name">Maxz</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inputs Section -->
+      <section id="inputs">
+        <h2>Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Particles In</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outputs Section -->
+      <section id="outputs">
+        <h2>Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Particles Out</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../soft-body/" class="nav-button prev">Soft Body</a>
+        <a href="../sph/" class="nav-button next">SPH</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li>
+          <a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-sa">Page: SA</a></li>
+            <li><a href="#page-bounds">Page: Bounds</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

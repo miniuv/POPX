@@ -9,6 +9,7 @@ op_name.par.Instances0material.help = "Material to apply to instances with the c
 # Page: Common
 op_name.par.Freeextragpumem.help = "Free memory that has accumulated when output memory has grown and shrunk."
 op_name.par.Renderprimitives.help = "Toggles rendering of POPX Geometry or shows it as point instances only."
+op_name.par.Converttoptprim.help = "Converts points to primitive points when Render Primitives is toggled off."
 op_name.par.Srtrst.help = "Sets the transform order when using POPX Geometry as built-in TouchDesigner."
 
 print("Geometry parameter help text updated successfully!")

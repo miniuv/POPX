@@ -966,6 +966,7 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
+      { title: 'Version 1.2.0', anchor: '#v1-2-0' },
       { title: 'Version 1.1.0', anchor: '#v1-1-0' },
       { title: 'Version 1.0.2', anchor: '#v1-0-2' },
       { title: 'Version 1.0.1', anchor: '#v1-0-1' },
@@ -1230,7 +1231,7 @@ const searchIndex = [
     sections: [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: Relax', anchor: '#page-relax' },
-      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['geometry', 'volume', 'surface', 'projection', 'collision', '3d texture', 'bounds', 'force', 'repulsion', 'pre-shrink', 'filter size'] },
+      { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['collision', 'damping', 'solid', 'project', 'box', 'plane', 'sphere', 'torus', 'sdf', '3d texture', 'bounds', 'transform', 'display', 'geometry', 'offset', 'radius', 'corner radius'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1308,19 +1309,6 @@ const searchIndex = [
     ]
   },
   {
-    title: 'Constraints Config',
-    path: 'docs/operators/tools/constraints-config/',
-    type: 'Operator',
-    category: 'Tools',
-    sections: [
-      { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Config', anchor: '#page-config', keywords: ['soft body', 'solver', 'constraints', 'configuration', 'pre-processing'] },
-      { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' },
-      { title: 'Outputs', anchor: '#outputs' }
-    ]
-  },
-  {
     title: 'Delete',
     path: 'docs/operators/tools/delete/',
     type: 'Operator',
@@ -1365,13 +1353,24 @@ const searchIndex = [
     ]
   },
   {
+    title: 'Light',
+    path: 'docs/operators/tools/light/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Light', anchor: '#page-light', keywords: ['light', 'point light', 'spot light', 'area light', 'volumetric light', 'cone', 'attenuation', 'dimmer', 'color', 'texture map', 'bidirectional', 'rolloff'] },
+      { title: 'Page: Common', anchor: '#page-common' }
+    ]
+  },
+  {
     title: 'Material',
     path: 'docs/operators/tools/material/',
     type: 'Operator',
     category: 'Tools',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Material', anchor: '#page-material', keywords: ['material', 'disney brdf', 'pbr', 'path tracer', 'base color', 'metallic', 'roughness', 'specular', 'anisotropic', 'subsurface', 'sheen', 'clearcoat', 'transmission', 'ior', 'emission', 'primitive attributes', 'per-primitive', 'material override'] },
+      { title: 'Page: Material', anchor: '#page-material', keywords: ['material', 'disney brdf', 'pbr', 'path tracer', 'base color', 'metallic', 'roughness', 'specular', 'specular color', 'anisotropic', 'subsurface', 'sheen', 'sheen color', 'clearcoat', 'transmission', 'ior', 'dispersion', 'emission', 'attribute class', 'group', 'material override'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1472,6 +1471,33 @@ const searchIndex = [
     ]
   },
   {
+    title: 'SBPP',
+    path: 'docs/operators/tools/sbpp/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Operations', anchor: '#page-operations', keywords: ['soft body', 'post process', 'smooth', 'blur', 'subdivide', 'subdivision', 'crease', 'neighbors', 'iterations', 'depth'] },
+      { title: 'Page: Visualize', anchor: '#page-visualize', keywords: ['collision', 'self collision', 'thickness', 'constraints', 'distance', 'bend', 'struts', 'attach', 'pin', 'stress', 'property', 'color'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'SSFR',
+    path: 'docs/operators/tools/ssfr/',
+    type: 'Operator',
+    category: 'Tools',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: SSFR', anchor: '#page-ssfr', keywords: ['screen space', 'fluid', 'render', 'particle', 'refractive', 'pbr', 'material', 'bilateral blur', 'depth', 'ior', 'extinction', 'absorption', 'refraction', 'specular', 'metallic', 'roughness', 'environment', 'tone map', 'surface detail'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
     title: 'Preview Falloff',
     path: 'docs/operators/tools/preview-falloff/',
     type: 'Operator',
@@ -1517,7 +1543,7 @@ const searchIndex = [
     category: 'Tools',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Voxelize', anchor: '#page-voxelize', keywords: ['volume', 'mesh', 'point cloud', 'resolution', 'bounds', 'ray', 'density', 'blur', '3d texture', 'volumetric'] },
+      { title: 'Page: Voxelize', anchor: '#page-voxelize', keywords: ['volume', 'mesh', 'point cloud', 'resolution', 'bounds', 'ray', 'density', 'sdf', 'surface', 'smoothness', '3d texture', 'volumetric'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1545,8 +1571,8 @@ const searchIndex = [
     category: 'Simulations',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: DLG', anchor: '#page-dlg', keywords: ['differential line growth', 'edge subdivision', 'branching', 'coral', 'brain', 'organic', 'line strips', 'curvature', 'neighbors', 'max distance', 'vertices', 'smoothing', 'filter', 'gaussian', 'initialize', 'play', 'step'] },
-      { title: 'Page: Constraints', anchor: '#page-constraints', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'loop', 'zig zag', 'boundary', 'bounds', 'geometry', 'volume', 'surface', 'projection', 'collision', '3d texture', 'force', 'repulsion', 'pre-shrink'] },
+      { title: 'Page: DLG', anchor: '#page-dlg', keywords: ['differential line growth', 'edge subdivision', 'branching', 'coral', 'brain', 'organic', 'line strips', 'curvature', 'neighbors', 'max distance', 'vertices', 'smoothing', 'filter', 'gaussian', 'initialize', 'play', 'step', 'distribution', 'hash buckets'] },
+      { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['collision', 'box', 'plane', 'sphere', 'torus', 'sdf', 'damping', 'solid', 'project', 'transform', 'translate', 'rotate', 'scale', 'pivot', 'bounds', 'offset', 'radius', 'corner'] },
       { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'noise', 'displacement', 'harmonics', 'octaves', 'frequency', 'amplitude', 'fractal', 'animate', 'seed'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
@@ -1587,14 +1613,16 @@ const searchIndex = [
   },
   {
     title: 'Path Tracer',
-    path: 'docs/operators/simulations/path-tracer/',
+    path: 'docs/operators/tools/path-tracer/',
     type: 'Operator',
-    category: 'Simulations',
+    category: 'Tools',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Path Tracing', anchor: '#page-path-tracing', keywords: ['path tracing', 'ray tracing', 'ray pop', 'physically based', 'monte carlo', 'progressive rendering', 'rays per pixel', 'bounces', 'depth of field', 'aperture', 'focal length', 'tone mapping', 'exposure', 'hdr', 'temporal smoothing', 'lock input', 'opaque'] },
-      { title: 'Page: Material', anchor: '#page-material', keywords: ['disney brdf', 'pbr', 'base color', 'metallic', 'roughness', 'specular', 'anisotropic', 'subsurface', 'sheen', 'clearcoat', 'transmission', 'ior', 'emission', 'material override'] },
-      { title: 'Page: Lights', anchor: '#page-lights', keywords: ['lighting', 'environment map', 'hdri', 'point light', 'spot light', 'area light', 'direct light', 'image based lighting', 'intensity', 'dimmer', 'cone angle', 'bidirectional'] },
+      { title: 'Page: Path Tracer', anchor: '#page-path-tracer', keywords: ['path tracing', 'ray tracing', 'ray pop', 'physically based', 'monte carlo', 'progressive rendering', 'rays per pixel', 'bounces', 'depth of field', 'aperture', 'focal length', 'hybrid tracing', 'ray offset', 'focal plane', 'lock input', 'project on geometry'] },
+      { title: 'Page: Material', anchor: '#page-material', keywords: ['disney brdf', 'pbr', 'attribute class', 'base color', 'metallic', 'roughness', 'specular', 'specular color', 'anisotropic', 'subsurface', 'sheen', 'sheen color', 'clearcoat', 'transmission', 'ior', 'dispersion', 'emission', 'material override'] },
+      { title: 'Page: Voxel Tracer', anchor: '#page-voxel-tracer', keywords: ['voxel', 'volume', 'isosurface', 'ray marching', 'density', 'absorption', 'scattering', 'threshold', 'normal smoothing', 'step size', 'bounds', 'transform', 'texture map', 'metallic map', 'roughness map', 'specular map', 'emission map'] },
+      { title: 'Page: Lights', anchor: '#page-lights', keywords: ['lighting', 'environment map', 'hdri', 'direct light', 'image based lighting', 'intensity', 'light comp', 'texture map resolution'] },
+      { title: 'Page: Post', anchor: '#page-post', keywords: ['tone mapping', 'exposure', 'gamma', 'hdr', 'svgf', 'denoiser', 'denoise', 'temporal', 'variance', 'a-trous', 'wavelet', 'noise reduction', 'reprojection', 'color box scale', 'kernel radius', 'sensitivity'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' }
     ]
@@ -1624,23 +1652,35 @@ const searchIndex = [
       { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['ground', 'bounding box', 'collision geometry', 'self collision', 'neighbors', 'distance', 'connected', 'thickness', 'smoothing', 'signed distance field', 'sdf', 'voxelize', 'resolution'] },
       { title: 'Page: Forces', anchor: '#page-forces', keywords: ['gravity', 'velocity damping', 'friction', 'static threshold', 'dynamic scale', 'wind', 'direction', 'strength', 'local forces', 'radial', 'planar', 'axial', 'spiral', 'external forces', 'grabber', 'grab points', 'radius', 'stiffness'] },
       { title: 'Page: Advanced', anchor: '#page-advanced', keywords: ['integration order', 'first order', 'second order', 'max acceleration', 'velocity', 'position', 'stability', 'accuracy'] },
-      { title: 'Page: Post Process', anchor: '#page-post-process', keywords: ['smoothing', 'laplacian', 'iterations', 'post process', 'mesh quality'] },
-      { title: 'Page: Visualize', anchor: '#page-visualize', keywords: ['display', 'collision geometry', 'constraints', 'color', 'thickness', 'stiffness', 'damping', 'map', 'attribute', 'visualization', 'debug'] },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
   },
   {
-    title: 'SPH',
-    path: 'docs/operators/simulations/sph/',
+    title: 'SA',
+    path: 'docs/operators/simulations/sa/',
     type: 'Operator',
     category: 'Simulations',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: SPH', anchor: '#page-sph', keywords: ['smoothed particle hydrodynamics', 'liquid', 'water', 'splash', 'particle', 'solver mode', 'fluids', 'grains', 'substeps', 'iterations', 'timescale', 'smoothing radius', 'neighbors', 'initialize', 'play', 'step'] },
+      { title: 'Page: SA', anchor: '#page-sa', keywords: ['strange attractor', 'lorenz', 'aizawa', 'thomas', 'halvorsen', 'dadras', 'chen', 'rossler', 'sprott', 'four-wing', 'nose-hoover', 'chaos', 'dynamical system', 'attractor', 'advect', 'custom', 'initialize', 'play', 'step'] },
+      { title: 'Page: Bounds', anchor: '#page-bounds', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'loop', 'zig zag', 'boundary'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Particle',
+    path: 'docs/operators/simulations/particle/',
+    type: 'Operator',
+    category: 'Simulations',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Particle', anchor: '#page-particle', keywords: ['smoothed particle hydrodynamics', 'sph', 'pbf', 'position based fluids', 'liquid', 'water', 'splash', 'particle', 'solver mode', 'material mode', 'fluids', 'grains', 'substeps', 'iterations', 'timescale', 'smoothing radius', 'neighbors', 'initialize', 'play', 'step'] },
       { title: 'Page: Properties', anchor: '#page-properties', keywords: ['target density', 'viscosity', 'cohesion', 'surface tension', 'adhesion', 'repulsion', 'attraction', 'incompressible', 'thickness', 'sticky', 'droplet', 'granular', 'sand'] },
-      { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['ground', 'bounding box', 'collision geometry', 'container', 'voxelize', 'opaque', 'vessel', 'boundary', 'display'] },
-      { title: 'Page: Forces', anchor: '#page-forces', keywords: ['gravity', 'damping', 'friction', 'static threshold', 'dynamic scale', 'acceleration limit', 'velocity'] },
+      { title: 'Page: Collisions', anchor: '#page-collisions', keywords: ['ground', 'bounding box', 'collision type', 'pop', 'box', 'plane', 'sphere', 'torus', 'sdf', 'solid', 'project', 'transform', 'display', 'boundary', 'margin'] },
+      { title: 'Page: Forces', anchor: '#page-forces', keywords: ['gravity', 'damping', 'collision damping', 'friction', 'static threshold', 'dynamic scale', 'acceleration limit', 'velocity'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1905,21 +1945,39 @@ function initSearch() {
 }
 
 function performSearch(query, resultsDiv) {
-  // Search through pages - only match page titles
+  // Search through pages - match page titles, section titles, and keywords
   const searchResults = [];
 
   searchIndex.forEach(item => {
     const titleMatch = item.title.toLowerCase().includes(query);
 
-    // Only add result if page title matches
-    if (titleMatch) {
-      searchResults.push({
-        item: item,
-        matchingSections: [],
-        pageMatch: true,
-        hasSectionMatch: false
+    // Check section titles and keywords
+    const matchingSections = [];
+    if (item.sections) {
+      item.sections.forEach(section => {
+        const sectionTitleMatch = section.title.toLowerCase().includes(query);
+        const keywordMatch = section.keywords && section.keywords.some(kw => kw.toLowerCase().includes(query));
+        if (sectionTitleMatch || keywordMatch) {
+          matchingSections.push(section);
+        }
       });
     }
+
+    if (titleMatch || matchingSections.length > 0) {
+      searchResults.push({
+        item: item,
+        matchingSections: matchingSections,
+        pageMatch: titleMatch,
+        hasSectionMatch: matchingSections.length > 0
+      });
+    }
+  });
+
+  // Sort: page title matches first, then section/keyword matches
+  searchResults.sort((a, b) => {
+    if (a.pageMatch && !b.pageMatch) return -1;
+    if (!a.pageMatch && b.pageMatch) return 1;
+    return 0;
   });
 
   // Limit results

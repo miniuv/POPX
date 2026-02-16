@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Mesh Fill</h1>
+      <h1>Mesh Fill <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -68,15 +68,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Time Step</span>
-            <span class="param-name">Timestep</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls simulation speed per frame (higher values = faster filling).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Switch to Volume Input</span>
             <span class="param-name">Switchtovol</span>
             <span class="param-separator">–</span>
@@ -86,10 +77,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normalize Input Mesh</span>
-            <span class="param-name">Normalizeinputmesh</span>
+            <span class="param-label">Display Bounds</span>
+            <span class="param-name">Displaybounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale input mesh to unit size before voxelization.</span>
+            <span class="param-description">Visualize the voxelization volume bounds as a bounding box.</span>
           </div>
         </div>
 
@@ -102,6 +93,83 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normalize Input Mesh</span>
+            <span class="param-name">Normalizeinputmesh</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale input mesh to unit size before voxelization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Minimum XYZ coordinates of the voxelization volume.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Maximum XYZ coordinates of the voxelization volume.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Margin</span>
+            <span class="param-name">Margin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Additional padding around the geometry bounds.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Get Bounds</span>
+            <span class="param-name">Getbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Automatically calculate bounds from input geometry.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Ray Direction Mode</span>
@@ -109,16 +177,16 @@
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Method for determining ray directions when voxelizing meshes.</span>
+            <span class="param-group-description">Method for determining ray direction during voxelization.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Constant</span>
-              <span class="param-name">constant</span>
+              <span class="param-label">Axis Aligned</span>
+              <span class="param-name">axis</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Inside Sphere</span>
-              <span class="param-name">insidesphere</span>
+              <span class="param-label">Custom Direction</span>
+              <span class="param-name">custom</span>
             </div>
           </div>
         </div>
@@ -160,11 +228,11 @@
           <div class="param-subparams">
             <div class="param-subparam">
               <span class="param-label">16-bit float</span>
-              <span class="param-name">16bit</span>
+              <span class="param-name">16-bit float</span>
             </div>
             <div class="param-subparam">
               <span class="param-label">32-bit float</span>
-              <span class="param-name">32bit</span>
+              <span class="param-name">32-bit float</span>
             </div>
           </div>
         </div>
@@ -189,6 +257,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Filter Size</span>
+            <span class="param-name">Size</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Blur kernel size for density field smoothing.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Filter Scale</span>
             <span class="param-name">Filterscale</span>
             <span class="param-separator">–</span>
@@ -198,10 +275,37 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Filter Size</span>
-            <span class="param-name">Size</span>
+            <span class="param-label">Continuous Simulation</span>
+            <span class="param-name">Continuoussim</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Blur kernel size for density field smoothing.</span>
+            <span class="param-description">Enables continuous simulation mode where particles keep moving after initial fill completes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Retention</span>
+            <span class="param-name">Retention</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of density retained between frames during continuous simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Stop Threshold</span>
+            <span class="param-name">Stopthreshold</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Density threshold below which the simulation stops filling.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Time Step</span>
+            <span class="param-name">Timestep</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls simulation speed per frame (higher values = faster filling).</span>
           </div>
         </div>
 
@@ -624,7 +728,7 @@
       <!-- Page Navigation -->
       <nav class="page-navigation">
         <a href="../flow/" class="nav-button prev">Flow</a>
-        <a href="../path-tracer/" class="nav-button next">Path Tracer</a>
+        <a href="../physarum/" class="nav-button next">Physarum</a>
       </nav>
     </main>
 

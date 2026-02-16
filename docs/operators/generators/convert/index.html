@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Convert</h1>
+      <h1>Convert <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -74,7 +74,34 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Min Points per Piece</span>
+            <span class="param-label">Number of Pieces to Allocate</span>
+            <span class="param-name">Numberofpieces</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of pieces to allocate memory for.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Input Point Count</span>
+            <span class="param-name">Inputpointcount</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of points in the input geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Number of Pieces Detected</span>
+            <span class="param-name">Piecesdetected</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Read-only display of the number of pieces detected by connectivity.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Minimum Points per Piece</span>
             <span class="param-name">Minpointsperpiece</span>
             <span class="param-separator">–</span>
             <span class="param-description">Minimum number of points required for a piece.</span>
@@ -87,15 +114,6 @@
             <span class="param-name">Searchpasses</span>
             <span class="param-separator">–</span>
             <span class="param-description">Number of passes to search for connectivity.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Number of Pieces Detected</span>
-            <span class="param-name">Numberofpieces</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Read-only display of detected pieces.</span>
           </div>
         </div>
 
@@ -165,7 +183,7 @@
             <span class="param-label">Angle</span>
             <span class="param-name">Angle</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Threshold angle between faces above which shared edge vertices don't share normals.</span>
+            <span class="param-description">Threshold angle between faces above which shared edge vertices don't share.</span>
           </div>
         </div>
 

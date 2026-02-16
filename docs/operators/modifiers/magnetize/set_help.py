@@ -3,7 +3,7 @@
 op_name = target
 
 # Page: Magnetize
-op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause."
+op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
 op_name.par.Solvermode.help = "Determines the computation mode for magnetic forces."
 op_name.par.Magnetspop.help = "Reference to a POP containing points that define magnet positions and."
 op_name.par.Displaymagents.help = "Enables visual display of magnet positions in the viewport."
@@ -12,6 +12,8 @@ op_name.par.Falloffattr.help = "Specifies which attribute to use for falloff val
 op_name.par.Initialpop.help = "Reference to a POP containing initial positions for Simple solver mode."
 op_name.par.Searchradius.help = "Maximum distance from magnets within which instances are affected by magnetic."
 op_name.par.Relaxfactor.help = "Controls the smoothness and damping of magnetic force application over time."
+op_name.par.Mode.help = "Determines the type of magnetic force: Repulse, Attract, or Spin."
+op_name.par.Positionx.help = "Position of the magnet in 3D space."
 op_name.par.Radius.help = "Radius of influence for each magnet."
 op_name.par.Strength.help = "Intensity of magnetic forces applied to instances."
 op_name.par.Exponent.help = "Controls the falloff curve of magnetic force with distance."
@@ -31,6 +33,7 @@ op_name.par.Play.help = "Toggles simulation playback on or off."
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."
 op_name.par.Freeextragpumem.help = "Free memory that has accumulated when output memory has grown and shrunk."
 op_name.par.Renderprimitives.help = "Toggles rendering of POPX Geometry or shows it as point instances only."
+op_name.par.Converttoptprim.help = "Converts points to primitive points when Render Primitives is toggled off."
 op_name.par.Srtrst.help = "Sets the transform order when using POPX Geometry as built-in TouchDesigner."
 
 print("Magnetize parameter help text updated successfully!")

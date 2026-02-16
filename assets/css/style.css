@@ -1656,6 +1656,24 @@ pre code {
 .badge-tool { background-color: rgba(33, 150, 243, 0.2); color: var(--color-tool); }
 .badge-simulation { background-color: rgba(229, 57, 53, 0.2); color: var(--color-simulation); }
 
+/* Operator Version Tag */
+.operator-version {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  background-color: rgba(184, 0, 58, 0.15);
+  color: var(--color-accent);
+  border: 1px solid rgba(184, 0, 58, 0.3);
+  vertical-align: middle;
+  margin-left: 12px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
 /* Parameter Tables */
 .parameter-table {
   width: 100%;

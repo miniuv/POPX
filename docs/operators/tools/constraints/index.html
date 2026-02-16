@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Constraints</h1>
+      <h1>Constraints <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -57,10 +57,19 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Visualize Geometry</span>
-            <span class="param-name">Visualizegeometry</span>
+            <span class="param-label">Lock Input</span>
+            <span class="param-name">Lockinput</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Display the input geometry in the viewport for debugging.</span>
+            <span class="param-description">Lock the input geometry to prevent updates from upstream changes.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Reload</span>
+            <span class="param-name">Reload</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reload the input geometry and regenerate constraints.</span>
           </div>
         </div>
 
@@ -91,6 +100,15 @@
             <span class="param-name">Geogroup</span>
             <span class="param-separator">–</span>
             <span class="param-description">Name of the group to process. Leave empty to process all geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Geometry</span>
+            <span class="param-name">Visualizegeometry</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display the input geometry in the viewport for debugging.</span>
           </div>
         </div>
 
@@ -137,7 +155,7 @@
             <span class="param-label">Density</span>
             <span class="param-name">Density</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Material density used when calculating mass from geometry volume or surface area.</span>
+            <span class="param-description">Material density used when calculating mass from geometry volume or surface.</span>
           </div>
         </div>
 
@@ -211,7 +229,7 @@
             <span class="param-label">Normal Drag</span>
             <span class="param-name">Normaldrag</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Drag coefficient perpendicular to the surface. Higher values slow motion normal to the surface.</span>
+            <span class="param-description">Drag coefficient perpendicular to the surface.</span>
           </div>
         </div>
 
@@ -221,45 +239,6 @@
             <span class="param-name">Tangentdrag</span>
             <span class="param-separator">–</span>
             <span class="param-description">Drag coefficient along the surface. Controls sliding friction.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Group Type</span>
-            <span class="param-name">Pinanimategrouptype</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Specify whether to use point or primitive groups for pinned points.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Point</span>
-              <span class="param-name">point</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Primitive</span>
-              <span class="param-name">primitive</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Group</span>
-            <span class="param-name">Pinanimategroup</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Group name of points to pin to their animated positions.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Visualize Pinned Point</span>
-            <span class="param-name">Visualizepinnedpoint</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Highlight pinned points in the viewport.</span>
           </div>
         </div>
 
@@ -356,6 +335,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Visualization Seed</span>
+            <span class="param-name">Visualizationseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for piece color generation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Visualize Pieces</span>
             <span class="param-name">Visualizepieces</span>
             <span class="param-separator">–</span>
@@ -363,12 +351,51 @@
           </div>
         </div>
 
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Group Type</span>
+            <span class="param-name">Targetgrouptype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Specify whether to use point or primitive groups for target geometry selection.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Primitive</span>
+              <span class="param-name">primitive</span>
+            </div>
+          </div>
+        </div>
+
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Visualization Seed</span>
-            <span class="param-name">Visualizationseed</span>
+            <span class="param-label">Target Geometry Group</span>
+            <span class="param-name">Targetgroup</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for piece color generation.</span>
+            <span class="param-description">Name of the target geometry group to use. Leave empty for all.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Geometry Path</span>
+            <span class="param-name">Targetpath</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Path to the target geometry operator.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Target Geometry</span>
+            <span class="param-name">Visualizetarget</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display the target geometry in the viewport for debugging.</span>
           </div>
         </div>
 
@@ -620,7 +647,7 @@
             <span class="param-label">Rest Length Scale</span>
             <span class="param-name">Stretchrestscale</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for the rest length. Values above 1.0 create pre-stretched constraints.</span>
+            <span class="param-description">Multiplier for the rest length.</span>
           </div>
         </div>
 
@@ -674,7 +701,7 @@
             <span class="param-label">Enable Output Group</span>
             <span class="param-name">Stretchenablegroup</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Create a primitive group containing stretch constraints on the constraint geometry.</span>
+            <span class="param-description">Create a primitive group containing stretch constraints on the constraint.</span>
           </div>
         </div>
 
@@ -874,33 +901,55 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Pin Points</span>
+            <span class="param-name">Pinpoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Point group name for pinning points to their animated positions.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Group Type</span>
-            <span class="param-name">Pingrouptype</span>
+            <span class="param-label">Pin Type</span>
+            <span class="param-name">Pintype</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Type of group for pin constraints: Point or Primitive.</span>
+            <span class="param-group-description">Method for pinning points to their target positions.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Point</span>
-              <span class="param-name">point</span>
+              <span class="param-label">Permanent</span>
+              <span class="param-name">permanent</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Primitive</span>
-              <span class="param-name">primitive</span>
+              <span class="param-label">Stopped</span>
+              <span class="param-name">stopped</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Soft</span>
+              <span class="param-name">soft</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Group</span>
-            <span class="param-name">Pingroup</span>
+            <span class="param-label">Match Animation</span>
+            <span class="param-name">Matchanimation</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Group name for points/primitives to pin to target positions.</span>
+            <span class="param-description">Update pinned point positions to match input animation each frame.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Pinned</span>
+            <span class="param-name">Visualizepinned</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Display pinned points in the viewport for debugging.</span>
           </div>
         </div>
 

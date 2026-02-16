@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Flow</h1>
+      <h1>Flow <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -76,10 +76,19 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Time Scale</span>
+            <span class="param-name">Timescale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Simulation speed multiplier per frame (higher = faster evolution).</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Time Step</span>
             <span class="param-name">Timestep</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Simulation speed multiplier per frame (higher = faster evolution).</span>
+            <span class="param-description">Read-only display of effective timestep, equal to 1/FPS of TouchDesigner.</span>
           </div>
         </div>
 
@@ -119,6 +128,27 @@
 
         <div class="param-group">
           <div class="param-group-header">
+            <span class="param-label">Precision</span>
+            <span class="param-name">Precision</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Texture precision for simulation data.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">16-bit float</span>
+              <span class="param-name">16-bit float</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">32-bit float</span>
+              <span class="param-name">32-bit float</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
             <span class="param-label">Simulation Resolution</span>
             <span class="param-name">Resolution</span>
             <span class="param-separator">–</span>
@@ -138,27 +168,6 @@
             <div class="param-subparam">
               <span class="param-label">Simulation Resolution</span>
               <span class="param-name">Resolutionz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Precision</span>
-            <span class="param-name">Precision</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Texture precision for simulation data.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">16-bit float</span>
-              <span class="param-name">16bit</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">32-bit float</span>
-              <span class="param-name">32bit</span>
             </div>
           </div>
         </div>
@@ -550,15 +559,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enable Bounds</span>
-            <span class="param-name">Enablebounds</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables collision boundaries at simulation volume edges.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Bounds TOP</span>
             <span class="param-name">Boundstop</span>
             <span class="param-separator">–</span>
@@ -616,18 +616,39 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Target Particles Update POP</span>
-            <span class="param-name">Particlesupdatepop</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Solver Mode</span>
+            <span class="param-name">Solvermode</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Reference to a POP node downstream in the network. This reference will cause a feedback loop and re-injects the particles next frame.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Switches between Simple and Advect modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Simple</span>
+              <span class="param-name">simple</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Advect</span>
+              <span class="param-name">advect</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Advection Step</span>
+            <span class="param-label">Target Particles Update POP</span>
+            <span class="param-name">Particlesupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP node downstream in the network.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Advection Step Scale</span>
             <span class="param-name">Advectionstep</span>
             <span class="param-separator">–</span>
             <span class="param-description">Multiplier for particle advection speed.</span>
@@ -649,6 +670,15 @@
             <span class="param-name">Numparticles</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum particles spawned.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Density Resolution Scale (Fraction)</span>
+            <span class="param-name">Densityscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Fraction of simulation resolution used for the density field when spawning particles (lower = faster, less precise).</span>
           </div>
         </div>
 
@@ -690,15 +720,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Seed</span>
-            <span class="param-name">Lifeseed</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Random seed for lifespan variance.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Life Span</span>
             <span class="param-name">Lifespan</span>
             <span class="param-separator">–</span>
@@ -717,6 +738,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Lifeseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for lifespan variance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Lookup Substance Color</span>
             <span class="param-name">Lookupcolor</span>
             <span class="param-separator">–</span>
@@ -724,127 +754,157 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-group">
-            <div class="param-group-header">
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Channel Mask (RGBA)</span>
+            <span class="param-name">Channelmask</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects which RGBA channels are sampled when looking up substance color.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Channel Mask (RGBA)</span>
+              <span class="param-name">Channelmask1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Channel Mask (RGBA)</span>
+              <span class="param-name">Channelmask2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Channel Mask (RGBA)</span>
+              <span class="param-name">Channelmask3</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Channel Mask (RGBA)</span>
+              <span class="param-name">Channelmask4</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">From Low</span>
+            <span class="param-name">Fromlow</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Input range minimum for color remapping (RGBA).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
               <span class="param-label">From Low</span>
-              <span class="param-name">Fromlow</span>
-              <span class="param-separator">–</span>
-              <span class="param-toggle"></span>
-              <span class="param-separator">–</span>
-              <span class="param-group-description">Input range minimum for color remapping (RGBA).</span>
+              <span class="param-name">Fromlow1</span>
             </div>
-            <div class="param-subparams">
-              <div class="param-subparam">
-                <span class="param-label">From Low</span>
-                <span class="param-name">Fromlow1</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From Low</span>
-                <span class="param-name">Fromlow2</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From Low</span>
-                <span class="param-name">Fromlow3</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From Low</span>
-                <span class="param-name">Fromlow4</span>
-              </div>
+            <div class="param-subparam">
+              <span class="param-label">From Low</span>
+              <span class="param-name">Fromlow2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">From Low</span>
+              <span class="param-name">Fromlow3</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">From Low</span>
+              <span class="param-name">Fromlow4</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-group">
-            <div class="param-group-header">
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">From High</span>
+            <span class="param-name">Fromhigh</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Input range maximum for color remapping (RGBA).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
               <span class="param-label">From High</span>
-              <span class="param-name">Fromhigh</span>
-              <span class="param-separator">–</span>
-              <span class="param-toggle"></span>
-              <span class="param-separator">–</span>
-              <span class="param-group-description">Input range maximum for color remapping (RGBA).</span>
+              <span class="param-name">Fromhigh1</span>
             </div>
-            <div class="param-subparams">
-              <div class="param-subparam">
-                <span class="param-label">From High</span>
-                <span class="param-name">Fromhigh1</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From High</span>
-                <span class="param-name">Fromhigh2</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From High</span>
-                <span class="param-name">Fromhigh3</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">From High</span>
-                <span class="param-name">Fromhigh4</span>
-              </div>
+            <div class="param-subparam">
+              <span class="param-label">From High</span>
+              <span class="param-name">Fromhigh2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">From High</span>
+              <span class="param-name">Fromhigh3</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">From High</span>
+              <span class="param-name">Fromhigh4</span>
             </div>
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-group">
-            <div class="param-group-header">
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">To Low</span>
+            <span class="param-name">Tolow</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Output range minimum for color remapping (RGBA).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
               <span class="param-label">To Low</span>
-              <span class="param-name">Tolow</span>
-              <span class="param-separator">–</span>
-              <span class="param-toggle"></span>
-              <span class="param-separator">–</span>
-              <span class="param-group-description">Output range minimum for color remapping (RGBA).</span>
+              <span class="param-name">Tolow1</span>
             </div>
-            <div class="param-subparams">
-              <div class="param-subparam">
-                <span class="param-label">To Low</span>
-                <span class="param-name">Tolow1</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To Low</span>
-                <span class="param-name">Tolow2</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To Low</span>
-                <span class="param-name">Tolow3</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To Low</span>
-                <span class="param-name">Tolow4</span>
-              </div>
+            <div class="param-subparam">
+              <span class="param-label">To Low</span>
+              <span class="param-name">Tolow2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">To Low</span>
+              <span class="param-name">Tolow3</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">To Low</span>
+              <span class="param-name">Tolow4</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">To High</span>
+            <span class="param-name">Tohigh</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Output range maximum for color remapping (RGBA).</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">To High</span>
+              <span class="param-name">Tohigh1</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">To High</span>
+              <span class="param-name">Tohigh2</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">To High</span>
+              <span class="param-name">Tohigh3</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">To High</span>
+              <span class="param-name">Tohigh4</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
-          <div class="param-group">
-            <div class="param-group-header">
-              <span class="param-label">To High</span>
-              <span class="param-name">Tohigh</span>
-              <span class="param-separator">–</span>
-              <span class="param-toggle"></span>
-              <span class="param-separator">–</span>
-              <span class="param-group-description">Output range maximum for color remapping (RGBA).</span>
-            </div>
-            <div class="param-subparams">
-              <div class="param-subparam">
-                <span class="param-label">To High</span>
-                <span class="param-name">Tohigh1</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To High</span>
-                <span class="param-name">Tohigh2</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To High</span>
-                <span class="param-name">Tohigh3</span>
-              </div>
-              <div class="param-subparam">
-                <span class="param-label">To High</span>
-                <span class="param-name">Tohigh4</span>
-              </div>
-            </div>
+          <div class="param-header">
+            <span class="param-label">Match Bounds To T3D</span>
+            <span class="param-name">Matchtot3d</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Matches particle advection bounds to the 3D texture input dimensions.</span>
           </div>
         </div>
 

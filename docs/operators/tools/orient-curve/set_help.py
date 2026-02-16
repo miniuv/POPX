@@ -3,7 +3,7 @@
 op_name = target
 
 # Page: Orient Curve
-op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause."
+op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
 op_name.par.Invertn.help = "Inverts the normal direction of the orientation frame."
 op_name.par.Customfirsttangent.help = "Enables custom tangent vector for the first point on the curve."
 op_name.par.Twistamount.help = "Rotation amount in degrees applied along the curve length."

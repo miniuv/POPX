@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +30,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Soft Body</h1>
+      <h1>Soft Body <span class="operator-version">v1.2.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -48,7 +48,7 @@
         <h2>Parameters</h2>
 
         <!-- Solver Page -->
-        <h3 id="page-solver" class="page-heading">Page: Solver</h3>
+        <h3 id="page-soft-body" class="page-heading">Page: Soft Body</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -79,24 +79,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Constraints per Point</span>
-            <span class="param-name">Maxconstperpoint</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of constraints that can be attached to a single point.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Pressure Constraints</span>
-            <span class="param-name">Pressureconst</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enable volume-preserving pressure constraints for closed meshes.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Substeps</span>
             <span class="param-name">Substeps</span>
             <span class="param-separator">–</span>
@@ -106,10 +88,10 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Constraint Iterations</span>
+            <span class="param-label">Iterations</span>
             <span class="param-name">Iterations</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of constraint solver iterations. Higher values improve accuracy but increase computation time.</span>
+            <span class="param-description">Number of constraint solver iterations.</span>
           </div>
         </div>
 
@@ -156,16 +138,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enable Collisions</span>
-            <span class="param-name">Enablecollisions</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Master toggle for all collision detection and response.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Ground Collision</span>
+            <span class="param-label">Enable Ground Collision</span>
             <span class="param-name">Enablegroundcollision</span>
             <span class="param-separator">–</span>
             <span class="param-description">Enable collision with an infinite ground plane.</span>
@@ -199,6 +172,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Ground Collision Margin</span>
+            <span class="param-name">Groundmargin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Collision margin distance from the ground plane surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Display Ground</span>
             <span class="param-name">Displayground</span>
             <span class="param-separator">–</span>
@@ -208,7 +190,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Bounding Box Collision</span>
+            <span class="param-label">Enable Bounding Box Collision</span>
             <span class="param-name">Enablebboxcollision</span>
             <span class="param-separator">–</span>
             <span class="param-description">Enable collision with a bounding box volume.</span>
@@ -226,6 +208,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Bounding Box Collision Margin</span>
+            <span class="param-name">Bboxmargin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Collision margin distance from the bounding box surface.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Display Bounding Box</span>
             <span class="param-name">Displaybbox</span>
             <span class="param-separator">–</span>
@@ -233,87 +224,454 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Geometry Collision</span>
-            <span class="param-name">Enablegeocollision</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Collision Type</span>
+            <span class="param-name">Collisiontype</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable collision with external geometry from the collision geometry input (Input 2).</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the collision geometry type for constraining instance movement.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">POP (Windows Only)</span>
+              <span class="param-name">pop</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Box</span>
+              <span class="param-name">box</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Plane</span>
+              <span class="param-name">plane</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Sphere</span>
+              <span class="param-name">sphere</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Torus</span>
+              <span class="param-name">torus</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">3D SDF</span>
+              <span class="param-name">3dsdf</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">T3D</span>
+              <span class="param-name">t3d</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">2D SDF</span>
+              <span class="param-name">2dsdf</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">T2D</span>
+              <span class="param-name">t2d</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Collision Thickness</span>
-            <span class="param-name">Collisionthickness</span>
+            <span class="param-label">Collision Damping</span>
+            <span class="param-name">Collisiondamping</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Thickness value for collision detection with external geometry.</span>
+            <span class="param-description">Amount of velocity dampening applied when instances collide with the collision geometry.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Display Collider</span>
-            <span class="param-name">Displaycollider</span>
+            <span class="param-label">Solid</span>
+            <span class="param-name">Solid</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Visualize the collision geometry in the viewport.</span>
+            <span class="param-description">Treats the collision geometry as a solid volume, preventing instances from passing through.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Self Collision</span>
-            <span class="param-name">Enableselfcollision</span>
+            <span class="param-label">Project</span>
+            <span class="param-name">Project</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable collision detection between different parts of the same soft body as well as between different geometries.</span>
+            <span class="param-description">Projects instances onto the surface of the collision geometry.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Self Collision Passes</span>
-            <span class="param-name">Selfcollisionpasses</span>
+            <span class="param-label">Collision POP</span>
+            <span class="param-name">Collisionpop</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of self-collision detection passes per substep.</span>
+            <span class="param-description">Reference to a POP containing the collision geometry when using POP collision type.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enable Normal-Based Correction</span>
-            <span class="param-name">Normalcorrection</span>
+            <span class="param-label">Collision Offset</span>
+            <span class="param-name">Collisionoffset</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Use surface normals to improve collision response accuracy.</span>
+            <span class="param-description">Offset distance from the collision surface to prevent z-fighting artifacts.</span>
           </div>
         </div>
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Neighbors Type</span>
-            <span class="param-name">Nebrtype</span>
+            <span class="param-label">Size</span>
+            <span class="param-name">Size</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
-            <span class="param-group-description">Method for determining neighbor points for self-collision.</span>
+            <span class="param-group-description">Size of the box collision geometry.</span>
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">By Distance</span>
-              <span class="param-name">distance</span>
+              <span class="param-label">Size</span>
+              <span class="param-name">Sizex</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Connected</span>
-              <span class="param-name">connected</span>
+              <span class="param-label">Size</span>
+              <span class="param-name">Sizey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Size</span>
+              <span class="param-name">Sizez</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Radius</span>
+            <span class="param-name">Radius</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Radius of the collision geometry per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Radiusx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Radiusy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Radius</span>
+              <span class="param-name">Radiusz</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max Neighbors</span>
-            <span class="param-name">Maxneighbors</span>
+            <span class="param-label">Corner Radius</span>
+            <span class="param-name">Cornerradius</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of neighbors to consider for self-collision per point.</span>
+            <span class="param-description">Radius of rounded corners on the box collision geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Collison TOP</span>
+            <span class="param-name">Collisontop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a TOP texture used as the collision field for SDF and texture collision types.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Use Custom Bounds</span>
+            <span class="param-name">Usecustombounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables custom bounding box for the collision texture instead of using the texture's native bounds.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Lower Bounds</span>
+            <span class="param-name">Lowerbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Lower bounds of the collision volume in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Lower Bounds</span>
+              <span class="param-name">Lowerboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Upper Bounds</span>
+            <span class="param-name">Upperbounds</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Upper bounds of the collision volume in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Upper Bounds</span>
+              <span class="param-name">Upperboundsz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transform Order</span>
+            <span class="param-name">Xord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the order of scale, rotate, and translate operations for the collision geometry transform.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale Rotate Translate</span>
+              <span class="param-name">srt</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale Translate Rotate</span>
+              <span class="param-name">str</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Scale Translate</span>
+              <span class="param-name">rst</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate Translate Scale</span>
+              <span class="param-name">rts</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Scale Rotate</span>
+              <span class="param-name">tsr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate Rotate Scale</span>
+              <span class="param-name">trs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate Order</span>
+            <span class="param-name">Rord</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Sets the order of rotation operations for the collision geometry transform.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rx Ry Rz</span>
+              <span class="param-name">xyz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rx Rz Ry</span>
+              <span class="param-name">xzy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rx Rz</span>
+              <span class="param-name">yxz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ry Rz Rx</span>
+              <span class="param-name">yzx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Rx Ry</span>
+              <span class="param-name">zxy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rz Ry Rx</span>
+              <span class="param-name">zyx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Translate</span>
+            <span class="param-name">T</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Translation of the collision geometry in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Ty</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Translate</span>
+              <span class="param-name">Tz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Rotate</span>
+            <span class="param-name">R</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation of the collision geometry in degrees.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Ry</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Rotate</span>
+              <span class="param-name">Rz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">S</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale of the collision geometry per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Sz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Pivot</span>
+            <span class="param-name">P</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Pivot point for the collision geometry transform.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Px</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Py</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Pivot</span>
+              <span class="param-name">Pz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform scale factor applied to the collision geometry.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Geometry</span>
+            <span class="param-name">Displaygeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shows the collision geometry in the viewport for visualization.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Display Color</span>
+            <span class="param-name">Displaycolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Display color for the collision geometry visualization.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Display Color</span>
+              <span class="param-name">Displaycolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Self Collision</span>
+            <span class="param-name">Enableselfcollision</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable collision detection between different parts of the same soft body as well as between different geometries.</span>
           </div>
         </div>
 
@@ -348,6 +706,15 @@
               <span class="param-label">Closest</span>
               <span class="param-name">closest</span>
             </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of neighbors to consider for self-collision per point.</span>
           </div>
         </div>
 
@@ -464,6 +831,15 @@
           </div>
         </div>
 
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Grab</span>
+            <span class="param-name">Grab</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Momentary button to activate grabbing.</span>
+          </div>
+        </div>
+
         <div class="param-group">
           <div class="param-group-header">
             <span class="param-label">Position</span>
@@ -525,10 +901,44 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Grab</span>
-            <span class="param-name">Grab</span>
+            <span class="param-label">Transition Range</span>
+            <span class="param-name">Transitionrange</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Momentary button to activate grabbing.</span>
+            <span class="param-description">Range of the transition falloff from the grabber edge.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transition Align</span>
+            <span class="param-name">Transitionalign</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Alignment offset for the transition falloff.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Transition Type</span>
+            <span class="param-name">Transitiontype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Interpolation curve type for the transition falloff.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Linear</span>
+              <span class="param-name">linear</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Smooth Step</span>
+              <span class="param-name">smoothstep</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ease In Ease Out</span>
+              <span class="param-name">easeinout</span>
+            </div>
           </div>
         </div>
 
@@ -612,392 +1022,6 @@
           </div>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- Post Process Page -->
-        <h3 id="page-post-process" class="page-heading">Page: Post Process</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Post Smooth Positions</span>
-            <span class="param-name">Postsmoothp</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Apply position smoothing after simulation step.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Post Line Smooth</span>
-            <span class="param-name">Postlinesmooth</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Apply line smoothing to line strip geometry.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Visualize Page -->
-        <h3 id="page-visualize" class="page-heading">Page: Visualize</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Simulated Geometry</span>
-            <span class="param-name">Simulatedgeometry</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Display the simulated geometry.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Collisions</span>
-            <span class="param-name">Viscollisions</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize collision detection points.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Collisionscolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for collision visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Collisionscolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Collisionscolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Collisionscolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Self Collision</span>
-            <span class="param-name">Visselfcollision</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize self-collision detection points.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Selfcollisioncolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for self-collision visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Selfcollisioncolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Selfcollisioncolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Selfcollisioncolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Thickness</span>
-            <span class="param-name">Visthickness</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize point thickness values.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Thicknesscolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for thickness visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Thicknesscolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Thicknesscolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Thicknesscolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Constraints Visualization -->
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Distance Along Edges</span>
-            <span class="param-name">Distancealongedges</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize distance constraints along mesh edges.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Distalongedgescolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for edge distance constraint visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Distalongedgescolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Distalongedgescolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Distalongedgescolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Bend Across Triangles</span>
-            <span class="param-name">Bendacrosstriangles</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize bending constraints across triangle edges.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Bendacrosstricolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for bend constraint visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Bendacrosstricolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Bendacrosstricolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Bendacrosstricolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Struts</span>
-            <span class="param-name">Struts</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize strut constraints.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Strutscolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for strut constraint visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Strutscolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Strutscolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Strutscolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Attach to Geometry</span>
-            <span class="param-name">Attachtogeometry</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize attachment constraints to collision geometry.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Attachtogeocolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for attachment constraint visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Attachtogeocolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Attachtogeo colorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Attachtogeocolor b</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Pinned</span>
-            <span class="param-name">Pinned</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Visualize pinned points.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Pinnedcolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color for pinned point visualization.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Pinnedcolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Pinnedcolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Pinnedcolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Property Visualization -->
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Property</span>
-            <span class="param-name">Property</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Constraint property to visualize with color mapping.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">None</span>
-              <span class="param-name">none</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Stretch Stress</span>
-              <span class="param-name">stretchstress</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bend Stress</span>
-              <span class="param-name">bendstress</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Stretch Distance</span>
-              <span class="param-name">stretchdistance</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Stretch Ratio</span>
-              <span class="param-name">stretchratio</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bend Angle</span>
-              <span class="param-name">bendangle</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Stretch Plastic Flow</span>
-              <span class="param-name">stretchplasticflow</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bend Plastic Flow</span>
-              <span class="param-name">bendplasticflow</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Volume Stress</span>
-              <span class="param-name">volumestress</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Volume Distance</span>
-              <span class="param-name">volumedistance</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Volume Ratio</span>
-              <span class="param-name">volumeratio</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Display Property</span>
-            <span class="param-name">Displayproperty</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Show the selected property visualization on constraints.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Max Value</span>
-            <span class="param-name">Maxvalue</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Maximum value for property color mapping range.</span>
-          </div>
-        </div>
-
       </section>
 
       <!-- Inputs Section -->
@@ -1063,20 +1087,12 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header param-header-inline">
-            <span class="param-label">Output 3</span>
-            <span class="param-name">POP</span>
-            <span class="param-separator">–</span>
-            <span class="param-text">Target Geometry Update</span>
-          </div>
-        </div>
       </section>
 
       <!-- Page Navigation -->
       <nav class="page-navigation">
         <a href="../physarum/" class="nav-button prev">Physarum</a>
-        <a href="../sph/" class="nav-button next">SPH</a>
+        <a href="../sa/" class="nav-button next">SA</a>
       </nav>
     </main>
 
@@ -1087,12 +1103,10 @@
         <li><a href="#summary">Summary</a></li>
         <li><a href="#parameters">Parameters</a>
           <ul>
-            <li><a href="#page-solver">Solver</a></li>
+            <li><a href="#page-soft-body">Soft Body</a></li>
             <li><a href="#page-collisions">Collisions</a></li>
             <li><a href="#page-forces">Forces</a></li>
             <li><a href="#page-advanced">Advanced</a></li>
-            <li><a href="#page-post-process">Post Process</a></li>
-            <li><a href="#page-visualize">Visualize</a></li>
           </ul>
         </li>
         <li><a href="#inputs">Inputs</a></li>
