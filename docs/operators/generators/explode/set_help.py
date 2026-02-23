@@ -2,7 +2,7 @@
 
 op_name = target
 
-# Page: Define Pieces
+# Page: Explode
 op_name.par.Partitionmethod.help = "Determines how geometry is partitioned into instances."
 op_name.par.Scattermethod.help = "Defines how scatter points are distributed for clustering."
 op_name.par.Numberofclusters.help = "Maximum number of clusters to allocate memory for."
