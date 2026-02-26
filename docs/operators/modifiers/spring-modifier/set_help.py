@@ -4,6 +4,7 @@ op_name = target
 
 # Page: Spring
 op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
+op_name.par.Pointsupdatepop.help = "Reference to a POP node downstream in the network when Solver Mode is set to Advect. This reference will cause a feedback loop and re-injects the points next frame."
 op_name.par.Dofalloff.help = "Enables falloff-based attenuation of spring effects."
 op_name.par.Falloffattr.help = "Specifies which attribute to use for falloff values that attenuate spring."
 op_name.par.Position.help = "Applies spring physics to instance position."
