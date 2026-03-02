@@ -958,7 +958,10 @@ const searchIndex = [
     path: 'docs/guides/tutorials/',
     type: 'Guide',
     category: 'Guides',
-    sections: []
+    sections: [
+      { title: 'POPX Introduction Series', anchor: '#popx-introduction', keywords: ['tutorial', 'introduction', 'basics', 'youtube'] },
+      { title: 'POPX Soft Body Series', anchor: '#popx-soft-body', keywords: ['tutorial', 'soft body', 'simulation', 'youtube'] }
+    ]
   },
   {
     title: 'Release Notes',
