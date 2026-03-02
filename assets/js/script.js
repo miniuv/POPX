@@ -966,6 +966,7 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
+      { title: 'Version 1.2.1', anchor: '#v1-2-1' },
       { title: 'Version 1.2.0', anchor: '#v1-2-0' },
       { title: 'Version 1.1.0', anchor: '#v1-1-0' },
       { title: 'Version 1.0.2', anchor: '#v1-0-2' },
