@@ -969,6 +969,7 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
+      { title: 'Version 1.3.0', anchor: '#v1-3-0' },
       { title: 'Version 1.2.1', anchor: '#v1-2-1' },
       { title: 'Version 1.2.0', anchor: '#v1-2-0' },
       { title: 'Version 1.1.0', anchor: '#v1-1-0' },
@@ -1054,6 +1055,20 @@ const searchIndex = [
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]
+  },
+  {
+    title: 'Planar Patch',
+    path: 'docs/operators/generators/planar-patch/',
+    type: 'Operator',
+    category: 'Generators',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Planar Patch', anchor: '#page-planar-patch' },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ],
+    keywords: 'planar, patch, mesh, triangle, triangulate, rectangle, circle, trapezoid, ring, edge length, relax, orient, round corners, taper, skew, arc'
   },
   {
     title: 'Subdivider',

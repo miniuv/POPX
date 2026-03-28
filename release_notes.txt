@@ -1,6 +1,19 @@
 POPX Release Notes
 ==================
 
+Version 1.3.0 - Future Release
+-------------------------------
+
+NEW OPERATORS
+
+Planar Patch:
+  • New generator that creates planar triangulated meshes from various shapes
+  • Supports Rectangle, Circle, Trapezoid, and Ring shapes
+  • Configurable edge length and relaxation iterations for mesh quality
+  • Shape-specific controls including round corners, taper, skew, inner size, and arc angles
+
+-------------------------------
+
 Version 1.2.1 - March 2, 2026
 -------------------------------
 
@@ -16,7 +29,6 @@ IMPROVEMENTS
 
 Examples:
   • Updated and refined example files in the example files loader included in the release folder
-
 
 Version 1.2.0 - February 27, 2026
 -------------------------------

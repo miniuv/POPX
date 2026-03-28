@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planar Patch | POPX</title>
+  <meta name="description" content="Generates a planar triangulated mesh in various shapes with configurable edge length and relaxation.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Planar Patch <span class="operator-version">v1.3.0</span></h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Planar Patch</strong> generates a planar triangulated mesh from a variety of shapes. It produces well-distributed triangles with a target edge length and optional relaxation iterations to improve mesh quality. Supported shapes include <strong>Rectangle</strong>, <strong>Circle</strong>, <strong>Trapezoid</strong>, and <strong>Ring</strong>, each with shape-specific controls for corners, taper, skew, inner size, and arc angles.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Planar Patch Page -->
+        <h3 class="page-heading" id="page-planar-patch">Page: Planar Patch</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Shape</span>
+            <span class="param-name">Shape</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Base shape of the planar mesh.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Rectangle</span>
+              <span class="param-name">rectangle</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Circle</span>
+              <span class="param-name">circle</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Trapezoid</span>
+              <span class="param-name">trapezoid</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Ring</span>
+              <span class="param-name">ring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Edge Length</span>
+            <span class="param-name">Edgelength</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Target edge length for generated triangles.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Relax Iterations</span>
+            <span class="param-name">Relaxiters</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of relaxation iterations to improve triangle quality and uniformity.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for point scattering variation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Orient</span>
+            <span class="param-name">Orient</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Orientation plane for the generated mesh.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">XY</span>
+              <span class="param-name">xy</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">YZ</span>
+              <span class="param-name">yz</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">ZX</span>
+              <span class="param-name">zx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Center</span>
+            <span class="param-name">Center</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Center position of the planar mesh in world space.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Center</span>
+              <span class="param-name">Centerx</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Center</span>
+              <span class="param-name">Centery</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Center</span>
+              <span class="param-name">Centerz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Scale</span>
+            <span class="param-name">Scale</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Scale of the planar mesh per axis.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Scalex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Scale</span>
+              <span class="param-name">Scaley</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Uniform Scale</span>
+            <span class="param-name">Uniformscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Uniform scale factor applied to the entire mesh.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Round Corners</span>
+            <span class="param-name">Roundcorners</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Rounds the corners of the rectangle shape. Enabled when Shape is Rectangle.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Corner Radius</span>
+            <span class="param-name">Cornerradius</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Radius of the rounded corners. Enabled when Round Corners is on and Shape is Rectangle.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Side</span>
+            <span class="param-name">Side</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Which side of the trapezoid is tapered. Enabled when Shape is Trapezoid.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Left</span>
+              <span class="param-name">left</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Right</span>
+              <span class="param-name">right</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Top</span>
+              <span class="param-name">top</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Bottom</span>
+              <span class="param-name">bottom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Taper</span>
+            <span class="param-name">Taper</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of tapering applied to the selected side. Enabled when Shape is Trapezoid.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Skew</span>
+            <span class="param-name">Skew</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shifts the tapered side along its axis. Enabled when Shape is Trapezoid.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Inner Size</span>
+            <span class="param-name">Innersize</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Size of the inner hole for the ring shape. Enabled when Shape is Ring.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Open Arc</span>
+            <span class="param-name">Openarc</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Start and end angles in degrees for an open arc on the ring shape. Enabled when Shape is Ring.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2 id="inputs">Inputs</h2>
+        <p class="no-inputs">This operator has no inputs.</p>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">POPX_out1</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../instancer/" class="nav-button prev">Instancer</a>
+        <a href="../subdivider/" class="nav-button next">Subdivider</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-planar-patch">Page: Planar Patch</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

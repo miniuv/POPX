@@ -61,6 +61,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://popsextension.com/docs/operators/generators/planar-patch/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://popsextension.com/docs/operators/generators/subdivider/</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
