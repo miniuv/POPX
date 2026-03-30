@@ -34,23 +34,23 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Light <span class="operator-version">v1.2.1</span></h1>
+      <h1>Light <span class="operator-version">v1.3.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Light</strong> is a light source tool for the POPX Path Tracer's direct lighting system.
+          <strong>Light</strong> is a light source tool for the POPX Path Tracer's lighting system.
           It functions similarly to TouchDesigner's built-in Light COMP but provides light parameters specifically designed for the Path Tracer's physically-based rendering pipeline.
         </p>
 
         <p>
-          The Light tool supports four light types: Point Light for omnidirectional illumination, Spot Light with cone angle and falloff controls, Area Light for soft rectangular illumination, and Volumetric Light for atmospheric light effects with ray marching.
-          Each light can be configured with color, intensity, distance attenuation, and optional texture projection.
+          The Light tool supports five light types: <strong>Point Light</strong> for omnidirectional illumination, <strong>Spot Light</strong> with cone angle and falloff controls, <strong>Area Light</strong> for soft rectangular illumination, <strong>Volumetric Light</strong> for atmospheric light effects with ray marching, and <strong>Environment Light</strong> for image-based lighting using an HDR environment map.
+          Each light can be configured with color, intensity, distance attenuation, and optional texture/environment map projection.
         </p>
 
         <p>
-          Light tools are referenced by the Path Tracer operator through the Light Comp parameter in the Lights sequence on the Lights page.
+          Lights are referenced by the Path Tracer through the <strong>Render TOP's Lights parameter</strong>. To visualize the light as geometry in the scene or render the Environment Light as a background, toggle on the <strong>Render Flag</strong> on the Light COMP.
         </p>
       </section>
 
@@ -60,6 +60,39 @@
 
         <!-- Light Page -->
         <h3 id="page-light" class="page-heading">Page: Light</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Light Type</span>
+            <span class="param-name">Type</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the type of light source.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Point Light</span>
+              <span class="param-name">point</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Spot Light</span>
+              <span class="param-name">spot</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Area Light</span>
+              <span class="param-name">area</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Volumetric Light</span>
+              <span class="param-name">volumetric</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Environment Light</span>
+              <span class="param-name">env</span>
+            </div>
+          </div>
+        </div>
 
         <div class="param-group">
           <div class="param-group-header">
@@ -92,35 +125,6 @@
             <span class="param-name">Dimmer</span>
             <span class="param-separator">–</span>
             <span class="param-description">Light intensity multiplier.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Light Type</span>
-            <span class="param-name">Type</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Selects the type of light source.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Point Light</span>
-              <span class="param-name">point</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Spot Light</span>
-              <span class="param-name">spot</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Area Light</span>
-              <span class="param-name">area</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Volumetric Light</span>
-              <span class="param-name">volumetric</span>
-            </div>
           </div>
         </div>
 
@@ -216,10 +220,35 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Texture Map</span>
+            <span class="param-label">Texture/Environment Map</span>
             <span class="param-name">Texturemap</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Texture map projected from the light source.</span>
+            <span class="param-description">Texture map projected from the light source, or HDR environment map for Environment Light.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Environment Map Rotate</span>
+            <span class="param-name">Envlightmaprotate</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Rotation of the environment map in degrees. Enabled when Light Type is Environment Light.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Environment Map Rotate</span>
+              <span class="param-name">Envlightmaprotatex</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Environment Map Rotate</span>
+              <span class="param-name">Envlightmaprotatey</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Environment Map Rotate</span>
+              <span class="param-name">Envlightmaprotatez</span>
+            </div>
           </div>
         </div>
 

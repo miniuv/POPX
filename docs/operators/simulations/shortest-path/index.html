@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shortest Path | POPX</title>
+  <meta name="description" content="GPU-accelerated shortest path solver that computes optimal paths between start and end point groups on geometry.">
+  <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../assets/css/style.css">
+</head>
+<body>
+  <script>
+    // Prevent flash during page transitions
+    if (performance.navigation.type === 1) {
+      // Page was reloaded, no transition needed
+      document.body.style.opacity = '1';
+    } else {
+      // Normal navigation, start hidden for fade-in
+      document.body.classList.add('page-transitioning');
+    }
+  </script>
+  <!-- Top Navigation Bar -->
+  <div id="navbar-container"></div>
+
+  <div class="page-layout">
+    <!-- Mobile Menu Toggle -->
+    <div id="mobile-menu-container"></div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Shortest Path <span class="operator-version">v1.3.0</span></h1>
+
+      <!-- Summary Section -->
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          <strong>Shortest Path</strong> computes the optimal paths between <strong>Start Point Group</strong> and <strong>End Point Group</strong> on the path geometry input.
+          The start and end groups reference the path geometry by default. If an <strong>Alternate Start/End Point Locations</strong> input is connected, the groups are referenced from that input and the solver finds the closest points on the path geometry to those locations, tagging them as start and end points accordingly.
+          Neighbor connectivity can be determined by spatial distance or mesh connectivity, with an optional <strong>Cost Attribute</strong> to weight traversal costs for more controlled pathfinding.
+        </p>
+        <p>
+          The solver outputs <strong>Line Strips Paths</strong> and <strong>Path Geometry</strong>.
+          Visualization tools allow coloring individual paths, highlighting start/end points, and displaying cost attributes.
+          Use <strong>Lock Alternate Start/End Point Locations</strong> to freeze path endpoints and avoid recomputation when upstream geometry changes.
+        </p>
+      </section>
+
+      <!-- Parameters Section -->
+      <section id="parameters">
+        <h2>Parameters</h2>
+
+        <!-- Shortest Path Page -->
+        <h3 id="page-shortest-path" class="page-heading">Page: Shortest Path</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Start Point Group</span>
+            <span class="param-name">Startgroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Group defining the start points for pathfinding. Sourced from path geometry, or nearest path points to alternate input if connected.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">End Point Group</span>
+            <span class="param-name">Endgroup</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Group defining the end points for pathfinding. Sourced from path geometry, or nearest path points to alternate input if connected.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Cost Attribute</span>
+            <span class="param-name">Costattrib</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Point attribute used as traversal cost weight for pathfinding.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Iterations</span>
+            <span class="param-name">Iterations</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of solver iterations for path computation.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Neighbors Type</span>
+            <span class="param-name">Nebrtype</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Method for determining point connectivity.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">By Distance</span>
+              <span class="param-name">distance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Connected</span>
+              <span class="param-name">connected</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors Distance</span>
+            <span class="param-name">Maxdistance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum search distance for neighbor connections. Enabled when Neighbors Type is By Distance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Num Hash Buckets</span>
+            <span class="param-name">Numhashbuckets</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of hash buckets for spatial neighbor lookups. Enabled when Neighbors Type is By Distance.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of neighbors per point.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Line Strips Paths</span>
+            <span class="param-name">Displaylinestrips</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Displays the computed paths as line strips in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Path Geometry</span>
+            <span class="param-name">Displaygeo</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Displays the path geometry in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Paths</span>
+            <span class="param-name">Visualizepaths</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Colors each path with a unique color for identification.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualization Seed</span>
+            <span class="param-name">Visualizationseed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for visualization colors.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Start/End Points</span>
+            <span class="param-name">Visualizestartend</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Highlights start and end points in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Visualize Cost</span>
+            <span class="param-name">Visualizecost</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Visualizes the cost attribute as a color gradient.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Lock Alternate Start/End Point Locations</span>
+            <span class="param-name">Lockalternate</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Locks alternate start and end point locations to prevent recomputation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Number of Paths</span>
+            <span class="param-name">Maxpaths</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of paths to compute.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Maximum Number of Vertices</span>
+            <span class="param-name">Maxverts</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of vertices across all paths.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Copy Topology Info Back to CPU</span>
+            <span class="param-name">Cpureadback</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Copies path topology information back to CPU for downstream processing.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Common Page -->
+        <h3 id="page-common" class="page-heading">Page: Common</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Free Extra GPU Memory</span>
+            <span class="param-name">Freeextragpumem</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Free memory that has accumulated when output memory has grown and shrunk.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="inputs">Inputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Path Geometry</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Input 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Alternate Start/End Point Locations</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Line Strips Paths</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header param-header-inline">
+            <span class="param-label">Output 1</span>
+            <span class="param-name">POP</span>
+            <span class="param-separator">–</span>
+            <span class="param-text">Path Geometry</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Navigation -->
+      <nav class="page-navigation">
+        <a href="../sa/" class="nav-button prev">SA</a>
+        <a href="../particle/" class="nav-button next">Particle</a>
+      </nav>
+    </main>
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#parameters">Parameters</a>
+          <ul>
+            <li><a href="#page-shortest-path">Page: Shortest Path</a></li>
+            <li><a href="#page-common">Page: Common</a></li>
+          </ul>
+        </li>
+        <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div id="menu-overlay-container"></div>
+
+  <script src="../../../../assets/js/component-loader.js"></script>
+  <script src="../../../../assets/js/script.js"></script>
+</body>
+</html>

@@ -28,14 +28,7 @@ op_name.par.Instances0unityscale.help = "Normalizes the scale of this specific i
 
 # Page: Distribution
 op_name.par.Distributiontype.help = "Type of distribution pattern."
-op_name.par.Linearsettings.help = "Opens settings for linear distribution."
-op_name.par.Radialsettings.help = "Opens settings for radial distribution."
-op_name.par.Sphericalsettings.help = "Opens settings for spherical distribution."
-op_name.par.Gridsettings.help = "Opens settings for grid distribution."
-op_name.par.Honeycombsettings.help = "Opens settings for honeycomb distribution."
-op_name.par.Pointcloudsettings.help = "Opens settings for point cloud distribution."
-op_name.par.Meshsettings.help = "Opens settings for mesh distribution."
-op_name.par.Curvesettings.help = "Opens settings for curve distribution."
+op_name.par.Opensettings.help = "Opens the settings panel for the selected distribution type."
 op_name.par.Templateobject.help = "Template object for mesh, curve, or point cloud distribution."
 op_name.par.Templategroup.help = "Group within template object to use."
 op_name.par.Copytemplateattributes.help = "Copy attributes from template to instances."

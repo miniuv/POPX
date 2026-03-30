@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Explode <span class="operator-version">v1.2.1</span></h1>
+      <h1>Explode <span class="operator-version">v1.3.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -69,6 +69,10 @@
               <span class="param-label">Clustering</span>
               <span class="param-name">cluster</span>
             </div>
+            <div class="param-subparam">
+              <span class="param-label">Voronoi</span>
+              <span class="param-name">voronoi</span>
+            </div>
           </div>
         </div>
 
@@ -99,7 +103,7 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Number of Clusters to Allocate</span>
+            <span class="param-label">Number of Clusters/Cells to Allocate</span>
             <span class="param-name">Numberofclusters</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum number of clusters to allocate memory for.</span>
@@ -108,10 +112,28 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Clusters Seed</span>
+            <span class="param-label">Clusters/Cells Seed</span>
             <span class="param-name">Clustersseed</span>
             <span class="param-separator">–</span>
             <span class="param-description">Random seed value for cluster generation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Points to Allocate</span>
+            <span class="param-name">Maxpoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of output points to allocate memory for in Voronoi mode.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Triangles to Allocate</span>
+            <span class="param-name">Maxtriangles</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of output triangles to allocate memory for in Voronoi mode.</span>
           </div>
         </div>
 
@@ -121,6 +143,15 @@
             <span class="param-name">Maxdistance</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum distance threshold for clustering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Num Hash Buckets</span>
+            <span class="param-name">Numhashbuckets</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of hash buckets for spatial neighbor lookups.</span>
           </div>
         </div>
 

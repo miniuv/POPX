@@ -1,10 +1,10 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path Tracer | POPX</title>
-  <meta name="description" content="GPU-accelerated physically-based path tracing renderer using POPs accelerated structure for ray-geometry intersections with Disney BRDF material model.">
+  <meta name="description" content="GPU-accelerated physically-based path tracing renderer with realtime and offline modes, SVGF and OptiX denoising, motion blur, and depth of field.">
   <link rel="icon" type="image/png" href="../../../../media/popx-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,34 +34,21 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Path Tracer <span class="operator-version">v1.2.1</span></h1>
+      <h1>Path Tracer <span class="operator-version">v1.3.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
         <h2>Summary</h2>
         <p>
-          <strong>Path Tracer</strong> is a GPU-accelerated physically-based renderer that uses the POPs accelerated structure (ray query extension) to compute ray-geometry intersections.
+          <strong>Path Tracer</strong> is a GPU-accelerated physically-based renderer using the new <strong>ray query extension</strong> from TouchDesigner to compute ray-geometry intersections.
           This operator implements Monte Carlo path tracing with the Disney principled BRDF material model, enabling realistic lighting and material simulation.
-          The path tracer supports progressive rendering for clean convergence and depth of field effects through aperture simulation.
+          <strong>Path Tracer is currently available on Windows only.</strong>
         </p>
-
         <p>
-          In addition to geometry path tracing, Path Tracer includes a voxel tracer for rendering volumetric data with support for isosurface, volume, or blending between rendering modes.
-          Hybrid tracing mode enables both the voxel tracer and geometry path tracing to render together, combining volumetric and surface-based rendering in a single pass.
-        </p>
-
-        <p>
-          The operator provides comprehensive material controls following the Disney BRDF standard, including base color, metallic/roughness workflows, specular reflections with anisotropic highlights, subsurface scattering, sheen for fabric-like materials, clearcoat layering, and transmission for glass.
-          Lighting is handled through environment maps (HDR images) and direct light sources (point, spot, and area lights) with full transform controls.
-          You can override existing materials on input geometry or respect per-primitive material attributes.
-        </p>
-
-        <p>
-          Path Tracer renders images to the Render TOP specified in the parameter.
-          Progressive rendering accumulates samples over time for noise reduction.
-          The renderer supports adjustable ray counts per pixel, bounce depth limits, and camera effects including depth of field with focal length and aperture controls.
-          Path Tracer also supports real-time path tracing using a custom SVGF denoiser.
-          This makes Path Tracer ideal for high-quality offline rendering, lookdev workflows, physically accurate lighting studies, or real-time path tracing of complex scenes.
+          Path Tracer supports both <strong>Realtime</strong> and <strong>Offline</strong> rendering modes. Realtime mode includes motion blur and a choice of <strong>Custom SVGF</strong> or <strong>NVIDIA OptiX</strong> denoising.
+          Offline mode supports progressive sample refinement for clean convergence.
+          Camera effects include depth of field with focal length and aperture controls, and tone mapping for HDR output.
+          Materials are assigned by connecting a <strong>POPX Material</strong> operator before the Path Tracer. All lighting, environment maps, and direct lights are controlled via the <strong>POPX Light</strong> operator.
         </p>
       </section>
 
@@ -72,21 +59,60 @@
         <!-- Path Tracer Page -->
         <h3 id="page-path-tracer" class="page-heading">Page: Path Tracer</h3>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Path Tracing</span>
-            <span class="param-name">Enabletracing</span>
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Render Mode</span>
+            <span class="param-name">Rendermode</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Master toggle for path tracing rendering.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects between realtime and offline rendering modes.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Realtime</span>
+              <span class="param-name">realtime</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Offline</span>
+              <span class="param-name">offline</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Enable Hybrid Tracing</span>
-            <span class="param-name">Enablehybridtracing</span>
+            <span class="param-label">Refine Samples</span>
+            <span class="param-name">Refinesamples</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enables hybrid tracing mode that renders both the voxel tracer and geometry path tracing together.</span>
+            <span class="param-description">Enables progressive sample refinement in offline mode.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Refine Samples</span>
+            <span class="param-name">Maxrefinesamples</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of refinement samples to accumulate in offline mode.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Done</span>
+            <span class="param-name">Done</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Read-only indicator showing refinement completion status.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Render TOP</span>
+            <span class="param-name">Rendertop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to Render TOP providing camera and viewport settings that the path tracer will render to.</span>
           </div>
         </div>
 
@@ -110,33 +136,6 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Progressive Rendering</span>
-            <span class="param-name">Progressiverendering</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Accumulate samples over time for noise-free convergence.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Project On Geometry</span>
-            <span class="param-name">Projectongeometry</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Projects the path traced result onto the input geometry surface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Render TOP</span>
-            <span class="param-name">Rendertop</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reference to Render TOP providing camera and viewport settings that the path tracer will render to.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
             <span class="param-label">Rays per Pixel</span>
             <span class="param-name">Raysperpixel</span>
             <span class="param-separator">–</span>
@@ -155,10 +154,28 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Ray Offset</span>
-            <span class="param-name">Rayoffset</span>
+            <span class="param-label">Render Emissives</span>
+            <span class="param-name">Renderemissives</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Offset distance for ray origins to prevent self-intersection artifacts.</span>
+            <span class="param-description">Enables rendering of emissive materials as light sources.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Firefly Clamp</span>
+            <span class="param-name">Enablefireflyclamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Clamps extremely bright samples to reduce firefly artifacts.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Firefly Clamp</span>
+            <span class="param-name">Fireflyclamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum brightness value for firefly clamping.</span>
           </div>
         </div>
 
@@ -198,886 +215,32 @@
           </div>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- Material Page -->
-        <h3 id="page-material" class="page-heading">Page: Material</h3>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Attribute Class</span>
-            <span class="param-name">Attrclass</span>
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Enable Motion Blur</span>
+            <span class="param-name">Enablemotionblur</span>
             <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Selects which attribute class the material properties are applied to.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Point</span>
-              <span class="param-name">point</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Primitive</span>
-              <span class="param-name">primitive</span>
-            </div>
+            <span class="param-description">Enables motion blur effect in realtime mode.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Override if Material Exists</span>
-            <span class="param-name">Overrideifexists</span>
+            <span class="param-label">Strength</span>
+            <span class="param-name">Blurstrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Apply material parameters even when geometry has existing material attributes.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Base Color</span>
-            <span class="param-name">Basecolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Diffuse albedo color.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Base Color</span>
-              <span class="param-name">Basecolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Base Color</span>
-              <span class="param-name">Basecolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Base Color</span>
-              <span class="param-name">Basecolorb</span>
-            </div>
+            <span class="param-description">Motion blur intensity.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Metallic</span>
-            <span class="param-name">Metallic</span>
+            <span class="param-label">Samples</span>
+            <span class="param-name">Blursamples</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Metallic appearance.</span>
+            <span class="param-description">Number of samples for motion blur quality.</span>
           </div>
         </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Roughness</span>
-            <span class="param-name">Roughness</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Surface roughness.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specular</span>
-            <span class="param-name">Specular</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Specular reflection strength for dielectrics.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Specular Color</span>
-            <span class="param-name">Specularcolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Tint specular reflection with color.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Anisotropic</span>
-            <span class="param-name">Anisotropic</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Anisotropic highlight stretching.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Anisotropic Rotation</span>
-            <span class="param-name">Anisotropicrot</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Rotation angle for anisotropic highlights.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Subsurface</span>
-            <span class="param-name">Subsurface</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Subsurface scattering amount for translucent materials like skin or wax.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen</span>
-            <span class="param-name">Sheen</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Soft velvet-like reflection for fabrics and cloth.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Sheen Color</span>
-            <span class="param-name">Sheencolor</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Tint sheen reflection with color.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Clearcoat</span>
-            <span class="param-name">Clearcoat</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Secondary specular layer for car paint or lacquered surfaces.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Clearcoat Gloss</span>
-            <span class="param-name">Clearcoatgloss</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Glossiness of clearcoat layer.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">IOR</span>
-            <span class="param-name">Ior</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Index of refraction for dielectrics.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Transmission</span>
-            <span class="param-name">Transmission</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Light transmission through surface for glass and transparent materials.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Dispersion</span>
-            <span class="param-name">Dispersion</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Chromatic dispersion amount for refractive materials.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Emission</span>
-            <span class="param-name">Emission</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Emissive color for self-illuminating surfaces.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissionr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissiong</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissionb</span>
-            </div>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Voxel Tracer Page -->
-        <h3 id="page-voxel-tracer" class="page-heading">Page: Voxel Tracer</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Voxel Tracing</span>
-            <span class="param-name">Enablevoxeltracing</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Master toggle for voxel tracing rendering.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Render Mode</span>
-            <span class="param-name">Rendermode</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Selects the voxel rendering technique.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Volume</span>
-              <span class="param-name">volume</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Isosurface</span>
-              <span class="param-name">surface</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Hybrid</span>
-              <span class="param-name">hybrid</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Render Mode Map</span>
-            <span class="param-name">Rendermodemap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map that blends between isosurface and volume rendering.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Step Size Scale</span>
-            <span class="param-name">Stepsizescale</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for ray marching step size through the volume.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Use Custom Bounds</span>
-            <span class="param-name">Usecustombounds</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enables custom bounding box for the voxel volume.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Lower Bounds</span>
-            <span class="param-name">Lowerbounds</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Minimum XYZ coordinates of the voxelization volume.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Lower Bounds</span>
-              <span class="param-name">Lowerboundsx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Lower Bounds</span>
-              <span class="param-name">Lowerboundsy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Lower Bounds</span>
-              <span class="param-name">Lowerboundsz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Upper Bounds</span>
-            <span class="param-name">Upperbounds</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Maximum XYZ coordinates of the voxelization volume.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Upper Bounds</span>
-              <span class="param-name">Upperboundsx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Upper Bounds</span>
-              <span class="param-name">Upperboundsy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Upper Bounds</span>
-              <span class="param-name">Upperboundsz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Transform Order</span>
-            <span class="param-name">Xord</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the order of scale, rotate, and translate operations for the voxel volume transform.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Scale Rotate Translate</span>
-              <span class="param-name">srt</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Scale Translate Rotate</span>
-              <span class="param-name">str</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rotate Scale Translate</span>
-              <span class="param-name">rst</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rotate Translate Scale</span>
-              <span class="param-name">rts</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate Scale Rotate</span>
-              <span class="param-name">tsr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate Rotate Scale</span>
-              <span class="param-name">trs</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Rotate Order</span>
-            <span class="param-name">Rord</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Sets the order of rotation operations for the voxel volume transform.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Rx Ry Rz</span>
-              <span class="param-name">xyz</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rx Rz Ry</span>
-              <span class="param-name">xzy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Ry Rx Rz</span>
-              <span class="param-name">yxz</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Ry Rz Rx</span>
-              <span class="param-name">yzx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rz Rx Ry</span>
-              <span class="param-name">zxy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rz Ry Rx</span>
-              <span class="param-name">zyx</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Translate</span>
-            <span class="param-name">T</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Translation of the voxel volume in world space.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Tx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Ty</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Translate</span>
-              <span class="param-name">Tz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Rotate</span>
-            <span class="param-name">R</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Rotation of the voxel volume in degrees.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Rx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Ry</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Rotate</span>
-              <span class="param-name">Rz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Scale</span>
-            <span class="param-name">S</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Scale of the voxel volume per axis.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sy</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Scale</span>
-              <span class="param-name">Sz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Pivot</span>
-            <span class="param-name">P</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Pivot point for the voxel volume transform.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Px</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Py</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Pivot</span>
-              <span class="param-name">Pz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Uniform Scale</span>
-            <span class="param-name">Scale</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Uniform scale factor applied to the voxel volume.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Density Scale</span>
-            <span class="param-name">Densityscale</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for volumetric density values.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Absorption Color</span>
-            <span class="param-name">Absorption</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Color filter applied to light absorbed within the volume.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Absorption Color</span>
-              <span class="param-name">Absorptionr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Absorption Color</span>
-              <span class="param-name">Absorptiong</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Absorption Color</span>
-              <span class="param-name">Absorptionb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Scattering Coefficient</span>
-            <span class="param-name">Scatteringcoeff</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Controls the amount of light scattered within the volume.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Threshold Channel</span>
-            <span class="param-name">Thresholdchan</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Selects which texture channel to use for isosurface threshold evaluation.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Luminance</span>
-              <span class="param-name">luminance</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Red</span>
-              <span class="param-name">red</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Green</span>
-              <span class="param-name">green</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Blue</span>
-              <span class="param-name">blue</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Alpha</span>
-              <span class="param-name">alpha</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">RGB Average</span>
-              <span class="param-name">rgbaverage</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">RGBA Average</span>
-              <span class="param-name">average</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">RGB Maximum</span>
-              <span class="param-name">rgbmax</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">RGBA Maximum</span>
-              <span class="param-name">max</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Surface Threshold</span>
-            <span class="param-name">Surfacethreshold</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Density value at which the isosurface is extracted from the volume.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Normal Smoothing</span>
-            <span class="param-name">Normalsmoothing</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Smoothing factor for computed surface normals on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Metallic Map</span>
-            <span class="param-name">Metallicmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for metallic material property on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Roughness Map</span>
-            <span class="param-name">Roughnessmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for roughness material property on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specular Map</span>
-            <span class="param-name">Specularmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for specular reflection strength on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Specular Color Map</span>
-            <span class="param-name">Specularcolormap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for specular color tint on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Anisotropic Map</span>
-            <span class="param-name">Anisotropicmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for anisotropic highlight stretching on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Anisotropic Rotation Map</span>
-            <span class="param-name">Anisotropicrotmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for anisotropic highlight rotation on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Subsurface Map</span>
-            <span class="param-name">Subsurfacemap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for subsurface scattering on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen Map</span>
-            <span class="param-name">Sheenmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for sheen reflection on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen Color Map</span>
-            <span class="param-name">Sheencolormap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for sheen color tint on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Clearcoat Map</span>
-            <span class="param-name">Clearcoatmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for clearcoat layer on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Clearcoat Gloss Map</span>
-            <span class="param-name">Clearcoatglossmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for clearcoat glossiness on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">IOR Map</span>
-            <span class="param-name">Iormap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for index of refraction on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Transmission Map</span>
-            <span class="param-name">Transmissionmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for light transmission on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Dispersion Map</span>
-            <span class="param-name">Dispersionmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for chromatic dispersion on the isosurface.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Emission Map</span>
-            <span class="param-name">Emissionmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">3D texture map for emissive color on the isosurface.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Lights Page -->
-        <h3 id="page-lights" class="page-heading">Page: Lights</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Environment Light</span>
-            <span class="param-name">Enableenv</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enable image-based lighting from environment map.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Environment Map</span>
-            <span class="param-name">Environmentmap</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">HDR environment texture.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Environment Map Intensity</span>
-            <span class="param-name">Envmapintensity</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for environment light contribution.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Render Environment</span>
-            <span class="param-name">Renderenv</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Show environment map in background when rays miss geometry.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Direct Lighting</span>
-            <span class="param-name">Enabledirectlight</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Enable direct lighting.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Texture Map Resolution</span>
-            <span class="param-name">Texturemapres</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Resolution of the texture maps used for direct light evaluation.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Texture Map Resolution</span>
-              <span class="param-name">Texturemapresx</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Texture Map Resolution</span>
-              <span class="param-name">Texturemapresy</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Lights</span>
-            <span class="param-name">Lights</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Sequence of light sources.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item parameter-item-indented">
-          <div class="param-header">
-            <span class="param-label">Light Comp</span>
-            <span class="param-name">Lights0lightcomp</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Reference to a POPX Light tool defining light properties.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
-        <!-- Post Page -->
-        <h3 id="page-post" class="page-heading">Page: Post</h3>
 
         <div class="parameter-item">
           <div class="param-header">
@@ -1106,120 +269,231 @@
           </div>
         </div>
 
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable SVGF</span>
-            <span class="param-name">Enablesvgf</span>
+        <hr class="section-divider">
+
+        <!-- Denoiser Page -->
+        <h3 id="page-denoiser" class="page-heading">Page: Denoiser</h3>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Denoiser</span>
+            <span class="param-name">Denoiser</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Enable SVGF denoiser for real-time noise reduction.</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Selects the denoising method.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">None</span>
+              <span class="param-name">none</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Custom SVGF</span>
+              <span class="param-name">svgf</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">NVIDIA OptiX</span>
+              <span class="param-name">optix</span>
+            </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Color Box Scale</span>
-            <span class="param-name">Colorboxscale</span>
+            <span class="param-label">Use Motion Vectors</span>
+            <span class="param-name">Usemotionvectors</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Scale factor for the color bounding box used in temporal reprojection.</span>
+            <span class="param-description">Uses motion vectors for temporal reprojection accuracy.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Max History</span>
-            <span class="param-name">Maxhistory</span>
+            <span class="param-label">Normal Reject</span>
+            <span class="param-name">Normalreject</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Maximum number of frames to accumulate in temporal history.</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on surface normal differences.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normal Threshold</span>
-            <span class="param-name">Normalthreshold</span>
+            <span class="param-label">Depth Reject</span>
+            <span class="param-name">Depthreject</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Threshold for surface normal similarity in temporal reprojection.</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on depth differences.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Depth Threshold</span>
-            <span class="param-name">Depththreshold</span>
+            <span class="param-label">Albedo Reject</span>
+            <span class="param-name">Albedoreject</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Threshold for depth similarity in temporal reprojection.</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on albedo differences.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Kernel Radius</span>
-            <span class="param-name">Kernelradius</span>
+            <span class="param-label">Diffuse History Blend</span>
+            <span class="param-name">Diffusehistoryblend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Radius of the variance estimation kernel.</span>
+            <span class="param-description">Temporal blend factor for diffuse lobe history accumulation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normal Sensitivity</span>
-            <span class="param-name">Varnormalsensitivity</span>
+            <span class="param-label">Diffuse Variance Blend</span>
+            <span class="param-name">Diffusevarianceblend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to surface normal differences in variance estimation.</span>
+            <span class="param-description">Temporal blend factor for diffuse variance estimation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Depth Sensitivity</span>
-            <span class="param-name">Vardepthsensitivity</span>
+            <span class="param-label">Specular History Blend</span>
+            <span class="param-name">Specularhistoryblend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to depth differences in variance estimation.</span>
+            <span class="param-description">Temporal blend factor for specular lobe history accumulation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Passes</span>
-            <span class="param-name">Passes</span>
+            <span class="param-label">Specular Variance Blend</span>
+            <span class="param-name">Specularvarianceblend</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Number of a-trous wavelet filter passes for spatial denoising.</span>
+            <span class="param-description">Temporal blend factor for specular variance estimation.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Color Sensitivity</span>
-            <span class="param-name">Colorsensitivity</span>
+            <span class="param-label">Diffuse Atrous Passes</span>
+            <span class="param-name">Diffpasses</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to color differences in a-trous filtering.</span>
+            <span class="param-description">Number of a-trous wavelet filter passes for diffuse spatial denoising.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Normal Sensitivity</span>
-            <span class="param-name">Trousnormalsensitivity</span>
+            <span class="param-label">Diffuse Color Sensitivity</span>
+            <span class="param-name">Diffcolor</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to surface normal differences in a-trous filtering.</span>
+            <span class="param-description">Sensitivity to color differences in diffuse spatial filtering.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Depth Sensitivity</span>
-            <span class="param-name">Trousdepthsensitivity</span>
+            <span class="param-label">Diffuse Normal Sensitivity</span>
+            <span class="param-name">Diffnormal</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to depth differences in a-trous filtering.</span>
+            <span class="param-description">Sensitivity to surface normal differences in diffuse spatial filtering.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Roughness Sensitivity</span>
-            <span class="param-name">Roughnesssensitivity</span>
+            <span class="param-label">Diffuse Depth Sensitivity</span>
+            <span class="param-name">Diffdepth</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Sensitivity to roughness differences in a-trous filtering.</span>
+            <span class="param-description">Sensitivity to depth differences in diffuse spatial filtering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Blur Passes</span>
+            <span class="param-name">Specpasses</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of a-trous wavelet filter passes for specular spatial denoising.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Color Sensitivity</span>
+            <span class="param-name">Speccolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sensitivity to color differences in specular spatial filtering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Normal Sensitivity</span>
+            <span class="param-name">Specnormal</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sensitivity to surface normal differences in specular spatial filtering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Depth Sensitivity</span>
+            <span class="param-name">Specdepth</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Sensitivity to depth differences in specular spatial filtering.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Smooth Reflections</span>
+            <span class="param-name">Smoothreflections</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Amount of specular reflection smoothing based on roughness.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plugin Path</span>
+            <span class="param-name">Plugin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">File path to the NVIDIA OptiX denoiser plugin.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">History Blend</span>
+            <span class="param-name">Optixhistoryblend</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Temporal history blend factor for OptiX denoiser.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normal Reject</span>
+            <span class="param-name">Optixnormalreject</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on surface normal differences for OptiX denoiser.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Depth Reject</span>
+            <span class="param-name">Optixdepthreject</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on depth differences for OptiX denoiser.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Albedo Reject</span>
+            <span class="param-name">Optixalbedoreject</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Threshold for rejecting temporal samples based on albedo differences for OptiX denoiser.</span>
           </div>
         </div>
 
@@ -1250,13 +524,17 @@
             <span class="param-text">Geometry</span>
           </div>
         </div>
+      </section>
+
+      <section>
+        <h2 id="outputs">Outputs</h2>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
-            <span class="param-label">Input 1</span>
-            <span class="param-name">TOP</span>
+            <span class="param-label">Output 0</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Voxels</span>
+            <span class="param-text">POPX_out1</span>
           </div>
         </div>
       </section>
@@ -1277,14 +555,12 @@
           <a href="#parameters">Parameters</a>
           <ul>
             <li><a href="#page-path-tracer">Page: Path Tracer</a></li>
-            <li><a href="#page-material">Page: Material</a></li>
-            <li><a href="#page-voxel-tracer">Page: Voxel Tracer</a></li>
-            <li><a href="#page-lights">Page: Lights</a></li>
-            <li><a href="#page-post">Page: Post</a></li>
+            <li><a href="#page-denoiser">Page: Denoiser</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>
         <li><a href="#inputs">Inputs</a></li>
+        <li><a href="#outputs">Outputs</a></li>
       </ul>
     </aside>
   </div>

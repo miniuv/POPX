@@ -4,6 +4,7 @@ op_name = target
 
 # Page: Orient Curve
 op_name.par.Reorientcurve.help = "Enables curve reorientation."
+op_name.par.Closedcurve.help = "Treats the curve as a closed loop."
 op_name.par.Invertn.help = "Inverts the normal vector direction."
 op_name.par.Customfirsttangent.help = "Enables custom first tangent vector."
 op_name.par.Firsttangentx.help = "Custom first tangent vector direction."
@@ -18,11 +19,12 @@ op_name.par.Twistattr.help = "Name of the point attribute to use for twist value
 # Page: Surface
 op_name.par.Surfaceshape.help = "Type of cross-section shape to use."
 op_name.par.Width.help = "Width of the swept surface. Can be overridden by a LineWidth point attribute."
-op_name.par.Columbs.help = "Number of columns for round tube cross-section."
+op_name.par.Columns.help = "Number of columns for round tube cross-section."
 op_name.par.Roundcorners.help = "Enables rounded corners for square tubes."
 op_name.par.Cornerradius.help = "Radius of rounded corners."
 op_name.par.Cornersides.help = "Number of sides for rounded corners."
 op_name.par.Scalecrosssections.help = "Scale factor for input cross-sections."
+op_name.par.Uniquepoints.help = "Generates unique vertices per polygon."
 op_name.par.Skinops.help = "Skin primitive method."
 op_name.par.Inc.help = "N value when skinning groups of N input primitives or every N input primitives."
 op_name.par.Closedsurface.help = "The last vertex is connected to the first vertex."

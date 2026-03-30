@@ -1,7 +1,7 @@
 POPX Release Notes
 ==================
 
-Version 1.3.0 - Future Release
+Version 1.3.0 - March 30, 2026
 -------------------------------
 
 NEW OPERATORS
@@ -11,6 +11,68 @@ Planar Patch:
   • Supports Rectangle, Circle, Trapezoid, and Ring shapes
   • Configurable edge length and relaxation iterations for mesh quality
   • Shape-specific controls including round corners, taper, skew, inner size, and arc angles
+
+Shortest Path:
+  • New simulation that computes optimal paths between start and end point groups on geometry
+  • Supports neighbor connectivity by spatial distance or mesh connectivity with optional cost attribute weighting
+  • Visualization tools for paths, start/end points, and cost attributes
+
+Paint Falloff:
+  • New falloff for interactively painting falloff values directly onto POPX or POP Geometry in the viewport
+  • Configurable brush size with paint, erase, and erase all actions via keyboard shortcuts
+  • Transition range and alignment controls for smooth edges between painted regions
+
+IMPROVEMENTS
+
+Instancer:
+  • Consolidated individual distribution settings buttons into a single Open Settings button
+
+Path Tracer (Windows only):
+  • Added Realtime and Offline render modes with progressive sample refinement
+  • Added dedicated Denoiser page with Custom SVGF and NVIDIA OptiX denoiser options
+  • Added motion blur, firefly clamping, and render emissives controls
+  • All lighting, environment maps, and direct lights are now controlled via POPX Light
+  • Removed Voxel Tracer — volumetric rendering did not fit the realtime approach and is under development for future integration
+  • Removed built-in Material and Lights pages — connect POPX Material before the Path Tracer to assign materials, lighting is handled via POPX Light
+
+DLA:
+  • Removed built-in mesh and volume outputs — use POPX Voxelize and Polygonize on the point output to generate those
+  • Added new DLA Structure (Lines) output showing the structure connected by lines
+  • Added display toggles, attach strength, max neighbors, internal noise, and random walkers update POP parameters
+  • Improved solver stability and performance
+
+Light:
+  • Added Environment Light type for image-based lighting with HDR environment maps
+  • Added Environment Map Rotate parameter for rotating the environment map
+  • Renamed Texture Map to Texture/Environment Map
+  • Lights are referenced via the Render TOP's Lights parameter; toggle the Render Flag to visualize light geometry or render environment as background
+
+Explode:
+  • Added Voronoi option to Partition Method menu
+  • Added Max Points to Allocate and Max Triangles to Allocate parameters for Voronoi mode
+  • Added Num Hash Buckets parameter for spatial neighbor lookups
+  • Renamed Number of Clusters to Allocate to Number of Clusters/Cells to Allocate
+  • Renamed Clusters Seed to Clusters/Cells Seed
+
+Orient Curve:
+  • Added Closed Curve parameter
+
+Sweep:
+  • Added Closed Curve parameter to Orient Curve page
+  • Added Unique Points parameter to Surface page
+  • Added Per Line Strip option to Skin menu
+
+Material:
+  • Added Vertex attribute class option
+  • Added new Maps page with texture map inputs for all material properties
+  • Added Clearcoat Tint, Thickness, Absorption Color, and Emission Level parameters
+  • Renamed parameters: Specular to Specular Level, Specular Color to Specular Tint, Sheen to Sheen Level, Sheen Color to Sheen Tint, Clearcoat to Clearcoat Level, Clearcoat Gloss to Clearcoat Roughness, Anisotropic to Anisotropic Level, Anisotropic Rotation to Anisotropic Angle
+  • Removed Subsurface parameter
+
+GENERAL
+
+  • General stability and performance improvements across all POPX operators
+  • Bug fixes and maintenance updates
 
 -------------------------------
 

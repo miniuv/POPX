@@ -1389,7 +1389,8 @@ const searchIndex = [
     category: 'Tools',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Material', anchor: '#page-material', keywords: ['material', 'disney brdf', 'pbr', 'path tracer', 'base color', 'metallic', 'roughness', 'specular', 'specular color', 'anisotropic', 'subsurface', 'sheen', 'sheen color', 'clearcoat', 'transmission', 'ior', 'dispersion', 'emission', 'attribute class', 'group', 'material override'] },
+      { title: 'Page: Material', anchor: '#page-material', keywords: ['material', 'disney brdf', 'pbr', 'path tracer', 'base color', 'metallic', 'roughness', 'specular', 'specular tint', 'anisotropic', 'sheen', 'sheen tint', 'clearcoat', 'clearcoat tint', 'transmission', 'ior', 'thickness', 'dispersion', 'absorption', 'emission', 'attribute class', 'group', 'material override'] },
+      { title: 'Page: Maps', anchor: '#page-maps', keywords: ['texture', 'map', 'substance', 'normal', 'bump', 'base color map', 'metallic map', 'roughness map'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1637,13 +1638,11 @@ const searchIndex = [
     category: 'Tools',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: Path Tracer', anchor: '#page-path-tracer', keywords: ['path tracing', 'ray tracing', 'ray pop', 'physically based', 'monte carlo', 'progressive rendering', 'rays per pixel', 'bounces', 'depth of field', 'aperture', 'focal length', 'hybrid tracing', 'ray offset', 'focal plane', 'lock input', 'project on geometry'] },
-      { title: 'Page: Material', anchor: '#page-material', keywords: ['disney brdf', 'pbr', 'attribute class', 'base color', 'metallic', 'roughness', 'specular', 'specular color', 'anisotropic', 'subsurface', 'sheen', 'sheen color', 'clearcoat', 'transmission', 'ior', 'dispersion', 'emission', 'material override'] },
-      { title: 'Page: Voxel Tracer', anchor: '#page-voxel-tracer', keywords: ['voxel', 'volume', 'isosurface', 'ray marching', 'density', 'absorption', 'scattering', 'threshold', 'normal smoothing', 'step size', 'bounds', 'transform', 'texture map', 'metallic map', 'roughness map', 'specular map', 'emission map'] },
-      { title: 'Page: Lights', anchor: '#page-lights', keywords: ['lighting', 'environment map', 'hdri', 'direct light', 'image based lighting', 'intensity', 'light comp', 'texture map resolution'] },
-      { title: 'Page: Post', anchor: '#page-post', keywords: ['tone mapping', 'exposure', 'gamma', 'hdr', 'svgf', 'denoiser', 'denoise', 'temporal', 'variance', 'a-trous', 'wavelet', 'noise reduction', 'reprojection', 'color box scale', 'kernel radius', 'sensitivity'] },
+      { title: 'Page: Path Tracer', anchor: '#page-path-tracer', keywords: ['path tracing', 'ray tracing', 'physically based', 'monte carlo', 'realtime', 'offline', 'refine samples', 'rays per pixel', 'bounces', 'depth of field', 'aperture', 'focal length', 'focal plane', 'motion blur', 'firefly clamp', 'tone map', 'exposure', 'gamma', 'emissives'] },
+      { title: 'Page: Denoiser', anchor: '#page-denoiser', keywords: ['svgf', 'optix', 'nvidia', 'denoise', 'temporal', 'spatial', 'a-trous', 'wavelet', 'motion vectors', 'diffuse', 'specular', 'history blend', 'variance', 'smooth reflections'] },
       { title: 'Page: Common', anchor: '#page-common' },
-      { title: 'Inputs', anchor: '#inputs' }
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
     ]
   },
   {
@@ -1684,6 +1683,19 @@ const searchIndex = [
       { title: 'Summary', anchor: '#summary' },
       { title: 'Page: SA', anchor: '#page-sa', keywords: ['strange attractor', 'lorenz', 'aizawa', 'thomas', 'halvorsen', 'dadras', 'chen', 'rossler', 'sprott', 'four-wing', 'nose-hoover', 'chaos', 'dynamical system', 'attractor', 'advect', 'custom', 'initialize', 'play', 'step'] },
       { title: 'Page: Bounds', anchor: '#page-bounds', keywords: ['limit', 'minimum', 'maximum', 'clamp', 'loop', 'zig zag', 'boundary'] },
+      { title: 'Page: Common', anchor: '#page-common' },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Shortest Path',
+    path: 'docs/operators/simulations/shortest-path/',
+    type: 'Operator',
+    category: 'Simulations',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Shortest Path', anchor: '#page-shortest-path', keywords: ['shortest path', 'pathfinding', 'dijkstra', 'graph', 'start', 'end', 'cost', 'neighbors', 'distance', 'connected', 'line strips', 'visualization'] },
       { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
@@ -1796,6 +1808,21 @@ const searchIndex = [
       { title: 'Page: Noise', anchor: '#page-noise', keywords: ['perlin', 'simplex', 'harmonics'] },
       { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
       { title: 'Page: Common', anchor: '#page-common', keywords: ['feedback'] },
+      { title: 'Inputs', anchor: '#inputs' },
+      { title: 'Outputs', anchor: '#outputs' }
+    ]
+  },
+  {
+    title: 'Paint Falloff',
+    path: 'docs/operators/falloffs/paint-falloff/',
+    type: 'Operator',
+    category: 'Falloffs',
+    sections: [
+      { title: 'Summary', anchor: '#summary' },
+      { title: 'Page: Paint', anchor: '#page-paint', keywords: ['paint', 'brush', 'erase', 'interactive', 'viewport', 'transition'] },
+      { title: 'Page: Falloff', anchor: '#page-falloff', keywords: ['combine', 'blend', 'attribute'] },
+      { title: 'Page: Remap', anchor: '#page-remap', keywords: ['fit', 'clamp', 'invert', 'ramp'] },
+      { title: 'Page: Common', anchor: '#page-common' },
       { title: 'Inputs', anchor: '#inputs' },
       { title: 'Outputs', anchor: '#outputs' }
     ]

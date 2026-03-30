@@ -7,7 +7,10 @@ op_name.par.Partitionmethod.help = "Determines how geometry is partitioned into 
 op_name.par.Scattermethod.help = "Defines how scatter points are distributed for clustering."
 op_name.par.Numberofclusters.help = "Maximum number of clusters to allocate memory for."
 op_name.par.Clustersseed.help = "Random seed value for cluster generation."
+op_name.par.Maxpoints.help = "Maximum number of output points to allocate memory for in Voronoi mode."
+op_name.par.Maxtriangles.help = "Maximum number of output triangles to allocate memory for in Voronoi mode."
 op_name.par.Maxdistance.help = "Maximum distance threshold for clustering."
+op_name.par.Numhashbuckets.help = "Number of hash buckets for spatial neighbor lookups."
 op_name.par.Visualizepieces.help = "Enables color visualization of pieces."
 op_name.par.Visualizationseed.help = "Random seed for visualization colors."
 

@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>Material <span class="operator-version">v1.2.1</span></h1>
+      <h1>Material <span class="operator-version">v1.3.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -76,6 +76,10 @@
             <div class="param-subparam">
               <span class="param-label">Primitive</span>
               <span class="param-name">primitive</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Vertex</span>
+              <span class="param-name">vertex</span>
             </div>
           </div>
         </div>
@@ -143,8 +147,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Specular</span>
-            <span class="param-name">Specular</span>
+            <span class="param-label">Specular Level</span>
+            <span class="param-name">Specularlevel</span>
             <span class="param-separator">–</span>
             <span class="param-description">Specular reflection strength for dielectrics.</span>
           </div>
@@ -152,8 +156,8 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Specular Color</span>
-            <span class="param-name">Specularcolor</span>
+            <span class="param-label">Specular Tint</span>
+            <span class="param-name">Speculartint</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -161,33 +165,33 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorr</span>
+              <span class="param-label">Specular Tint</span>
+              <span class="param-name">Speculartintr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorg</span>
+              <span class="param-label">Specular Tint</span>
+              <span class="param-name">Speculartintg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Specular Color</span>
-              <span class="param-name">Specularcolorb</span>
+              <span class="param-label">Specular Tint</span>
+              <span class="param-name">Speculartintb</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Anisotropic</span>
-            <span class="param-name">Anisotropic</span>
+            <span class="param-label">Anisotropic Level</span>
+            <span class="param-name">Anisotropiclevel</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Anisotropic highlight stretching.</span>
+            <span class="param-description">Anisotropic highlight stretching level.</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Anisotropic Rotation</span>
-            <span class="param-name">Anisotropicrot</span>
+            <span class="param-label">Anisotropic Angle</span>
+            <span class="param-name">Anisotropicangle</span>
             <span class="param-separator">–</span>
             <span class="param-description">Rotation angle for anisotropic highlights.</span>
           </div>
@@ -195,17 +199,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Subsurface</span>
-            <span class="param-name">Subsurface</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Subsurface scattering amount for translucent materials like skin or wax.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Sheen</span>
-            <span class="param-name">Sheen</span>
+            <span class="param-label">Sheen Level</span>
+            <span class="param-name">Sheenlevel</span>
             <span class="param-separator">–</span>
             <span class="param-description">Soft velvet-like reflection for fabrics and cloth.</span>
           </div>
@@ -213,8 +208,8 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Sheen Color</span>
-            <span class="param-name">Sheencolor</span>
+            <span class="param-label">Sheen Tint</span>
+            <span class="param-name">Sheentint</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -222,24 +217,24 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorr</span>
+              <span class="param-label">Sheen Tint</span>
+              <span class="param-name">Sheentintr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorg</span>
+              <span class="param-label">Sheen Tint</span>
+              <span class="param-name">Sheentintg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Sheen Color</span>
-              <span class="param-name">Sheencolorb</span>
+              <span class="param-label">Sheen Tint</span>
+              <span class="param-name">Sheentintb</span>
             </div>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Clearcoat</span>
-            <span class="param-name">Clearcoat</span>
+            <span class="param-label">Clearcoat Level</span>
+            <span class="param-name">Clearcoatlevel</span>
             <span class="param-separator">–</span>
             <span class="param-description">Secondary specular layer for car paint or lacquered surfaces.</span>
           </div>
@@ -247,10 +242,35 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Clearcoat Gloss</span>
-            <span class="param-name">Clearcoatgloss</span>
+            <span class="param-label">Clearcoat Roughness</span>
+            <span class="param-name">Clearcoatroughness</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Glossiness of clearcoat layer.</span>
+            <span class="param-description">Roughness of the clearcoat layer.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Clearcoat Tint</span>
+            <span class="param-name">Clearcoattint</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Tint clearcoat reflection with color.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Clearcoat Tint</span>
+              <span class="param-name">Clearcoattintr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clearcoat Tint</span>
+              <span class="param-name">Clearcoattintg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Clearcoat Tint</span>
+              <span class="param-name">Clearcoattintb</span>
+            </div>
           </div>
         </div>
 
@@ -260,6 +280,15 @@
             <span class="param-name">Ior</span>
             <span class="param-separator">–</span>
             <span class="param-description">Index of refraction for dielectrics.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Thickness</span>
+            <span class="param-name">Thickness</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Thickness of the surface for thin-walled materials.</span>
           </div>
         </div>
 
@@ -283,8 +312,42 @@
 
         <div class="param-group">
           <div class="param-group-header">
-            <span class="param-label">Emission</span>
-            <span class="param-name">Emission</span>
+            <span class="param-label">Absorption Color</span>
+            <span class="param-name">Absorptioncolor</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Color absorbed by the volume as light passes through.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Absorption Color</span>
+              <span class="param-name">Absorptioncolorr</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Absorption Color</span>
+              <span class="param-name">Absorptioncolorg</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Absorption Color</span>
+              <span class="param-name">Absorptioncolorb</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emission Level</span>
+            <span class="param-name">Emissionlevel</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Emission intensity for self-illuminating surfaces.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Emssion Color</span>
+            <span class="param-name">Emssioncolor</span>
             <span class="param-separator">–</span>
             <span class="param-toggle"></span>
             <span class="param-separator">–</span>
@@ -292,17 +355,139 @@
           </div>
           <div class="param-subparams">
             <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissionr</span>
+              <span class="param-label">Emssion Color</span>
+              <span class="param-name">Emssioncolorr</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissiong</span>
+              <span class="param-label">Emssion Color</span>
+              <span class="param-name">Emssioncolorg</span>
             </div>
             <div class="param-subparam">
-              <span class="param-label">Emission</span>
-              <span class="param-name">Emissionb</span>
+              <span class="param-label">Emssion Color</span>
+              <span class="param-name">Emssioncolorb</span>
             </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Maps Page -->
+        <h3 id="page-maps" class="page-heading">Page: Maps</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Substance TOP</span>
+            <span class="param-name">Substance</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a Substance TOP for automatic PBR texture assignment.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Base Color Map</span>
+            <span class="param-name">Basecolormap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for base color.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Metallic Map</span>
+            <span class="param-name">Metallicmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for metallic values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Roughness Map</span>
+            <span class="param-name">Roughnessmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for roughness values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Specular Map</span>
+            <span class="param-name">Specularmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for specular values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic Level Map</span>
+            <span class="param-name">Anisotropiclevelmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for anisotropic level values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Anisotropic Angle Map</span>
+            <span class="param-name">Anisotropicanglemap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for anisotropic angle values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Sheen Map</span>
+            <span class="param-name">Sheenmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for sheen values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Clearcoat Map</span>
+            <span class="param-name">Clearcoatmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for clearcoat values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Transmission Map</span>
+            <span class="param-name">Transmissionmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for transmission values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Emssion Map</span>
+            <span class="param-name">Emssionmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Texture map for emission values.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Normal Map (Bump)</span>
+            <span class="param-name">Normalmap</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Normal map for surface bump detail.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Bump Scale</span>
+            <span class="param-name">Bumpscale</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Scale factor for normal map bump intensity.</span>
           </div>
         </div>
 
@@ -365,6 +550,7 @@
           <a href="#parameters">Parameters</a>
           <ul>
             <li><a href="#page-material">Page: Material</a></li>
+            <li><a href="#page-maps">Page: Maps</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>

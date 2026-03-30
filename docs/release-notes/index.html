@@ -39,7 +39,7 @@
       <section id="v1-3-0" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
         <div style="margin-bottom: 12px;">
           <h2 style="margin: 0; margin-bottom: 4px; font-size: 20px;">Version <span style="background: var(--color-accent); color: #000; padding: 3px 10px; border-radius: 5px; font-weight: 700;">1.3.0</span></h2>
-          <p style="margin: 0; font-size: 13px; color: var(--color-accent); font-weight: 600;">Future Release</p>
+          <p style="margin: 0; font-size: 13px; color: var(--color-accent); font-weight: 600;">March 30, 2026</p>
         </div>
 
         <div style="margin-top: 24px;">
@@ -63,6 +63,223 @@
               <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
                 <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
                 Shape-specific controls including round corners, taper, skew, inner size, and arc angles.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Shortest Path</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                New simulation that computes optimal paths between start and end point groups on geometry.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Supports neighbor connectivity by spatial distance or mesh connectivity with optional cost attribute weighting.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Visualization tools for paths, start/end points, and cost attributes.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Paint Falloff</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                New falloff for interactively painting falloff values directly onto POPX or POP Geometry in the viewport.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Configurable brush size with paint, erase, and erase all actions via keyboard shortcuts.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Transition range and alignment controls for smooth edges between painted regions.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">IMPROVEMENTS</h3>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Instancer</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Consolidated individual distribution settings buttons into a single Open Settings button.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Path Tracer (Windows only)</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Realtime and Offline render modes with progressive sample refinement.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added dedicated Denoiser page with Custom SVGF and NVIDIA OptiX denoiser options.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added motion blur, firefly clamping, and render emissives controls.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                All lighting, environment maps, and direct lights are now controlled via POPX Light.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed Voxel Tracer — volumetric rendering did not fit the realtime approach and is under development for future integration.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed built-in Material and Lights pages — connect POPX Material before the Path Tracer to assign materials, lighting is handled via POPX Light.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">DLA</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed built-in mesh and volume outputs — use POPX Voxelize and Polygonize on the point output to generate those.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added new DLA Structure (Lines) output showing the structure connected by lines.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added display toggles, attach strength, max neighbors, internal noise, and random walkers update POP parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Improved solver stability and performance.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Light</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Environment Light type for image-based lighting with HDR environment maps.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Environment Map Rotate parameter.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Lights are referenced via the Render TOP's Lights parameter; toggle the Render Flag to visualize light geometry or render environment as background.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Explode</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Voronoi</strong> option to Partition Method menu.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Max Points to Allocate</strong> and <strong style="color: var(--color-text);">Max Triangles to Allocate</strong> parameters for Voronoi mode.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Num Hash Buckets</strong> parameter for spatial neighbor lookups.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Number of Clusters to Allocate</strong> to <strong style="color: var(--color-text);">Number of Clusters/Cells to Allocate</strong>.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed <strong style="color: var(--color-text);">Clusters Seed</strong> to <strong style="color: var(--color-text);">Clusters/Cells Seed</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Orient Curve</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Closed Curve</strong> parameter.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Sweep</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Closed Curve</strong> parameter to Orient Curve page.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Unique Points</strong> parameter to Surface page.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added <strong style="color: var(--color-text);">Per Line Strip</strong> option to Skin menu.
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">Material</h4>
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Vertex attribute class option.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added new Maps page with texture map inputs for all material properties.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Added Clearcoat Tint, Thickness, Absorption Color, and Emission Level parameters.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Renamed parameters to follow updated PBR naming conventions.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Removed Subsurface parameter.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 15px; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; letter-spacing: 0.5px;">GENERAL</h3>
+
+          <div style="margin-bottom: 16px;">
+            <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                General stability and performance improvements across all POPX operators.
+              </li>
+              <li style="position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 13px; line-height: 1.6; color: var(--color-text-muted);">
+                <span style="position: absolute; left: 0; color: var(--color-accent);">•</span>
+                Bug fixes and maintenance updates.
               </li>
             </ul>
           </div>

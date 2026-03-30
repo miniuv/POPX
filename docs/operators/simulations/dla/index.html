@@ -34,7 +34,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>DLA <span class="operator-version">v1.2.1</span></h1>
+      <h1>DLA <span class="operator-version">v1.3.0</span></h1>
 
       <!-- Summary Section -->
       <section id="summary">
@@ -46,14 +46,8 @@
 
         <p>
           The simulation progresses by spawning particles at random positions within simulation bounds and allowing them to diffuse until they encounter the structure.
-          You control the density and character of the branching through parameters like search distance (how far particles look for attachment points) and attach distance (how close they must be to stick).
+          You control the density and character of the branching through parameters like search distance (how far particles look for attachment points), attach distance (how close they must be to stick), and attach strength.
           The simulation can be initialized, played continuously, or stepped frame-by-frame for precise control over growth progression.
-        </p>
-
-        <p>
-          DLA outputs the point cloud structure and optionally generates polygonal meshes through marching cubes or volumetric representations for rendering.
-          The Outputs page provides extensive control over voxel grid resolution, blur filtering, and volume density for different visualization styles.
-          This makes DLA suitable for creating natural growth patterns, procedural coral structures, electrical discharge effects, or abstract organic forms.
         </p>
       </section>
 
@@ -63,6 +57,15 @@
 
         <!-- DLA Page -->
         <h3 id="page-dla" class="page-heading">Page: DLA</h3>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Target Random Walkers Update POP</span>
+            <span class="param-name">Walkersupdatepop</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Reference to a POP node downstream in the network. This creates a feedback loop that re-injects the seed points each frame.</span>
+          </div>
+        </div>
 
         <div class="param-group">
           <div class="param-group-header">
@@ -91,10 +94,37 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Time Step</span>
-            <span class="param-name">Timestep</span>
+            <span class="param-label">Display Bounds</span>
+            <span class="param-name">Displaybounds</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Controls simulation speed per frame (higher values = faster growth).</span>
+            <span class="param-description">Visualizes the simulation bounds in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display Random Walkers</span>
+            <span class="param-name">Displayrandomwalkers</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shows the diffusing random walker particles in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display DLA Structure (Points)</span>
+            <span class="param-name">Displaydlapoints</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shows the DLA structure as points in the viewport.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Display DLA Structure (Lines)</span>
+            <span class="param-name">Displaydlalines</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Shows the DLA structure as connected lines in the viewport.</span>
           </div>
         </div>
 
@@ -104,6 +134,15 @@
             <span class="param-name">Maxpoints</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum number of diffusing particles in the simulation.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Seed</span>
+            <span class="param-name">Seed</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Random seed for particle spawn positions and diffusion paths.</span>
           </div>
         </div>
 
@@ -127,10 +166,37 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Seed</span>
-            <span class="param-name">Seed</span>
+            <span class="param-label">Attach Strength</span>
+            <span class="param-name">Attachstrength</span>
             <span class="param-separator">–</span>
-            <span class="param-description">Random seed for particle spawn positions and diffusion paths.</span>
+            <span class="param-description">Controls the strength of the attachment force when particles approach the structure.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Max Neighbors</span>
+            <span class="param-name">Maxneighbors</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Maximum number of neighboring structure points considered for attachment.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Internal Noise</span>
+            <span class="param-name">Internalnoise</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enable internal noise for randomized particle diffusion.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Noise Amplitude</span>
+            <span class="param-name">Noiseamp</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Controls the amplitude of the internal noise applied to particle movement.</span>
           </div>
         </div>
 
@@ -172,316 +238,6 @@
 
         <hr class="section-divider">
 
-        <!-- Outputs Page -->
-        <h3 id="page-outputs" class="page-heading">Page: Outputs</h3>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Mesh</span>
-            <span class="param-name">Mesh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for mesh output settings.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Polygonize</span>
-            <span class="param-name">Polygonize</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Converts point cloud to polygonal mesh using marching cubes algorithm.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Voxel Grid Resolution</span>
-            <span class="param-name">Gridres</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Voxel grid resolution for mesh generation (higher = more detail, slower).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Blur</span>
-            <span class="param-name">Enableblur</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Applies smoothing filter to mesh before polygonization.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Type</span>
-            <span class="param-name">Type</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Blur filter type.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Catmull-Rom</span>
-              <span class="param-name">catmull</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Gaussian</span>
-              <span class="param-name">gaussian</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Box</span>
-              <span class="param-name">box</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bartlette</span>
-              <span class="param-name">bartlette</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Sinc</span>
-              <span class="param-name">sinc</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Hanning</span>
-              <span class="param-name">hanning</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Blackman</span>
-              <span class="param-name">blackman</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Pre-Shrink</span>
-            <span class="param-name">Preshrink</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Downsamples volume before blur for performance (1 = no downsample).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Filter Size</span>
-            <span class="param-name">Size</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Blur kernel size (larger = smoother, more computation).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Threshold</span>
-            <span class="param-name">Threshold</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Isosurface threshold for mesh extraction (lower = thicker mesh).</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Extend</span>
-            <span class="param-name">Extend</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">How to handle volume edges.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Zero</span>
-              <span class="param-name">zero</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Hold</span>
-              <span class="param-name">hold</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Repeat</span>
-              <span class="param-name">repeat</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Mirror</span>
-              <span class="param-name">mirror</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Shared Points</span>
-            <span class="param-name">Sharedpoints</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Welds duplicate vertices for cleaner topology.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Alt</span>
-            <span class="param-name">Alt</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Alternative point sharing algorithm.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Volume</span>
-            <span class="param-name">Volumeh</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Header for volumetric output settings.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Volume</span>
-            <span class="param-name">Volume</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Generates volumetric TOP output for rendering with volume materials.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Max Axis Resolution</span>
-            <span class="param-name">Maxaxisres</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Maximum resolution along the longest axis of the volume texture.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Color</span>
-            <span class="param-name">Color</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Base color for volume rendering.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorr</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorg</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Color</span>
-              <span class="param-name">Colorb</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Density Scale</span>
-            <span class="param-name">Densityscale</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Multiplier for volume opacity (higher = more opaque).</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Enable Blur</span>
-            <span class="param-name">Enablevolblur</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Applies smoothing filter to volume texture.</span>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Type</span>
-            <span class="param-name">Volblurtype</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Blur filter type for volume.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Catmull-Rom</span>
-              <span class="param-name">catmull</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Gaussian</span>
-              <span class="param-name">gaussian</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Box</span>
-              <span class="param-name">box</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Bartlette</span>
-              <span class="param-name">bartlette</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Sinc</span>
-              <span class="param-name">sinc</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Hanning</span>
-              <span class="param-name">hanning</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Blackman</span>
-              <span class="param-name">blackman</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="param-group">
-          <div class="param-group-header">
-            <span class="param-label">Extend</span>
-            <span class="param-name">Volblurextend</span>
-            <span class="param-separator">–</span>
-            <span class="param-toggle"></span>
-            <span class="param-separator">–</span>
-            <span class="param-group-description">Edge handling mode for volume blur.</span>
-          </div>
-          <div class="param-subparams">
-            <div class="param-subparam">
-              <span class="param-label">Hold</span>
-              <span class="param-name">hold</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Repeat</span>
-              <span class="param-name">repeat</span>
-            </div>
-            <div class="param-subparam">
-              <span class="param-label">Mirror</span>
-              <span class="param-name">mirror</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Pre-Shrink</span>
-            <span class="param-name">Volblurpreshrink</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Resolution reduction before applying blur for performance optimization.</span>
-          </div>
-        </div>
-
-        <div class="parameter-item">
-          <div class="param-header">
-            <span class="param-label">Filter Size</span>
-            <span class="param-name">Volblursize</span>
-            <span class="param-separator">–</span>
-            <span class="param-description">Size of the blur filter kernel.</span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-
         <!-- Common Page -->
         <h3 id="page-common" class="page-heading">Page: Common</h3>
 
@@ -518,7 +274,7 @@
             <span class="param-label">Output 0</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Points</span>
+            <span class="param-text">DLA Structure (Points)</span>
           </div>
         </div>
 
@@ -527,16 +283,16 @@
             <span class="param-label">Output 1</span>
             <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Mesh</span>
+            <span class="param-text">DLA Structure (Lines)</span>
           </div>
         </div>
 
         <div class="parameter-item">
           <div class="param-header param-header-inline">
             <span class="param-label">Output 2</span>
-            <span class="param-name">TOP</span>
+            <span class="param-name">POP</span>
             <span class="param-separator">–</span>
-            <span class="param-text">Volume</span>
+            <span class="param-text">Random Walkers</span>
           </div>
         </div>
       </section>
@@ -557,7 +313,6 @@
           <a href="#parameters">Parameters</a>
           <ul>
             <li><a href="#page-dla">Page: DLA</a></li>
-            <li><a href="#page-outputs">Page: Outputs</a></li>
             <li><a href="#page-common">Page: Common</a></li>
           </ul>
         </li>
