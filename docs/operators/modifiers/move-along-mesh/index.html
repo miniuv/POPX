@@ -374,8 +374,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Open Scale Ramp</span>
-            <span class="param-name">Openscaleramp</span>
+            <span class="param-label">Open Scale Ramp Editor</span>
+            <span class="param-name">Openscalerampeditor</span>
             <span class="param-separator">–</span>
             <span class="param-description">Opens the internal scale ramp editor for creating custom scale curves over lifetime.</span>
           </div>
@@ -392,8 +392,8 @@
 
         <div class="parameter-item">
           <div class="param-header">
-            <span class="param-label">Scale TOP</span>
-            <span class="param-name">Scaletop</span>
+            <span class="param-label">Custom Scale TOP</span>
+            <span class="param-name">Customscaletop</span>
             <span class="param-separator">–</span>
             <span class="param-description">Reference to an external TOP for scale control. When specified, overrides the internal ramp editor.</span>
           </div>
@@ -423,6 +423,40 @@
             <span class="param-name">Maxrelaxradius</span>
             <span class="param-separator">–</span>
             <span class="param-description">Maximum distance at which relaxation forces affect neighboring instances.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">Distribution</span>
+            <span class="param-name">Distribution</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Neighbor distribution method for relaxation.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Default</span>
+              <span class="param-name">default</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Unique</span>
+              <span class="param-name">unique</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Closest</span>
+              <span class="param-name">closest</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Num Hash Buckets</span>
+            <span class="param-name">Numhashbuckets</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Number of hash buckets for spatial neighbor lookups.</span>
           </div>
         </div>
 

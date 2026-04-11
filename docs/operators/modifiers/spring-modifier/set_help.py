@@ -23,7 +23,7 @@ op_name.par.Play.help = "Toggles spring simulation playback on or off."
 
 # Page: Falloff
 op_name.par.Previewfalloff.help = "Visualizes the Other float attribute as colors when Other is enabled."
-op_name.par.Opencustumramp.help = "Opens the custom ramp editor for creating custom visualization gradients for."
+op_name.par.Opencustumrampeditor.help = "Opens the custom ramp editor for creating custom visualization gradients for."
 op_name.par.Resetcustomramp.help = "Resets the custom ramp to default gradient values."
 
 # Page: Common

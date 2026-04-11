@@ -24,7 +24,7 @@ op_name.par.Transmission.help = "Light transmission through surface for glass an
 op_name.par.Dispersion.help = "Chromatic dispersion amount for refractive materials."
 op_name.par.Absorptioncolorr.help = "Color absorbed by the volume as light passes through."
 op_name.par.Emissionlevel.help = "Emission intensity for self-illuminating surfaces."
-op_name.par.Emssioncolorr.help = "Emissive color for self-illuminating surfaces."
+op_name.par.Emissioncolorr.help = "Emissive color for self-illuminating surfaces."
 
 # Page: Maps
 op_name.par.Substance.help = "Reference to a Substance TOP for automatic PBR texture assignment."
@@ -37,7 +37,7 @@ op_name.par.Anisotropicanglemap.help = "Texture map for anisotropic angle values
 op_name.par.Sheenmap.help = "Texture map for sheen values."
 op_name.par.Clearcoatmap.help = "Texture map for clearcoat values."
 op_name.par.Transmissionmap.help = "Texture map for transmission values."
-op_name.par.Emssionmap.help = "Texture map for emission values."
+op_name.par.Emissionmap.help = "Texture map for emission values."
 op_name.par.Normalmap.help = "Normal map for surface bump detail."
 op_name.par.Bumpscale.help = "Scale factor for normal map bump intensity."
 

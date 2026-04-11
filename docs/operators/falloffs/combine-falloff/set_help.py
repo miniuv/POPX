@@ -15,7 +15,7 @@ op_name.par.Falloffs0gain.help = "Multiplier applied to the falloff value before
 # Page: Falloff
 op_name.par.Previewfalloff.help = "When enabled, visualizes falloff values using a color ramp."
 op_name.par.Fallofframp.help = "Color ramp preset used for visualizing falloff values when Preview Falloff is enabled."
-op_name.par.Opencustumramp.help = "Opens the custom color ramp editor for defining a custom falloff visualization gradient."
+op_name.par.Opencustumrampeditor.help = "Opens the custom color ramp editor for defining a custom falloff visualization gradient."
 op_name.par.Resetcustomramp.help = "Resets the custom color ramp to its default state."
 
 # Page: Common

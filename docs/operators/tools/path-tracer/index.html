@@ -163,6 +163,15 @@
 
         <div class="parameter-item">
           <div class="param-header">
+            <span class="param-label">Enable Microfacet Refraction</span>
+            <span class="param-name">Microfacetrefraction</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Enables microfacet-based refraction model for rough transmissive materials.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
             <span class="param-label">Enable Firefly Clamp</span>
             <span class="param-name">Enablefireflyclamp</span>
             <span class="param-separator">–</span>
@@ -295,6 +304,10 @@
             <div class="param-subparam">
               <span class="param-label">NVIDIA OptiX</span>
               <span class="param-name">optix</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">NVIDIA DLSS</span>
+              <span class="param-name">dlss</span>
             </div>
           </div>
         </div>
@@ -455,9 +468,18 @@
         <div class="parameter-item">
           <div class="param-header">
             <span class="param-label">Plugin Path</span>
-            <span class="param-name">Plugin</span>
+            <span class="param-name">Optixplugin</span>
             <span class="param-separator">–</span>
             <span class="param-description">File path to the NVIDIA OptiX denoiser plugin.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Re-Init</span>
+            <span class="param-name">Optixreinitpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Re-initializes the OptiX denoiser.</span>
           </div>
         </div>
 
@@ -494,6 +516,57 @@
             <span class="param-name">Optixalbedoreject</span>
             <span class="param-separator">–</span>
             <span class="param-description">Threshold for rejecting temporal samples based on albedo differences for OptiX denoiser.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Plugin Path</span>
+            <span class="param-name">Dlssplugin</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">File path to the NVIDIA DLSS denoiser plugin.</span>
+          </div>
+        </div>
+
+        <div class="parameter-item">
+          <div class="param-header">
+            <span class="param-label">Re-Init</span>
+            <span class="param-name">Dlssreinitpulse</span>
+            <span class="param-separator">–</span>
+            <span class="param-description">Re-initializes the DLSS denoiser.</span>
+          </div>
+        </div>
+
+        <div class="param-group">
+          <div class="param-group-header">
+            <span class="param-label">DLSS Quality</span>
+            <span class="param-name">Quality</span>
+            <span class="param-separator">–</span>
+            <span class="param-toggle"></span>
+            <span class="param-separator">–</span>
+            <span class="param-group-description">Quality preset for the DLSS denoiser.</span>
+          </div>
+          <div class="param-subparams">
+            <div class="param-subparam">
+              <span class="param-label">Ultra Performance</span>
+              <span class="param-name">Ultra Performance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Performance</span>
+              <span class="param-name">Performance</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Balanced</span>
+              <span class="param-name">Balanced</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">Quality</span>
+              <span class="param-name">Quality</span>
+            </div>
+            <div class="param-subparam">
+              <span class="param-label">DLAA</span>
+              <span class="param-name">DLAA</span>
+            </div>
           </div>
         </div>
 

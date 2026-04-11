@@ -1,6 +1,67 @@
 POPX Release Notes
 ==================
 
+Version 1.3.1 - Future Release
+-------------------------------
+
+BUG FIXES
+
+Material:
+  • Fixed typo in Emission Color and Emission Map parameter names (previously Emssion)
+
+IMPROVEMENTS
+
+General:
+  • New custom ramp tool with dedicated UI for both float ramps and color ramps, replacing the TouchDesigner built-in ramp TOP UI parameters
+  • All operators using ramp parameters now share a consistent ramp editor experience for falloff visualization, color gradients, and animation curves
+  • Operators now using the new custom ramp tool: Sweep, Move Along Curve, Move Along Mesh, Orient Curve, Color Modifier, Randomize, Spring Modifier, Measure, Preview Falloff, and all Falloffs (custom visualization and Remap pages)
+
+Light:
+  • Added Diffuse Contribution and Specular Contribution parameters for fine-grained control over light shading
+
+Path Tracer:
+  • Added Enable Microfacet Refraction toggle for microfacet-based refraction on rough transmissive materials
+  • Added NVIDIA DLSS denoiser support with quality presets (Ultra Performance, Performance, Balanced, Quality, DLAA)
+  • Added OptiX-specific Normal/Depth/Albedo Reject thresholds and Re-Init pulse for fine-grained denoiser control
+
+All Falloffs:
+  • Renamed Remap page parameters: Enable Remap Ramp to Enable Ramp Remap, Open Remap Ramp to Open Ramp Editor, Reset Remap Ramp to Reset Ramp, Remap TOP to Custom Ramp TOP
+  • Renamed Open Custom Ramp to Open Custom Ramp Editor (custom falloff visualization)
+
+Sweep:
+  • Renamed parameters: Twist TOP to Custom Twist TOP, Scale TOP to Custom Scale TOP, Color TOP to Custom Color TOP, Open Twist/Scale/Color Ramp to Open Twist/Scale/Color Ramp Editor
+  • Removed Twist per Curve, Scale per Curve, and Color per Curve parameters — per-curve mapping is now automatic from the custom ramp or TOP, with each row of the texture corresponding to one curve
+
+Move Along Mesh:
+  • Renamed Scale TOP to Custom Scale TOP and Open Scale Ramp to Open Scale Ramp Editor
+  • Added Distribution menu (Default/Unique/Closest) and Num Hash Buckets parameters for point relax neighbor lookups
+
+Move Along Curve:
+  • Renamed parameters: Offset TOP to Custom Offset TOP, Orient TOP to Custom Orient TOP, Twist Curve TOP to Custom Twist Curve TOP, Twist TOP to Custom Twist TOP, Scale TOP to Custom Scale TOP, Acceleration TOP to Custom Acceleration TOP, all Open ... Ramp to Open ... Ramp Editor
+  • Removed Twist per Curve parameter — per-curve mapping is now automatic from the custom ramp or TOP
+
+Orient Curve:
+  • Renamed Twist TOP to Custom Twist TOP and Open Twist Ramp to Open Twist Ramp Editor
+  • Removed Twist per Curve parameter — twist now automatically maps per-curve from the custom ramp or TOP, with each row of the texture corresponding to one curve
+
+Color Modifier:
+  • Renamed parameters: Open Ramp to Open Color Ramp Editor, Reset Ramp to Reset Color Ramp, Ramp TOP to Custom Color TOP
+
+Randomize:
+  • Renamed General page to Randomize
+  • Renamed parameters: Open Color Ramp to Open Color Ramp Editor, Color TOP to Custom Color TOP
+
+Spring Modifier:
+  • Renamed Open Custum Ramp to Open Custom Ramp Editor
+
+Measure:
+  • Renamed Open Custom Ramp to Open Custom Ramp Editor
+
+Preview Falloff:
+  • Renamed Open Custom Ramp to Open Custom Ramp Editor
+
+-------------------------------
+
 Version 1.3.0 - March 30, 2026
 -------------------------------
 

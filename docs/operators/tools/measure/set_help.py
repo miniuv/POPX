@@ -19,7 +19,7 @@ op_name.par.Outputneighborsattrs.help = "When enabled, outputs neighbor attribut
 # Page: Preview Measure
 op_name.par.Previewmeasure.help = "When enabled, visualizes the measured values using a color ramp."
 op_name.par.Measureramp.help = "Color ramp preset used for visualizing measured values when Preview Measure is."
-op_name.par.Opencustumramp.help = "Opens the custom color ramp editor for defining a custom measure visualization."
+op_name.par.Opencustumrampeditor.help = "Opens the custom color ramp editor for defining a custom measure visualization."
 op_name.par.Resetcustomramp.help = "Resets the custom color ramp to its default state."
 
 # Page: Common

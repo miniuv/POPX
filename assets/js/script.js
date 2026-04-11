@@ -969,6 +969,7 @@ const searchIndex = [
     type: 'Guide',
     category: 'Guides',
     sections: [
+      { title: 'Version 1.3.1', anchor: '#v1-3-1' },
       { title: 'Version 1.3.0', anchor: '#v1-3-0' },
       { title: 'Version 1.2.1', anchor: '#v1-2-1' },
       { title: 'Version 1.2.0', anchor: '#v1-2-0' },
@@ -1231,7 +1232,7 @@ const searchIndex = [
     category: 'Modifiers',
     sections: [
       { title: 'Summary', anchor: '#summary' },
-      { title: 'Page: General', anchor: '#page-general' },
+      { title: 'Page: Randomize', anchor: '#page-randomize' },
       { title: 'Page: Position', anchor: '#page-position' },
       { title: 'Page: Rotation', anchor: '#page-rotation' },
       { title: 'Page: Scale', anchor: '#page-scale' },

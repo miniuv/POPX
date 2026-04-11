@@ -16,6 +16,8 @@ op_name.par.Attenuated.help = "Enables distance-based light intensity falloff."
 op_name.par.Attenuationstart.help = "Distance at which light attenuation begins."
 op_name.par.Attenuationend.help = "Distance at which light attenuation reaches zero."
 op_name.par.Attenuationexp.help = "Exponent controlling the attenuation falloff curve."
+op_name.par.Diffusecontrib.help = "Controls how much this light contributes to diffuse shading."
+op_name.par.Specularcontrib.help = "Controls how much this light contributes to specular reflections."
 op_name.par.Texturemap.help = "Texture map projected from the light source, or HDR environment map for Environment Light."
 op_name.par.Envlightmaprotatex.help = "Rotation of the environment map in degrees. Enabled when Light Type is Environment Light."
 

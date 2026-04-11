@@ -37,9 +37,9 @@ op_name.par.Fromhigh.help = "Upper bound of the input random range for color map
 op_name.par.Tolow.help = "Lower bound of the output color range."
 op_name.par.Tohigh.help = "Upper bound of the output color range."
 op_name.par.Colorramp.help = "Enables color ramp for randomization instead of direct random values."
-op_name.par.Opencolorramp.help = "Opens the internal ramp editor for customizing the color gradient."
+op_name.par.Opencolorrampeditor.help = "Opens the internal ramp editor for customizing the color gradient."
 op_name.par.Resetcolorramp.help = "Resets the internal ramp to default gradient values."
-op_name.par.Colortop.help = "Reference to an external TOP for color palette."
+op_name.par.Customcolortop.help = "Reference to an external TOP for color palette."
 
 # Page: Other
 op_name.par.Otherrand.help = "Enables randomization of a custom float attribute."

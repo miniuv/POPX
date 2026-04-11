@@ -5,7 +5,7 @@ op_name = target
 # Page: Preview
 op_name.par.Falloffattr.help = "Name of the falloff attribute to visualize."
 op_name.par.Previewfalloff.help = "When enabled, visualizes falloff values using a color ramp."
-op_name.par.Opencustumramp.help = "Opens the custom color ramp editor for defining a custom falloff visualization."
+op_name.par.Opencustumrampeditor.help = "Opens the custom color ramp editor for defining a custom falloff visualization."
 op_name.par.Resetcustomramp.help = "Resets the custom color ramp to its default state."
 
 # Page: Common

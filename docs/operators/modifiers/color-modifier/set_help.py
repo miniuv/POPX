@@ -5,9 +5,9 @@ op_name = target
 # Page: Color
 op_name.par.Group.help = "If there are input groups, specifying a group name in this field will cause this POPX to act only upon the group specified."
 op_name.par.Falloffattr.help = "Specifies which attribute to use for falloff values that drive the color ramp."
-op_name.par.Openramp.help = "Opens the internal ramp editor for customizing the color gradient."
-op_name.par.Resetramp.help = "Resets the internal ramp to default gradient values."
-op_name.par.Ramptop.help = "Reference to an external Ramp TOP for color palette."
+op_name.par.Opencolorrampeditor.help = "Opens the internal ramp editor for customizing the color gradient."
+op_name.par.Resetcolorramp.help = "Resets the internal ramp to default gradient values."
+op_name.par.Customcolortop.help = "Reference to an external Ramp TOP for color palette."
 
 # Page: Common
 op_name.par.Bypass.help = "Pass through the first input to the output unchanged."

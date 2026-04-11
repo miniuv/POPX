@@ -15,15 +15,15 @@ op_name.par.Outputmin.help = "Minimum value of the output range for remapping."
 op_name.par.Outputmax.help = "Maximum value of the output range for remapping."
 op_name.par.Absvalue.help = "Converts all falloff values to their absolute values (positive only)."
 op_name.par.Invert.help = "Reverses the falloff values (1 - value)."
-op_name.par.Enableremapramp.help = "Applies a custom curve defined by a ramp to remap the falloff values."
-op_name.par.Openremapramp.help = "Opens the ramp editor for defining the custom remapping curve."
-op_name.par.Resetremapramp.help = "Resets the remap ramp editor."
-op_name.par.Remaptop.help = "Reference to an external TOP for remap control. When specified, overrides the internal ramp editor."
+op_name.par.Enablerampremap.help = "Applies a custom curve defined by a ramp to remap the falloff values."
+op_name.par.Openrampeditor.help = "Opens the ramp editor for defining the custom remapping curve."
+op_name.par.Resetramp.help = "Resets the remap ramp editor."
+op_name.par.Customramptop.help = "Reference to an external TOP for remap control. When specified, overrides the internal ramp editor."
 
 # Page: Falloff
 op_name.par.Previewfalloff.help = "When enabled, visualizes falloff values using a color ramp."
 op_name.par.Fallofframp.help = "Color ramp preset used for visualizing falloff values when Preview Falloff is enabled."
-op_name.par.Opencustumramp.help = "Opens the custom color ramp editor for defining a custom falloff visualization gradient."
+op_name.par.Opencustumrampeditor.help = "Opens the custom color ramp editor for defining a custom falloff visualization gradient."
 op_name.par.Resetcustomramp.help = "Resets the custom color ramp to its default state."
 
 # Page: Common
